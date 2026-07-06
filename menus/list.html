@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>메뉴 - 카페 앱</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="list.css" />
+</head>
+<body>
+  <header class="page-header glass">
+    <a href="../index.html" class="icon-btn" aria-label="홈으로">‹</a>
+    <h1>메뉴</h1>
+    <a href="../basket/list.html" class="icon-btn cart-btn" aria-label="장바구니">
+      🛒
+      <span class="cart-badge" id="cartBadge" hidden>0</span>
+    </a>
+  </header>
+
+  <main class="container">
+    <div class="category-tabs" id="categoryTabs"></div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="list.js"></script>
+</body>
+</html>

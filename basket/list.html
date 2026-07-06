@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>장바구니 - 카페 앱</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="list.css" />
+</head>
+<body>
+  <header class="page-header glass">
+    <a href="../menus/list.html" class="icon-btn" aria-label="메뉴로">‹</a>
+    <h1>장바구니</h1>
+    <button class="icon-btn" id="clearCartBtn" type="button" aria-label="장바구니 비우기">🗑</button>
+  </header>
+
+  <main class="container basket-page">
+    <section class="basket-summary glass" id="basketSummary">
+      <div>
+        <span class="summary-label">담긴 메뉴</span>
+        <strong class="summary-value" id="summaryCount">0개</strong>
+      </div>
+      <div>
+        <span class="summary-label">예상 결제 금액</span>
+        <strong class="summary-value" id="summaryPrice">0원</strong>
+      </div>
+    </section>
+
+    <section id="basketContent"></section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="list.js"></script>
+</body>
+</html>

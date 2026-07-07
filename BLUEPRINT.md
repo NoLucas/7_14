@@ -1,4 +1,4 @@
-g git branch feat/admin-menus-detail# ☕ 카페 앱 - 프로젝트 청사진
+# ☕ 카페 앱 - 프로젝트 청사진
 
 ## 📁 폴더 구조 (완전 코로케이션)
 
@@ -138,12 +138,12 @@ cafe-app/
 
 ### 5단계: 고객 - 주문 관리 시스템
 
-- [x] `orders/list.html` — 주문 내역 목록 (`5단계/list.html`에 임시 작업, 병합 시 `orders/`로 이동 필요)
-- [x] `orders/list.css` (`5단계/list.css`)
-- [x] `orders/list.js` (`5단계/list.js`)
-- [x] `orders/detail.html` — 주문 상세 (`5단계/detail.html`)
-- [x] `orders/detail.css` (`5단계/detail.css`)
-- [x] `orders/detail.js` (`5단계/detail.js`)
+- [x] `orders/list.html` — 주문 내역 목록
+- [x] `orders/list.css`
+- [x] `orders/list.js`
+- [x] `orders/detail.html` — 주문 상세
+- [x] `orders/detail.css`
+- [x] `orders/detail.js`
 
 ### 6단계: 고객 - 메인 페이지
 
@@ -159,12 +159,12 @@ cafe-app/
 
 ### 8단계: 관리자 - 대시보드 & 주문 관리
 
-- [ ] `admin/index.html` — 대시보드
-- [ ] `admin/index.css`
-- [ ] `admin/index.js`
-- [ ] `admin/orders/list.html` — 주문 목록
-- [ ] `admin/orders/list.css`
-- [ ] `admin/orders/list.js`
-- [ ] `admin/orders/detail.html` — 주문 상세
-- [ ] `admin/orders/detail.css`
-- [ ] `admin/orders/detail.js`
+- [x] `admin/index.html` — 대시보드
+- [x] `admin/index.css`
+- [x] `admin/index.js`
+- [x] `admin/orders/list.html` — 주문 목록
+- [x] `admin/orders/list.css`
+- [x] `admin/orders/list.js`
+- [x] `admin/orders/detail.html` — 주문 상세
+- [x] `admin/orders/detail.css`
+- [x] `admin/orders/detail.js`

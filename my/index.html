@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>마이페이지 - 카페 앱</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <header class="page-header glass">
+    <a href="../index.html" class="icon-btn" aria-label="홈으로">‹</a>
+    <h1>마이페이지</h1>
+    <a href="../basket/list.html" class="icon-btn cart-btn" aria-label="장바구니">
+      🛒
+      <span class="cart-badge" id="cartBadge" hidden>0</span>
+    </a>
+  </header>
+
+  <main class="container">
+    <section class="profile-card glass">
+      <div class="profile-avatar">☕</div>
+      <div class="profile-info">
+        <p class="profile-name">게스트님</p>
+        <p class="profile-desc">로그인하고 주문 내역을 더 편하게 관리해보세요.</p>
+      </div>
+    </section>
+
+    <section class="stat-grid">
+      <article class="stat-card glass">
+        <span class="stat-label">장바구니</span>
+        <strong class="stat-value" id="cartCount">0개</strong>
+      </article>
+      <article class="stat-card glass">
+        <span class="stat-label">예상 결제 금액</span>
+        <strong class="stat-value" id="cartPrice">0원</strong>
+      </article>
+    </section>
+
+    <nav class="menu-list">
+      <a href="../orders/list.html" class="menu-item glass">
+        <span class="menu-item-icon">🧾</span>
+        <span class="menu-item-label">주문 내역</span>
+        <span class="menu-item-arrow">›</span>
+      </a>
+      <a href="../basket/list.html" class="menu-item glass">
+        <span class="menu-item-icon">🛒</span>
+        <span class="menu-item-label">장바구니</span>
+        <span class="menu-item-arrow">›</span>
+      </a>
+      <a href="../menus/list.html" class="menu-item glass">
+        <span class="menu-item-icon">☕</span>
+        <span class="menu-item-label">전체 메뉴 보기</span>
+        <span class="menu-item-arrow">›</span>
+      </a>
+    </nav>
+
+    <section class="section-block">
+      <h2 class="section-title">고객 지원</h2>
+      <nav class="menu-list">
+        <button class="menu-item glass" type="button" data-info="notice">
+          <span class="menu-item-icon">📢</span>
+          <span class="menu-item-label">공지사항</span>
+          <span class="menu-item-arrow">›</span>
+        </button>
+        <button class="menu-item glass" type="button" data-info="faq">
+          <span class="menu-item-icon">💬</span>
+          <span class="menu-item-label">자주 묻는 질문</span>
+          <span class="menu-item-arrow">›</span>
+        </button>
+        <button class="menu-item glass" type="button" data-info="terms">
+          <span class="menu-item-icon">📄</span>
+          <span class="menu-item-label">이용약관 및 정책</span>
+          <span class="menu-item-arrow">›</span>
+        </button>
+      </nav>
+    </section>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

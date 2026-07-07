@@ -220,3 +220,88 @@ function getMenusByCategory(categoryId) {
   }
   return getAllMenus().filter((menu) => menu.categoryId === categoryId);
 }
+
+// ===== 주문 =====
+const ORDER_STATUSES = ["주문접수", "준비중", "완료"];
+
+const ORDERS_STORAGE_KEY = "cafe-app:orders";
+
+const ORDER_SEED = [
+  {
+    id: "ORD-20260701-001",
+    createdAt: "2026-07-01T10:23:00",
+    status: "완료",
+    items: [
+      { menuId: "americano", quantity: 2 },
+      { menuId: "cheesecake", quantity: 1 },
+    ],
+  },
+  {
+    id: "ORD-20260703-002",
+    createdAt: "2026-07-03T14:05:00",
+    status: "준비중",
+    items: [{ menuId: "vanilla-latte", quantity: 1 }],
+  },
+  {
+    id: "ORD-20260705-003",
+    createdAt: "2026-07-05T09:40:00",
+    status: "주문접수",
+    items: [
+      { menuId: "lemon-ade", quantity: 2 },
+      { menuId: "croissant", quantity: 2 },
+    ],
+  },
+];
+
+function seedOrdersIfEmpty() {
+  if (localStorage.getItem(ORDERS_STORAGE_KEY) === null) {
+    localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(ORDER_SEED));
+  }
+}
+
+function getOrders() {
+  seedOrdersIfEmpty();
+  const raw = localStorage.getItem(ORDERS_STORAGE_KEY);
+  if (!raw) return [];
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
+function saveOrders(orders) {
+  localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
+  return orders;
+}
+
+function getOrderById(orderId) {
+  return getOrders().find((order) => order.id === orderId) || null;
+}
+
+function getOrderTotalPrice(order) {
+  return order.items.reduce((total, item) => {
+    const menu = getMenuById(item.menuId);
+    if (!menu) return total;
+    return total + menu.price * item.quantity;
+  }, 0);
+}
+
+function getOrderSummaryText(order) {
+  const firstMenu = getMenuById(order.items[0].menuId);
+  const firstName = firstMenu ? firstMenu.name : "알 수 없는 메뉴";
+  if (order.items.length > 1) {
+    return `${firstName} 외 ${order.items.length - 1}건`;
+  }
+  return firstName;
+}
+
+function updateOrderStatus(orderId, status) {
+  const orders = getOrders();
+  const index = orders.findIndex((order) => order.id === orderId);
+  if (index === -1) return null;
+
+  orders[index] = { ...orders[index], status };
+  saveOrders(orders);
+  return orders[index];
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관리자 - 대시보드</title>
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar glass">
+        <div>
+          <p class="eyebrow">Admin · Dashboard</p>
+          <h1>☕ 카페 앱 관리자</h1>
+        </div>
+        <a class="secondary-link" href="../index.html">고객 화면으로</a>
+      </header>
+
+      <main class="container page-content">
+        <section class="summary-grid">
+          <article class="summary-card glass">
+            <span>전체 주문</span>
+            <strong id="totalOrders">0</strong>
+          </article>
+          <article class="summary-card glass">
+            <span>대기 중 주문</span>
+            <strong id="pendingOrders">0</strong>
+          </article>
+          <article class="summary-card glass">
+            <span>총 매출</span>
+            <strong id="totalRevenue">0원</strong>
+          </article>
+          <article class="summary-card glass">
+            <span>품절 메뉴</span>
+            <strong id="soldOutMenus">0</strong>
+          </article>
+        </section>
+
+        <nav class="quick-nav">
+          <a href="./menus/list.html" class="quick-nav-item glass">
+            <span class="quick-nav-icon">🍰</span>
+            <span class="quick-nav-label">메뉴 관리</span>
+          </a>
+          <a href="./orders/list.html" class="quick-nav-item glass">
+            <span class="quick-nav-icon">🧾</span>
+            <span class="quick-nav-label">주문 관리</span>
+          </a>
+        </nav>
+
+        <section class="list-panel">
+          <div class="list-header">
+            <h2>최근 주문</h2>
+            <a class="secondary-link" href="./orders/list.html">전체 보기</a>
+          </div>
+          <div id="recentOrders" class="order-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

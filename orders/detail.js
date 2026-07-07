@@ -1,66 +1,8 @@
-// ===== 주문 저장소 (localStorage 기반) =====
-const ORDERS_STORAGE_KEY = "cafe-app:orders";
-
-const ORDER_SEED = [
-  {
-    id: "ORD-20260701-001",
-    createdAt: "2026-07-01T10:23:00",
-    status: "완료",
-    items: [
-      { menuId: "americano", quantity: 2 },
-      { menuId: "cheesecake", quantity: 1 },
-    ],
-  },
-  {
-    id: "ORD-20260703-002",
-    createdAt: "2026-07-03T14:05:00",
-    status: "준비중",
-    items: [{ menuId: "vanilla-latte", quantity: 1 }],
-  },
-  {
-    id: "ORD-20260705-003",
-    createdAt: "2026-07-05T09:40:00",
-    status: "주문접수",
-    items: [
-      { menuId: "lemon-ade", quantity: 2 },
-      { menuId: "croissant", quantity: 2 },
-    ],
-  },
-];
-
-function seedOrdersIfEmpty() {
-  if (localStorage.getItem(ORDERS_STORAGE_KEY) === null) {
-    localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(ORDER_SEED));
-  }
-}
-
-function getOrders() {
-  const raw = localStorage.getItem(ORDERS_STORAGE_KEY);
-  if (!raw) return [];
-  try {
-    return JSON.parse(raw);
-  } catch {
-    return [];
-  }
-}
-
-function getOrderById(orderId) {
-  return getOrders().find((order) => order.id === orderId) || null;
-}
-
-function getStatusClass(status) {
-  if (status === "완료") return "status-done";
-  if (status === "준비중") return "status-preparing";
-  return "status-received";
-}
-
 // ===== 상태 =====
 let currentOrder = null;
 
 // ===== 초기화 =====
 function init() {
-  seedOrdersIfEmpty();
-
   const params = new URLSearchParams(window.location.search);
   const orderId = params.get("id");
   currentOrder = orderId ? getOrderById(orderId) : null;

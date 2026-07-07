@@ -13,6 +13,12 @@ function formatDate(dateInput) {
   return `${year}.${month}.${day} ${hours}:${minutes}`;
 }
 
+function getStatusClass(status) {
+  if (status === "완료") return "status-done";
+  if (status === "준비중") return "status-preparing";
+  return "status-received";
+}
+
 // ===== 장바구니 유틸리티 (localStorage 기반) =====
 const CART_STORAGE_KEY = "cafe-app:cart";
 

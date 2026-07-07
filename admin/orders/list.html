@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관리자 - 주문 관리</title>
+    <link rel="stylesheet" href="../../css/variables.css" />
+    <link rel="stylesheet" href="./list.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar glass">
+        <div>
+          <p class="eyebrow">Admin · Order Management</p>
+          <h1>주문 관리</h1>
+        </div>
+        <a class="secondary-link" href="../index.html">← 대시보드</a>
+      </header>
+
+      <main class="container page-content">
+        <section class="summary-grid">
+          <article class="summary-card glass">
+            <span>전체 주문</span>
+            <strong id="totalCount">0</strong>
+          </article>
+          <article class="summary-card glass">
+            <span>주문접수</span>
+            <strong id="receivedCount">0</strong>
+          </article>
+          <article class="summary-card glass">
+            <span>준비중</span>
+            <strong id="preparingCount">0</strong>
+          </article>
+          <article class="summary-card glass">
+            <span>완료</span>
+            <strong id="doneCount">0</strong>
+          </article>
+        </section>
+
+        <section class="filter-panel glass">
+          <label class="field">
+            <span>상태</span>
+            <select id="statusFilter">
+              <option value="all">전체</option>
+              <option value="주문접수">주문접수</option>
+              <option value="준비중">준비중</option>
+              <option value="완료">완료</option>
+            </select>
+          </label>
+
+          <label class="field field-search">
+            <span>검색</span>
+            <input id="keywordInput" type="search" placeholder="주문 번호로 검색" />
+          </label>
+        </section>
+
+        <section class="list-panel">
+          <div class="list-header">
+            <h2>주문 목록</h2>
+            <p id="resultText">총 0건</p>
+          </div>
+          <div id="orderList" class="order-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="../../js/data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="./list.js"></script>
+  </body>
+</html>

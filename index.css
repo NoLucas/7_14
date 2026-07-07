@@ -146,15 +146,38 @@
 }
 
 .featured-scroll {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
-  overflow-x: auto;
+  max-height: 420px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: var(--space-xs);
   padding-bottom: var(--space-sm);
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-surface-alt);
+}
+
+.featured-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.featured-scroll::-webkit-scrollbar-track {
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-full);
+}
+
+.featured-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+.featured-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
 }
 
 .featured-card {
-  flex: none;
-  width: 160px;
   display: flex;
   flex-direction: column;
   overflow: hidden;

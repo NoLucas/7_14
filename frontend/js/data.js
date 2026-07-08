@@ -14,8 +14,9 @@ const MENUS = [
     name: "아메리카노",
     price: 4500,
     description: "깔끔하고 깊은 풍미의 에스프레소 베이스 커피",
-    image: "",
+    image: "images/menus/americano.png",
     soldOut: false,
+    rating: 4.8,
   },
   {
     id: "latte",
@@ -23,8 +24,9 @@ const MENUS = [
     name: "카페라떼",
     price: 5000,
     description: "부드러운 우유와 에스프레소의 조화",
-    image: "",
+    image: "images/menus/latte.png",
     soldOut: false,
+    rating: 4.9,
   },
   {
     id: "cappuccino",
@@ -32,8 +34,9 @@ const MENUS = [
     name: "카푸치노",
     price: 5000,
     description: "풍성한 우유 거품이 매력적인 커피",
-    image: "",
+    image: "images/menus/cappuccino.png",
     soldOut: false,
+    rating: 4.7,
   },
   {
     id: "vanilla-latte",
@@ -41,8 +44,9 @@ const MENUS = [
     name: "바닐라라떼",
     price: 5500,
     description: "달콤한 바닐라 시럽을 더한 라떼",
-    image: "",
+    image: "images/menus/vanilla-latte.png",
     soldOut: false,
+    rating: 4.6,
   },
   {
     id: "earl-grey",
@@ -50,8 +54,9 @@ const MENUS = [
     name: "얼그레이",
     price: 4800,
     description: "은은한 베르가못 향의 홍차",
-    image: "",
+    image: "images/menus/earl-grey.png",
     soldOut: false,
+    rating: 4.5,
   },
   {
     id: "peppermint",
@@ -59,8 +64,9 @@ const MENUS = [
     name: "페퍼민트",
     price: 4800,
     description: "상쾌한 향의 허브티",
-    image: "",
+    image: "images/menus/peppermint.png",
     soldOut: false,
+    rating: 4.4,
   },
   {
     id: "lemon-ade",
@@ -68,8 +74,9 @@ const MENUS = [
     name: "레몬에이드",
     price: 5500,
     description: "상큼한 레몬으로 만든 탄산 에이드",
-    image: "",
+    image: "images/menus/lemon-ade.png",
     soldOut: false,
+    rating: 4.7,
   },
   {
     id: "grapefruit-ade",
@@ -77,8 +84,9 @@ const MENUS = [
     name: "자몽에이드",
     price: 5800,
     description: "새콤달콤한 자몽 과육이 가득한 에이드",
-    image: "",
+    image: "images/menus/grapefruit-ade.png",
     soldOut: false,
+    rating: 4.6,
   },
   {
     id: "cheesecake",
@@ -86,8 +94,9 @@ const MENUS = [
     name: "치즈케이크",
     price: 6500,
     description: "진한 크림치즈의 부드러운 케이크",
-    image: "",
+    image: "images/menus/cheesecake.png",
     soldOut: false,
+    rating: 4.9,
   },
   {
     id: "croissant",
@@ -95,12 +104,21 @@ const MENUS = [
     name: "크루아상",
     price: 4200,
     description: "겹겹이 바삭한 버터 크루아상",
-    image: "",
+    image: "images/menus/croissant.png",
     soldOut: false,
+    rating: 4.5,
   },
 ];
 
+// 관리자 화면 등에서 새로 만든 메뉴처럼 rating이 없는 경우를 대비한 기본값
+const DEFAULT_MENU_RATING = 4.5;
+
 const MENU_STORAGE_KEY = "cafe-app:menus";
+
+// MENUS 시드 데이터(이미지 경로 등)를 바꿀 때마다 이 값을 올려준다.
+// 그래야 이미 브라우저에 저장된 이전 캐시를 새 시드 데이터로 갱신한다.
+const MENU_SEED_VERSION = "2";
+const MENU_SEED_VERSION_KEY = "cafe-app:menus:seed-version";
 
 function getCategories() {
   return [...CATEGORIES];
@@ -110,7 +128,19 @@ function getSeedMenus() {
   return MENUS.map((menu) => ({ ...menu }));
 }
 
+function seedMenusIfOutdated() {
+  const storedVersion = localStorage.getItem(MENU_SEED_VERSION_KEY);
+  if (storedVersion === MENU_SEED_VERSION) {
+    return;
+  }
+
+  localStorage.setItem(MENU_STORAGE_KEY, JSON.stringify(getSeedMenus()));
+  localStorage.setItem(MENU_SEED_VERSION_KEY, MENU_SEED_VERSION);
+}
+
 function getAllMenus() {
+  seedMenusIfOutdated();
+
   const raw = localStorage.getItem(MENU_STORAGE_KEY);
 
   if (!raw) {
@@ -273,6 +303,40 @@ function getOrders() {
 function saveOrders(orders) {
   localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
   return orders;
+}
+
+// 오늘 날짜 + 일련번호 조합으로 주문 ID를 만든다 (예: ORD-20260708-001)
+function generateOrderId() {
+  const now = new Date();
+  const datePart = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(
+    now.getDate()
+  ).padStart(2, "0")}`;
+
+  const orders = getOrders();
+  let sequence = 1;
+  let nextId = `ORD-${datePart}-${String(sequence).padStart(3, "0")}`;
+
+  while (orders.some((order) => order.id === nextId)) {
+    sequence += 1;
+    nextId = `ORD-${datePart}-${String(sequence).padStart(3, "0")}`;
+  }
+
+  return nextId;
+}
+
+// 장바구니 항목({menuId, quantity}[])을 받아 새 주문을 생성하고 저장한다.
+function createOrder(items) {
+  const orders = getOrders();
+  const newOrder = {
+    id: generateOrderId(),
+    createdAt: new Date().toISOString(),
+    status: ORDER_STATUSES[0],
+    items: items.map((item) => ({ menuId: item.menuId, quantity: item.quantity })),
+  };
+
+  orders.push(newOrder);
+  saveOrders(orders);
+  return newOrder;
 }
 
 function getOrderById(orderId) {

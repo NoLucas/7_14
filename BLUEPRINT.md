@@ -14,6 +14,14 @@ project1/
 │   ├── index.css                      # 메인 페이지 스타일
 │   ├── index.js                       # 메인 페이지 로직
 │   │
+│   ├── 🔑 로그인 / 회원가입 (DB 미연동, 화면만 구현)
+│   │   └── auth/
+│   │       ├── login.html             # 로그인
+│   │       ├── login.js
+│   │       ├── signup.html            # 회원가입
+│   │       ├── signup.js
+│   │       └── auth.css               # 로그인/회원가입 공통 스타일
+│   │
 │   ├── 👤 고객 - 메뉴
 │   │   └── menus/
 │   │       ├── list.html              # 메뉴 목록
@@ -91,7 +99,7 @@ project1/
 
 | 역할 | 경로 | 주요 기능 |
 |------|------|-----------|
-| **고객** | `/frontend/`, `/frontend/menus/`, `/frontend/my/`, `/frontend/basket/`, `/frontend/orders/` | 메인, 메뉴 조회, 마이페이지, 장바구니, 주문 내역 |
+| **고객** | `/frontend/`, `/frontend/menus/`, `/frontend/my/`, `/frontend/basket/`, `/frontend/orders/`, `/frontend/auth/` | 메인, 메뉴 조회, 마이페이지, 장바구니, 주문 내역, 로그인/회원가입 |
 | **관리자/사장** | `/frontend/admin/`, `/frontend/admin/menus/`, `/frontend/admin/orders/` | 대시보드, 메뉴 CRUD, 주문 관리 |
 
 ## 🎨 디자인
@@ -157,6 +165,8 @@ project1/
 - [x] `frontend/orders/detail.html` — 주문 상세
 - [x] `frontend/orders/detail.css`
 - [x] `frontend/orders/detail.js`
+- [x] `frontend/js/data.js` — `createOrder`/`generateOrderId`로 실제 주문 생성 (장바구니 → 주문하기)
+- [x] `frontend/basket/list.js` — "주문하기" 클릭 시 주문 생성 후 장바구니 비우고 주문 상세로 이동
 
 ### 6단계: 고객 - 메인 페이지
 
@@ -184,3 +194,20 @@ project1/
 - [x] `frontend/admin/orders/edit.html` — 주문 상태 수정
 - [x] `frontend/admin/orders/edit.css`
 - [x] `frontend/admin/orders/edit.js`
+
+### 9단계: 고객 - 로그인 / 회원가입 (DB 미연동)
+
+- [x] `frontend/auth/login.html` — 로그인 (아이디/이메일, 비밀번호)
+- [x] `frontend/auth/login.js` — 제출 시 안내 메시지만 표시 (실제 인증 없음)
+- [x] `frontend/auth/signup.html` — 회원가입 (이름, 아이디/이메일, 비밀번호, 비밀번호 확인)
+- [x] `frontend/auth/signup.js` — 제출 시 안내 메시지만 표시 (실제 저장 없음)
+- [x] `frontend/auth/auth.css` — 로그인/회원가입 공통 스타일
+- [x] 카페명(`Cafe Moment`) 상단 표시 및 클릭 시 `index.html` 이동 (메인/관리자/로그인/회원가입 공통)
+
+### 10단계: 메인 페이지 UI/UX 리뉴얼 (Premium Minimal Cafe 스타일)
+
+- [x] `frontend/css/variables.css` — 색상 팔레트(브라운/크림/우드)·타이포·여백·Pretendard 폰트 전면 교체 (전 페이지 공통 반영)
+- [x] `frontend/js/data.js` — `MENUS`에 `rating`(별점) 필드 추가
+- [x] `frontend/index.html` — Header(Sticky+Blur, Menu/About/Store/Event), Hero, Quick Menu, Popular Menu, Today's Recommendation, About Cafe, Review, Instagram Gallery, Footer 신규 구성
+- [x] `frontend/index.css` — 신규 섹션 스타일, hover/스크롤 reveal/버튼 리플 애니메이션, 반응형(Desktop/Tablet/Mobile)
+- [x] `frontend/index.js` — Popular Menu 카드(별점/카테고리/Add to Cart), Today's Recommendation·Instagram Gallery 렌더링, 헤더 스크롤 효과, 스크롤 reveal, 리플 이벤트 바인딩

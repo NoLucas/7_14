@@ -25,7 +25,9 @@ function renderMenuDetail() {
   const soldOut = currentMenu.soldOut;
 
   detailEl.innerHTML = `
-    <div class="menu-detail-image">☕</div>
+    <div class="menu-detail-image">
+      <img src="../${currentMenu.image}" alt="${currentMenu.name}" loading="lazy" />
+    </div>
     <div class="menu-detail-body">
       ${category ? `<span class="menu-detail-category">${category.name}</span>` : ""}
       <h2 class="menu-detail-name">${currentMenu.name}</h2>

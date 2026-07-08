@@ -121,13 +121,16 @@
 }
 
 .menu-card-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   height: 140px;
-  font-size: 2.5rem;
-  color: var(--color-primary-light);
+  overflow: hidden;
   background: var(--color-surface-alt);
+}
+
+.menu-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .menu-card-body {

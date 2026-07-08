@@ -69,7 +69,7 @@ function renderBasketPage() {
       <div class="bottom-bar-actions">
         <a class="shop-link" href="../menus/list.html">메뉴 더 담기</a>
         <button class="checkout-btn" id="checkoutBtn" type="button" ${validItems.length === 0 ? "disabled" : ""}>
-          주문 단계는 5단계에서 구현
+          주문하기
         </button>
       </div>
     </div>
@@ -113,7 +113,9 @@ function renderBasketItem(item) {
   return `
     <article class="basket-item">
       <div class="basket-item-top">
-        <div class="item-emoji">${item.menu.categoryId === "dessert" ? "🥐" : item.menu.categoryId === "tea" ? "🍵" : item.menu.categoryId === "ade" ? "🍹" : "☕"}</div>
+        <div class="item-emoji">
+          <img src="../${item.menu.image}" alt="${item.menu.name}" loading="lazy" />
+        </div>
         <div>
           ${item.category ? `<span class="item-category">${item.category.name}</span>` : ""}
           <h3 class="item-name">${item.menu.name}</h3>
@@ -141,7 +143,19 @@ function bindBasketEvents() {
   const checkoutBtn = document.getElementById("checkoutBtn");
   if (checkoutBtn) {
     checkoutBtn.addEventListener("click", () => {
-      window.alert("주문 기능은 다음 5단계에서 이어서 구현됩니다.");
+      const validItems = buildCartViewModels().filter((item) => item.menu);
+      if (validItems.length === 0) {
+        return;
+      }
+
+      const confirmed = window.confirm("장바구니에 담긴 메뉴로 주문할까요?");
+      if (!confirmed) {
+        return;
+      }
+
+      const newOrder = createOrder(validItems);
+      clearCart();
+      window.location.href = `../orders/detail.html?id=${encodeURIComponent(newOrder.id)}`;
     });
   }
 }

@@ -62,14 +62,18 @@
 
 /* ===== Menu Detail ===== */
 .menu-detail-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   height: 220px;
   margin-top: var(--space-lg);
-  font-size: 4rem;
-  color: var(--color-primary-light);
+  overflow: hidden;
   background: var(--color-surface-alt);
+  border-radius: var(--radius-lg);
+}
+
+.menu-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: var(--radius-lg);
 }
 

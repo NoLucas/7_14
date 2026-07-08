@@ -165,6 +165,8 @@ project1/
 - [x] `frontend/orders/detail.html` — 주문 상세
 - [x] `frontend/orders/detail.css`
 - [x] `frontend/orders/detail.js`
+- [x] `frontend/js/data.js` — `createOrder`/`generateOrderId`로 실제 주문 생성 (장바구니 → 주문하기)
+- [x] `frontend/basket/list.js` — "주문하기" 클릭 시 주문 생성 후 장바구니 비우고 주문 상세로 이동
 
 ### 6단계: 고객 - 메인 페이지
 
@@ -201,3 +203,11 @@ project1/
 - [x] `frontend/auth/signup.js` — 제출 시 안내 메시지만 표시 (실제 저장 없음)
 - [x] `frontend/auth/auth.css` — 로그인/회원가입 공통 스타일
 - [x] 카페명(`Cafe Moment`) 상단 표시 및 클릭 시 `index.html` 이동 (메인/관리자/로그인/회원가입 공통)
+
+### 10단계: 메인 페이지 UI/UX 리뉴얼 (Premium Minimal Cafe 스타일)
+
+- [x] `frontend/css/variables.css` — 색상 팔레트(브라운/크림/우드)·타이포·여백·Pretendard 폰트 전면 교체 (전 페이지 공통 반영)
+- [x] `frontend/js/data.js` — `MENUS`에 `rating`(별점) 필드 추가
+- [x] `frontend/index.html` — Header(Sticky+Blur, Menu/About/Store/Event), Hero, Quick Menu, Popular Menu, Today's Recommendation, About Cafe, Review, Instagram Gallery, Footer 신규 구성
+- [x] `frontend/index.css` — 신규 섹션 스타일, hover/스크롤 reveal/버튼 리플 애니메이션, 반응형(Desktop/Tablet/Mobile)
+- [x] `frontend/index.js` — Popular Menu 카드(별점/카테고리/Add to Cart), Today's Recommendation·Instagram Gallery 렌더링, 헤더 스크롤 효과, 스크롤 reveal, 리플 이벤트 바인딩

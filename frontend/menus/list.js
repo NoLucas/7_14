@@ -51,7 +51,9 @@ function renderMenuGrid() {
           href="detail.html?id=${encodeURIComponent(menu.id)}"
         >
           ${menu.soldOut ? `<span class="sold-out-badge">품절</span>` : ""}
-          <div class="menu-card-image">☕</div>
+          <div class="menu-card-image">
+            <img src="../${menu.image}" alt="${menu.name}" loading="lazy" />
+          </div>
           <div class="menu-card-body">
             <span class="menu-card-name">${menu.name}</span>
             <p class="menu-card-desc">${menu.description}</p>

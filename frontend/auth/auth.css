@@ -42,6 +42,27 @@
   color: var(--color-text-muted);
 }
 
+/* 임시 테스트 계정 안내 박스 */
+.auth-hint {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+}
+
+.auth-hint-title {
+  margin-bottom: var(--space-xs);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.auth-hint strong {
+  color: var(--color-primary-dark);
+}
+
 .auth-form {
   display: grid;
   gap: var(--space-md);

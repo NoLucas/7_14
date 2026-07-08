@@ -3,17 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>카페 앱</title>
+  <title>Cafe Moment</title>
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="index.css" />
 </head>
 <body>
   <header class="page-header glass">
-    <h1>☕ 카페 앱</h1>
-    <a href="basket/list.html" class="icon-btn cart-btn" aria-label="장바구니">
-      🛒
-      <span class="cart-badge" id="cartBadge" hidden>0</span>
-    </a>
+    <!-- 카페명: 클릭하면 메인 홈페이지(index.html)로 이동한다 -->
+    <a href="index.html" class="brand-link"><h1>☕ Cafe Moment</h1></a>
+    <div class="header-actions">
+      <a href="login.html" class="icon-btn" aria-label="로그인">👤</a>
+      <a href="basket/list.html" class="icon-btn cart-btn" aria-label="장바구니">
+        🛒
+        <span class="cart-badge" id="cartBadge" hidden>0</span>
+      </a>
+    </div>
   </header>
 
   <main class="container">

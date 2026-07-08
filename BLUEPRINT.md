@@ -14,6 +14,13 @@ project1/
 │   ├── index.css                      # 메인 페이지 스타일
 │   ├── index.js                       # 메인 페이지 로직
 │   │
+│   ├── 🔑 로그인 / 회원가입 (DB 미연동, 화면만 구현)
+│   │   ├── login.html                 # 로그인
+│   │   ├── login.js
+│   │   ├── signup.html                # 회원가입
+│   │   ├── signup.js
+│   │   └── auth.css                   # 로그인/회원가입 공통 스타일
+│   │
 │   ├── 👤 고객 - 메뉴
 │   │   └── menus/
 │   │       ├── list.html              # 메뉴 목록
@@ -91,7 +98,7 @@ project1/
 
 | 역할 | 경로 | 주요 기능 |
 |------|------|-----------|
-| **고객** | `/frontend/`, `/frontend/menus/`, `/frontend/my/`, `/frontend/basket/`, `/frontend/orders/` | 메인, 메뉴 조회, 마이페이지, 장바구니, 주문 내역 |
+| **고객** | `/frontend/`, `/frontend/menus/`, `/frontend/my/`, `/frontend/basket/`, `/frontend/orders/`, `/frontend/login.html`, `/frontend/signup.html` | 메인, 메뉴 조회, 마이페이지, 장바구니, 주문 내역, 로그인/회원가입 |
 | **관리자/사장** | `/frontend/admin/`, `/frontend/admin/menus/`, `/frontend/admin/orders/` | 대시보드, 메뉴 CRUD, 주문 관리 |
 
 ## 🎨 디자인
@@ -184,3 +191,12 @@ project1/
 - [x] `frontend/admin/orders/edit.html` — 주문 상태 수정
 - [x] `frontend/admin/orders/edit.css`
 - [x] `frontend/admin/orders/edit.js`
+
+### 9단계: 고객 - 로그인 / 회원가입 (DB 미연동)
+
+- [x] `frontend/login.html` — 로그인 (아이디/이메일, 비밀번호)
+- [x] `frontend/login.js` — 제출 시 안내 메시지만 표시 (실제 인증 없음)
+- [x] `frontend/signup.html` — 회원가입 (이름, 아이디/이메일, 비밀번호, 비밀번호 확인)
+- [x] `frontend/signup.js` — 제출 시 안내 메시지만 표시 (실제 저장 없음)
+- [x] `frontend/auth.css` — 로그인/회원가입 공통 스타일
+- [x] 카페명(`Cafe Moment`) 상단 표시 및 클릭 시 `index.html` 이동 (메인/관리자/로그인/회원가입 공통)

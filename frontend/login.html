@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로그인 - Cafe Moment</title>
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+  <main class="container auth-page">
+    <!-- 카페명: 클릭하면 메인 홈페이지(index.html)로 이동한다 -->
+    <a href="index.html" class="auth-brand">☕ Cafe Moment</a>
+
+    <section class="auth-card glass">
+      <h2 class="auth-title">로그인</h2>
+      <p class="auth-desc">아직 서버(DB) 연결 전입니다. 화면 동작만 확인해보세요.</p>
+
+      <form id="loginForm" class="auth-form">
+        <label class="field">
+          <span>아이디 또는 이메일</span>
+          <input name="userId" type="text" placeholder="아이디 또는 이메일을 입력하세요" required />
+        </label>
+
+        <label class="field">
+          <span>비밀번호</span>
+          <input name="password" type="password" placeholder="비밀번호를 입력하세요" required />
+        </label>
+
+        <!-- 로그인 결과 안내 메시지가 표시되는 영역 -->
+        <p id="message" class="message" aria-live="polite"></p>
+
+        <button class="primary-button" type="submit">로그인</button>
+      </form>
+
+      <p class="auth-switch">
+        아직 계정이 없으신가요?
+        <a href="signup.html">회원가입</a>
+      </p>
+    </section>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>

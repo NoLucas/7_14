@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "serve -l 3113",
+    "start": "serve frontend -l 3113",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

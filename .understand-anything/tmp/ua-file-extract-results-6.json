@@ -1,0 +1,71 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "legacy-step2-backup/admin/menus/create.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 119,
+      "nonEmptyLines": 101,
+      "metrics": {}
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/create.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 68,
+      "nonEmptyLines": 59,
+      "metrics": {}
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/detail.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 135,
+      "nonEmptyLines": 114,
+      "metrics": {}
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/detail.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 24,
+      "nonEmptyLines": 22,
+      "metrics": {}
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/edit.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 138,
+      "nonEmptyLines": 117,
+      "metrics": {}
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/edit.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 30,
+      "nonEmptyLines": 28,
+      "metrics": {}
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/list.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 259,
+      "nonEmptyLines": 218,
+      "metrics": {}
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/list.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 62,
+      "nonEmptyLines": 57,
+      "metrics": {}
+    }
+  ]
+}

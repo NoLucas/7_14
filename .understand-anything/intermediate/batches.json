@@ -1,0 +1,596 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 71,
+  "totalBatches": 8,
+  "exportsByPath": {
+    ".understand-anything/.understandignore": [],
+    "frontend/admin/index.js": [],
+    "frontend/admin/menus/create.js": [],
+    "frontend/admin/menus/detail.js": [],
+    "frontend/admin/menus/edit.js": [],
+    "frontend/admin/menus/list.js": [],
+    "frontend/admin/orders/detail.js": [],
+    "frontend/admin/orders/edit.js": [],
+    "frontend/admin/orders/list.js": [],
+    "frontend/auth/login.js": [],
+    "frontend/auth/signup.js": [],
+    "frontend/basket/list.js": [],
+    "frontend/index.js": [],
+    "frontend/js/data.js": [],
+    "frontend/js/utils.js": [],
+    "frontend/menus/detail.js": [],
+    "frontend/menus/list.js": [],
+    "frontend/my/index.js": [],
+    "frontend/orders/detail.js": [],
+    "frontend/orders/list.js": [],
+    "legacy-step2-backup/admin/menus/create.js": [],
+    "legacy-step2-backup/admin/menus/detail.js": [],
+    "legacy-step2-backup/admin/menus/edit.js": [],
+    "legacy-step2-backup/admin/menus/list.js": [],
+    "legacy-step2-backup/js/data.js": []
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": "frontend/admin/menus/create.css",
+          "language": "css",
+          "sizeLines": 119,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/menus/create.html",
+          "language": "html",
+          "sizeLines": 68,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/menus/detail.css",
+          "language": "css",
+          "sizeLines": 135,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/menus/detail.html",
+          "language": "html",
+          "sizeLines": 24,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/menus/edit.css",
+          "language": "css",
+          "sizeLines": 138,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/menus/edit.html",
+          "language": "html",
+          "sizeLines": 30,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/menus/list.css",
+          "language": "css",
+          "sizeLines": 259,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/menus/list.html",
+          "language": "html",
+          "sizeLines": 62,
+          "fileCategory": "markup"
+        }
+      ],
+      "batchImportData": {
+        "frontend/admin/menus/create.css": [],
+        "frontend/admin/menus/create.html": [],
+        "frontend/admin/menus/detail.css": [],
+        "frontend/admin/menus/detail.html": [],
+        "frontend/admin/menus/edit.css": [],
+        "frontend/admin/menus/edit.html": [],
+        "frontend/admin/menus/list.css": [],
+        "frontend/admin/menus/list.html": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": "frontend/admin/orders/detail.css",
+          "language": "css",
+          "sizeLines": 165,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/orders/detail.html",
+          "language": "html",
+          "sizeLines": 24,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/orders/edit.css",
+          "language": "css",
+          "sizeLines": 136,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/orders/edit.html",
+          "language": "html",
+          "sizeLines": 23,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/orders/list.css",
+          "language": "css",
+          "sizeLines": 240,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/orders/list.html",
+          "language": "html",
+          "sizeLines": 71,
+          "fileCategory": "markup"
+        }
+      ],
+      "batchImportData": {
+        "frontend/admin/orders/detail.css": [],
+        "frontend/admin/orders/detail.html": [],
+        "frontend/admin/orders/edit.css": [],
+        "frontend/admin/orders/edit.html": [],
+        "frontend/admin/orders/list.css": [],
+        "frontend/admin/orders/list.html": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": "frontend/auth/auth.css",
+          "language": "css",
+          "sizeLines": 131,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/auth/login.html",
+          "language": "html",
+          "sizeLines": 52,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/auth/signup.html",
+          "language": "html",
+          "sizeLines": 55,
+          "fileCategory": "markup"
+        }
+      ],
+      "batchImportData": {
+        "frontend/auth/auth.css": [],
+        "frontend/auth/login.html": [],
+        "frontend/auth/signup.html": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 4,
+      "files": [
+        {
+          "path": "frontend/menus/detail.css",
+          "language": "css",
+          "sizeLines": 201,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/menus/detail.html",
+          "language": "html",
+          "sizeLines": 26,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/menus/list.css",
+          "language": "css",
+          "sizeLines": 187,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/menus/list.html",
+          "language": "html",
+          "sizeLines": 29,
+          "fileCategory": "markup"
+        }
+      ],
+      "batchImportData": {
+        "frontend/menus/detail.css": [],
+        "frontend/menus/detail.html": [],
+        "frontend/menus/list.css": [],
+        "frontend/menus/list.html": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 5,
+      "files": [
+        {
+          "path": "frontend/orders/detail.css",
+          "language": "css",
+          "sizeLines": 161,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/orders/detail.html",
+          "language": "html",
+          "sizeLines": 26,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/orders/list.css",
+          "language": "css",
+          "sizeLines": 146,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/orders/list.html",
+          "language": "html",
+          "sizeLines": 28,
+          "fileCategory": "markup"
+        }
+      ],
+      "batchImportData": {
+        "frontend/orders/detail.css": [],
+        "frontend/orders/detail.html": [],
+        "frontend/orders/list.css": [],
+        "frontend/orders/list.html": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 6,
+      "files": [
+        {
+          "path": "legacy-step2-backup/admin/menus/create.css",
+          "language": "css",
+          "sizeLines": 119,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/create.html",
+          "language": "html",
+          "sizeLines": 68,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/detail.css",
+          "language": "css",
+          "sizeLines": 135,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/detail.html",
+          "language": "html",
+          "sizeLines": 24,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/edit.css",
+          "language": "css",
+          "sizeLines": 138,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/edit.html",
+          "language": "html",
+          "sizeLines": 30,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/list.css",
+          "language": "css",
+          "sizeLines": 259,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/list.html",
+          "language": "html",
+          "sizeLines": 62,
+          "fileCategory": "markup"
+        }
+      ],
+      "batchImportData": {
+        "legacy-step2-backup/admin/menus/create.css": [],
+        "legacy-step2-backup/admin/menus/create.html": [],
+        "legacy-step2-backup/admin/menus/detail.css": [],
+        "legacy-step2-backup/admin/menus/detail.html": [],
+        "legacy-step2-backup/admin/menus/edit.css": [],
+        "legacy-step2-backup/admin/menus/edit.html": [],
+        "legacy-step2-backup/admin/menus/list.css": [],
+        "legacy-step2-backup/admin/menus/list.html": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 7,
+      "files": [
+        {
+          "path": ".understand-anything/.understandignore",
+          "language": "unknown",
+          "sizeLines": 38,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".understand-anything/config.json",
+          "language": "json",
+          "sizeLines": 1,
+          "fileCategory": "config"
+        },
+        {
+          "path": "backend/README.md",
+          "language": "markdown",
+          "sizeLines": 6,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "BLUEPRINT.md",
+          "language": "markdown",
+          "sizeLines": 213,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "frontend/admin/index.css",
+          "language": "css",
+          "sizeLines": 196,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/index.html",
+          "language": "html",
+          "sizeLines": 66,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/admin/index.js",
+          "language": "javascript",
+          "sizeLines": 51,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/admin/menus/create.js",
+          "language": "javascript",
+          "sizeLines": 55,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/admin/menus/detail.js",
+          "language": "javascript",
+          "sizeLines": 59,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/admin/menus/edit.js",
+          "language": "javascript",
+          "sizeLines": 130,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/admin/menus/list.js",
+          "language": "javascript",
+          "sizeLines": 125,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/admin/orders/detail.js",
+          "language": "javascript",
+          "sizeLines": 64,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/admin/orders/edit.js",
+          "language": "javascript",
+          "sizeLines": 69,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/admin/orders/list.js",
+          "language": "javascript",
+          "sizeLines": 108,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/auth/login.js",
+          "language": "javascript",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/auth/signup.js",
+          "language": "javascript",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/basket/list.css",
+          "language": "css",
+          "sizeLines": 295,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/basket/list.html",
+          "language": "html",
+          "sizeLines": 36,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/basket/list.js",
+          "language": "javascript",
+          "sizeLines": 191,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/css/variables.css",
+          "language": "css",
+          "sizeLines": 158,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/index.css",
+          "language": "css",
+          "sizeLines": 708,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/index.html",
+          "language": "html",
+          "sizeLines": 161,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/index.js",
+          "language": "javascript",
+          "sizeLines": 208,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/js/data.js",
+          "language": "javascript",
+          "sizeLines": 371,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/js/utils.js",
+          "language": "javascript",
+          "sizeLines": 89,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        ".understand-anything/.understandignore": [],
+        ".understand-anything/config.json": [],
+        "backend/README.md": [],
+        "BLUEPRINT.md": [],
+        "frontend/admin/index.css": [],
+        "frontend/admin/index.html": [],
+        "frontend/admin/index.js": [],
+        "frontend/admin/menus/create.js": [],
+        "frontend/admin/menus/detail.js": [],
+        "frontend/admin/menus/edit.js": [],
+        "frontend/admin/menus/list.js": [],
+        "frontend/admin/orders/detail.js": [],
+        "frontend/admin/orders/edit.js": [],
+        "frontend/admin/orders/list.js": [],
+        "frontend/auth/login.js": [],
+        "frontend/auth/signup.js": [],
+        "frontend/basket/list.css": [],
+        "frontend/basket/list.html": [],
+        "frontend/basket/list.js": [],
+        "frontend/css/variables.css": [],
+        "frontend/index.css": [],
+        "frontend/index.html": [],
+        "frontend/index.js": [],
+        "frontend/js/data.js": [],
+        "frontend/js/utils.js": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 8,
+      "files": [
+        {
+          "path": "frontend/menus/detail.js",
+          "language": "javascript",
+          "sizeLines": 124,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/menus/list.js",
+          "language": "javascript",
+          "sizeLines": 81,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/my/index.css",
+          "language": "css",
+          "sizeLines": 167,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/my/index.html",
+          "language": "html",
+          "sizeLines": 84,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "frontend/my/index.js",
+          "language": "javascript",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/orders/detail.js",
+          "language": "javascript",
+          "sizeLines": 76,
+          "fileCategory": "code"
+        },
+        {
+          "path": "frontend/orders/list.js",
+          "language": "javascript",
+          "sizeLines": 49,
+          "fileCategory": "code"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/create.js",
+          "language": "javascript",
+          "sizeLines": 55,
+          "fileCategory": "code"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/detail.js",
+          "language": "javascript",
+          "sizeLines": 59,
+          "fileCategory": "code"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/edit.js",
+          "language": "javascript",
+          "sizeLines": 130,
+          "fileCategory": "code"
+        },
+        {
+          "path": "legacy-step2-backup/admin/menus/list.js",
+          "language": "javascript",
+          "sizeLines": 125,
+          "fileCategory": "code"
+        },
+        {
+          "path": "legacy-step2-backup/js/data.js",
+          "language": "javascript",
+          "sizeLines": 307,
+          "fileCategory": "code"
+        },
+        {
+          "path": "README.md",
+          "language": "markdown",
+          "sizeLines": 3,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "frontend/menus/detail.js": [],
+        "frontend/menus/list.js": [],
+        "frontend/my/index.css": [],
+        "frontend/my/index.html": [],
+        "frontend/my/index.js": [],
+        "frontend/orders/detail.js": [],
+        "frontend/orders/list.js": [],
+        "legacy-step2-backup/admin/menus/create.js": [],
+        "legacy-step2-backup/admin/menus/detail.js": [],
+        "legacy-step2-backup/admin/menus/edit.js": [],
+        "legacy-step2-backup/admin/menus/list.js": [],
+        "legacy-step2-backup/js/data.js": [],
+        "README.md": []
+      },
+      "neighborMap": {}
+    }
+  ]
+}

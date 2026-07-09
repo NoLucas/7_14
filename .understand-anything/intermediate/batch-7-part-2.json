@@ -1,0 +1,675 @@
+{
+  "nodes": [
+    {
+      "id": "fn:frontend/basket/list.js::bindHeaderActions",
+      "type": "file",
+      "label": "bindHeaderActions",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 전체 비우기(clearCartBtn) 버튼에 클릭 이벤트를 바인딩하는 함수. 비어 있으면 alert로 안내하고, 있으면 confirm 후 clearCart()를 호출한다.",
+      "tags": ["장바구니", "event-handler"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 7,
+      "endLine": 23
+    },
+    {
+      "id": "fn:frontend/basket/list.js::buildCartViewModels",
+      "type": "file",
+      "label": "buildCartViewModels",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 항목(menuId·quantity)에 메뉴·카테고리 정보를 합쳐 view-model 배열로 변환하는 함수.",
+      "tags": ["장바구니", "view-model"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 25,
+      "endLine": 37
+    },
+    {
+      "id": "fn:frontend/basket/list.js::renderBasketPage",
+      "type": "file",
+      "label": "renderBasketPage",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 페이지 전체를 렌더링하는 함수. 유효 아이템 수·총 금액을 요약 섹션에 표시하고, 빈 경우 빈 상태 UI, 아이템 있으면 카드 목록과 주문하기 버튼을 출력한다.",
+      "tags": ["장바구니", "렌더링"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 39,
+      "endLine": 79
+    },
+    {
+      "id": "fn:frontend/basket/list.js::renderBasketItem",
+      "type": "file",
+      "label": "renderBasketItem",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 아이템 view-model을 받아 이미지·카테고리·이름·가격·수량 조절 버튼·삭제 버튼이 포함된 카드 HTML 문자열을 반환하는 함수(49줄).",
+      "tags": ["장바구니", "렌더링", "cart-item"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 91,
+      "endLine": 140
+    },
+    {
+      "id": "fn:frontend/basket/list.js::bindBasketEvents",
+      "type": "file",
+      "label": "bindBasketEvents",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "주문하기(checkoutBtn) 버튼에 클릭 이벤트를 바인딩하는 함수. 유효 아이템이 없으면 alert, 있으면 confirm 후 createOrder()를 호출하고 주문 완료 페이지로 이동한다.",
+      "tags": ["장바구니", "주문생성", "event-handler"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 142,
+      "endLine": 161
+    },
+    {
+      "id": "fn:frontend/basket/list.js::handleBasketClick",
+      "type": "file",
+      "label": "handleBasketClick",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 콘텐츠 영역의 클릭 이벤트를 위임 처리하는 함수. 수량 증감(increase/decrease)·삭제(remove) data-action에 따라 장바구니를 갱신하고 화면을 다시 렌더링한다.",
+      "tags": ["장바구니", "event-delegation"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 163,
+      "endLine": 189
+    },
+    {
+      "id": "fn:frontend/index.js::renderFeaturedMenus",
+      "type": "file",
+      "label": "renderFeaturedMenus",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "인기 메뉴 목록을 조회해 메뉴 카드(이미지·카테고리·이름·평점·가격·장바구니 버튼)를 렌더링하는 함수. 품절 메뉴는 장바구니 버튼 없이 표시한다.",
+      "tags": ["홈페이지", "메뉴카드", "렌더링"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 11,
+      "endLine": 50
+    },
+    {
+      "id": "fn:frontend/index.js::renderRecommendation",
+      "type": "file",
+      "label": "renderRecommendation",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "추천 메뉴(평점 상위·미품절)를 조회해 추천 카드(이미지·카테고리·이름·설명·가격)를 렌더링하는 함수.",
+      "tags": ["홈페이지", "추천메뉴", "렌더링"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 70,
+      "endLine": 98
+    },
+    {
+      "id": "fn:frontend/index.js::bindAddToCartButtons",
+      "type": "file",
+      "label": "bindAddToCartButtons",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "지정 DOM 범위 내 .add-cart-btn 버튼들에 클릭 이벤트를 바인딩하는 함수. addToCart() 호출 후 장바구니 배지를 갱신하고 버튼에 시각적 피드백을 제공한다.",
+      "tags": ["홈페이지", "장바구니", "event-handler"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 114,
+      "endLine": 130
+    },
+    {
+      "id": "fn:frontend/index.js::updateCartBadge",
+      "type": "file",
+      "label": "updateCartBadge",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "장바구니 총 수량을 조회해 헤더의 cart-badge 표시를 갱신하는 함수.",
+      "tags": ["홈페이지", "장바구니", "UI"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 133,
+      "endLine": 143
+    },
+    {
+      "id": "fn:frontend/index.js::bindRevealAnimation",
+      "type": "file",
+      "label": "bindRevealAnimation",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "IntersectionObserver를 사용해 .reveal 요소가 뷰포트에 들어올 때 visible 클래스를 추가하는 스크롤 애니메이션 함수.",
+      "tags": ["홈페이지", "animation", "IntersectionObserver"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 159,
+      "endLine": 175
+    },
+    {
+      "id": "fn:frontend/index.js::bindButtonRipple",
+      "type": "file",
+      "label": "bindButtonRipple",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": ".btn-ripple 버튼에 클릭 시 물결(ripple) 효과 DOM 요소를 동적으로 생성·삽입하고 애니메이션 종료 후 제거하는 함수.",
+      "tags": ["홈페이지", "animation", "ripple"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 179,
+      "endLine": 195
+    },
+    {
+      "id": "fn:frontend/js/data.js::getAllMenus",
+      "type": "file",
+      "label": "getAllMenus",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "localStorage에서 메뉴 배열을 읽어 반환하는 함수. 시드 버전이 다르거나 데이터가 없으면 시드 데이터로 초기화한다.",
+      "tags": ["data-layer", "메뉴", "localStorage"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 141,
+      "endLine": 163
+    },
+    {
+      "id": "fn:frontend/js/data.js::generateMenuId",
+      "type": "file",
+      "label": "generateMenuId",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "메뉴 이름을 slug화하여 고유한 메뉴 ID를 생성하는 함수. 충돌 시 숫자 접미사를 붙여 유일성을 보장한다.",
+      "tags": ["data-layer", "메뉴", "id-generation"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 170,
+      "endLine": 189
+    },
+    {
+      "id": "fn:frontend/js/data.js::createMenu",
+      "type": "file",
+      "label": "createMenu",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "새 메뉴 객체를 생성해 localStorage에 저장하는 함수.",
+      "tags": ["data-layer", "메뉴", "CRUD"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 191,
+      "endLine": 206
+    },
+    {
+      "id": "fn:frontend/js/data.js::updateMenu",
+      "type": "file",
+      "label": "updateMenu",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "기존 메뉴를 찾아 필드를 갱신하고 localStorage에 저장하는 함수.",
+      "tags": ["data-layer", "메뉴", "CRUD"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 208,
+      "endLine": 225
+    },
+    {
+      "id": "fn:frontend/js/data.js::generateOrderId",
+      "type": "file",
+      "label": "generateOrderId",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "날짜 기반(YYYYMMDD-NNN 형식) 고유 주문 ID를 생성하는 함수. 당일 마지막 시퀀스를 확인해 순번을 증가시킨다.",
+      "tags": ["data-layer", "주문", "id-generation"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 309,
+      "endLine": 325
+    },
+    {
+      "id": "fn:frontend/js/data.js::createOrder",
+      "type": "file",
+      "label": "createOrder",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "장바구니 아이템 배열을 받아 새 주문 객체(id·createdAt·status·items)를 생성하고 localStorage에 저장하는 함수.",
+      "tags": ["data-layer", "주문", "CRUD"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 328,
+      "endLine": 340
+    },
+    {
+      "id": "fn:frontend/js/data.js::getOrderTotalPrice",
+      "type": "file",
+      "label": "getOrderTotalPrice",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "주문 객체를 받아 각 항목의 메뉴 가격 × 수량 합산으로 총 금액을 계산하는 함수.",
+      "tags": ["data-layer", "주문", "가격계산"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 346,
+      "endLine": 352
+    },
+    {
+      "id": "fn:frontend/js/data.js::updateOrderStatus",
+      "type": "file",
+      "label": "updateOrderStatus",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "주문 ID와 새 상태를 받아 해당 주문의 status 필드를 갱신하고 localStorage에 저장하는 함수.",
+      "tags": ["data-layer", "주문", "상태변경"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 363,
+      "endLine": 371
+    },
+    {
+      "id": "fn:frontend/js/utils.js::addToCart",
+      "type": "file",
+      "label": "addToCart",
+      "path": "frontend/js/utils.js",
+      "language": "javascript",
+      "summary": "menuId를 받아 장바구니에 해당 메뉴가 있으면 수량을 1 증가시키고 없으면 새 항목을 추가한 후 saveCart()를 호출하는 함수.",
+      "tags": ["utility", "장바구니", "CRUD"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/utils.js",
+      "startLine": 39,
+      "endLine": 51
+    },
+    {
+      "id": "fn:frontend/js/utils.js::updateCartItemQuantity",
+      "type": "file",
+      "label": "updateCartItemQuantity",
+      "path": "frontend/js/utils.js",
+      "language": "javascript",
+      "summary": "장바구니에서 특정 menuId의 수량을 갱신하는 함수. 수량이 0 이하면 해당 항목을 제거한다.",
+      "tags": ["utility", "장바구니", "수량관리"],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/utils.js",
+      "startLine": 53,
+      "endLine": 67
+    }
+  ],
+  "edges": [
+    {
+      "from": "file:frontend/admin/index.js",
+      "to": "fn:frontend/admin/index.js::renderSummary",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/index.js",
+      "to": "fn:frontend/admin/index.js::renderRecentOrders",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/menus/create.js",
+      "to": "fn:frontend/admin/menus/create.js::validateMenuForm",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/menus/detail.js",
+      "to": "fn:frontend/admin/menus/detail.js::renderDetail",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/menus/edit.js",
+      "to": "fn:frontend/admin/menus/edit.js::validateMenuForm",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/menus/edit.js",
+      "to": "fn:frontend/admin/menus/edit.js::renderForm",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/menus/list.js",
+      "to": "fn:frontend/admin/menus/list.js::getFilteredMenus",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/menus/list.js",
+      "to": "fn:frontend/admin/menus/list.js::renderList",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/menus/list.js",
+      "to": "fn:frontend/admin/menus/list.js::handleListClick",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/orders/detail.js",
+      "to": "fn:frontend/admin/orders/detail.js::renderDetail",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/orders/edit.js",
+      "to": "fn:frontend/admin/orders/edit.js::renderStatusActions",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/orders/edit.js",
+      "to": "fn:frontend/admin/orders/edit.js::renderEdit",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/orders/list.js",
+      "to": "fn:frontend/admin/orders/list.js::getFilteredOrders",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/orders/list.js",
+      "to": "fn:frontend/admin/orders/list.js::renderList",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/orders/list.js",
+      "to": "fn:frontend/admin/orders/list.js::handleListClick",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/basket/list.js",
+      "to": "fn:frontend/basket/list.js::bindHeaderActions",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/basket/list.js",
+      "to": "fn:frontend/basket/list.js::buildCartViewModels",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/basket/list.js",
+      "to": "fn:frontend/basket/list.js::renderBasketPage",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/basket/list.js",
+      "to": "fn:frontend/basket/list.js::renderBasketItem",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/basket/list.js",
+      "to": "fn:frontend/basket/list.js::bindBasketEvents",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/basket/list.js",
+      "to": "fn:frontend/basket/list.js::handleBasketClick",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/index.js",
+      "to": "fn:frontend/index.js::renderFeaturedMenus",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/index.js",
+      "to": "fn:frontend/index.js::renderRecommendation",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/index.js",
+      "to": "fn:frontend/index.js::bindAddToCartButtons",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/index.js",
+      "to": "fn:frontend/index.js::updateCartBadge",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/index.js",
+      "to": "fn:frontend/index.js::bindRevealAnimation",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/index.js",
+      "to": "fn:frontend/index.js::bindButtonRipple",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/data.js",
+      "to": "fn:frontend/js/data.js::getAllMenus",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/data.js",
+      "to": "fn:frontend/js/data.js::generateMenuId",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/data.js",
+      "to": "fn:frontend/js/data.js::createMenu",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/data.js",
+      "to": "fn:frontend/js/data.js::updateMenu",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/data.js",
+      "to": "fn:frontend/js/data.js::generateOrderId",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/data.js",
+      "to": "fn:frontend/js/data.js::createOrder",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/data.js",
+      "to": "fn:frontend/js/data.js::getOrderTotalPrice",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/data.js",
+      "to": "fn:frontend/js/data.js::updateOrderStatus",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/utils.js",
+      "to": "fn:frontend/js/utils.js::addToCart",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/js/utils.js",
+      "to": "fn:frontend/js/utils.js::updateCartItemQuantity",
+      "type": "contains"
+    },
+    {
+      "from": "file:frontend/admin/index.html",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "script 태그로 로드"
+    },
+    {
+      "from": "file:frontend/admin/index.html",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "script 태그로 로드"
+    },
+    {
+      "from": "file:frontend/admin/index.html",
+      "to": "file:frontend/admin/index.js",
+      "type": "uses",
+      "label": "script 태그로 로드"
+    },
+    {
+      "from": "file:frontend/admin/index.html",
+      "to": "file:frontend/admin/index.css",
+      "type": "uses",
+      "label": "stylesheet 로드"
+    },
+    {
+      "from": "file:frontend/admin/index.html",
+      "to": "file:frontend/css/variables.css",
+      "type": "uses",
+      "label": "stylesheet 로드"
+    },
+    {
+      "from": "file:frontend/basket/list.html",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "script 태그로 로드"
+    },
+    {
+      "from": "file:frontend/basket/list.html",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "script 태그로 로드"
+    },
+    {
+      "from": "file:frontend/basket/list.html",
+      "to": "file:frontend/basket/list.js",
+      "type": "uses",
+      "label": "script 태그로 로드"
+    },
+    {
+      "from": "file:frontend/basket/list.html",
+      "to": "file:frontend/basket/list.css",
+      "type": "uses",
+      "label": "stylesheet 로드"
+    },
+    {
+      "from": "file:frontend/basket/list.html",
+      "to": "file:frontend/css/variables.css",
+      "type": "uses",
+      "label": "stylesheet 로드"
+    },
+    {
+      "from": "file:frontend/index.html",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "script 태그로 로드"
+    },
+    {
+      "from": "file:frontend/index.html",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "script 태그로 로드"
+    },
+    {
+      "from": "file:frontend/index.html",
+      "to": "file:frontend/index.js",
+      "type": "uses",
+      "label": "script 태그로 로드"
+    },
+    {
+      "from": "file:frontend/index.html",
+      "to": "file:frontend/index.css",
+      "type": "uses",
+      "label": "stylesheet 로드"
+    },
+    {
+      "from": "file:frontend/index.html",
+      "to": "file:frontend/css/variables.css",
+      "type": "uses",
+      "label": "stylesheet 로드"
+    },
+    {
+      "from": "file:frontend/admin/index.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getOrders, getAllMenus, getOrderTotalPrice 호출"
+    },
+    {
+      "from": "file:frontend/admin/index.js",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "formatPrice, formatDate, getStatusClass, getOrderSummaryText 호출"
+    },
+    {
+      "from": "file:frontend/admin/menus/create.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getCategories, createMenu 호출"
+    },
+    {
+      "from": "file:frontend/admin/menus/detail.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getCategoryById 호출"
+    },
+    {
+      "from": "file:frontend/admin/menus/detail.js",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "formatPrice 호출"
+    },
+    {
+      "from": "file:frontend/admin/menus/edit.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getCategories, updateMenu 호출"
+    },
+    {
+      "from": "file:frontend/admin/menus/list.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getCategories, getAllMenus, getCategoryById, toggleMenuSoldOut, getMenuById, deleteMenu 호출"
+    },
+    {
+      "from": "file:frontend/admin/menus/list.js",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "formatPrice 호출"
+    },
+    {
+      "from": "file:frontend/admin/orders/detail.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getMenuById, getOrderTotalPrice 호출"
+    },
+    {
+      "from": "file:frontend/admin/orders/detail.js",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "formatPrice, formatDate, getStatusClass 호출"
+    },
+    {
+      "from": "file:frontend/admin/orders/edit.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getOrderById, updateOrderStatus, getOrderTotalPrice, getOrderSummaryText 호출"
+    },
+    {
+      "from": "file:frontend/admin/orders/edit.js",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "formatDate, formatPrice, getStatusClass 호출"
+    },
+    {
+      "from": "file:frontend/admin/orders/list.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getOrders, getOrderById, updateOrderStatus, getOrderTotalPrice, getOrderSummaryText 호출"
+    },
+    {
+      "from": "file:frontend/admin/orders/list.js",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "formatDate, formatPrice, getStatusClass 호출"
+    },
+    {
+      "from": "file:frontend/basket/list.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getMenuById, getCategoryById, createOrder 호출"
+    },
+    {
+      "from": "file:frontend/basket/list.js",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "getCart, clearCart, addToCart, updateCartItemQuantity, removeFromCart, formatPrice 호출"
+    },
+    {
+      "from": "file:frontend/index.js",
+      "to": "file:frontend/js/data.js",
+      "type": "uses",
+      "label": "getAllMenus, getCategoryById 호출"
+    },
+    {
+      "from": "file:frontend/index.js",
+      "to": "file:frontend/js/utils.js",
+      "type": "uses",
+      "label": "addToCart, getCartTotalCount, formatPrice 호출"
+    }
+  ]
+}

@@ -1,0 +1,3877 @@
+{
+  "nodes": [
+    {
+      "id": "function:frontend/admin/menus/create.css:create.css",
+      "type": "file",
+      "label": "create.css",
+      "path": "frontend/admin/menus/create.css",
+      "language": "css",
+      "summary": "관리자 메뉴 등록 폼 페이지의 스타일을 정의합니다. glass-morphism 기반의 form-card, 반응형 field-grid, 입력 필드, 체크박스, 액션 버튼(primary/secondary) 스타일을 포함하며 모바일 breakpoint(767px)에서 세로 배치로 전환됩니다.",
+      "tags": [
+        "css",
+        "admin",
+        "form",
+        "글래스모피즘",
+        "반응형",
+        "메뉴-등록"
+      ],
+      "sizeLines": 119,
+      "nonEmptyLines": 101,
+      "metrics": {},
+      "exports": [],
+      "imports": [],
+      "languageNotes": "CSS 커스텀 프로퍼티(design token)를 전적으로 활용하며, backdrop-filter를 통한 glass-morphism 효과와 radial-gradient 배경을 적용합니다.",
+      "name": "create.css",
+      "filePath": "frontend/admin/menus/create.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/admin/menus/create.html:create.html",
+      "type": "file",
+      "label": "create.html",
+      "path": "frontend/admin/menus/create.html",
+      "language": "html",
+      "summary": "관리자용 새 메뉴 등록 페이지입니다. 메뉴명, 카테고리(동적 select), 가격, 이미지 경로, 설명, 품절 여부 체크박스를 포함한 등록 폼을 제공합니다. data.js, utils.js, create.js를 로드하며 list.html로의 네비게이션 링크를 포함합니다.",
+      "tags": [
+        "html",
+        "admin",
+        "entry-point",
+        "메뉴-등록",
+        "폼",
+        "CRUD"
+      ],
+      "sizeLines": 68,
+      "nonEmptyLines": 59,
+      "metrics": {},
+      "exports": [],
+      "imports": [
+        "../../css/variables.css",
+        "../../js/data.js",
+        "../../js/utils.js",
+        "./create.js"
+      ],
+      "languageNotes": "lang=\"ko\" 설정, aria-live 속성을 가진 메시지 영역을 포함하여 접근성을 고려합니다. categorySelect는 JS에 의해 동적으로 채워집니다.",
+      "name": "create.html",
+      "filePath": "frontend/admin/menus/create.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/admin/menus/detail.css:detail.css",
+      "type": "file",
+      "label": "detail.css",
+      "path": "frontend/admin/menus/detail.css",
+      "language": "css",
+      "summary": "관리자 메뉴 상세 보기 페이지의 스타일을 정의합니다. detail-card의 glass-morphism 레이아웃, 카테고리·품절 badge, 가격 표시, info-box 그리드, 빈 상태(empty-card)를 포함하며 모바일에서 세로 레이아웃으로 전환됩니다.",
+      "tags": [
+        "css",
+        "admin",
+        "detail",
+        "badge",
+        "글래스모피즘",
+        "반응형",
+        "메뉴-상세"
+      ],
+      "sizeLines": 135,
+      "nonEmptyLines": 114,
+      "metrics": {},
+      "exports": [],
+      "imports": [],
+      "languageNotes": "linear-gradient 배경, badge(category/soldout) 색상 구분, info-box 그리드 레이아웃을 통해 메뉴 상세 정보를 시각적으로 구조화합니다.",
+      "name": "detail.css",
+      "filePath": "frontend/admin/menus/detail.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/admin/menus/detail.html:detail.html",
+      "type": "file",
+      "label": "detail.html",
+      "path": "frontend/admin/menus/detail.html",
+      "language": "html",
+      "summary": "관리자용 메뉴 상세 보기 페이지입니다. 콘텐츠 영역(#content)은 detail.js가 동적으로 렌더링하며, list.html로 돌아가는 링크와 edit.html로 이동하는 수정 링크(#editLink)를 헤더에 포함합니다.",
+      "tags": [
+        "html",
+        "admin",
+        "entry-point",
+        "메뉴-상세",
+        "동적-렌더링",
+        "CRUD"
+      ],
+      "sizeLines": 24,
+      "nonEmptyLines": 22,
+      "metrics": {},
+      "exports": [],
+      "imports": [
+        "../../css/variables.css",
+        "./detail.css",
+        "../../js/data.js",
+        "../../js/utils.js",
+        "./detail.js"
+      ],
+      "languageNotes": "메인 콘텐츠가 전적으로 JS(detail.js)에 의해 동적으로 삽입되는 shell 패턴을 따릅니다. editLink의 href는 JS에서 쿼리스트링과 함께 갱신됩니다.",
+      "name": "detail.html",
+      "filePath": "frontend/admin/menus/detail.html",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/admin/menus/edit.css:edit.css",
+      "type": "file",
+      "label": "edit.css",
+      "path": "frontend/admin/menus/edit.css",
+      "language": "css",
+      "summary": "관리자 메뉴 수정 폼 페이지의 스타일을 정의합니다. create.css와 구조적으로 유사하나, readonly-box(읽기 전용 필드 표시), header-actions 그룹, 빈 상태(empty-card)가 추가되어 있습니다.",
+      "tags": [
+        "css",
+        "admin",
+        "form",
+        "수정",
+        "readonly",
+        "글래스모피즘",
+        "반응형",
+        "메뉴-수정"
+      ],
+      "sizeLines": 138,
+      "nonEmptyLines": 117,
+      "metrics": {},
+      "exports": [],
+      "imports": [],
+      "languageNotes": "radial-gradient(top left) 배경을 사용하여 create.css와 시각적으로 차별화합니다. readonly-box는 점선 테두리와 반투명 배경으로 편집 불가 필드임을 표시합니다.",
+      "name": "edit.css",
+      "filePath": "frontend/admin/menus/edit.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/admin/menus/edit.html:edit.html",
+      "type": "file",
+      "label": "edit.html",
+      "path": "frontend/admin/menus/edit.html",
+      "language": "html",
+      "summary": "관리자용 메뉴 수정 페이지입니다. 폼 콘텐츠는 edit.js가 동적으로 렌더링하며, 헤더에는 상세 보기(#detailLink)와 목록(list.html) 이동 링크를 포함합니다.",
+      "tags": [
+        "html",
+        "admin",
+        "entry-point",
+        "메뉴-수정",
+        "동적-렌더링",
+        "CRUD"
+      ],
+      "sizeLines": 30,
+      "nonEmptyLines": 28,
+      "metrics": {},
+      "exports": [],
+      "imports": [
+        "../../css/variables.css",
+        "./edit.css",
+        "../../js/data.js",
+        "../../js/utils.js",
+        "./edit.js"
+      ],
+      "languageNotes": "detail.html과 동일한 shell 패턴 사용. detailLink의 href는 JS에서 메뉴 ID 쿼리스트링과 함께 동적으로 설정됩니다.",
+      "name": "edit.html",
+      "filePath": "frontend/admin/menus/edit.html",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/admin/menus/list.css:list.css",
+      "type": "file",
+      "label": "list.css",
+      "path": "frontend/admin/menus/list.css",
+      "language": "css",
+      "summary": "관리자 메뉴 목록 페이지의 스타일을 정의합니다. topbar, 요약 통계 카드(summary-card), 필터 패널, 메뉴 카드 목록(menu-card), badge, 가격, action-button(수정/삭제/품절 토글), 빈 상태(empty-state) 등 목록 관리에 필요한 전체 UI 컴포넌트를 포함합니다.",
+      "tags": [
+        "css",
+        "admin",
+        "list",
+        "필터",
+        "카드",
+        "badge",
+        "글래스모피즘",
+        "반응형",
+        "메뉴-관리"
+      ],
+      "sizeLines": 259,
+      "nonEmptyLines": 218,
+      "metrics": {},
+      "exports": [],
+      "imports": [],
+      "languageNotes": "이 배치에서 가장 큰 CSS 파일(259줄)로, summary-grid, filter-panel, menu-list 등 복합적인 레이아웃 구조를 포함합니다. hover 시 translateY(-1px) 애니메이션, 모바일에서 action-group의 flex:1 확장을 적용합니다.",
+      "name": "list.css",
+      "filePath": "frontend/admin/menus/list.css",
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/admin/menus/list.html:list.html",
+      "type": "file",
+      "label": "list.html",
+      "path": "frontend/admin/menus/list.html",
+      "language": "html",
+      "summary": "관리자용 메뉴 목록 관리 페이지입니다. 전체/판매중/품절 건수를 표시하는 통계 카드, 카테고리 필터와 키워드 검색 패널, 동적으로 렌더링되는 메뉴 목록(#menuList)을 포함합니다. create.html로의 새 메뉴 등록 링크를 제공합니다.",
+      "tags": [
+        "html",
+        "admin",
+        "entry-point",
+        "메뉴-관리",
+        "목록",
+        "필터",
+        "검색",
+        "CRUD"
+      ],
+      "sizeLines": 62,
+      "nonEmptyLines": 57,
+      "metrics": {},
+      "exports": [],
+      "imports": [
+        "../../css/variables.css",
+        "./list.css",
+        "../../js/data.js",
+        "../../js/utils.js",
+        "./list.js"
+      ],
+      "languageNotes": "summary-card의 totalCount, activeCount, soldOutCount와 menuList는 list.js에 의해 동적으로 업데이트됩니다. glass CSS 클래스를 topbar와 summary-card에 적용합니다.",
+      "name": "list.html",
+      "filePath": "frontend/admin/menus/list.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/admin/orders/detail.css:detail.css",
+      "type": "file",
+      "label": "detail.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 165,
+      "nonEmptyLines": 139,
+      "summary": "관리자 주문 상세 페이지의 스타일시트. 유리 형태(glass morphism)의 detail-card, 주문 상태 배지(status-received/preparing/done), 주문 항목 목록(item-row), 합계 행(total-row) 등의 레이아웃과 색상을 정의하며 767px 이하의 반응형 레이아웃도 포함한다.",
+      "tags": [
+        "css",
+        "admin",
+        "orders",
+        "detail",
+        "glass-morphism",
+        "responsive",
+        "status-badge"
+      ],
+      "filePath": "frontend/admin/orders/detail.css",
+      "name": "detail.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/admin/orders/detail.html:detail.html",
+      "type": "file",
+      "label": "detail.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 24,
+      "nonEmptyLines": 22,
+      "summary": "관리자 주문 상세 페이지의 HTML 진입점(entry-point). variables.css와 detail.css를 로드하고, 주문 목록으로 돌아가는 링크와 상태 수정 링크(editLink)를 포함한 헤더, 동적 콘텐츠를 위한 빈 main#content 요소를 제공한다. data.js, utils.js, detail.js를 순서대로 로드한다.",
+      "tags": [
+        "html",
+        "admin",
+        "orders",
+        "detail",
+        "entry-point",
+        "spa-shell"
+      ],
+      "filePath": "frontend/admin/orders/detail.html",
+      "name": "detail.html",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/admin/orders/edit.css:edit.css",
+      "type": "file",
+      "label": "edit.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 136,
+      "nonEmptyLines": 115,
+      "summary": "관리자 주문 상태 수정 페이지의 스타일시트. glass morphism 기반의 edit-card, 주문 상태 배지(status-received/preparing/done), 상태 변경 버튼 그룹(status-actions/status-button)의 활성화(active) 상태 강조, 767px 이하 반응형 레이아웃을 정의한다.",
+      "tags": [
+        "css",
+        "admin",
+        "orders",
+        "edit",
+        "glass-morphism",
+        "responsive",
+        "status-button"
+      ],
+      "filePath": "frontend/admin/orders/edit.css",
+      "name": "edit.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/admin/orders/edit.html:edit.html",
+      "type": "file",
+      "label": "edit.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 21,
+      "summary": "관리자 주문 상태 수정 페이지의 HTML 진입점(entry-point). variables.css와 edit.css를 로드하고, 주문 상세 페이지로 돌아가는 링크(backLink)가 있는 헤더와 동적 콘텐츠를 위한 빈 main#content 요소를 제공한다. data.js, utils.js, edit.js를 순서대로 로드한다.",
+      "tags": [
+        "html",
+        "admin",
+        "orders",
+        "edit",
+        "entry-point",
+        "spa-shell"
+      ],
+      "filePath": "frontend/admin/orders/edit.html",
+      "name": "edit.html",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/admin/orders/list.css:list.css",
+      "type": "file",
+      "label": "list.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 240,
+      "nonEmptyLines": 203,
+      "summary": "관리자 주문 목록 페이지의 스타일시트. topbar, 통계 요약 카드(summary-card/summary-grid), 필터 패널(filter-panel), 주문 카드(order-card) 레이아웃을 정의하며, 주문 상태 배지(status-received/preparing/done), 액션 버튼(action-button), 빈 상태 표시(empty-state)를 포함한다. 767px 이하에서 컬럼을 세로 정렬로 전환하는 반응형 규칙도 포함한다.",
+      "tags": [
+        "css",
+        "admin",
+        "orders",
+        "list",
+        "glass-morphism",
+        "responsive",
+        "filter",
+        "summary-card"
+      ],
+      "filePath": "frontend/admin/orders/list.css",
+      "name": "list.css",
+      "complexity": "complex"
+    },
+    {
+      "id": "function:frontend/admin/orders/list.html:list.html",
+      "type": "file",
+      "label": "list.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 71,
+      "nonEmptyLines": 66,
+      "summary": "관리자 주문 관리 목록 페이지의 HTML 진입점(entry-point). 전체/주문접수/준비중/완료 건수를 표시하는 통계 요약 섹션(summary-grid), 상태 필터(statusFilter) 및 키워드 검색(keywordInput)을 포함한 필터 패널, 동적 주문 목록(orderList)을 렌더링하는 영역을 제공한다. data.js, utils.js, list.js를 순서대로 로드한다.",
+      "tags": [
+        "html",
+        "admin",
+        "orders",
+        "list",
+        "entry-point",
+        "filter",
+        "search",
+        "summary"
+      ],
+      "filePath": "frontend/admin/orders/list.html",
+      "name": "list.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/auth/auth.css:auth.css",
+      "type": "file",
+      "label": "auth.css",
+      "language": "css",
+      "path": "frontend/auth/auth.css",
+      "summary": "로그인과 회원가입 두 페이지가 공통으로 사용하는 인증 UI 스타일 시트. `.auth-page`, `.auth-card`, `.auth-form`, `.auth-brand`, `.auth-hint`, `.primary-button`, `.auth-switch` 등의 클래스를 정의하며, CSS 변수(--color-*, --space-*, --font-size-* 등)를 활용해 디자인 토큰 기반 스타일을 적용한다. 768px 이상에서 카드 최대 너비를 420px로 제한하는 반응형 미디어 쿼리 포함.",
+      "tags": [
+        "css",
+        "auth",
+        "로그인",
+        "회원가입",
+        "공통스타일",
+        "반응형",
+        "디자인토큰"
+      ],
+      "sizeLines": 131,
+      "exports": [],
+      "imports": [],
+      "languageNotes": "CSS 변수(CSS custom properties)를 통해 variables.css에 정의된 디자인 토큰을 참조함",
+      "name": "auth.css",
+      "filePath": "frontend/auth/auth.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/auth/login.html:login.html",
+      "type": "file",
+      "label": "login.html",
+      "language": "html",
+      "path": "frontend/auth/login.html",
+      "summary": "Cafe Moment의 로그인 페이지. 아이디/이메일과 비밀번호 입력 필드로 구성된 `#loginForm` 폼을 제공하며, DB 연동 전 임시 테스트 계정(admin/admin1234, customer/customer1234) 안내 박스를 표시한다. 상단의 카페명 링크를 클릭하면 index.html(메인 홈페이지)로 이동하며, `login.js`를 로드해 폼 제출 로직을 처리한다.",
+      "tags": [
+        "html",
+        "auth",
+        "로그인",
+        "폼",
+        "테스트계정"
+      ],
+      "sizeLines": 52,
+      "exports": [],
+      "imports": [
+        {
+          "from": "frontend/css/variables.css",
+          "raw": "../css/variables.css",
+          "kind": "stylesheet"
+        },
+        {
+          "from": "frontend/auth/auth.css",
+          "raw": "auth.css",
+          "kind": "stylesheet"
+        },
+        {
+          "from": "frontend/auth/login.js",
+          "raw": "login.js",
+          "kind": "script"
+        }
+      ],
+      "languageNotes": "aria-live=\"polite\" 속성으로 스크린 리더에 메시지를 전달하는 접근성 고려 마크업 포함",
+      "name": "login.html",
+      "filePath": "frontend/auth/login.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/auth/signup.html:signup.html",
+      "type": "file",
+      "label": "signup.html",
+      "language": "html",
+      "path": "frontend/auth/signup.html",
+      "summary": "Cafe Moment의 회원가입 페이지. 이름, 아이디/이메일, 비밀번호, 비밀번호 확인 총 4개의 입력 필드로 구성된 `#signupForm` 폼을 제공한다. DB 미연동 상태임을 안내하며, `signup.js`를 로드해 폼 유효성 검사 및 제출 로직을 처리한다. 로그인 페이지(login.html)로의 전환 링크 포함.",
+      "tags": [
+        "html",
+        "auth",
+        "회원가입",
+        "폼",
+        "유효성검사"
+      ],
+      "sizeLines": 55,
+      "exports": [],
+      "imports": [
+        {
+          "from": "frontend/css/variables.css",
+          "raw": "../css/variables.css",
+          "kind": "stylesheet"
+        },
+        {
+          "from": "frontend/auth/auth.css",
+          "raw": "auth.css",
+          "kind": "stylesheet"
+        },
+        {
+          "from": "frontend/auth/signup.js",
+          "raw": "signup.js",
+          "kind": "script"
+        }
+      ],
+      "languageNotes": "aria-live=\"polite\" 속성으로 스크린 리더에 메시지를 전달하는 접근성 고려 마크업 포함",
+      "name": "signup.html",
+      "filePath": "frontend/auth/signup.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/menus/detail.css:detail.css",
+      "type": "file",
+      "label": "detail.css",
+      "path": "frontend/menus/detail.css",
+      "language": "css",
+      "summary": "메뉴 상세 페이지의 전체 스타일을 정의하는 CSS 파일. 상단 고정 헤더(page-header), 장바구니 뱃지(cart-badge), 메뉴 이미지·카테고리·이름·가격·설명·품절 표시 등 메뉴 상세 정보 영역, 수량 조절 스텝퍼(quantity-stepper), 하단 고정 액션 바(action-bar)와 장바구니 담기 버튼(add-to-cart-btn)으로 구성되어 있으며 CSS 변수 기반의 디자인 토큰을 전면 활용한다.",
+      "tags": [
+        "css",
+        "메뉴상세",
+        "스타일",
+        "sticky-header",
+        "action-bar",
+        "quantity-stepper",
+        "cart-badge"
+      ],
+      "metrics": {
+        "totalLines": 201,
+        "nonEmptyLines": 176
+      },
+      "languageNotes": "CSS 변수(--color-primary, --space-md 등)를 통해 디자인 시스템과 연동되며, .glass 유틸리티 클래스는 외부 variables.css에서 제공됨",
+      "name": "detail.css",
+      "filePath": "frontend/menus/detail.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/menus/detail.html:detail.html",
+      "type": "file",
+      "label": "detail.html",
+      "path": "frontend/menus/detail.html",
+      "language": "html",
+      "summary": "메뉴 상세 페이지의 HTML 구조 파일. 상단 헤더에 목록으로 돌아가는 뒤로가기 링크와 장바구니 뱃지 아이콘을 포함하며, 메인 영역(#menuDetail)은 detail.js가 동적으로 렌더링한다. variables.css와 detail.css를 로드하고 data.js·utils.js·detail.js 스크립트에 의존한다.",
+      "tags": [
+        "html",
+        "메뉴상세",
+        "페이지",
+        "동적렌더링",
+        "장바구니"
+      ],
+      "metrics": {
+        "totalLines": 26,
+        "nonEmptyLines": 24
+      },
+      "languageNotes": "lang=\"ko\" 설정, #menuDetail 컨테이너는 JS로 채워짐. detail.js, data.js, utils.js 스크립트에 의존",
+      "name": "detail.html",
+      "filePath": "frontend/menus/detail.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/menus/list.css:list.css",
+      "type": "file",
+      "label": "list.css",
+      "path": "frontend/menus/list.css",
+      "language": "css",
+      "summary": "메뉴 목록 페이지의 스타일을 정의하는 CSS 파일. 상단 고정 헤더, 장바구니 뱃지, 수평 스크롤 가능한 카테고리 탭(category-tabs), 반응형 메뉴 그리드(menu-grid, 1→2→3열), 메뉴 카드(이미지·본문·이름·설명·가격), 품절 상태 오버레이(sold-out-badge) 및 빈 상태(empty-state) 스타일을 포함하며 CSS 변수와 미디어 쿼리를 활용한다.",
+      "tags": [
+        "css",
+        "메뉴목록",
+        "스타일",
+        "반응형",
+        "grid",
+        "category-tabs",
+        "menu-card"
+      ],
+      "metrics": {
+        "totalLines": 187,
+        "nonEmptyLines": 164
+      },
+      "languageNotes": "640px·960px 브레이크포인트 미디어 쿼리로 반응형 그리드를 구현. CSS 변수 기반 디자인 토큰 활용",
+      "name": "list.css",
+      "filePath": "frontend/menus/list.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/menus/list.html:list.html",
+      "type": "file",
+      "label": "list.html",
+      "path": "frontend/menus/list.html",
+      "language": "html",
+      "summary": "메뉴 목록 페이지의 HTML 구조 파일. 헤더에 홈으로 돌아가는 링크와 장바구니 뱃지가 있으며, 메인 영역에 카테고리 탭(#categoryTabs)과 메뉴 그리드(#menuGrid) 컨테이너를 포함한다. list.js가 카테고리와 메뉴 카드를 동적으로 렌더링하며, variables.css·list.css·data.js·utils.js·list.js에 의존한다.",
+      "tags": [
+        "html",
+        "메뉴목록",
+        "페이지",
+        "카테고리탭",
+        "동적렌더링"
+      ],
+      "metrics": {
+        "totalLines": 29,
+        "nonEmptyLines": 27
+      },
+      "languageNotes": "lang=\"ko\" 설정. #categoryTabs, #menuGrid, #cartBadge 요소를 list.js가 동적 조작함",
+      "name": "list.html",
+      "filePath": "frontend/menus/list.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/orders/detail.css:detail.css",
+      "type": "file",
+      "label": "detail.css",
+      "path": "frontend/orders/detail.css",
+      "language": "css",
+      "summary": "주문 상세 페이지의 스타일 시트. 상단 sticky 헤더(.page-header), 아이콘 버튼(.icon-btn), 장바구니 뱃지(.cart-badge)를 정의하고, 주문 ID·날짜·아이템 행·소계·합계를 표시하는 주문 상세 레이아웃(.order-detail-top, .order-item-list, .order-total-row)과 주문 상태 배지(.order-status: status-received/preparing/done)의 색상 변형을 포함합니다.",
+      "tags": [
+        "css",
+        "orders",
+        "detail",
+        "layout",
+        "status-badge",
+        "sticky-header"
+      ],
+      "sizeLines": 161,
+      "nonEmptyLines": 138,
+      "exports": [],
+      "imports": [],
+      "name": "detail.css",
+      "filePath": "frontend/orders/detail.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/orders/detail.html:detail.html",
+      "type": "file",
+      "label": "detail.html",
+      "path": "frontend/orders/detail.html",
+      "language": "html",
+      "summary": "주문 상세 페이지의 HTML 진입점. glass 스타일 sticky 헤더에 목록으로 돌아가는 뒤로가기 버튼과 장바구니 링크(뱃지 포함)를 배치하고, #orderDetail 컨테이너에 JavaScript(detail.js)가 동적으로 주문 내용을 렌더링합니다. variables.css, detail.css, data.js, utils.js를 로드합니다.",
+      "tags": [
+        "html",
+        "orders",
+        "detail",
+        "page",
+        "entry-point"
+      ],
+      "sizeLines": 26,
+      "nonEmptyLines": 24,
+      "exports": [],
+      "imports": [],
+      "name": "detail.html",
+      "filePath": "frontend/orders/detail.html",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/orders/list.css:list.css",
+      "type": "file",
+      "label": "list.css",
+      "path": "frontend/orders/list.css",
+      "language": "css",
+      "summary": "주문 내역 목록 페이지의 스타일 시트. sticky 헤더(.page-header)와 장바구니 뱃지(.cart-badge)를 정의하며, 주문 카드(.order-card) 레이아웃과 hover 시 위로 이동하는 애니메이션 효과를 포함합니다. 주문 상태 뱃지(.order-status: status-received/preparing/done) 색상 변형, 카드 상단/하단 정보 행(.order-card-top, .order-card-bottom), 빈 상태 메시지(.empty-state)를 정의합니다.",
+      "tags": [
+        "css",
+        "orders",
+        "list",
+        "card",
+        "layout",
+        "status-badge",
+        "sticky-header"
+      ],
+      "sizeLines": 146,
+      "nonEmptyLines": 126,
+      "exports": [],
+      "imports": [],
+      "name": "list.css",
+      "filePath": "frontend/orders/list.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/orders/list.html:list.html",
+      "type": "file",
+      "label": "list.html",
+      "path": "frontend/orders/list.html",
+      "language": "html",
+      "summary": "주문 내역 목록 페이지의 HTML 진입점. glass 스타일 sticky 헤더에 홈으로 돌아가는 뒤로가기 버튼과 장바구니 링크(뱃지 포함)를 배치하고, #orderList 컨테이너에 JavaScript(list.js)가 동적으로 주문 카드를 렌더링합니다. variables.css, list.css, data.js, utils.js를 로드합니다.",
+      "tags": [
+        "html",
+        "orders",
+        "list",
+        "page",
+        "entry-point"
+      ],
+      "sizeLines": 28,
+      "nonEmptyLines": 26,
+      "exports": [],
+      "imports": [],
+      "name": "list.html",
+      "filePath": "frontend/orders/list.html",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/create.css:create.css (admin/menus)",
+      "type": "file",
+      "label": "create.css (admin/menus)",
+      "path": "legacy-step2-backup/admin/menus/create.css",
+      "language": "css",
+      "summary": "레거시 백업 파일. 관리자 메뉴 등록 폼 페이지의 스타일시트. glass morphism 기반의 .form-card, 반응형 .field-grid, .primary-button/.secondary-button 등의 버튼 스타일, 모바일 대응 미디어 쿼리를 포함한다.",
+      "tags": [
+        "legacy",
+        "admin",
+        "css",
+        "form",
+        "glass-morphism",
+        "responsive"
+      ],
+      "sizeLines": 119,
+      "fileCategory": "markup",
+      "exports": [],
+      "imports": [],
+      "languageNotes": "CSS 디자인 토큰(CSS 변수)을 사용하며 backdrop-filter를 활용한 유리 효과를 적용",
+      "name": "create.css (admin/menus)",
+      "filePath": "legacy-step2-backup/admin/menus/create.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/create.html:create.html (admin/menus)",
+      "type": "file",
+      "label": "create.html (admin/menus)",
+      "path": "legacy-step2-backup/admin/menus/create.html",
+      "language": "html",
+      "summary": "레거시 백업 파일. 관리자 새 메뉴 등록 페이지. 메뉴명, 카테고리(동적 select), 가격, 이미지 경로, 설명, 품절 여부 체크박스로 구성된 #menuForm 폼을 가지며, data.js/utils.js/create.js를 로드한다.",
+      "tags": [
+        "legacy",
+        "admin",
+        "html",
+        "form",
+        "menu-create",
+        "crud"
+      ],
+      "sizeLines": 68,
+      "fileCategory": "markup",
+      "exports": [],
+      "imports": [],
+      "languageNotes": "lang=\"ko\" 문서이며 create.js, data.js, utils.js에 의존",
+      "name": "create.html (admin/menus)",
+      "filePath": "legacy-step2-backup/admin/menus/create.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/detail.css:detail.css (admin/menus)",
+      "type": "file",
+      "label": "detail.css (admin/menus)",
+      "path": "legacy-step2-backup/admin/menus/detail.css",
+      "language": "css",
+      "summary": "레거시 백업 파일. 관리자 메뉴 상세 보기 페이지의 스타일시트. .detail-card, .detail-top, .title-row, .badge(카테고리/품절), .info-box, .empty-card 등의 레이아웃 및 상태 표현 클래스를 정의한다.",
+      "tags": [
+        "legacy",
+        "admin",
+        "css",
+        "detail",
+        "badge",
+        "glass-morphism",
+        "responsive"
+      ],
+      "sizeLines": 135,
+      "fileCategory": "markup",
+      "exports": [],
+      "imports": [],
+      "languageNotes": "카테고리·품절 배지에 RGBA 컬러 오버레이를 사용해 상태를 시각적으로 구분",
+      "name": "detail.css (admin/menus)",
+      "filePath": "legacy-step2-backup/admin/menus/detail.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/detail.html:detail.html (admin/menus)",
+      "type": "file",
+      "label": "detail.html (admin/menus)",
+      "path": "legacy-step2-backup/admin/menus/detail.html",
+      "language": "html",
+      "summary": "레거시 백업 파일. 관리자 메뉴 상세 페이지. 헤더에 '← 메뉴 목록' 링크와 '수정하기' #editLink가 있으며, #content 영역은 detail.js가 동적으로 렌더링한다. data.js/utils.js/detail.js를 로드한다.",
+      "tags": [
+        "legacy",
+        "admin",
+        "html",
+        "detail",
+        "menu",
+        "dynamic-render"
+      ],
+      "sizeLines": 24,
+      "fileCategory": "markup",
+      "exports": [],
+      "imports": [],
+      "languageNotes": "lang=\"ko\", 콘텐츠는 #content div에 JavaScript로 주입",
+      "name": "detail.html (admin/menus)",
+      "filePath": "legacy-step2-backup/admin/menus/detail.html",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/edit.css:edit.css (admin/menus)",
+      "type": "file",
+      "label": "edit.css (admin/menus)",
+      "path": "legacy-step2-backup/admin/menus/edit.css",
+      "language": "css",
+      "summary": "레거시 백업 파일. 관리자 메뉴 수정 폼 페이지의 스타일시트. create.css와 구조가 유사하며 .readonly-box(읽기 전용 필드 시각화), .header-actions 등이 추가되어 있다. glass morphism 카드 스타일을 공유한다.",
+      "tags": [
+        "legacy",
+        "admin",
+        "css",
+        "form",
+        "edit",
+        "readonly",
+        "glass-morphism",
+        "responsive"
+      ],
+      "sizeLines": 138,
+      "fileCategory": "markup",
+      "exports": [],
+      "imports": [],
+      "languageNotes": ".readonly-box는 점선 테두리와 반투명 배경으로 편집 불가 필드를 구분",
+      "name": "edit.css (admin/menus)",
+      "filePath": "legacy-step2-backup/admin/menus/edit.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/edit.html:edit.html (admin/menus)",
+      "type": "file",
+      "label": "edit.html (admin/menus)",
+      "path": "legacy-step2-backup/admin/menus/edit.html",
+      "language": "html",
+      "summary": "레거시 백업 파일. 관리자 메뉴 수정 페이지. 헤더에 '상세 보기(#detailLink)'와 '목록으로' 링크가 있으며, #content 영역은 edit.js가 기존 메뉴 데이터를 폼에 채워 동적 렌더링한다. data.js/utils.js/edit.js를 로드한다.",
+      "tags": [
+        "legacy",
+        "admin",
+        "html",
+        "edit",
+        "menu",
+        "crud",
+        "dynamic-render"
+      ],
+      "sizeLines": 30,
+      "fileCategory": "markup",
+      "exports": [],
+      "imports": [],
+      "languageNotes": "lang=\"ko\", 수정 대상 메뉴 데이터는 edit.js가 URL 파라미터 등으로 로드 후 #content에 주입",
+      "name": "edit.html (admin/menus)",
+      "filePath": "legacy-step2-backup/admin/menus/edit.html",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/list.css:list.css (admin/menus)",
+      "type": "file",
+      "label": "list.css (admin/menus)",
+      "path": "legacy-step2-backup/admin/menus/list.css",
+      "language": "css",
+      "summary": "레거시 백업 파일. 관리자 메뉴 목록 페이지의 스타일시트. .topbar, .summary-card(통계 카드), .filter-panel(카테고리·검색 필터), .menu-card, .badge(카테고리/품절), .action-button, .empty-state 등 목록 UI 전체를 정의한다. 이 배치에서 가장 큰 CSS 파일(259줄)이다.",
+      "tags": [
+        "legacy",
+        "admin",
+        "css",
+        "list",
+        "filter",
+        "badge",
+        "summary",
+        "glass-morphism",
+        "responsive"
+      ],
+      "sizeLines": 259,
+      "fileCategory": "markup",
+      "exports": [],
+      "imports": [],
+      "languageNotes": "hover 시 translateY(-1px) 마이크로 인터랙션과 모바일 단일 컬럼 레이아웃 포함",
+      "name": "list.css (admin/menus)",
+      "filePath": "legacy-step2-backup/admin/menus/list.css",
+      "complexity": "complex"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/list.html:list.html (admin/menus)",
+      "type": "file",
+      "label": "list.html (admin/menus)",
+      "path": "legacy-step2-backup/admin/menus/list.html",
+      "language": "html",
+      "summary": "레거시 백업 파일. 관리자 메뉴 목록 페이지. #totalCount/#activeCount/#soldOutCount 통계, 카테고리 필터(#categoryFilter), 키워드 검색(#keywordInput), 메뉴 목록(#menuList)으로 구성된다. list.js가 데이터를 렌더링한다.",
+      "tags": [
+        "legacy",
+        "admin",
+        "html",
+        "list",
+        "filter",
+        "search",
+        "menu-management"
+      ],
+      "sizeLines": 62,
+      "fileCategory": "markup",
+      "exports": [],
+      "imports": [],
+      "languageNotes": "lang=\"ko\", '+ 새 메뉴 등록' 링크를 통해 create.html로 이동",
+      "name": "list.html (admin/menus)",
+      "filePath": "legacy-step2-backup/admin/menus/list.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "label": ".understandignore",
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "summary": "understand-anything 분석에서 제외할 파일/디렉터리 패턴을 정의하는 설정 파일. .gitignore와 동일한 glob 문법을 사용하며, 테스트 파일·빌드 산출물 등 분석 대상에서 뺄 경로를 주석 처리된 예시로 제공한다.",
+      "tags": [
+        "config",
+        "ignore-patterns",
+        "analysis-exclusion"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 38,
+      "languageNotes": "",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/config.json",
+      "type": "file",
+      "label": "config.json",
+      "path": ".understand-anything/config.json",
+      "language": "json",
+      "summary": "understand-anything 플러그인의 출력 언어를 한국어(ko)로 지정하는 설정 파일.",
+      "tags": [
+        "config",
+        "output-language",
+        "understand-anything"
+      ],
+      "fileCategory": "config",
+      "sizeLines": 1,
+      "languageNotes": "",
+      "name": "config.json",
+      "filePath": ".understand-anything/config.json",
+      "complexity": "simple"
+    },
+    {
+      "id": "file:backend/README.md",
+      "type": "file",
+      "label": "backend/README.md",
+      "path": "backend/README.md",
+      "language": "markdown",
+      "summary": "백엔드 디렉터리가 현재 비어 있음을 설명하는 문서. 현재 앱은 순수 정적 프런트엔드(HTML/CSS/JS)와 브라우저 localStorage만으로 동작하며, 향후 서버/API가 추가될 예정임을 안내한다.",
+      "tags": [
+        "documentation",
+        "backend",
+        "placeholder"
+      ],
+      "fileCategory": "docs",
+      "sizeLines": 6,
+      "languageNotes": "",
+      "name": "backend/README.md",
+      "filePath": "backend/README.md",
+      "complexity": "simple"
+    },
+    {
+      "id": "file:BLUEPRINT.md",
+      "type": "file",
+      "label": "BLUEPRINT.md",
+      "path": "BLUEPRINT.md",
+      "language": "markdown",
+      "summary": "카페 주문 관리 웹 앱 전체 설계 청사진. 폴더 구조(코로케이션 원칙), 관리자·고객 역할별 기능 목록, 디자인 방향(Premium Minimal Cafe 스타일), 10단계 구현 TODO(공유 자원 → 관리자 메뉴/주문 관리 → 고객 메뉴/장바구니/주문/마이페이지 → 로그인/회원가입 → 메인 UI 리뉴얼)를 상세히 기술한다.",
+      "tags": [
+        "documentation",
+        "architecture",
+        "blueprint",
+        "roadmap"
+      ],
+      "fileCategory": "docs",
+      "sizeLines": 213,
+      "languageNotes": "",
+      "name": "BLUEPRINT.md",
+      "filePath": "BLUEPRINT.md",
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/admin/index.css",
+      "type": "file",
+      "label": "admin/index.css",
+      "path": "frontend/admin/index.css",
+      "language": "css",
+      "summary": "관리자 대시보드 전용 스타일시트. 유리질감(glass morphism) 효과의 topbar, 요약 카드(summary-grid), 빠른 내비게이션(quick-nav), 주문 카드(order-card) 레이아웃을 정의한다.",
+      "tags": [
+        "admin",
+        "css",
+        "glass-morphism",
+        "dashboard"
+      ],
+      "fileCategory": "markup",
+      "sizeLines": 196,
+      "languageNotes": "",
+      "name": "admin/index.css",
+      "filePath": "frontend/admin/index.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/admin/index.html",
+      "type": "file",
+      "label": "admin/index.html",
+      "path": "frontend/admin/index.html",
+      "language": "html",
+      "summary": "관리자 대시보드 진입 페이지. 전체 주문·대기 주문·총 매출·품절 메뉴 수를 표시하는 요약 카드 4개와, 메뉴 관리·주문 관리로의 빠른 링크, 최근 주문 목록 섹션을 제공한다. data.js, utils.js, index.js를 script 태그로 로드한다.",
+      "tags": [
+        "admin",
+        "html",
+        "dashboard",
+        "entry-point"
+      ],
+      "fileCategory": "markup",
+      "sizeLines": 66,
+      "languageNotes": "",
+      "name": "admin/index.html",
+      "filePath": "frontend/admin/index.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/admin/index.js",
+      "type": "file",
+      "label": "admin/index.js",
+      "path": "frontend/admin/index.js",
+      "language": "javascript",
+      "summary": "관리자 대시보드 로직. 전체 주문·대기 주문 수·총 매출·품절 메뉴 수를 집계해 요약 카드에 렌더링하고, 최근 주문 10건을 날짜 역순으로 정렬해 카드 형태로 표시한다. data.js의 getOrders·getAllMenus, utils.js의 formatPrice·formatDate 등에 의존한다.",
+      "tags": [
+        "admin",
+        "dashboard",
+        "event-handler",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 51,
+      "languageNotes": "",
+      "name": "admin/index.js",
+      "filePath": "frontend/admin/index.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/admin/menus/create.js",
+      "type": "file",
+      "label": "menus/create.js",
+      "path": "frontend/admin/menus/create.js",
+      "language": "javascript",
+      "summary": "관리자 메뉴 생성 폼 로직. 카테고리 select를 동적으로 채우고, 폼 제출 시 이름·카테고리·가격 유효성 검사 후 createMenu()를 호출한다. 생성 성공 시 메뉴 상세 페이지로 이동한다.",
+      "tags": [
+        "admin",
+        "메뉴관리",
+        "form-validation",
+        "event-handler"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 55,
+      "languageNotes": "",
+      "name": "menus/create.js",
+      "filePath": "frontend/admin/menus/create.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/admin/menus/detail.js",
+      "type": "file",
+      "label": "menus/detail.js",
+      "path": "frontend/admin/menus/detail.js",
+      "language": "javascript",
+      "summary": "관리자 메뉴 상세 페이지 로직. URL 쿼리에서 메뉴 ID를 읽어 해당 메뉴가 없으면 빈 상태를 렌더링하고, 있으면 카테고리명·가격·이미지·설명 등 전체 정보를 표시한다.",
+      "tags": [
+        "admin",
+        "메뉴관리",
+        "렌더링",
+        "detail-view"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 59,
+      "languageNotes": "",
+      "name": "menus/detail.js",
+      "filePath": "frontend/admin/menus/detail.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/admin/menus/edit.js",
+      "type": "file",
+      "label": "menus/edit.js",
+      "path": "frontend/admin/menus/edit.js",
+      "language": "javascript",
+      "summary": "관리자 메뉴 수정 폼 로직. 기존 메뉴 데이터를 폼에 채워 넣고, 유효성 검사 후 updateMenu()를 호출해 저장한다. 취소 버튼은 상세 페이지로 복귀한다.",
+      "tags": [
+        "admin",
+        "메뉴관리",
+        "form-validation",
+        "event-handler"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 130,
+      "languageNotes": "",
+      "name": "menus/edit.js",
+      "filePath": "frontend/admin/menus/edit.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/admin/menus/list.js",
+      "type": "file",
+      "label": "menus/list.js",
+      "path": "frontend/admin/menus/list.js",
+      "language": "javascript",
+      "summary": "관리자 메뉴 목록 페이지 로직. 카테고리 필터·키워드 검색으로 메뉴를 필터링하고, 각 카드에서 상세보기·수정·품절 처리·삭제 액션을 event delegation 방식으로 처리한다.",
+      "tags": [
+        "admin",
+        "메뉴관리",
+        "필터링",
+        "event-delegation"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 125,
+      "languageNotes": "",
+      "name": "menus/list.js",
+      "filePath": "frontend/admin/menus/list.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/admin/orders/detail.js",
+      "type": "file",
+      "label": "orders/detail.js",
+      "path": "frontend/admin/orders/detail.js",
+      "language": "javascript",
+      "summary": "관리자 주문 상세 페이지 로직. 주문 ID로 주문을 조회해 주문 항목·금액 합계·상태·날짜를 렌더링한다. 메뉴가 삭제된 경우 '알 수 없는 메뉴'로 대체 표시한다.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "detail-view",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 64,
+      "languageNotes": "",
+      "name": "orders/detail.js",
+      "filePath": "frontend/admin/orders/detail.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/admin/orders/edit.js",
+      "type": "file",
+      "label": "orders/edit.js",
+      "path": "frontend/admin/orders/edit.js",
+      "language": "javascript",
+      "summary": "관리자 주문 상태 편집 페이지 로직. 주문 정보를 렌더링하고, 상태 버튼(주문접수·준비중·완료) 클릭 시 updateOrderStatus()를 호출한 후 즉시 화면을 갱신한다.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "상태변경",
+        "event-handler"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 69,
+      "languageNotes": "",
+      "name": "orders/edit.js",
+      "filePath": "frontend/admin/orders/edit.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/admin/orders/list.js",
+      "type": "file",
+      "label": "orders/list.js",
+      "path": "frontend/admin/orders/list.js",
+      "language": "javascript",
+      "summary": "관리자 주문 목록 페이지 로직. 상태 필터·키워드 검색으로 주문을 필터링하고, 주문 카드에서 상태 단계 진행(advance)을 event delegation으로 처리한다. 전체·대기·완료 건수 요약도 제공한다.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "필터링",
+        "event-delegation"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 108,
+      "languageNotes": "",
+      "name": "orders/list.js",
+      "filePath": "frontend/admin/orders/list.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/auth/login.js",
+      "type": "file",
+      "label": "auth/login.js",
+      "path": "frontend/auth/login.js",
+      "language": "javascript",
+      "summary": "로그인 폼 event-handler. DB 연결 전 임시 테스트 계정(admin/customer)을 하드코딩해두고, 일치하는 계정이 있으면 역할에 맞는 페이지로 리디렉션한다.",
+      "tags": [
+        "auth",
+        "로그인",
+        "event-handler",
+        "demo-account"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 31,
+      "languageNotes": "",
+      "name": "auth/login.js",
+      "filePath": "frontend/auth/login.js",
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/auth/signup.js",
+      "type": "file",
+      "label": "auth/signup.js",
+      "path": "frontend/auth/signup.js",
+      "language": "javascript",
+      "summary": "회원가입 폼 event-handler. 백엔드 미연동 상태로 폼 제출 시 안내 메시지만 출력한다(실제 저장 없음).",
+      "tags": [
+        "auth",
+        "회원가입",
+        "event-handler",
+        "stub"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 13,
+      "languageNotes": "",
+      "name": "auth/signup.js",
+      "filePath": "frontend/auth/signup.js",
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/basket/list.css",
+      "type": "file",
+      "label": "basket/list.css",
+      "path": "frontend/basket/list.css",
+      "language": "css",
+      "summary": "장바구니 페이지 전용 스타일시트. glass-morphism 헤더, 요약 섹션, 장바구니 아이템 카드(수량 조절 버튼 포함), 빈 상태, 주문하기 버튼의 레이아웃과 시각적 스타일을 정의한다.",
+      "tags": [
+        "장바구니",
+        "css",
+        "glass-morphism",
+        "cart-item"
+      ],
+      "fileCategory": "markup",
+      "sizeLines": 295,
+      "languageNotes": "",
+      "name": "basket/list.css",
+      "filePath": "frontend/basket/list.css",
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/basket/list.html",
+      "type": "file",
+      "label": "basket/list.html",
+      "path": "frontend/basket/list.html",
+      "language": "html",
+      "summary": "장바구니 페이지 HTML. 담긴 메뉴 수·예상 결제 금액 요약 섹션과 아이템 목록 컨테이너를 제공하며, data.js·utils.js·list.js를 script 태그로 로드한다.",
+      "tags": [
+        "장바구니",
+        "html",
+        "entry-point"
+      ],
+      "fileCategory": "markup",
+      "sizeLines": 36,
+      "languageNotes": "",
+      "name": "basket/list.html",
+      "filePath": "frontend/basket/list.html",
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frontend/basket/list.js",
+      "type": "file",
+      "label": "basket/list.js",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 페이지 로직. 장바구니 아이템을 view-model로 변환해 렌더링하고, 수량 증감·아이템 삭제·전체 비우기·주문하기(createOrder) 기능을 event delegation으로 처리한다. 주문 생성 후 주문 확인 페이지로 이동한다.",
+      "tags": [
+        "장바구니",
+        "event-delegation",
+        "주문생성",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 191,
+      "languageNotes": "",
+      "name": "basket/list.js",
+      "filePath": "frontend/basket/list.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/css/variables.css",
+      "type": "file",
+      "label": "css/variables.css",
+      "path": "frontend/css/variables.css",
+      "language": "css",
+      "summary": "전체 프런트엔드의 CSS 기반 파일. Pretendard 폰트 import, CSS reset, 공통 typography·button·input 스타일을 정의한다. :root에서 CSS custom property(색상·간격·그림자 등 디자인 토큰)를 선언하여 모든 페이지에서 공유한다.",
+      "tags": [
+        "css",
+        "design-tokens",
+        "variables",
+        "reset",
+        "utility"
+      ],
+      "fileCategory": "markup",
+      "sizeLines": 158,
+      "languageNotes": "",
+      "name": "css/variables.css",
+      "filePath": "frontend/css/variables.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/index.css",
+      "type": "file",
+      "label": "frontend/index.css",
+      "path": "frontend/index.css",
+      "language": "css",
+      "summary": "고객용 메인 홈페이지 전용 스타일시트(708줄). 헤더 scroll 효과(glass morphism), hero 섹션, 메뉴 카드(menu-card), 추천 카드(recommend-card), 갤러리(gallery-tile), 장바구니 배지(cart-badge), reveal 애니메이션, ripple 버튼 효과 등 고객 홈의 모든 UI 컴포넌트 스타일을 포함한다.",
+      "tags": [
+        "css",
+        "홈페이지",
+        "glass-morphism",
+        "animation",
+        "반응형"
+      ],
+      "fileCategory": "markup",
+      "sizeLines": 708,
+      "languageNotes": "",
+      "name": "frontend/index.css",
+      "filePath": "frontend/index.css",
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/index.html",
+      "type": "file",
+      "label": "frontend/index.html",
+      "path": "frontend/index.html",
+      "language": "html",
+      "summary": "고객용 메인 홈페이지 HTML(161줄). 'Cafe Moment' 브랜드 헤더(로고·내비·장바구니 배지), hero 섹션, 인기 메뉴(featured), 추천 메뉴, 이미지 갤러리 섹션으로 구성된다. variables.css·index.css·data.js·utils.js·index.js를 로드한다.",
+      "tags": [
+        "홈페이지",
+        "html",
+        "entry-point",
+        "고객"
+      ],
+      "fileCategory": "markup",
+      "sizeLines": 161,
+      "languageNotes": "",
+      "name": "frontend/index.html",
+      "filePath": "frontend/index.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frontend/index.js",
+      "type": "file",
+      "label": "frontend/index.js",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "고객용 메인 홈페이지 로직(208줄). 인기 메뉴·추천 메뉴·갤러리 렌더링, 장바구니 담기(add-to-cart) 버튼 바인딩, 장바구니 배지 카운트 갱신, 헤더 스크롤 효과, IntersectionObserver 기반 reveal 애니메이션, ripple 버튼 효과를 포함한다.",
+      "tags": [
+        "홈페이지",
+        "고객",
+        "렌더링",
+        "animation",
+        "장바구니"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 208,
+      "languageNotes": "",
+      "name": "frontend/index.js",
+      "filePath": "frontend/index.js",
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/js/data.js",
+      "type": "file",
+      "label": "js/data.js",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "카페 앱의 핵심 데이터 레이어(371줄). 카테고리(CATEGORIES)·메뉴(MENUS) 시드 데이터를 localStorage에 저장·조회·수정·삭제하는 CRUD 함수와, 주문(ORDER) 시드 데이터 기반 주문 생성·조회·상태 변경 함수를 모두 제공한다. 모든 페이지 JS에서 공유하는 전역 data-layer다.",
+      "tags": [
+        "data-layer",
+        "localStorage",
+        "CRUD",
+        "메뉴",
+        "주문",
+        "utility"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 371,
+      "languageNotes": "",
+      "name": "js/data.js",
+      "filePath": "frontend/js/data.js",
+      "complexity": "complex"
+    },
+    {
+      "id": "file:frontend/js/utils.js",
+      "type": "file",
+      "label": "js/utils.js",
+      "path": "frontend/js/utils.js",
+      "language": "javascript",
+      "summary": "전역 utility 함수 모음(89줄). 가격 포맷(formatPrice), 날짜 포맷(formatDate), 주문 상태 CSS 클래스 변환(getStatusClass), 장바구니 CRUD(getCart·saveCart·addToCart·updateCartItemQuantity·removeFromCart·clearCart·getCartTotalCount·getCartTotalPrice)를 제공한다.",
+      "tags": [
+        "utility",
+        "장바구니",
+        "포맷팅",
+        "localStorage"
+      ],
+      "fileCategory": "code",
+      "sizeLines": 89,
+      "languageNotes": "",
+      "name": "js/utils.js",
+      "filePath": "frontend/js/utils.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/admin/index.js:renderSummary",
+      "type": "function",
+      "label": "renderSummary",
+      "path": "frontend/admin/index.js",
+      "language": "javascript",
+      "summary": "관리자 대시보드 요약 카드(전체 주문·대기 주문·총 매출·품절 메뉴)를 집계해 DOM에 렌더링하는 함수.",
+      "tags": [
+        "admin",
+        "dashboard",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/index.js",
+      "startLine": 1,
+      "endLine": 13,
+      "name": "renderSummary",
+      "filePath": "frontend/admin/index.js",
+      "complexity": "moderate",
+      "lineRange": [
+        1,
+        13
+      ]
+    },
+    {
+      "id": "function:frontend/admin/index.js:renderRecentOrders",
+      "type": "function",
+      "label": "renderRecentOrders",
+      "path": "frontend/admin/index.js",
+      "language": "javascript",
+      "summary": "최근 주문 10건을 날짜 역순으로 정렬하여 주문 카드 HTML을 생성하고 DOM에 삽입하는 함수.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/index.js",
+      "startLine": 15,
+      "endLine": 44,
+      "name": "renderRecentOrders",
+      "filePath": "frontend/admin/index.js",
+      "complexity": "moderate",
+      "lineRange": [
+        15,
+        44
+      ]
+    },
+    {
+      "id": "function:frontend/admin/menus/create.js:validateMenuForm",
+      "type": "function",
+      "label": "validateMenuForm",
+      "path": "frontend/admin/menus/create.js",
+      "language": "javascript",
+      "summary": "메뉴 생성 폼의 이름·카테고리·가격 유효성을 검사하고 오류 메시지 문자열을 반환하는 함수(정상이면 빈 문자열 반환).",
+      "tags": [
+        "admin",
+        "form-validation",
+        "메뉴관리"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/menus/create.js",
+      "startLine": 12,
+      "endLine": 26,
+      "name": "validateMenuForm",
+      "filePath": "frontend/admin/menus/create.js",
+      "complexity": "moderate",
+      "lineRange": [
+        12,
+        26
+      ]
+    },
+    {
+      "id": "function:frontend/admin/menus/detail.js:renderDetail",
+      "type": "function",
+      "label": "renderDetail",
+      "path": "frontend/admin/menus/detail.js",
+      "language": "javascript",
+      "summary": "메뉴 상세 정보(카테고리·가격·이미지·설명·품절 여부)를 HTML로 렌더링하는 함수.",
+      "tags": [
+        "admin",
+        "메뉴관리",
+        "detail-view",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/menus/detail.js",
+      "startLine": 16,
+      "endLine": 51,
+      "name": "renderDetail",
+      "filePath": "frontend/admin/menus/detail.js",
+      "complexity": "moderate",
+      "lineRange": [
+        16,
+        51
+      ]
+    },
+    {
+      "id": "function:frontend/admin/menus/edit.js:validateMenuForm",
+      "type": "function",
+      "label": "validateMenuForm",
+      "path": "frontend/admin/menus/edit.js",
+      "language": "javascript",
+      "summary": "메뉴 수정 폼의 이름·카테고리·가격 유효성을 검사하는 함수.",
+      "tags": [
+        "admin",
+        "form-validation",
+        "메뉴관리"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/menus/edit.js",
+      "startLine": 6,
+      "endLine": 20,
+      "name": "validateMenuForm",
+      "filePath": "frontend/admin/menus/edit.js",
+      "complexity": "moderate",
+      "lineRange": [
+        6,
+        20
+      ]
+    },
+    {
+      "id": "function:frontend/admin/menus/edit.js:renderForm",
+      "type": "function",
+      "label": "renderForm",
+      "path": "frontend/admin/menus/edit.js",
+      "language": "javascript",
+      "summary": "기존 메뉴 데이터를 수정 폼에 채워 넣고, 폼 제출·취소 이벤트 리스너를 바인딩하는 함수(90줄).",
+      "tags": [
+        "admin",
+        "메뉴관리",
+        "form-rendering",
+        "event-handler"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/menus/edit.js",
+      "startLine": 32,
+      "endLine": 122,
+      "name": "renderForm",
+      "filePath": "frontend/admin/menus/edit.js",
+      "complexity": "moderate",
+      "lineRange": [
+        32,
+        122
+      ]
+    },
+    {
+      "id": "function:frontend/admin/menus/list.js:getFilteredMenus",
+      "type": "function",
+      "label": "getFilteredMenus",
+      "path": "frontend/admin/menus/list.js",
+      "language": "javascript",
+      "summary": "카테고리 필터와 키워드 검색 입력값을 기반으로 메뉴 배열을 필터링해 반환하는 함수.",
+      "tags": [
+        "admin",
+        "메뉴관리",
+        "필터링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/menus/list.js",
+      "startLine": 16,
+      "endLine": 26,
+      "name": "getFilteredMenus",
+      "filePath": "frontend/admin/menus/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "function:frontend/admin/menus/list.js:renderList",
+      "type": "function",
+      "label": "renderList",
+      "path": "frontend/admin/menus/list.js",
+      "language": "javascript",
+      "summary": "필터링된 메뉴 목록을 카드 HTML로 생성해 DOM에 삽입하는 함수. 카드에 상세보기·수정·품절처리·삭제 액션 버튼을 포함한다.",
+      "tags": [
+        "admin",
+        "메뉴관리",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/menus/list.js",
+      "startLine": 35,
+      "endLine": 86,
+      "name": "renderList",
+      "filePath": "frontend/admin/menus/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        35,
+        86
+      ]
+    },
+    {
+      "id": "function:frontend/admin/menus/list.js:handleListClick",
+      "type": "function",
+      "label": "handleListClick",
+      "path": "frontend/admin/menus/list.js",
+      "language": "javascript",
+      "summary": "메뉴 목록 클릭 이벤트를 위임 처리하는 함수. data-action에 따라 품절 토글 또는 삭제를 실행하고 화면을 갱신한다.",
+      "tags": [
+        "admin",
+        "메뉴관리",
+        "event-delegation"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/menus/list.js",
+      "startLine": 88,
+      "endLine": 113,
+      "name": "handleListClick",
+      "filePath": "frontend/admin/menus/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        88,
+        113
+      ]
+    },
+    {
+      "id": "function:frontend/admin/orders/detail.js:renderDetail",
+      "type": "function",
+      "label": "renderDetail",
+      "path": "frontend/admin/orders/detail.js",
+      "language": "javascript",
+      "summary": "주문 상세(항목별 이름·수량·금액, 총액, 상태, 날짜)를 HTML로 렌더링하는 함수.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "detail-view",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/orders/detail.js",
+      "startLine": 16,
+      "endLine": 56,
+      "name": "renderDetail",
+      "filePath": "frontend/admin/orders/detail.js",
+      "complexity": "moderate",
+      "lineRange": [
+        16,
+        56
+      ]
+    },
+    {
+      "id": "function:frontend/admin/orders/edit.js:renderStatusActions",
+      "type": "function",
+      "label": "renderStatusActions",
+      "path": "frontend/admin/orders/edit.js",
+      "language": "javascript",
+      "summary": "ORDER_STATUSES 배열을 순회해 현재 상태에 active 클래스를 표시하는 상태 변경 버튼들을 렌더링하는 함수.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "상태변경",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/orders/edit.js",
+      "startLine": 16,
+      "endLine": 29,
+      "name": "renderStatusActions",
+      "filePath": "frontend/admin/orders/edit.js",
+      "complexity": "moderate",
+      "lineRange": [
+        16,
+        29
+      ]
+    },
+    {
+      "id": "function:frontend/admin/orders/edit.js:renderEdit",
+      "type": "function",
+      "label": "renderEdit",
+      "path": "frontend/admin/orders/edit.js",
+      "language": "javascript",
+      "summary": "주문 편집 화면 전체를 렌더링하고 상태 버튼 클릭 이벤트를 바인딩하는 함수. 상태 변경 후 자기 자신을 재호출해 화면을 즉시 갱신한다.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "event-handler",
+        "상태변경"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/orders/edit.js",
+      "startLine": 31,
+      "endLine": 61,
+      "name": "renderEdit",
+      "filePath": "frontend/admin/orders/edit.js",
+      "complexity": "moderate",
+      "lineRange": [
+        31,
+        61
+      ]
+    },
+    {
+      "id": "function:frontend/admin/orders/list.js:getFilteredOrders",
+      "type": "function",
+      "label": "getFilteredOrders",
+      "path": "frontend/admin/orders/list.js",
+      "language": "javascript",
+      "summary": "상태 필터와 키워드 검색으로 주문 배열을 필터링하고 최신 순으로 정렬해 반환하는 함수.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "필터링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/orders/list.js",
+      "startLine": 10,
+      "endLine": 21,
+      "name": "getFilteredOrders",
+      "filePath": "frontend/admin/orders/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        10,
+        21
+      ]
+    },
+    {
+      "id": "function:frontend/admin/orders/list.js:renderList",
+      "type": "function",
+      "label": "renderList",
+      "path": "frontend/admin/orders/list.js",
+      "language": "javascript",
+      "summary": "필터링된 주문 목록을 카드 HTML로 생성해 DOM에 삽입하는 함수. 다음 상태로 진행(advance) 버튼도 포함한다.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/orders/list.js",
+      "startLine": 37,
+      "endLine": 77,
+      "name": "renderList",
+      "filePath": "frontend/admin/orders/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        37,
+        77
+      ]
+    },
+    {
+      "id": "function:frontend/admin/orders/list.js:handleListClick",
+      "type": "function",
+      "label": "handleListClick",
+      "path": "frontend/admin/orders/list.js",
+      "language": "javascript",
+      "summary": "주문 목록 클릭 이벤트를 위임 처리하는 함수. advance 액션 시 다음 상태로 주문 상태를 업데이트하고 화면을 갱신한다.",
+      "tags": [
+        "admin",
+        "주문관리",
+        "event-delegation"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/admin/orders/list.js",
+      "startLine": 79,
+      "endLine": 97,
+      "name": "handleListClick",
+      "filePath": "frontend/admin/orders/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        79,
+        97
+      ]
+    },
+    {
+      "id": "function:frontend/basket/list.js:bindHeaderActions",
+      "type": "function",
+      "label": "bindHeaderActions",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 전체 비우기(clearCartBtn) 버튼에 클릭 이벤트를 바인딩하는 함수. 비어 있으면 alert로 안내하고, 있으면 confirm 후 clearCart()를 호출한다.",
+      "tags": [
+        "장바구니",
+        "event-handler"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 7,
+      "endLine": 23,
+      "name": "bindHeaderActions",
+      "filePath": "frontend/basket/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        7,
+        23
+      ]
+    },
+    {
+      "id": "function:frontend/basket/list.js:buildCartViewModels",
+      "type": "function",
+      "label": "buildCartViewModels",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 항목(menuId·quantity)에 메뉴·카테고리 정보를 합쳐 view-model 배열로 변환하는 함수.",
+      "tags": [
+        "장바구니",
+        "view-model"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 25,
+      "endLine": 37,
+      "name": "buildCartViewModels",
+      "filePath": "frontend/basket/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        25,
+        37
+      ]
+    },
+    {
+      "id": "function:frontend/basket/list.js:renderBasketPage",
+      "type": "function",
+      "label": "renderBasketPage",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 페이지 전체를 렌더링하는 함수. 유효 아이템 수·총 금액을 요약 섹션에 표시하고, 빈 경우 빈 상태 UI, 아이템 있으면 카드 목록과 주문하기 버튼을 출력한다.",
+      "tags": [
+        "장바구니",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 39,
+      "endLine": 79,
+      "name": "renderBasketPage",
+      "filePath": "frontend/basket/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        39,
+        79
+      ]
+    },
+    {
+      "id": "function:frontend/basket/list.js:renderBasketItem",
+      "type": "function",
+      "label": "renderBasketItem",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 아이템 view-model을 받아 이미지·카테고리·이름·가격·수량 조절 버튼·삭제 버튼이 포함된 카드 HTML 문자열을 반환하는 함수(49줄).",
+      "tags": [
+        "장바구니",
+        "렌더링",
+        "cart-item"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 91,
+      "endLine": 140,
+      "name": "renderBasketItem",
+      "filePath": "frontend/basket/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        91,
+        140
+      ]
+    },
+    {
+      "id": "function:frontend/basket/list.js:bindBasketEvents",
+      "type": "function",
+      "label": "bindBasketEvents",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "주문하기(checkoutBtn) 버튼에 클릭 이벤트를 바인딩하는 함수. 유효 아이템이 없으면 alert, 있으면 confirm 후 createOrder()를 호출하고 주문 완료 페이지로 이동한다.",
+      "tags": [
+        "장바구니",
+        "주문생성",
+        "event-handler"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 142,
+      "endLine": 161,
+      "name": "bindBasketEvents",
+      "filePath": "frontend/basket/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        142,
+        161
+      ]
+    },
+    {
+      "id": "function:frontend/basket/list.js:handleBasketClick",
+      "type": "function",
+      "label": "handleBasketClick",
+      "path": "frontend/basket/list.js",
+      "language": "javascript",
+      "summary": "장바구니 콘텐츠 영역의 클릭 이벤트를 위임 처리하는 함수. 수량 증감(increase/decrease)·삭제(remove) data-action에 따라 장바구니를 갱신하고 화면을 다시 렌더링한다.",
+      "tags": [
+        "장바구니",
+        "event-delegation"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/basket/list.js",
+      "startLine": 163,
+      "endLine": 189,
+      "name": "handleBasketClick",
+      "filePath": "frontend/basket/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        163,
+        189
+      ]
+    },
+    {
+      "id": "function:frontend/index.js:renderFeaturedMenus",
+      "type": "function",
+      "label": "renderFeaturedMenus",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "인기 메뉴 목록을 조회해 메뉴 카드(이미지·카테고리·이름·평점·가격·장바구니 버튼)를 렌더링하는 함수. 품절 메뉴는 장바구니 버튼 없이 표시한다.",
+      "tags": [
+        "홈페이지",
+        "메뉴카드",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 11,
+      "endLine": 50,
+      "name": "renderFeaturedMenus",
+      "filePath": "frontend/index.js",
+      "complexity": "moderate",
+      "lineRange": [
+        11,
+        50
+      ]
+    },
+    {
+      "id": "function:frontend/index.js:renderRecommendation",
+      "type": "function",
+      "label": "renderRecommendation",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "추천 메뉴(평점 상위·미품절)를 조회해 추천 카드(이미지·카테고리·이름·설명·가격)를 렌더링하는 함수.",
+      "tags": [
+        "홈페이지",
+        "추천메뉴",
+        "렌더링"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 70,
+      "endLine": 98,
+      "name": "renderRecommendation",
+      "filePath": "frontend/index.js",
+      "complexity": "moderate",
+      "lineRange": [
+        70,
+        98
+      ]
+    },
+    {
+      "id": "function:frontend/index.js:bindAddToCartButtons",
+      "type": "function",
+      "label": "bindAddToCartButtons",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "지정 DOM 범위 내 .add-cart-btn 버튼들에 클릭 이벤트를 바인딩하는 함수. addToCart() 호출 후 장바구니 배지를 갱신하고 버튼에 시각적 피드백을 제공한다.",
+      "tags": [
+        "홈페이지",
+        "장바구니",
+        "event-handler"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 114,
+      "endLine": 130,
+      "name": "bindAddToCartButtons",
+      "filePath": "frontend/index.js",
+      "complexity": "moderate",
+      "lineRange": [
+        114,
+        130
+      ]
+    },
+    {
+      "id": "function:frontend/index.js:updateCartBadge",
+      "type": "function",
+      "label": "updateCartBadge",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "장바구니 총 수량을 조회해 헤더의 cart-badge 표시를 갱신하는 함수.",
+      "tags": [
+        "홈페이지",
+        "장바구니",
+        "UI"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 133,
+      "endLine": 143,
+      "name": "updateCartBadge",
+      "filePath": "frontend/index.js",
+      "complexity": "moderate",
+      "lineRange": [
+        133,
+        143
+      ]
+    },
+    {
+      "id": "function:frontend/index.js:bindRevealAnimation",
+      "type": "function",
+      "label": "bindRevealAnimation",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": "IntersectionObserver를 사용해 .reveal 요소가 뷰포트에 들어올 때 visible 클래스를 추가하는 스크롤 애니메이션 함수.",
+      "tags": [
+        "홈페이지",
+        "animation",
+        "IntersectionObserver"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 159,
+      "endLine": 175,
+      "name": "bindRevealAnimation",
+      "filePath": "frontend/index.js",
+      "complexity": "moderate",
+      "lineRange": [
+        159,
+        175
+      ]
+    },
+    {
+      "id": "function:frontend/index.js:bindButtonRipple",
+      "type": "function",
+      "label": "bindButtonRipple",
+      "path": "frontend/index.js",
+      "language": "javascript",
+      "summary": ".btn-ripple 버튼에 클릭 시 물결(ripple) 효과 DOM 요소를 동적으로 생성·삽입하고 애니메이션 종료 후 제거하는 함수.",
+      "tags": [
+        "홈페이지",
+        "animation",
+        "ripple"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/index.js",
+      "startLine": 179,
+      "endLine": 195,
+      "name": "bindButtonRipple",
+      "filePath": "frontend/index.js",
+      "complexity": "moderate",
+      "lineRange": [
+        179,
+        195
+      ]
+    },
+    {
+      "id": "function:frontend/js/data.js:getAllMenus",
+      "type": "function",
+      "label": "getAllMenus",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "localStorage에서 메뉴 배열을 읽어 반환하는 함수. 시드 버전이 다르거나 데이터가 없으면 시드 데이터로 초기화한다.",
+      "tags": [
+        "data-layer",
+        "메뉴",
+        "localStorage"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 141,
+      "endLine": 163,
+      "name": "getAllMenus",
+      "filePath": "frontend/js/data.js",
+      "complexity": "moderate",
+      "lineRange": [
+        141,
+        163
+      ]
+    },
+    {
+      "id": "function:frontend/js/data.js:generateMenuId",
+      "type": "function",
+      "label": "generateMenuId",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "메뉴 이름을 slug화하여 고유한 메뉴 ID를 생성하는 함수. 충돌 시 숫자 접미사를 붙여 유일성을 보장한다.",
+      "tags": [
+        "data-layer",
+        "메뉴",
+        "id-generation"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 170,
+      "endLine": 189,
+      "name": "generateMenuId",
+      "filePath": "frontend/js/data.js",
+      "complexity": "moderate",
+      "lineRange": [
+        170,
+        189
+      ]
+    },
+    {
+      "id": "function:frontend/js/data.js:createMenu",
+      "type": "function",
+      "label": "createMenu",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "새 메뉴 객체를 생성해 localStorage에 저장하는 함수.",
+      "tags": [
+        "data-layer",
+        "메뉴",
+        "CRUD"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 191,
+      "endLine": 206,
+      "name": "createMenu",
+      "filePath": "frontend/js/data.js",
+      "complexity": "moderate",
+      "lineRange": [
+        191,
+        206
+      ]
+    },
+    {
+      "id": "function:frontend/js/data.js:updateMenu",
+      "type": "function",
+      "label": "updateMenu",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "기존 메뉴를 찾아 필드를 갱신하고 localStorage에 저장하는 함수.",
+      "tags": [
+        "data-layer",
+        "메뉴",
+        "CRUD"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 208,
+      "endLine": 225,
+      "name": "updateMenu",
+      "filePath": "frontend/js/data.js",
+      "complexity": "moderate",
+      "lineRange": [
+        208,
+        225
+      ]
+    },
+    {
+      "id": "function:frontend/js/data.js:generateOrderId",
+      "type": "function",
+      "label": "generateOrderId",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "날짜 기반(YYYYMMDD-NNN 형식) 고유 주문 ID를 생성하는 함수. 당일 마지막 시퀀스를 확인해 순번을 증가시킨다.",
+      "tags": [
+        "data-layer",
+        "주문",
+        "id-generation"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 309,
+      "endLine": 325,
+      "name": "generateOrderId",
+      "filePath": "frontend/js/data.js",
+      "complexity": "moderate",
+      "lineRange": [
+        309,
+        325
+      ]
+    },
+    {
+      "id": "function:frontend/js/data.js:createOrder",
+      "type": "function",
+      "label": "createOrder",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "장바구니 아이템 배열을 받아 새 주문 객체(id·createdAt·status·items)를 생성하고 localStorage에 저장하는 함수.",
+      "tags": [
+        "data-layer",
+        "주문",
+        "CRUD"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 328,
+      "endLine": 340,
+      "name": "createOrder",
+      "filePath": "frontend/js/data.js",
+      "complexity": "moderate",
+      "lineRange": [
+        328,
+        340
+      ]
+    },
+    {
+      "id": "function:frontend/js/data.js:getOrderTotalPrice",
+      "type": "function",
+      "label": "getOrderTotalPrice",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "주문 객체를 받아 각 항목의 메뉴 가격 × 수량 합산으로 총 금액을 계산하는 함수.",
+      "tags": [
+        "data-layer",
+        "주문",
+        "가격계산"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 346,
+      "endLine": 352,
+      "name": "getOrderTotalPrice",
+      "filePath": "frontend/js/data.js",
+      "complexity": "moderate",
+      "lineRange": [
+        346,
+        352
+      ]
+    },
+    {
+      "id": "function:frontend/js/data.js:updateOrderStatus",
+      "type": "function",
+      "label": "updateOrderStatus",
+      "path": "frontend/js/data.js",
+      "language": "javascript",
+      "summary": "주문 ID와 새 상태를 받아 해당 주문의 status 필드를 갱신하고 localStorage에 저장하는 함수.",
+      "tags": [
+        "data-layer",
+        "주문",
+        "상태변경"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/data.js",
+      "startLine": 363,
+      "endLine": 371,
+      "name": "updateOrderStatus",
+      "filePath": "frontend/js/data.js",
+      "complexity": "moderate",
+      "lineRange": [
+        363,
+        371
+      ]
+    },
+    {
+      "id": "function:frontend/js/utils.js:addToCart",
+      "type": "function",
+      "label": "addToCart",
+      "path": "frontend/js/utils.js",
+      "language": "javascript",
+      "summary": "menuId를 받아 장바구니에 해당 메뉴가 있으면 수량을 1 증가시키고 없으면 새 항목을 추가한 후 saveCart()를 호출하는 함수.",
+      "tags": [
+        "utility",
+        "장바구니",
+        "CRUD"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/utils.js",
+      "startLine": 39,
+      "endLine": 51,
+      "name": "addToCart",
+      "filePath": "frontend/js/utils.js",
+      "complexity": "moderate",
+      "lineRange": [
+        39,
+        51
+      ]
+    },
+    {
+      "id": "function:frontend/js/utils.js:updateCartItemQuantity",
+      "type": "function",
+      "label": "updateCartItemQuantity",
+      "path": "frontend/js/utils.js",
+      "language": "javascript",
+      "summary": "장바구니에서 특정 menuId의 수량을 갱신하는 함수. 수량이 0 이하면 해당 항목을 제거한다.",
+      "tags": [
+        "utility",
+        "장바구니",
+        "수량관리"
+      ],
+      "fileCategory": "code",
+      "parentFile": "file:frontend/js/utils.js",
+      "startLine": 53,
+      "endLine": 67,
+      "name": "updateCartItemQuantity",
+      "filePath": "frontend/js/utils.js",
+      "complexity": "moderate",
+      "lineRange": [
+        53,
+        67
+      ]
+    },
+    {
+      "id": "function:frontend/menus/detail.js:frontend/menus/detail.js",
+      "type": "file",
+      "label": "frontend/menus/detail.js",
+      "title": "메뉴 상세 페이지 스크립트",
+      "summary": "사용자 메뉴 상세 페이지의 전체 로직을 담당하는 스크립트. URL 파라미터에서 메뉴 ID를 읽어 해당 메뉴 정보를 렌더링하고, 수량 조절 stepper와 장바구니 담기 event-handler를 바인딩한다. 품절 메뉴는 수량 조절 및 담기 버튼 없이 품절 문구만 표시한다.",
+      "language": "javascript",
+      "tags": [
+        "event-handler",
+        "render",
+        "cart",
+        "menu-detail"
+      ],
+      "sizeLines": 124,
+      "path": "frontend/menus/detail.js",
+      "name": "frontend/menus/detail.js",
+      "filePath": "frontend/menus/detail.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/menus/detail.js:init",
+      "type": "function",
+      "label": "init",
+      "title": "메뉴 상세 페이지 초기화 함수",
+      "summary": "URL 파라미터에서 메뉴 ID를 파싱하여 currentMenu 상태를 설정하고, renderMenuDetail과 updateCartBadge를 호출해 페이지 초기 상태를 구성한다.",
+      "language": "javascript",
+      "tags": [
+        "entry-point",
+        "init"
+      ],
+      "sizeLines": 8,
+      "startLine": 6,
+      "endLine": 13,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js",
+      "name": "init",
+      "filePath": "frontend/menus/detail.js",
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        13
+      ]
+    },
+    {
+      "id": "function:frontend/menus/detail.js:renderMenuDetail",
+      "type": "function",
+      "label": "renderMenuDetail",
+      "title": "메뉴 상세 정보 렌더링 함수",
+      "summary": "currentMenu 상태를 기반으로 메뉴 이미지, 이름, 가격, 설명, 수량 stepper, 액션바를 HTML로 렌더링한다. 메뉴가 없으면 안내 문구를 출력하고, 품절 시에는 수량 조절과 장바구니 버튼을 표시하지 않는다.",
+      "language": "javascript",
+      "tags": [
+        "render",
+        "menu-detail"
+      ],
+      "sizeLines": 30,
+      "startLine": 16,
+      "endLine": 45,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js",
+      "name": "renderMenuDetail",
+      "filePath": "frontend/menus/detail.js",
+      "complexity": "simple",
+      "lineRange": [
+        16,
+        45
+      ]
+    },
+    {
+      "id": "function:frontend/menus/detail.js:bindQuantityEvents",
+      "type": "function",
+      "label": "bindQuantityEvents",
+      "title": "수량 조절 버튼 event-handler 바인딩",
+      "summary": "감소/증가 버튼에 클릭 이벤트를 등록하고, 수량이 1 이하일 때 감소 버튼을 비활성화한다. 수량 변경 시 updateQuantityDisplay를 호출해 UI를 동기화한다.",
+      "language": "javascript",
+      "tags": [
+        "event-handler",
+        "quantity"
+      ],
+      "sizeLines": 18,
+      "startLine": 67,
+      "endLine": 84,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js",
+      "name": "bindQuantityEvents",
+      "filePath": "frontend/menus/detail.js",
+      "complexity": "simple",
+      "lineRange": [
+        67,
+        84
+      ]
+    },
+    {
+      "id": "function:frontend/menus/detail.js:bindAddToCartEvent",
+      "type": "function",
+      "label": "bindAddToCartEvent",
+      "title": "장바구니 담기 event-handler 바인딩",
+      "summary": "장바구니 담기 버튼 클릭 시 addToCart를 호출하고, 버튼 텍스트를 일시적으로 '담았습니다!'로 변경 후 1.2초 뒤 원래 상태로 복원한다.",
+      "language": "javascript",
+      "tags": [
+        "event-handler",
+        "cart"
+      ],
+      "sizeLines": 17,
+      "startLine": 93,
+      "endLine": 109,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js",
+      "name": "bindAddToCartEvent",
+      "filePath": "frontend/menus/detail.js",
+      "complexity": "simple",
+      "lineRange": [
+        93,
+        109
+      ]
+    },
+    {
+      "id": "function:frontend/menus/detail.js:updateCartBadge",
+      "type": "function",
+      "label": "updateCartBadge",
+      "title": "장바구니 배지 업데이트 함수",
+      "summary": "장바구니 총 수량을 조회하여 배지 요소에 표시하거나 숨긴다. 99개 초과 시 '99+'로 표시한다.",
+      "language": "javascript",
+      "tags": [
+        "utility",
+        "cart"
+      ],
+      "sizeLines": 11,
+      "startLine": 112,
+      "endLine": 122,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js",
+      "name": "updateCartBadge",
+      "filePath": "frontend/menus/detail.js",
+      "complexity": "simple",
+      "lineRange": [
+        112,
+        122
+      ]
+    },
+    {
+      "id": "function:frontend/menus/list.js:frontend/menus/list.js",
+      "type": "file",
+      "label": "frontend/menus/list.js",
+      "title": "메뉴 목록 페이지 스크립트",
+      "summary": "사용자용 메뉴 목록 페이지를 담당하는 스크립트. 카테고리 탭 렌더링과 탭 클릭 시 메뉴 그리드 필터링을 처리한다. 메뉴 카드는 상세 페이지 링크로 연결되며 품절 배지를 표시한다.",
+      "language": "javascript",
+      "tags": [
+        "render",
+        "menu-list",
+        "category-filter"
+      ],
+      "sizeLines": 81,
+      "path": "frontend/menus/list.js",
+      "name": "frontend/menus/list.js",
+      "filePath": "frontend/menus/list.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/menus/list.js:renderCategoryTabs",
+      "type": "function",
+      "label": "renderCategoryTabs",
+      "title": "카테고리 탭 렌더링 함수",
+      "summary": "전체 카테고리 탭 버튼을 생성하고, 클릭 이벤트로 selectedCategoryId 상태를 갱신한 뒤 탭과 그리드를 재렌더링한다.",
+      "language": "javascript",
+      "tags": [
+        "render",
+        "category-filter",
+        "event-handler"
+      ],
+      "sizeLines": 23,
+      "startLine": 12,
+      "endLine": 34,
+      "path": "frontend/menus/list.js",
+      "parent": "frontend/menus/list.js",
+      "name": "renderCategoryTabs",
+      "filePath": "frontend/menus/list.js",
+      "complexity": "simple",
+      "lineRange": [
+        12,
+        34
+      ]
+    },
+    {
+      "id": "function:frontend/menus/list.js:renderMenuGrid",
+      "type": "function",
+      "label": "renderMenuGrid",
+      "title": "메뉴 그리드 렌더링 함수",
+      "summary": "선택된 카테고리에 해당하는 메뉴 목록을 카드 형태로 렌더링한다. 메뉴가 없을 경우 빈 상태 문구를 표시하고, 품절 메뉴에는 'sold-out' 클래스와 배지를 추가한다.",
+      "language": "javascript",
+      "tags": [
+        "render",
+        "menu-list"
+      ],
+      "sizeLines": 30,
+      "startLine": 37,
+      "endLine": 66,
+      "path": "frontend/menus/list.js",
+      "parent": "frontend/menus/list.js",
+      "name": "renderMenuGrid",
+      "filePath": "frontend/menus/list.js",
+      "complexity": "simple",
+      "lineRange": [
+        37,
+        66
+      ]
+    },
+    {
+      "id": "function:frontend/my/index.css:frontend/my/index.css",
+      "type": "file",
+      "label": "frontend/my/index.css",
+      "title": "마이페이지 스타일시트",
+      "summary": "마이페이지(frontend/my/index.html)의 레이아웃과 컴포넌트 스타일을 정의한다. 페이지 헤더, 프로필 카드, 통계 그리드(stat-grid), 메뉴 목록 항목(menu-item), 장바구니 배지 등의 스타일을 포함한다. CSS 변수 기반의 디자인 토큰을 활용한다.",
+      "language": "css",
+      "tags": [
+        "layout",
+        "component",
+        "마이페이지"
+      ],
+      "sizeLines": 167,
+      "path": "frontend/my/index.css",
+      "name": "frontend/my/index.css",
+      "filePath": "frontend/my/index.css",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/my/index.html:frontend/my/index.html",
+      "type": "file",
+      "label": "frontend/my/index.html",
+      "title": "마이페이지 HTML",
+      "summary": "사용자 마이페이지의 HTML 구조. 게스트 프로필 카드, 장바구니 수량 및 예상 결제 금액 통계 카드, 주문 내역/장바구니/전체 메뉴 바로가기 nav, 고객 지원(공지사항/FAQ/이용약관) 섹션으로 구성된다. data.js, utils.js, index.js를 로드한다.",
+      "language": "html",
+      "tags": [
+        "마이페이지",
+        "navigation",
+        "profile"
+      ],
+      "sizeLines": 84,
+      "path": "frontend/my/index.html",
+      "name": "frontend/my/index.html",
+      "filePath": "frontend/my/index.html",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/my/index.js:frontend/my/index.js",
+      "type": "file",
+      "label": "frontend/my/index.js",
+      "title": "마이페이지 스크립트",
+      "summary": "마이페이지의 장바구니 요약 표시, 배지 업데이트, 고객 지원 버튼 클릭 처리 로직을 담당한다. 고객 지원 항목(공지사항/FAQ/이용약관)은 alert를 통해 준비 중 메시지를 표시한다.",
+      "language": "javascript",
+      "tags": [
+        "마이페이지",
+        "cart",
+        "event-handler"
+      ],
+      "sizeLines": 48,
+      "path": "frontend/my/index.js",
+      "name": "frontend/my/index.js",
+      "filePath": "frontend/my/index.js",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/my/index.js:renderCartSummary",
+      "type": "function",
+      "label": "renderCartSummary",
+      "title": "장바구니 요약 렌더링 함수",
+      "summary": "장바구니 총 수량과 예상 결제 금액을 계산하여 마이페이지 통계 카드(cartCount, cartPrice)에 표시한다.",
+      "language": "javascript",
+      "tags": [
+        "render",
+        "cart",
+        "utility"
+      ],
+      "sizeLines": 7,
+      "startLine": 8,
+      "endLine": 14,
+      "path": "frontend/my/index.js",
+      "parent": "frontend/my/index.js",
+      "name": "renderCartSummary",
+      "filePath": "frontend/my/index.js",
+      "complexity": "simple",
+      "lineRange": [
+        8,
+        14
+      ]
+    },
+    {
+      "id": "function:frontend/my/index.js:handleInfoClick",
+      "type": "function",
+      "label": "handleInfoClick",
+      "title": "고객 지원 버튼 클릭 event-handler",
+      "summary": "data-info 속성이 있는 버튼 클릭 이벤트를 위임 방식으로 처리하고, INFO_MESSAGES 객체에서 해당 메시지를 조회해 alert로 표시한다.",
+      "language": "javascript",
+      "tags": [
+        "event-handler",
+        "utility"
+      ],
+      "sizeLines": 9,
+      "startLine": 30,
+      "endLine": 38,
+      "path": "frontend/my/index.js",
+      "parent": "frontend/my/index.js",
+      "name": "handleInfoClick",
+      "filePath": "frontend/my/index.js",
+      "complexity": "simple",
+      "lineRange": [
+        30,
+        38
+      ]
+    },
+    {
+      "id": "function:frontend/orders/detail.js:frontend/orders/detail.js",
+      "type": "file",
+      "label": "frontend/orders/detail.js",
+      "title": "주문 상세 페이지 스크립트",
+      "summary": "주문 상세 페이지 로직을 담당한다. URL 파라미터에서 주문 ID를 읽어 주문 정보를 조회하고, 주문 항목별 메뉴명/수량/소계와 총 결제 금액을 렌더링한다. 주문이 없으면 안내 문구를 표시한다.",
+      "language": "javascript",
+      "tags": [
+        "render",
+        "order-detail"
+      ],
+      "sizeLines": 76,
+      "path": "frontend/orders/detail.js",
+      "name": "frontend/orders/detail.js",
+      "filePath": "frontend/orders/detail.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frontend/orders/detail.js:renderOrderDetail",
+      "type": "function",
+      "label": "renderOrderDetail",
+      "title": "주문 상세 정보 렌더링 함수",
+      "summary": "현재 주문의 항목 목록을 순회하며 메뉴명, 수량, 소계를 계산하고, 주문 ID, 상태, 날짜, 총 결제 금액을 포함한 상세 뷰를 DOM에 렌더링한다.",
+      "language": "javascript",
+      "tags": [
+        "render",
+        "order-detail"
+      ],
+      "sizeLines": 47,
+      "startLine": 15,
+      "endLine": 61,
+      "path": "frontend/orders/detail.js",
+      "parent": "frontend/orders/detail.js",
+      "name": "renderOrderDetail",
+      "filePath": "frontend/orders/detail.js",
+      "complexity": "simple",
+      "lineRange": [
+        15,
+        61
+      ]
+    },
+    {
+      "id": "function:frontend/orders/list.js:frontend/orders/list.js",
+      "type": "file",
+      "label": "frontend/orders/list.js",
+      "title": "주문 목록 페이지 스크립트",
+      "summary": "주문 내역 목록을 최신순으로 정렬하여 카드 형태로 렌더링하는 스크립트. 주문 ID, 상태 배지, 날짜, 요약 텍스트, 총 결제 금액을 표시하며 상세 페이지로의 링크를 제공한다.",
+      "language": "javascript",
+      "tags": [
+        "render",
+        "order-list"
+      ],
+      "sizeLines": 49,
+      "path": "frontend/orders/list.js",
+      "name": "frontend/orders/list.js",
+      "filePath": "frontend/orders/list.js",
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frontend/orders/list.js:renderOrderList",
+      "type": "function",
+      "label": "renderOrderList",
+      "title": "주문 목록 렌더링 함수",
+      "summary": "전체 주문을 생성일 기준 최신순으로 정렬한 뒤, 각 주문을 카드 요소로 변환하여 orderList 컨테이너에 삽입한다. 주문이 없으면 빈 상태 안내 문구를 표시한다.",
+      "language": "javascript",
+      "tags": [
+        "render",
+        "order-list"
+      ],
+      "sizeLines": 27,
+      "startLine": 8,
+      "endLine": 34,
+      "path": "frontend/orders/list.js",
+      "parent": "frontend/orders/list.js",
+      "name": "renderOrderList",
+      "filePath": "frontend/orders/list.js",
+      "complexity": "simple",
+      "lineRange": [
+        8,
+        34
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/create.js:legacy-step2-backup/admin/menus/create.js",
+      "type": "file",
+      "label": "legacy-step2-backup/admin/menus/create.js",
+      "title": "[레거시] 관리자 메뉴 생성 스크립트",
+      "summary": "레거시 백업 파일. 관리자 메뉴 생성 폼의 카테고리 옵션 렌더링과 폼 유효성 검사 로직을 포함한다. 폼 제출 시 createMenu를 호출하고 생성된 메뉴 상세 페이지로 이동한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "admin",
+        "menu-create",
+        "form-validation"
+      ],
+      "sizeLines": 55,
+      "path": "legacy-step2-backup/admin/menus/create.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전",
+      "name": "legacy-step2-backup/admin/menus/create.js",
+      "filePath": "legacy-step2-backup/admin/menus/create.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/create.js:validateMenuForm",
+      "type": "function",
+      "label": "validateMenuForm",
+      "title": "[레거시] 메뉴 폼 유효성 검사 함수",
+      "summary": "레거시 버전. 메뉴명, 카테고리, 가격(0 이상 유한수)을 검사하여 오류 메시지를 반환한다. 유효하면 빈 문자열을 반환한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "form-validation",
+        "utility"
+      ],
+      "sizeLines": 15,
+      "startLine": 12,
+      "endLine": 26,
+      "path": "legacy-step2-backup/admin/menus/create.js",
+      "parent": "legacy-step2-backup/admin/menus/create.js",
+      "name": "validateMenuForm",
+      "filePath": "legacy-step2-backup/admin/menus/create.js",
+      "complexity": "simple",
+      "lineRange": [
+        12,
+        26
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/detail.js:legacy-step2-backup/admin/menus/detail.js",
+      "type": "file",
+      "label": "legacy-step2-backup/admin/menus/detail.js",
+      "title": "[레거시] 관리자 메뉴 상세 스크립트",
+      "summary": "레거시 백업 파일. 관리자 메뉴 상세 페이지에서 메뉴 ID로 데이터를 조회하고, 메뉴 존재 여부에 따라 상세 정보 또는 빈 상태를 렌더링한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "admin",
+        "menu-detail"
+      ],
+      "sizeLines": 59,
+      "path": "legacy-step2-backup/admin/menus/detail.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전",
+      "name": "legacy-step2-backup/admin/menus/detail.js",
+      "filePath": "legacy-step2-backup/admin/menus/detail.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/detail.js:renderDetail",
+      "type": "function",
+      "label": "renderDetail",
+      "title": "[레거시] 관리자 메뉴 상세 렌더링 함수",
+      "summary": "레거시 버전. 메뉴 객체를 받아 카테고리명, 가격, 판매 상태, 이미지 경로 등을 포함한 상세 카드 HTML을 content 요소에 삽입하고, 수정 링크 href를 설정한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "render",
+        "admin"
+      ],
+      "sizeLines": 36,
+      "startLine": 16,
+      "endLine": 51,
+      "path": "legacy-step2-backup/admin/menus/detail.js",
+      "parent": "legacy-step2-backup/admin/menus/detail.js",
+      "name": "renderDetail",
+      "filePath": "legacy-step2-backup/admin/menus/detail.js",
+      "complexity": "simple",
+      "lineRange": [
+        16,
+        51
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/edit.js:legacy-step2-backup/admin/menus/edit.js",
+      "type": "file",
+      "label": "legacy-step2-backup/admin/menus/edit.js",
+      "title": "[레거시] 관리자 메뉴 수정 스크립트",
+      "summary": "레거시 백업 파일. 관리자 메뉴 수정 폼을 동적으로 렌더링하고, 폼 제출 시 유효성 검사 후 updateMenu를 호출한다. 폼과 버튼 event-handler를 renderForm 내부에서 바인딩하는 구조이다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "admin",
+        "menu-edit",
+        "form-validation"
+      ],
+      "sizeLines": 130,
+      "path": "legacy-step2-backup/admin/menus/edit.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전",
+      "name": "legacy-step2-backup/admin/menus/edit.js",
+      "filePath": "legacy-step2-backup/admin/menus/edit.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/edit.js:validateMenuForm",
+      "type": "function",
+      "label": "validateMenuForm",
+      "title": "[레거시] 메뉴 폼 유효성 검사 함수 (수정 페이지)",
+      "summary": "레거시 버전. 메뉴명, 카테고리, 가격을 검사하는 create.js의 동일 로직 사본. 오류 메시지를 반환하거나 빈 문자열을 반환한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "form-validation",
+        "utility"
+      ],
+      "sizeLines": 15,
+      "startLine": 6,
+      "endLine": 20,
+      "path": "legacy-step2-backup/admin/menus/edit.js",
+      "parent": "legacy-step2-backup/admin/menus/edit.js",
+      "name": "validateMenuForm",
+      "filePath": "legacy-step2-backup/admin/menus/edit.js",
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        20
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/edit.js:renderForm",
+      "type": "function",
+      "label": "renderForm",
+      "title": "[레거시] 메뉴 수정 폼 렌더링 및 이벤트 바인딩 함수",
+      "summary": "레거시 버전. 메뉴 객체를 받아 수정 폼 HTML을 동적으로 생성하고, 폼 submit 및 취소 버튼 이벤트를 내부에서 바인딩한다. 저장 시 updateMenu 호출 후 상세 페이지로 이동한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "render",
+        "form-validation",
+        "event-handler"
+      ],
+      "sizeLines": 91,
+      "startLine": 32,
+      "endLine": 122,
+      "path": "legacy-step2-backup/admin/menus/edit.js",
+      "parent": "legacy-step2-backup/admin/menus/edit.js",
+      "name": "renderForm",
+      "filePath": "legacy-step2-backup/admin/menus/edit.js",
+      "complexity": "moderate",
+      "lineRange": [
+        32,
+        122
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/list.js:legacy-step2-backup/admin/menus/list.js",
+      "type": "file",
+      "label": "legacy-step2-backup/admin/menus/list.js",
+      "title": "[레거시] 관리자 메뉴 목록 스크립트",
+      "summary": "레거시 백업 파일. 관리자용 메뉴 목록을 카테고리 필터와 키워드 검색으로 조회하고, 각 메뉴 카드에 수정/품절 토글/삭제 기능을 제공한다. event delegation 방식으로 목록 클릭을 처리한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "admin",
+        "menu-list",
+        "event-handler"
+      ],
+      "sizeLines": 125,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전",
+      "name": "legacy-step2-backup/admin/menus/list.js",
+      "filePath": "legacy-step2-backup/admin/menus/list.js",
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/list.js:getFilteredMenus",
+      "type": "function",
+      "label": "getFilteredMenus",
+      "title": "[레거시] 필터링된 메뉴 목록 반환 함수",
+      "summary": "레거시 버전. 카테고리 필터와 키워드(이름+설명 대상 소문자 검색)를 동시에 적용하여 조건에 맞는 메뉴 배열을 반환한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "utility",
+        "filter"
+      ],
+      "sizeLines": 11,
+      "startLine": 16,
+      "endLine": 26,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "parent": "legacy-step2-backup/admin/menus/list.js",
+      "name": "getFilteredMenus",
+      "filePath": "legacy-step2-backup/admin/menus/list.js",
+      "complexity": "simple",
+      "lineRange": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/list.js:renderList",
+      "type": "function",
+      "label": "renderList",
+      "title": "[레거시] 관리자 메뉴 목록 렌더링 함수",
+      "summary": "레거시 버전. 필터링된 메뉴를 카드 형태로 렌더링하며, 각 카드에 상세 보기, 수정, 품절 토글, 삭제 버튼을 포함한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "render",
+        "admin"
+      ],
+      "sizeLines": 52,
+      "startLine": 35,
+      "endLine": 86,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "parent": "legacy-step2-backup/admin/menus/list.js",
+      "name": "renderList",
+      "filePath": "legacy-step2-backup/admin/menus/list.js",
+      "complexity": "moderate",
+      "lineRange": [
+        35,
+        86
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/list.js:handleListClick",
+      "type": "function",
+      "label": "handleListClick",
+      "title": "[레거시] 메뉴 목록 클릭 event-handler",
+      "summary": "레거시 버전. 이벤트 위임으로 data-action 속성을 읽어 'toggle'(품절 토글) 또는 'delete'(확인 후 삭제) 동작을 수행하고 목록을 재렌더링한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "event-handler",
+        "admin"
+      ],
+      "sizeLines": 26,
+      "startLine": 88,
+      "endLine": 113,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "parent": "legacy-step2-backup/admin/menus/list.js",
+      "name": "handleListClick",
+      "filePath": "legacy-step2-backup/admin/menus/list.js",
+      "complexity": "simple",
+      "lineRange": [
+        88,
+        113
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/admin/menus/list.js:initializePage",
+      "type": "function",
+      "label": "initializePage",
+      "title": "[레거시] 관리자 메뉴 목록 페이지 초기화 함수",
+      "summary": "레거시 버전. 필터 초기화, 요약, 목록 렌더링을 수행하고 카테고리/키워드 변경 및 목록 클릭 이벤트를 등록한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "entry-point",
+        "init"
+      ],
+      "sizeLines": 9,
+      "startLine": 115,
+      "endLine": 123,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "parent": "legacy-step2-backup/admin/menus/list.js",
+      "name": "initializePage",
+      "filePath": "legacy-step2-backup/admin/menus/list.js",
+      "complexity": "simple",
+      "lineRange": [
+        115,
+        123
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/js/data.js:legacy-step2-backup/js/data.js",
+      "type": "file",
+      "label": "legacy-step2-backup/js/data.js",
+      "title": "[레거시] 데이터 레이어 스크립트",
+      "summary": "레거시 백업 파일. 카페 주문 앱의 전체 데이터 레이어를 담당하는 핵심 utility 파일. 카테고리/메뉴/주문 시드 데이터를 정의하고, localStorage를 통한 CRUD 및 조회 함수 19개를 제공한다. 현재 활성 버전인 frontend/js/data.js의 원형에 해당한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "data-layer",
+        "utility",
+        "localStorage",
+        "CRUD"
+      ],
+      "sizeLines": 307,
+      "path": "legacy-step2-backup/js/data.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전",
+      "name": "legacy-step2-backup/js/data.js",
+      "filePath": "legacy-step2-backup/js/data.js",
+      "complexity": "complex"
+    },
+    {
+      "id": "function:legacy-step2-backup/js/data.js:getAllMenus",
+      "type": "function",
+      "label": "getAllMenus",
+      "title": "[레거시] 전체 메뉴 조회 함수",
+      "summary": "레거시 버전. localStorage에서 메뉴 배열을 파싱하여 반환한다. 데이터가 없거나 파싱 실패 시 시드 데이터로 초기화한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "data-layer",
+        "utility"
+      ],
+      "sizeLines": 21,
+      "startLine": 113,
+      "endLine": 133,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js",
+      "name": "getAllMenus",
+      "filePath": "legacy-step2-backup/js/data.js",
+      "complexity": "simple",
+      "lineRange": [
+        113,
+        133
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/js/data.js:generateMenuId",
+      "type": "function",
+      "label": "generateMenuId",
+      "title": "[레거시] 메뉴 ID 생성 함수",
+      "summary": "레거시 버전. 메뉴명을 slug 형식으로 변환하고 중복 시 숫자 suffix를 붙여 고유 ID를 생성한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "utility",
+        "id-generation"
+      ],
+      "sizeLines": 20,
+      "startLine": 140,
+      "endLine": 159,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js",
+      "name": "generateMenuId",
+      "filePath": "legacy-step2-backup/js/data.js",
+      "complexity": "simple",
+      "lineRange": [
+        140,
+        159
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/js/data.js:createMenu",
+      "type": "function",
+      "label": "createMenu",
+      "title": "[레거시] 메뉴 생성 함수",
+      "summary": "레거시 버전. 새 메뉴 객체를 생성하고 localStorage에 저장한다. ID가 없으면 generateMenuId로 자동 생성한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "data-layer",
+        "CRUD"
+      ],
+      "sizeLines": 16,
+      "startLine": 161,
+      "endLine": 176,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js",
+      "name": "createMenu",
+      "filePath": "legacy-step2-backup/js/data.js",
+      "complexity": "simple",
+      "lineRange": [
+        161,
+        176
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/js/data.js:updateMenu",
+      "type": "function",
+      "label": "updateMenu",
+      "title": "[레거시] 메뉴 수정 함수",
+      "summary": "레거시 버전. 메뉴 ID로 항목을 찾아 입력값으로 병합 업데이트하고 localStorage에 저장한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "data-layer",
+        "CRUD"
+      ],
+      "sizeLines": 18,
+      "startLine": 178,
+      "endLine": 195,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js",
+      "name": "updateMenu",
+      "filePath": "legacy-step2-backup/js/data.js",
+      "complexity": "simple",
+      "lineRange": [
+        178,
+        195
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/js/data.js:deleteMenu",
+      "type": "function",
+      "label": "deleteMenu",
+      "title": "[레거시] 메뉴 삭제 함수",
+      "summary": "레거시 버전. 메뉴 ID에 해당하는 항목을 배열에서 제거하고 localStorage에 저장한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "data-layer",
+        "CRUD"
+      ],
+      "sizeLines": 5,
+      "startLine": 197,
+      "endLine": 201,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js",
+      "name": "deleteMenu",
+      "filePath": "legacy-step2-backup/js/data.js",
+      "complexity": "simple",
+      "lineRange": [
+        197,
+        201
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/js/data.js:getOrders",
+      "type": "function",
+      "label": "getOrders",
+      "title": "[레거시] 전체 주문 조회 함수",
+      "summary": "레거시 버전. 시드 데이터 초기화 후 localStorage에서 주문 배열을 파싱하여 반환한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "data-layer",
+        "utility"
+      ],
+      "sizeLines": 10,
+      "startLine": 262,
+      "endLine": 271,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js",
+      "name": "getOrders",
+      "filePath": "legacy-step2-backup/js/data.js",
+      "complexity": "simple",
+      "lineRange": [
+        262,
+        271
+      ]
+    },
+    {
+      "id": "function:legacy-step2-backup/js/data.js:updateOrderStatus",
+      "type": "function",
+      "label": "updateOrderStatus",
+      "title": "[레거시] 주문 상태 업데이트 함수",
+      "summary": "레거시 버전. 주문 ID로 항목을 찾아 상태를 변경하고 localStorage에 저장한다.",
+      "language": "javascript",
+      "tags": [
+        "legacy",
+        "data-layer",
+        "CRUD"
+      ],
+      "sizeLines": 9,
+      "startLine": 299,
+      "endLine": 307,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js",
+      "name": "updateOrderStatus",
+      "filePath": "legacy-step2-backup/js/data.js",
+      "complexity": "simple",
+      "lineRange": [
+        299,
+        307
+      ]
+    },
+    {
+      "id": "function:README.md:README.md",
+      "type": "file",
+      "label": "README.md",
+      "title": "프로젝트 README",
+      "summary": "프로젝트 루트 README 문서. 프로젝트명(project1)만 기재되어 있으며 실질적인 내용은 거의 없다.",
+      "language": "markdown",
+      "tags": [
+        "docs",
+        "readme"
+      ],
+      "sizeLines": 3,
+      "path": "README.md",
+      "name": "README.md",
+      "filePath": "README.md",
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/index.js",
+      "target": "function:frontend/admin/index.js:renderSummary",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/index.js",
+      "target": "function:frontend/admin/index.js:renderRecentOrders",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/menus/create.js",
+      "target": "function:frontend/admin/menus/create.js:validateMenuForm",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/menus/detail.js",
+      "target": "function:frontend/admin/menus/detail.js:renderDetail",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/menus/edit.js",
+      "target": "function:frontend/admin/menus/edit.js:validateMenuForm",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/menus/edit.js",
+      "target": "function:frontend/admin/menus/edit.js:renderForm",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/menus/list.js",
+      "target": "function:frontend/admin/menus/list.js:getFilteredMenus",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/menus/list.js",
+      "target": "function:frontend/admin/menus/list.js:renderList",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/menus/list.js",
+      "target": "function:frontend/admin/menus/list.js:handleListClick",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/orders/detail.js",
+      "target": "function:frontend/admin/orders/detail.js:renderDetail",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/orders/edit.js",
+      "target": "function:frontend/admin/orders/edit.js:renderStatusActions",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/orders/edit.js",
+      "target": "function:frontend/admin/orders/edit.js:renderEdit",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/orders/list.js",
+      "target": "function:frontend/admin/orders/list.js:getFilteredOrders",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/orders/list.js",
+      "target": "function:frontend/admin/orders/list.js:renderList",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/admin/orders/list.js",
+      "target": "function:frontend/admin/orders/list.js:handleListClick",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/basket/list.js",
+      "target": "function:frontend/basket/list.js:bindHeaderActions",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/basket/list.js",
+      "target": "function:frontend/basket/list.js:buildCartViewModels",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/basket/list.js",
+      "target": "function:frontend/basket/list.js:renderBasketPage",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/basket/list.js",
+      "target": "function:frontend/basket/list.js:renderBasketItem",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/basket/list.js",
+      "target": "function:frontend/basket/list.js:bindBasketEvents",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/basket/list.js",
+      "target": "function:frontend/basket/list.js:handleBasketClick",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/index.js",
+      "target": "function:frontend/index.js:renderFeaturedMenus",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/index.js",
+      "target": "function:frontend/index.js:renderRecommendation",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/index.js",
+      "target": "function:frontend/index.js:bindAddToCartButtons",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/index.js",
+      "target": "function:frontend/index.js:updateCartBadge",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/index.js",
+      "target": "function:frontend/index.js:bindRevealAnimation",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/index.js",
+      "target": "function:frontend/index.js:bindButtonRipple",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/data.js",
+      "target": "function:frontend/js/data.js:getAllMenus",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/data.js",
+      "target": "function:frontend/js/data.js:generateMenuId",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/data.js",
+      "target": "function:frontend/js/data.js:createMenu",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/data.js",
+      "target": "function:frontend/js/data.js:updateMenu",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/data.js",
+      "target": "function:frontend/js/data.js:generateOrderId",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/data.js",
+      "target": "function:frontend/js/data.js:createOrder",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/data.js",
+      "target": "function:frontend/js/data.js:getOrderTotalPrice",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/data.js",
+      "target": "function:frontend/js/data.js:updateOrderStatus",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/utils.js",
+      "target": "function:frontend/js/utils.js:addToCart",
+      "direction": "forward"
+    },
+    {
+      "type": "contains",
+      "source": "file:frontend/js/utils.js",
+      "target": "function:frontend/js/utils.js:updateCartItemQuantity",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "script 태그로 로드",
+      "source": "file:frontend/admin/index.html",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "script 태그로 로드",
+      "source": "file:frontend/admin/index.html",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "script 태그로 로드",
+      "source": "file:frontend/admin/index.html",
+      "target": "file:frontend/admin/index.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "stylesheet 로드",
+      "source": "file:frontend/admin/index.html",
+      "target": "file:frontend/admin/index.css",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "stylesheet 로드",
+      "source": "file:frontend/admin/index.html",
+      "target": "file:frontend/css/variables.css",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "script 태그로 로드",
+      "source": "file:frontend/basket/list.html",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "script 태그로 로드",
+      "source": "file:frontend/basket/list.html",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "script 태그로 로드",
+      "source": "file:frontend/basket/list.html",
+      "target": "file:frontend/basket/list.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "stylesheet 로드",
+      "source": "file:frontend/basket/list.html",
+      "target": "file:frontend/basket/list.css",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "stylesheet 로드",
+      "source": "file:frontend/basket/list.html",
+      "target": "file:frontend/css/variables.css",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "script 태그로 로드",
+      "source": "file:frontend/index.html",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "script 태그로 로드",
+      "source": "file:frontend/index.html",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "script 태그로 로드",
+      "source": "file:frontend/index.html",
+      "target": "file:frontend/index.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "stylesheet 로드",
+      "source": "file:frontend/index.html",
+      "target": "file:frontend/index.css",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "stylesheet 로드",
+      "source": "file:frontend/index.html",
+      "target": "file:frontend/css/variables.css",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getOrders, getAllMenus, getOrderTotalPrice 호출",
+      "source": "file:frontend/admin/index.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "formatPrice, formatDate, getStatusClass, getOrderSummaryText 호출",
+      "source": "file:frontend/admin/index.js",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getCategories, createMenu 호출",
+      "source": "file:frontend/admin/menus/create.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getCategoryById 호출",
+      "source": "file:frontend/admin/menus/detail.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "formatPrice 호출",
+      "source": "file:frontend/admin/menus/detail.js",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getCategories, updateMenu 호출",
+      "source": "file:frontend/admin/menus/edit.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getCategories, getAllMenus, getCategoryById, toggleMenuSoldOut, getMenuById, deleteMenu 호출",
+      "source": "file:frontend/admin/menus/list.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "formatPrice 호출",
+      "source": "file:frontend/admin/menus/list.js",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getMenuById, getOrderTotalPrice 호출",
+      "source": "file:frontend/admin/orders/detail.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "formatPrice, formatDate, getStatusClass 호출",
+      "source": "file:frontend/admin/orders/detail.js",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getOrderById, updateOrderStatus, getOrderTotalPrice, getOrderSummaryText 호출",
+      "source": "file:frontend/admin/orders/edit.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "formatDate, formatPrice, getStatusClass 호출",
+      "source": "file:frontend/admin/orders/edit.js",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getOrders, getOrderById, updateOrderStatus, getOrderTotalPrice, getOrderSummaryText 호출",
+      "source": "file:frontend/admin/orders/list.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "formatDate, formatPrice, getStatusClass 호출",
+      "source": "file:frontend/admin/orders/list.js",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getMenuById, getCategoryById, createOrder 호출",
+      "source": "file:frontend/basket/list.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getCart, clearCart, addToCart, updateCartItemQuantity, removeFromCart, formatPrice 호출",
+      "source": "file:frontend/basket/list.js",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "getAllMenus, getCategoryById 호출",
+      "source": "file:frontend/index.js",
+      "target": "file:frontend/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "uses",
+      "label": "addToCart, getCartTotalCount, formatPrice 호출",
+      "source": "file:frontend/index.js",
+      "target": "file:frontend/js/utils.js",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:frontend/menus/detail.js:init",
+      "target": "function:frontend/menus/detail.js:renderMenuDetail",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:frontend/menus/detail.js:init",
+      "target": "function:frontend/menus/detail.js:updateCartBadge",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:frontend/menus/detail.js:renderMenuDetail",
+      "target": "function:frontend/menus/detail.js:bindQuantityEvents",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:frontend/menus/detail.js:renderMenuDetail",
+      "target": "function:frontend/menus/detail.js:bindAddToCartEvent",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:frontend/menus/detail.js:bindAddToCartEvent",
+      "target": "function:frontend/menus/detail.js:updateCartBadge",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/menus/detail.js:init",
+      "target": "function:frontend/menus/detail.js:frontend/menus/detail.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/menus/detail.js:renderMenuDetail",
+      "target": "function:frontend/menus/detail.js:frontend/menus/detail.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/menus/detail.js:bindQuantityEvents",
+      "target": "function:frontend/menus/detail.js:frontend/menus/detail.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/menus/detail.js:bindAddToCartEvent",
+      "target": "function:frontend/menus/detail.js:frontend/menus/detail.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/menus/detail.js:updateCartBadge",
+      "target": "function:frontend/menus/detail.js:frontend/menus/detail.js",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:frontend/menus/list.js:renderCategoryTabs",
+      "target": "function:frontend/menus/list.js:renderMenuGrid",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/menus/list.js:renderCategoryTabs",
+      "target": "function:frontend/menus/list.js:frontend/menus/list.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/menus/list.js:renderMenuGrid",
+      "target": "function:frontend/menus/list.js:frontend/menus/list.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/my/index.js:renderCartSummary",
+      "target": "function:frontend/my/index.js:frontend/my/index.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/my/index.js:handleInfoClick",
+      "target": "function:frontend/my/index.js:frontend/my/index.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/orders/detail.js:renderOrderDetail",
+      "target": "function:frontend/orders/detail.js:frontend/orders/detail.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:frontend/orders/list.js:renderOrderList",
+      "target": "function:frontend/orders/list.js:frontend/orders/list.js",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/admin/menus/list.js:initializePage",
+      "target": "function:legacy-step2-backup/admin/menus/list.js:renderList",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/admin/menus/list.js:initializePage",
+      "target": "function:legacy-step2-backup/admin/menus/list.js:handleListClick",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/admin/menus/list.js:renderList",
+      "target": "function:legacy-step2-backup/admin/menus/list.js:getFilteredMenus",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/admin/menus/list.js:handleListClick",
+      "target": "function:legacy-step2-backup/admin/menus/list.js:renderList",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/admin/menus/list.js:getFilteredMenus",
+      "target": "function:legacy-step2-backup/admin/menus/list.js:legacy-step2-backup/admin/menus/list.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/admin/menus/list.js:renderList",
+      "target": "function:legacy-step2-backup/admin/menus/list.js:legacy-step2-backup/admin/menus/list.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/admin/menus/list.js:handleListClick",
+      "target": "function:legacy-step2-backup/admin/menus/list.js:legacy-step2-backup/admin/menus/list.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/admin/menus/list.js:initializePage",
+      "target": "function:legacy-step2-backup/admin/menus/list.js:legacy-step2-backup/admin/menus/list.js",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/admin/menus/edit.js:renderForm",
+      "target": "function:legacy-step2-backup/admin/menus/edit.js:validateMenuForm",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/admin/menus/edit.js:validateMenuForm",
+      "target": "function:legacy-step2-backup/admin/menus/edit.js:legacy-step2-backup/admin/menus/edit.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/admin/menus/edit.js:renderForm",
+      "target": "function:legacy-step2-backup/admin/menus/edit.js:legacy-step2-backup/admin/menus/edit.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/admin/menus/create.js:validateMenuForm",
+      "target": "function:legacy-step2-backup/admin/menus/create.js:legacy-step2-backup/admin/menus/create.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/admin/menus/detail.js:renderDetail",
+      "target": "function:legacy-step2-backup/admin/menus/detail.js:legacy-step2-backup/admin/menus/detail.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/js/data.js:getAllMenus",
+      "target": "function:legacy-step2-backup/js/data.js:legacy-step2-backup/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/js/data.js:generateMenuId",
+      "target": "function:legacy-step2-backup/js/data.js:legacy-step2-backup/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/js/data.js:createMenu",
+      "target": "function:legacy-step2-backup/js/data.js:legacy-step2-backup/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/js/data.js:updateMenu",
+      "target": "function:legacy-step2-backup/js/data.js:legacy-step2-backup/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/js/data.js:deleteMenu",
+      "target": "function:legacy-step2-backup/js/data.js:legacy-step2-backup/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/js/data.js:getOrders",
+      "target": "function:legacy-step2-backup/js/data.js:legacy-step2-backup/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "defined_in",
+      "label": "defined in",
+      "source": "function:legacy-step2-backup/js/data.js:updateOrderStatus",
+      "target": "function:legacy-step2-backup/js/data.js:legacy-step2-backup/js/data.js",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/js/data.js:createMenu",
+      "target": "function:legacy-step2-backup/js/data.js:generateMenuId",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/js/data.js:createMenu",
+      "target": "function:legacy-step2-backup/js/data.js:getAllMenus",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/js/data.js:updateMenu",
+      "target": "function:legacy-step2-backup/js/data.js:getAllMenus",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/js/data.js:deleteMenu",
+      "target": "function:legacy-step2-backup/js/data.js:getAllMenus",
+      "direction": "forward"
+    },
+    {
+      "type": "calls",
+      "label": "calls",
+      "source": "function:legacy-step2-backup/js/data.js:updateOrderStatus",
+      "target": "function:legacy-step2-backup/js/data.js:getOrders",
+      "direction": "forward"
+    }
+  ]
+}

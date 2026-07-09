@@ -1,0 +1,150 @@
+{
+  "batchIndex": 1,
+  "nodes": [
+    {
+      "id": "frontend/admin/menus/create.css",
+      "type": "file",
+      "label": "create.css",
+      "path": "frontend/admin/menus/create.css",
+      "language": "css",
+      "summary": "관리자 메뉴 등록 폼 페이지의 스타일을 정의합니다. glass-morphism 기반의 form-card, 반응형 field-grid, 입력 필드, 체크박스, 액션 버튼(primary/secondary) 스타일을 포함하며 모바일 breakpoint(767px)에서 세로 배치로 전환됩니다.",
+      "tags": ["css", "admin", "form", "글래스모피즘", "반응형", "메뉴-등록"],
+      "sizeLines": 119,
+      "nonEmptyLines": 101,
+      "metrics": {},
+      "exports": [],
+      "imports": [],
+      "languageNotes": "CSS 커스텀 프로퍼티(design token)를 전적으로 활용하며, backdrop-filter를 통한 glass-morphism 효과와 radial-gradient 배경을 적용합니다."
+    },
+    {
+      "id": "frontend/admin/menus/create.html",
+      "type": "file",
+      "label": "create.html",
+      "path": "frontend/admin/menus/create.html",
+      "language": "html",
+      "summary": "관리자용 새 메뉴 등록 페이지입니다. 메뉴명, 카테고리(동적 select), 가격, 이미지 경로, 설명, 품절 여부 체크박스를 포함한 등록 폼을 제공합니다. data.js, utils.js, create.js를 로드하며 list.html로의 네비게이션 링크를 포함합니다.",
+      "tags": ["html", "admin", "entry-point", "메뉴-등록", "폼", "CRUD"],
+      "sizeLines": 68,
+      "nonEmptyLines": 59,
+      "metrics": {},
+      "exports": [],
+      "imports": [
+        "../../css/variables.css",
+        "../../js/data.js",
+        "../../js/utils.js",
+        "./create.js"
+      ],
+      "languageNotes": "lang=\"ko\" 설정, aria-live 속성을 가진 메시지 영역을 포함하여 접근성을 고려합니다. categorySelect는 JS에 의해 동적으로 채워집니다."
+    },
+    {
+      "id": "frontend/admin/menus/detail.css",
+      "type": "file",
+      "label": "detail.css",
+      "path": "frontend/admin/menus/detail.css",
+      "language": "css",
+      "summary": "관리자 메뉴 상세 보기 페이지의 스타일을 정의합니다. detail-card의 glass-morphism 레이아웃, 카테고리·품절 badge, 가격 표시, info-box 그리드, 빈 상태(empty-card)를 포함하며 모바일에서 세로 레이아웃으로 전환됩니다.",
+      "tags": ["css", "admin", "detail", "badge", "글래스모피즘", "반응형", "메뉴-상세"],
+      "sizeLines": 135,
+      "nonEmptyLines": 114,
+      "metrics": {},
+      "exports": [],
+      "imports": [],
+      "languageNotes": "linear-gradient 배경, badge(category/soldout) 색상 구분, info-box 그리드 레이아웃을 통해 메뉴 상세 정보를 시각적으로 구조화합니다."
+    },
+    {
+      "id": "frontend/admin/menus/detail.html",
+      "type": "file",
+      "label": "detail.html",
+      "path": "frontend/admin/menus/detail.html",
+      "language": "html",
+      "summary": "관리자용 메뉴 상세 보기 페이지입니다. 콘텐츠 영역(#content)은 detail.js가 동적으로 렌더링하며, list.html로 돌아가는 링크와 edit.html로 이동하는 수정 링크(#editLink)를 헤더에 포함합니다.",
+      "tags": ["html", "admin", "entry-point", "메뉴-상세", "동적-렌더링", "CRUD"],
+      "sizeLines": 24,
+      "nonEmptyLines": 22,
+      "metrics": {},
+      "exports": [],
+      "imports": [
+        "../../css/variables.css",
+        "./detail.css",
+        "../../js/data.js",
+        "../../js/utils.js",
+        "./detail.js"
+      ],
+      "languageNotes": "메인 콘텐츠가 전적으로 JS(detail.js)에 의해 동적으로 삽입되는 shell 패턴을 따릅니다. editLink의 href는 JS에서 쿼리스트링과 함께 갱신됩니다."
+    },
+    {
+      "id": "frontend/admin/menus/edit.css",
+      "type": "file",
+      "label": "edit.css",
+      "path": "frontend/admin/menus/edit.css",
+      "language": "css",
+      "summary": "관리자 메뉴 수정 폼 페이지의 스타일을 정의합니다. create.css와 구조적으로 유사하나, readonly-box(읽기 전용 필드 표시), header-actions 그룹, 빈 상태(empty-card)가 추가되어 있습니다.",
+      "tags": ["css", "admin", "form", "수정", "readonly", "글래스모피즘", "반응형", "메뉴-수정"],
+      "sizeLines": 138,
+      "nonEmptyLines": 117,
+      "metrics": {},
+      "exports": [],
+      "imports": [],
+      "languageNotes": "radial-gradient(top left) 배경을 사용하여 create.css와 시각적으로 차별화합니다. readonly-box는 점선 테두리와 반투명 배경으로 편집 불가 필드임을 표시합니다."
+    },
+    {
+      "id": "frontend/admin/menus/edit.html",
+      "type": "file",
+      "label": "edit.html",
+      "path": "frontend/admin/menus/edit.html",
+      "language": "html",
+      "summary": "관리자용 메뉴 수정 페이지입니다. 폼 콘텐츠는 edit.js가 동적으로 렌더링하며, 헤더에는 상세 보기(#detailLink)와 목록(list.html) 이동 링크를 포함합니다.",
+      "tags": ["html", "admin", "entry-point", "메뉴-수정", "동적-렌더링", "CRUD"],
+      "sizeLines": 30,
+      "nonEmptyLines": 28,
+      "metrics": {},
+      "exports": [],
+      "imports": [
+        "../../css/variables.css",
+        "./edit.css",
+        "../../js/data.js",
+        "../../js/utils.js",
+        "./edit.js"
+      ],
+      "languageNotes": "detail.html과 동일한 shell 패턴 사용. detailLink의 href는 JS에서 메뉴 ID 쿼리스트링과 함께 동적으로 설정됩니다."
+    },
+    {
+      "id": "frontend/admin/menus/list.css",
+      "type": "file",
+      "label": "list.css",
+      "path": "frontend/admin/menus/list.css",
+      "language": "css",
+      "summary": "관리자 메뉴 목록 페이지의 스타일을 정의합니다. topbar, 요약 통계 카드(summary-card), 필터 패널, 메뉴 카드 목록(menu-card), badge, 가격, action-button(수정/삭제/품절 토글), 빈 상태(empty-state) 등 목록 관리에 필요한 전체 UI 컴포넌트를 포함합니다.",
+      "tags": ["css", "admin", "list", "필터", "카드", "badge", "글래스모피즘", "반응형", "메뉴-관리"],
+      "sizeLines": 259,
+      "nonEmptyLines": 218,
+      "metrics": {},
+      "exports": [],
+      "imports": [],
+      "languageNotes": "이 배치에서 가장 큰 CSS 파일(259줄)로, summary-grid, filter-panel, menu-list 등 복합적인 레이아웃 구조를 포함합니다. hover 시 translateY(-1px) 애니메이션, 모바일에서 action-group의 flex:1 확장을 적용합니다."
+    },
+    {
+      "id": "frontend/admin/menus/list.html",
+      "type": "file",
+      "label": "list.html",
+      "path": "frontend/admin/menus/list.html",
+      "language": "html",
+      "summary": "관리자용 메뉴 목록 관리 페이지입니다. 전체/판매중/품절 건수를 표시하는 통계 카드, 카테고리 필터와 키워드 검색 패널, 동적으로 렌더링되는 메뉴 목록(#menuList)을 포함합니다. create.html로의 새 메뉴 등록 링크를 제공합니다.",
+      "tags": ["html", "admin", "entry-point", "메뉴-관리", "목록", "필터", "검색", "CRUD"],
+      "sizeLines": 62,
+      "nonEmptyLines": 57,
+      "metrics": {},
+      "exports": [],
+      "imports": [
+        "../../css/variables.css",
+        "./list.css",
+        "../../js/data.js",
+        "../../js/utils.js",
+        "./list.js"
+      ],
+      "languageNotes": "summary-card의 totalCount, activeCount, soldOutCount와 menuList는 list.js에 의해 동적으로 업데이트됩니다. glass CSS 클래스를 topbar와 summary-card에 적용합니다."
+    }
+  ],
+  "edges": [],
+  "neighborMap": {}
+}

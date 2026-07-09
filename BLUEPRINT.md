@@ -211,3 +211,4 @@ project1/
 - [x] `frontend/index.html` — Header(Sticky+Blur, Menu/About/Store/Event), Hero, Quick Menu, Popular Menu, Today's Recommendation, About Cafe, Review, Instagram Gallery, Footer 신규 구성
 - [x] `frontend/index.css` — 신규 섹션 스타일, hover/스크롤 reveal/버튼 리플 애니메이션, 반응형(Desktop/Tablet/Mobile)
 - [x] `frontend/index.js` — Popular Menu 카드(별점/카테고리/Add to Cart), Today's Recommendation·Instagram Gallery 렌더링, 헤더 스크롤 효과, 스크롤 reveal, 리플 이벤트 바인딩
+

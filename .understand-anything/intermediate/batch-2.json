@@ -1,0 +1,78 @@
+{
+  "batchIndex": 2,
+  "nodes": [
+    {
+      "id": "frontend/admin/orders/detail.css",
+      "type": "file",
+      "label": "detail.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 165,
+      "nonEmptyLines": 139,
+      "summary": "관리자 주문 상세 페이지의 스타일시트. 유리 형태(glass morphism)의 detail-card, 주문 상태 배지(status-received/preparing/done), 주문 항목 목록(item-row), 합계 행(total-row) 등의 레이아웃과 색상을 정의하며 767px 이하의 반응형 레이아웃도 포함한다.",
+      "tags": ["css", "admin", "orders", "detail", "glass-morphism", "responsive", "status-badge"],
+      "filePath": "frontend/admin/orders/detail.css"
+    },
+    {
+      "id": "frontend/admin/orders/detail.html",
+      "type": "file",
+      "label": "detail.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 24,
+      "nonEmptyLines": 22,
+      "summary": "관리자 주문 상세 페이지의 HTML 진입점(entry-point). variables.css와 detail.css를 로드하고, 주문 목록으로 돌아가는 링크와 상태 수정 링크(editLink)를 포함한 헤더, 동적 콘텐츠를 위한 빈 main#content 요소를 제공한다. data.js, utils.js, detail.js를 순서대로 로드한다.",
+      "tags": ["html", "admin", "orders", "detail", "entry-point", "spa-shell"],
+      "filePath": "frontend/admin/orders/detail.html"
+    },
+    {
+      "id": "frontend/admin/orders/edit.css",
+      "type": "file",
+      "label": "edit.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 136,
+      "nonEmptyLines": 115,
+      "summary": "관리자 주문 상태 수정 페이지의 스타일시트. glass morphism 기반의 edit-card, 주문 상태 배지(status-received/preparing/done), 상태 변경 버튼 그룹(status-actions/status-button)의 활성화(active) 상태 강조, 767px 이하 반응형 레이아웃을 정의한다.",
+      "tags": ["css", "admin", "orders", "edit", "glass-morphism", "responsive", "status-button"],
+      "filePath": "frontend/admin/orders/edit.css"
+    },
+    {
+      "id": "frontend/admin/orders/edit.html",
+      "type": "file",
+      "label": "edit.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 21,
+      "summary": "관리자 주문 상태 수정 페이지의 HTML 진입점(entry-point). variables.css와 edit.css를 로드하고, 주문 상세 페이지로 돌아가는 링크(backLink)가 있는 헤더와 동적 콘텐츠를 위한 빈 main#content 요소를 제공한다. data.js, utils.js, edit.js를 순서대로 로드한다.",
+      "tags": ["html", "admin", "orders", "edit", "entry-point", "spa-shell"],
+      "filePath": "frontend/admin/orders/edit.html"
+    },
+    {
+      "id": "frontend/admin/orders/list.css",
+      "type": "file",
+      "label": "list.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 240,
+      "nonEmptyLines": 203,
+      "summary": "관리자 주문 목록 페이지의 스타일시트. topbar, 통계 요약 카드(summary-card/summary-grid), 필터 패널(filter-panel), 주문 카드(order-card) 레이아웃을 정의하며, 주문 상태 배지(status-received/preparing/done), 액션 버튼(action-button), 빈 상태 표시(empty-state)를 포함한다. 767px 이하에서 컬럼을 세로 정렬로 전환하는 반응형 규칙도 포함한다.",
+      "tags": ["css", "admin", "orders", "list", "glass-morphism", "responsive", "filter", "summary-card"],
+      "filePath": "frontend/admin/orders/list.css"
+    },
+    {
+      "id": "frontend/admin/orders/list.html",
+      "type": "file",
+      "label": "list.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 71,
+      "nonEmptyLines": 66,
+      "summary": "관리자 주문 관리 목록 페이지의 HTML 진입점(entry-point). 전체/주문접수/준비중/완료 건수를 표시하는 통계 요약 섹션(summary-grid), 상태 필터(statusFilter) 및 키워드 검색(keywordInput)을 포함한 필터 패널, 동적 주문 목록(orderList)을 렌더링하는 영역을 제공한다. data.js, utils.js, list.js를 순서대로 로드한다.",
+      "tags": ["html", "admin", "orders", "list", "entry-point", "filter", "search", "summary"],
+      "filePath": "frontend/admin/orders/list.html"
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,62 @@
+{
+  "batchIndex": 4,
+  "nodes": [
+    {
+      "id": "frontend/menus/detail.css",
+      "type": "file",
+      "label": "detail.css",
+      "path": "frontend/menus/detail.css",
+      "language": "css",
+      "summary": "메뉴 상세 페이지의 전체 스타일을 정의하는 CSS 파일. 상단 고정 헤더(page-header), 장바구니 뱃지(cart-badge), 메뉴 이미지·카테고리·이름·가격·설명·품절 표시 등 메뉴 상세 정보 영역, 수량 조절 스텝퍼(quantity-stepper), 하단 고정 액션 바(action-bar)와 장바구니 담기 버튼(add-to-cart-btn)으로 구성되어 있으며 CSS 변수 기반의 디자인 토큰을 전면 활용한다.",
+      "tags": ["css", "메뉴상세", "스타일", "sticky-header", "action-bar", "quantity-stepper", "cart-badge"],
+      "metrics": {
+        "totalLines": 201,
+        "nonEmptyLines": 176
+      },
+      "languageNotes": "CSS 변수(--color-primary, --space-md 등)를 통해 디자인 시스템과 연동되며, .glass 유틸리티 클래스는 외부 variables.css에서 제공됨"
+    },
+    {
+      "id": "frontend/menus/detail.html",
+      "type": "file",
+      "label": "detail.html",
+      "path": "frontend/menus/detail.html",
+      "language": "html",
+      "summary": "메뉴 상세 페이지의 HTML 구조 파일. 상단 헤더에 목록으로 돌아가는 뒤로가기 링크와 장바구니 뱃지 아이콘을 포함하며, 메인 영역(#menuDetail)은 detail.js가 동적으로 렌더링한다. variables.css와 detail.css를 로드하고 data.js·utils.js·detail.js 스크립트에 의존한다.",
+      "tags": ["html", "메뉴상세", "페이지", "동적렌더링", "장바구니"],
+      "metrics": {
+        "totalLines": 26,
+        "nonEmptyLines": 24
+      },
+      "languageNotes": "lang=\"ko\" 설정, #menuDetail 컨테이너는 JS로 채워짐. detail.js, data.js, utils.js 스크립트에 의존"
+    },
+    {
+      "id": "frontend/menus/list.css",
+      "type": "file",
+      "label": "list.css",
+      "path": "frontend/menus/list.css",
+      "language": "css",
+      "summary": "메뉴 목록 페이지의 스타일을 정의하는 CSS 파일. 상단 고정 헤더, 장바구니 뱃지, 수평 스크롤 가능한 카테고리 탭(category-tabs), 반응형 메뉴 그리드(menu-grid, 1→2→3열), 메뉴 카드(이미지·본문·이름·설명·가격), 품절 상태 오버레이(sold-out-badge) 및 빈 상태(empty-state) 스타일을 포함하며 CSS 변수와 미디어 쿼리를 활용한다.",
+      "tags": ["css", "메뉴목록", "스타일", "반응형", "grid", "category-tabs", "menu-card"],
+      "metrics": {
+        "totalLines": 187,
+        "nonEmptyLines": 164
+      },
+      "languageNotes": "640px·960px 브레이크포인트 미디어 쿼리로 반응형 그리드를 구현. CSS 변수 기반 디자인 토큰 활용"
+    },
+    {
+      "id": "frontend/menus/list.html",
+      "type": "file",
+      "label": "list.html",
+      "path": "frontend/menus/list.html",
+      "language": "html",
+      "summary": "메뉴 목록 페이지의 HTML 구조 파일. 헤더에 홈으로 돌아가는 링크와 장바구니 뱃지가 있으며, 메인 영역에 카테고리 탭(#categoryTabs)과 메뉴 그리드(#menuGrid) 컨테이너를 포함한다. list.js가 카테고리와 메뉴 카드를 동적으로 렌더링하며, variables.css·list.css·data.js·utils.js·list.js에 의존한다.",
+      "tags": ["html", "메뉴목록", "페이지", "카테고리탭", "동적렌더링"],
+      "metrics": {
+        "totalLines": 29,
+        "nonEmptyLines": 27
+      },
+      "languageNotes": "lang=\"ko\" 설정. #categoryTabs, #menuGrid, #cartBadge 요소를 list.js가 동적 조작함"
+    }
+  ],
+  "edges": []
+}

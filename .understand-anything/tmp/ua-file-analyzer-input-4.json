@@ -1,0 +1,15 @@
+{
+  "projectRoot": "C:/Users/Y/workspace/etc/project1",
+  "batchFiles": [
+    {"path": "frontend/menus/detail.css", "language": "css", "sizeLines": 201, "fileCategory": "markup"},
+    {"path": "frontend/menus/detail.html", "language": "html", "sizeLines": 26, "fileCategory": "markup"},
+    {"path": "frontend/menus/list.css", "language": "css", "sizeLines": 187, "fileCategory": "markup"},
+    {"path": "frontend/menus/list.html", "language": "html", "sizeLines": 29, "fileCategory": "markup"}
+  ],
+  "batchImportData": {
+    "frontend/menus/detail.css": [],
+    "frontend/menus/detail.html": [],
+    "frontend/menus/list.css": [],
+    "frontend/menus/list.html": []
+  }
+}

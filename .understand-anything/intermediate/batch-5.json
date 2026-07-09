@@ -1,0 +1,57 @@
+{
+  "nodes": [
+    {
+      "id": "frontend/orders/detail.css",
+      "type": "file",
+      "label": "detail.css",
+      "path": "frontend/orders/detail.css",
+      "language": "css",
+      "summary": "주문 상세 페이지의 스타일 시트. 상단 sticky 헤더(.page-header), 아이콘 버튼(.icon-btn), 장바구니 뱃지(.cart-badge)를 정의하고, 주문 ID·날짜·아이템 행·소계·합계를 표시하는 주문 상세 레이아웃(.order-detail-top, .order-item-list, .order-total-row)과 주문 상태 배지(.order-status: status-received/preparing/done)의 색상 변형을 포함합니다.",
+      "tags": ["css", "orders", "detail", "layout", "status-badge", "sticky-header"],
+      "sizeLines": 161,
+      "nonEmptyLines": 138,
+      "exports": [],
+      "imports": []
+    },
+    {
+      "id": "frontend/orders/detail.html",
+      "type": "file",
+      "label": "detail.html",
+      "path": "frontend/orders/detail.html",
+      "language": "html",
+      "summary": "주문 상세 페이지의 HTML 진입점. glass 스타일 sticky 헤더에 목록으로 돌아가는 뒤로가기 버튼과 장바구니 링크(뱃지 포함)를 배치하고, #orderDetail 컨테이너에 JavaScript(detail.js)가 동적으로 주문 내용을 렌더링합니다. variables.css, detail.css, data.js, utils.js를 로드합니다.",
+      "tags": ["html", "orders", "detail", "page", "entry-point"],
+      "sizeLines": 26,
+      "nonEmptyLines": 24,
+      "exports": [],
+      "imports": []
+    },
+    {
+      "id": "frontend/orders/list.css",
+      "type": "file",
+      "label": "list.css",
+      "path": "frontend/orders/list.css",
+      "language": "css",
+      "summary": "주문 내역 목록 페이지의 스타일 시트. sticky 헤더(.page-header)와 장바구니 뱃지(.cart-badge)를 정의하며, 주문 카드(.order-card) 레이아웃과 hover 시 위로 이동하는 애니메이션 효과를 포함합니다. 주문 상태 뱃지(.order-status: status-received/preparing/done) 색상 변형, 카드 상단/하단 정보 행(.order-card-top, .order-card-bottom), 빈 상태 메시지(.empty-state)를 정의합니다.",
+      "tags": ["css", "orders", "list", "card", "layout", "status-badge", "sticky-header"],
+      "sizeLines": 146,
+      "nonEmptyLines": 126,
+      "exports": [],
+      "imports": []
+    },
+    {
+      "id": "frontend/orders/list.html",
+      "type": "file",
+      "label": "list.html",
+      "path": "frontend/orders/list.html",
+      "language": "html",
+      "summary": "주문 내역 목록 페이지의 HTML 진입점. glass 스타일 sticky 헤더에 홈으로 돌아가는 뒤로가기 버튼과 장바구니 링크(뱃지 포함)를 배치하고, #orderList 컨테이너에 JavaScript(list.js)가 동적으로 주문 카드를 렌더링합니다. variables.css, list.css, data.js, utils.js를 로드합니다.",
+      "tags": ["html", "orders", "list", "page", "entry-point"],
+      "sizeLines": 28,
+      "nonEmptyLines": 26,
+      "exports": [],
+      "imports": []
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,13 @@
+{
+  "projectRoot": "C:/Users/Y/workspace/etc/project1",
+  "batchFiles": [
+    {"path": "frontend/auth/auth.css", "language": "css", "sizeLines": 131, "fileCategory": "markup"},
+    {"path": "frontend/auth/login.html", "language": "html", "sizeLines": 52, "fileCategory": "markup"},
+    {"path": "frontend/auth/signup.html", "language": "html", "sizeLines": 55, "fileCategory": "markup"}
+  ],
+  "batchImportData": {
+    "frontend/auth/auth.css": [],
+    "frontend/auth/login.html": [],
+    "frontend/auth/signup.html": []
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "projectRoot": "C:/Users/Y/workspace/etc/project1",
+  "batchFiles": [
+    {"path": "frontend/admin/orders/detail.css", "language": "css", "sizeLines": 165, "fileCategory": "markup"},
+    {"path": "frontend/admin/orders/detail.html", "language": "html", "sizeLines": 24, "fileCategory": "markup"},
+    {"path": "frontend/admin/orders/edit.css", "language": "css", "sizeLines": 136, "fileCategory": "markup"},
+    {"path": "frontend/admin/orders/edit.html", "language": "html", "sizeLines": 23, "fileCategory": "markup"},
+    {"path": "frontend/admin/orders/list.css", "language": "css", "sizeLines": 240, "fileCategory": "markup"},
+    {"path": "frontend/admin/orders/list.html", "language": "html", "sizeLines": 71, "fileCategory": "markup"}
+  ],
+  "batchImportData": {
+    "frontend/admin/orders/detail.css": [],
+    "frontend/admin/orders/detail.html": [],
+    "frontend/admin/orders/edit.css": [],
+    "frontend/admin/orders/edit.html": [],
+    "frontend/admin/orders/list.css": [],
+    "frontend/admin/orders/list.html": []
+  }
+}

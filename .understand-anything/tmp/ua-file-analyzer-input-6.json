@@ -1,0 +1,23 @@
+{
+  "projectRoot": "C:/Users/Y/workspace/etc/project1",
+  "batchFiles": [
+    {"path": "legacy-step2-backup/admin/menus/create.css", "language": "css", "sizeLines": 119, "fileCategory": "markup"},
+    {"path": "legacy-step2-backup/admin/menus/create.html", "language": "html", "sizeLines": 68, "fileCategory": "markup"},
+    {"path": "legacy-step2-backup/admin/menus/detail.css", "language": "css", "sizeLines": 135, "fileCategory": "markup"},
+    {"path": "legacy-step2-backup/admin/menus/detail.html", "language": "html", "sizeLines": 24, "fileCategory": "markup"},
+    {"path": "legacy-step2-backup/admin/menus/edit.css", "language": "css", "sizeLines": 138, "fileCategory": "markup"},
+    {"path": "legacy-step2-backup/admin/menus/edit.html", "language": "html", "sizeLines": 30, "fileCategory": "markup"},
+    {"path": "legacy-step2-backup/admin/menus/list.css", "language": "css", "sizeLines": 259, "fileCategory": "markup"},
+    {"path": "legacy-step2-backup/admin/menus/list.html", "language": "html", "sizeLines": 62, "fileCategory": "markup"}
+  ],
+  "batchImportData": {
+    "legacy-step2-backup/admin/menus/create.css": [],
+    "legacy-step2-backup/admin/menus/create.html": [],
+    "legacy-step2-backup/admin/menus/detail.css": [],
+    "legacy-step2-backup/admin/menus/detail.html": [],
+    "legacy-step2-backup/admin/menus/edit.css": [],
+    "legacy-step2-backup/admin/menus/edit.html": [],
+    "legacy-step2-backup/admin/menus/list.css": [],
+    "legacy-step2-backup/admin/menus/list.html": []
+  }
+}

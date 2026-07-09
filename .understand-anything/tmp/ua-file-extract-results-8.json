@@ -1,0 +1,1730 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 13,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "frontend/menus/detail.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 124,
+      "nonEmptyLines": 103,
+      "functions": [
+        {
+          "name": "init",
+          "startLine": 6,
+          "endLine": 13,
+          "params": []
+        },
+        {
+          "name": "renderMenuDetail",
+          "startLine": 16,
+          "endLine": 45,
+          "params": []
+        },
+        {
+          "name": "renderQuantityStepper",
+          "startLine": 47,
+          "endLine": 55,
+          "params": []
+        },
+        {
+          "name": "renderActionBar",
+          "startLine": 57,
+          "endLine": 64,
+          "params": []
+        },
+        {
+          "name": "bindQuantityEvents",
+          "startLine": 67,
+          "endLine": 84,
+          "params": []
+        },
+        {
+          "name": "updateQuantityDisplay",
+          "startLine": 86,
+          "endLine": 90,
+          "params": []
+        },
+        {
+          "name": "bindAddToCartEvent",
+          "startLine": 93,
+          "endLine": 109,
+          "params": []
+        },
+        {
+          "name": "updateCartBadge",
+          "startLine": 112,
+          "endLine": 122,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "init",
+          "callee": "params.get",
+          "lineNumber": 8
+        },
+        {
+          "caller": "init",
+          "callee": "getMenuById",
+          "lineNumber": 9
+        },
+        {
+          "caller": "init",
+          "callee": "renderMenuDetail",
+          "lineNumber": 11
+        },
+        {
+          "caller": "init",
+          "callee": "updateCartBadge",
+          "lineNumber": 12
+        },
+        {
+          "caller": "renderMenuDetail",
+          "callee": "document.getElementById",
+          "lineNumber": 17
+        },
+        {
+          "caller": "renderMenuDetail",
+          "callee": "getCategoryById",
+          "lineNumber": 24
+        },
+        {
+          "caller": "renderMenuDetail",
+          "callee": "formatPrice",
+          "lineNumber": 34
+        },
+        {
+          "caller": "renderMenuDetail",
+          "callee": "renderQuantityStepper",
+          "lineNumber": 36
+        },
+        {
+          "caller": "renderMenuDetail",
+          "callee": "renderActionBar",
+          "lineNumber": 38
+        },
+        {
+          "caller": "renderMenuDetail",
+          "callee": "bindQuantityEvents",
+          "lineNumber": 42
+        },
+        {
+          "caller": "renderMenuDetail",
+          "callee": "bindAddToCartEvent",
+          "lineNumber": 43
+        },
+        {
+          "caller": "renderActionBar",
+          "callee": "formatPrice",
+          "lineNumber": 60
+        },
+        {
+          "caller": "bindQuantityEvents",
+          "callee": "document.getElementById",
+          "lineNumber": 68
+        },
+        {
+          "caller": "bindQuantityEvents",
+          "callee": "document.getElementById",
+          "lineNumber": 69
+        },
+        {
+          "caller": "bindQuantityEvents",
+          "callee": "decreaseBtn.addEventListener",
+          "lineNumber": 73
+        },
+        {
+          "caller": "bindQuantityEvents",
+          "callee": "updateQuantityDisplay",
+          "lineNumber": 76
+        },
+        {
+          "caller": "bindQuantityEvents",
+          "callee": "increaseBtn.addEventListener",
+          "lineNumber": 80
+        },
+        {
+          "caller": "bindQuantityEvents",
+          "callee": "updateQuantityDisplay",
+          "lineNumber": 82
+        },
+        {
+          "caller": "updateQuantityDisplay",
+          "callee": "document.getElementById",
+          "lineNumber": 87
+        },
+        {
+          "caller": "updateQuantityDisplay",
+          "callee": "document.getElementById",
+          "lineNumber": 88
+        },
+        {
+          "caller": "updateQuantityDisplay",
+          "callee": "document.getElementById",
+          "lineNumber": 89
+        },
+        {
+          "caller": "updateQuantityDisplay",
+          "callee": "formatPrice",
+          "lineNumber": 89
+        },
+        {
+          "caller": "bindAddToCartEvent",
+          "callee": "document.getElementById",
+          "lineNumber": 94
+        },
+        {
+          "caller": "bindAddToCartEvent",
+          "callee": "addToCartBtn.addEventListener",
+          "lineNumber": 96
+        },
+        {
+          "caller": "bindAddToCartEvent",
+          "callee": "addToCart",
+          "lineNumber": 97
+        },
+        {
+          "caller": "bindAddToCartEvent",
+          "callee": "updateCartBadge",
+          "lineNumber": 98
+        },
+        {
+          "caller": "bindAddToCartEvent",
+          "callee": "setTimeout",
+          "lineNumber": 104
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "document.getElementById",
+          "lineNumber": 113
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "getCartTotalCount",
+          "lineNumber": 114
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "String",
+          "lineNumber": 117
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 8,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/menus/list.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 81,
+      "nonEmptyLines": 71,
+      "functions": [
+        {
+          "name": "init",
+          "startLine": 5,
+          "endLine": 9,
+          "params": []
+        },
+        {
+          "name": "renderCategoryTabs",
+          "startLine": 12,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "renderMenuGrid",
+          "startLine": 37,
+          "endLine": 66,
+          "params": []
+        },
+        {
+          "name": "updateCartBadge",
+          "startLine": 69,
+          "endLine": 79,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "init",
+          "callee": "renderCategoryTabs",
+          "lineNumber": 6
+        },
+        {
+          "caller": "init",
+          "callee": "renderMenuGrid",
+          "lineNumber": 7
+        },
+        {
+          "caller": "init",
+          "callee": "updateCartBadge",
+          "lineNumber": 8
+        },
+        {
+          "caller": "renderCategoryTabs",
+          "callee": "document.getElementById",
+          "lineNumber": 13
+        },
+        {
+          "caller": "renderCategoryTabs",
+          "callee": "allTabs\r\n    .map(\r\n      (category) => `\r\n        <button\r\n          class=\"category-tab${category.id === selectedCategoryId ? \" active\" : \"\"}\"\r\n          data-category-id=\"${category.id}\"\r\n        >${category.name}</button>\r\n      `\r\n    )\r\n    .join",
+          "lineNumber": 16
+        },
+        {
+          "caller": "renderCategoryTabs",
+          "callee": "allTabs\r\n    .map",
+          "lineNumber": 16
+        },
+        {
+          "caller": "renderCategoryTabs",
+          "callee": "tabsEl.querySelectorAll(\".category-tab\").forEach",
+          "lineNumber": 27
+        },
+        {
+          "caller": "renderCategoryTabs",
+          "callee": "tabsEl.querySelectorAll",
+          "lineNumber": 27
+        },
+        {
+          "caller": "renderCategoryTabs",
+          "callee": "tab.addEventListener",
+          "lineNumber": 28
+        },
+        {
+          "caller": "renderCategoryTabs",
+          "callee": "renderCategoryTabs",
+          "lineNumber": 30
+        },
+        {
+          "caller": "renderCategoryTabs",
+          "callee": "renderMenuGrid",
+          "lineNumber": 31
+        },
+        {
+          "caller": "renderMenuGrid",
+          "callee": "document.getElementById",
+          "lineNumber": 38
+        },
+        {
+          "caller": "renderMenuGrid",
+          "callee": "getMenusByCategory",
+          "lineNumber": 39
+        },
+        {
+          "caller": "renderMenuGrid",
+          "callee": "menus\r\n    .map(\r\n      (menu) => `\r\n        <a\r\n          class=\"menu-card glass${menu.soldOut ? \" sold-out\" : \"\"}\"\r\n          href=\"detail.html?id=${encodeURIComponent(menu.id)}\"\r\n        >\r\n          ${menu.soldOut ? `<span class=\"sold-out-badge\">품절</span>` : \"\"}\r\n          <div class=\"menu-card-image\">\r\n            <img src=\"../${menu.image}\" alt=\"${menu.name}\" loading=\"lazy\" />\r\n          </div>\r\n          <div class=\"menu-card-body\">\r\n            <span class=\"menu-card-name\">${menu.name}</span>\r\n            <p class=\"menu-card-desc\">${menu.description}</p>\r\n            <span class=\"menu-card-price\">${formatPrice(menu.price)}</span>\r\n          </div>\r\n        </a>\r\n      `\r\n    )\r\n    .join",
+          "lineNumber": 46
+        },
+        {
+          "caller": "renderMenuGrid",
+          "callee": "menus\r\n    .map",
+          "lineNumber": 46
+        },
+        {
+          "caller": "renderMenuGrid",
+          "callee": "encodeURIComponent",
+          "lineNumber": 51
+        },
+        {
+          "caller": "renderMenuGrid",
+          "callee": "formatPrice",
+          "lineNumber": 60
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "document.getElementById",
+          "lineNumber": 70
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "getCartTotalCount",
+          "lineNumber": 71
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "String",
+          "lineNumber": 74
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/my/index.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 167,
+      "nonEmptyLines": 144,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/my/index.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 84,
+      "nonEmptyLines": 79,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/my/index.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 48,
+      "nonEmptyLines": 40,
+      "functions": [
+        {
+          "name": "renderCartSummary",
+          "startLine": 8,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "updateCartBadge",
+          "startLine": 17,
+          "endLine": 27,
+          "params": []
+        },
+        {
+          "name": "handleInfoClick",
+          "startLine": 30,
+          "endLine": 38,
+          "params": [
+            "event"
+          ]
+        },
+        {
+          "name": "init",
+          "startLine": 40,
+          "endLine": 46,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderCartSummary",
+          "callee": "getCartTotalCount",
+          "lineNumber": 9
+        },
+        {
+          "caller": "renderCartSummary",
+          "callee": "getCartTotalPrice",
+          "lineNumber": 10
+        },
+        {
+          "caller": "renderCartSummary",
+          "callee": "document.getElementById",
+          "lineNumber": 12
+        },
+        {
+          "caller": "renderCartSummary",
+          "callee": "document.getElementById",
+          "lineNumber": 13
+        },
+        {
+          "caller": "renderCartSummary",
+          "callee": "formatPrice",
+          "lineNumber": 13
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "document.getElementById",
+          "lineNumber": 18
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "getCartTotalCount",
+          "lineNumber": 19
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "String",
+          "lineNumber": 22
+        },
+        {
+          "caller": "handleInfoClick",
+          "callee": "event.target.closest",
+          "lineNumber": 31
+        },
+        {
+          "caller": "handleInfoClick",
+          "callee": "window.alert",
+          "lineNumber": 36
+        },
+        {
+          "caller": "init",
+          "callee": "renderCartSummary",
+          "lineNumber": 41
+        },
+        {
+          "caller": "init",
+          "callee": "updateCartBadge",
+          "lineNumber": 42
+        },
+        {
+          "caller": "init",
+          "callee": "document.querySelectorAll(\"[data-info]\").forEach",
+          "lineNumber": 43
+        },
+        {
+          "caller": "init",
+          "callee": "document.querySelectorAll",
+          "lineNumber": 43
+        },
+        {
+          "caller": "init",
+          "callee": "button.addEventListener",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/orders/detail.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 64,
+      "functions": [
+        {
+          "name": "init",
+          "startLine": 5,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "renderOrderDetail",
+          "startLine": 15,
+          "endLine": 61,
+          "params": []
+        },
+        {
+          "name": "updateCartBadge",
+          "startLine": 64,
+          "endLine": 74,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "init",
+          "callee": "params.get",
+          "lineNumber": 7
+        },
+        {
+          "caller": "init",
+          "callee": "getOrderById",
+          "lineNumber": 8
+        },
+        {
+          "caller": "init",
+          "callee": "renderOrderDetail",
+          "lineNumber": 10
+        },
+        {
+          "caller": "init",
+          "callee": "updateCartBadge",
+          "lineNumber": 11
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "document.getElementById",
+          "lineNumber": 16
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "currentOrder.items\r\n    .map((item) => {\r\n      const menu = getMenuById(item.menuId);\r\n      const name = menu ? menu.name : \"알 수 없는 메뉴\";\r\n      const subtotal = menu ? menu.price * item.quantity : 0;\r\n      return `\r\n        <div class=\"order-item-row\">\r\n          <div>\r\n            <div class=\"order-item-name\">${name}</div>\r\n            <div class=\"order-item-qty\">${item.quantity}개</div>\r\n          </div>\r\n          <span class=\"order-item-subtotal\">${formatPrice(subtotal)}</span>\r\n        </div>\r\n      `;\r\n    })\r\n    .join",
+          "lineNumber": 23
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "currentOrder.items\r\n    .map",
+          "lineNumber": 23
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "getMenuById",
+          "lineNumber": 25
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "formatPrice",
+          "lineNumber": 34
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "currentOrder.items.reduce",
+          "lineNumber": 40
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "getMenuById",
+          "lineNumber": 41
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "getStatusClass",
+          "lineNumber": 48
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "formatDate",
+          "lineNumber": 50
+        },
+        {
+          "caller": "renderOrderDetail",
+          "callee": "formatPrice",
+          "lineNumber": 58
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "document.getElementById",
+          "lineNumber": 65
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "getCartTotalCount",
+          "lineNumber": 66
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "String",
+          "lineNumber": 69
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "frontend/orders/list.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 49,
+      "nonEmptyLines": 43,
+      "functions": [
+        {
+          "name": "init",
+          "startLine": 2,
+          "endLine": 5,
+          "params": []
+        },
+        {
+          "name": "renderOrderList",
+          "startLine": 8,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "updateCartBadge",
+          "startLine": 37,
+          "endLine": 47,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "init",
+          "callee": "renderOrderList",
+          "lineNumber": 3
+        },
+        {
+          "caller": "init",
+          "callee": "updateCartBadge",
+          "lineNumber": 4
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "document.getElementById",
+          "lineNumber": 9
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "getOrders().slice().sort",
+          "lineNumber": 10
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "getOrders().slice",
+          "lineNumber": 10
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "getOrders",
+          "lineNumber": 10
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "orders\r\n    .map(\r\n      (order) => `\r\n        <a class=\"order-card glass\" href=\"detail.html?id=${encodeURIComponent(order.id)}\">\r\n          <div class=\"order-card-top\">\r\n            <span class=\"order-card-id\">${order.id}</span>\r\n            <span class=\"order-status ${getStatusClass(order.status)}\">${order.status}</span>\r\n          </div>\r\n          <span class=\"order-card-date\">${formatDate(order.createdAt)}</span>\r\n          <span class=\"order-card-summary\">${getOrderSummaryText(order)}</span>\r\n          <div class=\"order-card-bottom\">\r\n            <span class=\"order-card-total\">${formatPrice(getOrderTotalPrice(order))}</span>\r\n          </div>\r\n        </a>\r\n      `\r\n    )\r\n    .join",
+          "lineNumber": 17
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "orders\r\n    .map",
+          "lineNumber": 17
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "encodeURIComponent",
+          "lineNumber": 20
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "getStatusClass",
+          "lineNumber": 23
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "formatDate",
+          "lineNumber": 25
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "getOrderSummaryText",
+          "lineNumber": 26
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "formatPrice",
+          "lineNumber": 28
+        },
+        {
+          "caller": "renderOrderList",
+          "callee": "getOrderTotalPrice",
+          "lineNumber": 28
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "document.getElementById",
+          "lineNumber": 38
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "getCartTotalCount",
+          "lineNumber": 39
+        },
+        {
+          "caller": "updateCartBadge",
+          "callee": "String",
+          "lineNumber": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/create.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 44,
+      "functions": [
+        {
+          "name": "renderCategoryOptions",
+          "startLine": 6,
+          "endLine": 10,
+          "params": []
+        },
+        {
+          "name": "validateMenuForm",
+          "startLine": 12,
+          "endLine": 26,
+          "params": [
+            "data"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderCategoryOptions",
+          "callee": "getCategories()\r\n    .map((category) => `<option value=\"${category.id}\">${category.name}</option>`)\r\n    .join",
+          "lineNumber": 7
+        },
+        {
+          "caller": "renderCategoryOptions",
+          "callee": "getCategories()\r\n    .map",
+          "lineNumber": 7
+        },
+        {
+          "caller": "renderCategoryOptions",
+          "callee": "getCategories",
+          "lineNumber": 7
+        },
+        {
+          "caller": "validateMenuForm",
+          "callee": "data.name.trim",
+          "lineNumber": 13
+        },
+        {
+          "caller": "validateMenuForm",
+          "callee": "Number.isFinite",
+          "lineNumber": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/detail.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 53,
+      "functions": [
+        {
+          "name": "renderEmpty",
+          "startLine": 6,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "renderDetail",
+          "startLine": 16,
+          "endLine": 51,
+          "params": [
+            "menu"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderDetail",
+          "callee": "getCategoryById",
+          "lineNumber": 17
+        },
+        {
+          "caller": "renderDetail",
+          "callee": "encodeURIComponent",
+          "lineNumber": 18
+        },
+        {
+          "caller": "renderDetail",
+          "callee": "formatPrice",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/edit.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 130,
+      "nonEmptyLines": 106,
+      "functions": [
+        {
+          "name": "validateMenuForm",
+          "startLine": 6,
+          "endLine": 20,
+          "params": [
+            "data"
+          ]
+        },
+        {
+          "name": "renderEmpty",
+          "startLine": 22,
+          "endLine": 30,
+          "params": []
+        },
+        {
+          "name": "renderForm",
+          "startLine": 32,
+          "endLine": 122,
+          "params": [
+            "menu"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "validateMenuForm",
+          "callee": "data.name.trim",
+          "lineNumber": 7
+        },
+        {
+          "caller": "validateMenuForm",
+          "callee": "Number.isFinite",
+          "lineNumber": 15
+        },
+        {
+          "caller": "renderForm",
+          "callee": "encodeURIComponent",
+          "lineNumber": 33
+        },
+        {
+          "caller": "renderForm",
+          "callee": "getCategories()\r\n    .map(\r\n      (category) =>\r\n        `<option value=\"${category.id}\" ${category.id === menu.categoryId ? \"selected\" : \"\"}>${category.name}</option>`\r\n    )\r\n    .join",
+          "lineNumber": 35
+        },
+        {
+          "caller": "renderForm",
+          "callee": "getCategories()\r\n    .map",
+          "lineNumber": 35
+        },
+        {
+          "caller": "renderForm",
+          "callee": "getCategories",
+          "lineNumber": 35
+        },
+        {
+          "caller": "renderForm",
+          "callee": "document.getElementById",
+          "lineNumber": 92
+        },
+        {
+          "caller": "renderForm",
+          "callee": "document.getElementById",
+          "lineNumber": 93
+        },
+        {
+          "caller": "renderForm",
+          "callee": "document.getElementById",
+          "lineNumber": 94
+        },
+        {
+          "caller": "renderForm",
+          "callee": "form.addEventListener",
+          "lineNumber": 96
+        },
+        {
+          "caller": "renderForm",
+          "callee": "event.preventDefault",
+          "lineNumber": 97
+        },
+        {
+          "caller": "renderForm",
+          "callee": "String(formData.get(\"name\") || \"\").trim",
+          "lineNumber": 101
+        },
+        {
+          "caller": "renderForm",
+          "callee": "String",
+          "lineNumber": 101
+        },
+        {
+          "caller": "renderForm",
+          "callee": "formData.get",
+          "lineNumber": 101
+        },
+        {
+          "caller": "renderForm",
+          "callee": "String",
+          "lineNumber": 102
+        },
+        {
+          "caller": "renderForm",
+          "callee": "formData.get",
+          "lineNumber": 102
+        },
+        {
+          "caller": "renderForm",
+          "callee": "Number",
+          "lineNumber": 103
+        },
+        {
+          "caller": "renderForm",
+          "callee": "formData.get",
+          "lineNumber": 103
+        },
+        {
+          "caller": "renderForm",
+          "callee": "String(formData.get(\"image\") || \"\").trim",
+          "lineNumber": 104
+        },
+        {
+          "caller": "renderForm",
+          "callee": "String",
+          "lineNumber": 104
+        },
+        {
+          "caller": "renderForm",
+          "callee": "formData.get",
+          "lineNumber": 104
+        },
+        {
+          "caller": "renderForm",
+          "callee": "String(formData.get(\"description\") || \"\").trim",
+          "lineNumber": 105
+        },
+        {
+          "caller": "renderForm",
+          "callee": "String",
+          "lineNumber": 105
+        },
+        {
+          "caller": "renderForm",
+          "callee": "formData.get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "renderForm",
+          "callee": "formData.get",
+          "lineNumber": 106
+        },
+        {
+          "caller": "renderForm",
+          "callee": "validateMenuForm",
+          "lineNumber": 109
+        },
+        {
+          "caller": "renderForm",
+          "callee": "updateMenu",
+          "lineNumber": 115
+        },
+        {
+          "caller": "renderForm",
+          "callee": "encodeURIComponent",
+          "lineNumber": 116
+        },
+        {
+          "caller": "renderForm",
+          "callee": "cancelButton.addEventListener",
+          "lineNumber": 119
+        },
+        {
+          "caller": "renderForm",
+          "callee": "encodeURIComponent",
+          "lineNumber": 120
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 125,
+      "nonEmptyLines": 107,
+      "functions": [
+        {
+          "name": "initializeFilters",
+          "startLine": 9,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "getFilteredMenus",
+          "startLine": 16,
+          "endLine": 26,
+          "params": []
+        },
+        {
+          "name": "renderSummary",
+          "startLine": 28,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "renderList",
+          "startLine": 35,
+          "endLine": 86,
+          "params": []
+        },
+        {
+          "name": "handleListClick",
+          "startLine": 88,
+          "endLine": 113,
+          "params": [
+            "event"
+          ]
+        },
+        {
+          "name": "initializePage",
+          "startLine": 115,
+          "endLine": 123,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "initializeFilters",
+          "callee": "getCategories",
+          "lineNumber": 10
+        },
+        {
+          "caller": "initializeFilters",
+          "callee": "options\r\n    .map((category) => `<option value=\"${category.id}\">${category.name}</option>`)\r\n    .join",
+          "lineNumber": 11
+        },
+        {
+          "caller": "initializeFilters",
+          "callee": "options\r\n    .map",
+          "lineNumber": 11
+        },
+        {
+          "caller": "getFilteredMenus",
+          "callee": "keywordInput.value.trim().toLowerCase",
+          "lineNumber": 18
+        },
+        {
+          "caller": "getFilteredMenus",
+          "callee": "keywordInput.value.trim",
+          "lineNumber": 18
+        },
+        {
+          "caller": "getFilteredMenus",
+          "callee": "getAllMenus().filter",
+          "lineNumber": 20
+        },
+        {
+          "caller": "getFilteredMenus",
+          "callee": "getAllMenus",
+          "lineNumber": 20
+        },
+        {
+          "caller": "getFilteredMenus",
+          "callee": "`${menu.name} ${menu.description}`.toLowerCase",
+          "lineNumber": 22
+        },
+        {
+          "caller": "getFilteredMenus",
+          "callee": "source.includes",
+          "lineNumber": 23
+        },
+        {
+          "caller": "renderSummary",
+          "callee": "getAllMenus",
+          "lineNumber": 29
+        },
+        {
+          "caller": "renderSummary",
+          "callee": "menus.filter",
+          "lineNumber": 31
+        },
+        {
+          "caller": "renderSummary",
+          "callee": "menus.filter",
+          "lineNumber": 32
+        },
+        {
+          "caller": "renderList",
+          "callee": "getFilteredMenus",
+          "lineNumber": 36
+        },
+        {
+          "caller": "renderList",
+          "callee": "menus\r\n    .map((menu) => {\r\n      const category = getCategoryById(menu.categoryId);\r\n      return `\r\n        <article class=\"menu-card\">\r\n          <div class=\"menu-card-header\">\r\n            <div>\r\n              <div class=\"menu-title-row\">\r\n                <h3>${menu.name}</h3>\r\n                <span class=\"badge category\">${category ? category.name : \"미분류\"}</span>\r\n                ${menu.soldOut ? '<span class=\"badge soldout\">품절</span>' : \"\"}\r\n              </div>\r\n              <p class=\"menu-description\">${menu.description || \"설명이 아직 없어요.\"}</p>\r\n            </div>\r\n            <span class=\"price\">${formatPrice(menu.price)}</span>\r\n          </div>\r\n\r\n          <ul class=\"meta-list\">\r\n            <li>메뉴 ID: ${menu.id}</li>\r\n            <li>이미지 경로: ${menu.image || \"미등록\"}</li>\r\n          </ul>\r\n\r\n          <div class=\"menu-card-footer\">\r\n            <a class=\"secondary-link\" href=\"./detail.html?id=${encodeURIComponent(menu.id)}\">상세 보기</a>\r\n            <div class=\"action-group\">\r\n              <a class=\"action-button\" href=\"./edit.html?id=${encodeURIComponent(menu.id)}\">수정</a>\r\n              <button class=\"action-button\" type=\"button\" data-action=\"toggle\" data-id=\"${menu.id}\">\r\n                ${menu.soldOut ? \"판매 재개\" : \"품절 처리\"}\r\n              </button>\r\n              <button class=\"action-button warn\" type=\"button\" data-action=\"delete\" data-id=\"${menu.id}\">\r\n                삭제\r\n              </button>\r\n            </div>\r\n          </div>\r\n        </article>\r\n      `;\r\n    })\r\n    .join",
+          "lineNumber": 48
+        },
+        {
+          "caller": "renderList",
+          "callee": "menus\r\n    .map",
+          "lineNumber": 48
+        },
+        {
+          "caller": "renderList",
+          "callee": "getCategoryById",
+          "lineNumber": 50
+        },
+        {
+          "caller": "renderList",
+          "callee": "formatPrice",
+          "lineNumber": 62
+        },
+        {
+          "caller": "renderList",
+          "callee": "encodeURIComponent",
+          "lineNumber": 71
+        },
+        {
+          "caller": "renderList",
+          "callee": "encodeURIComponent",
+          "lineNumber": 73
+        },
+        {
+          "caller": "handleListClick",
+          "callee": "event.target.closest",
+          "lineNumber": 89
+        },
+        {
+          "caller": "handleListClick",
+          "callee": "toggleMenuSoldOut",
+          "lineNumber": 96
+        },
+        {
+          "caller": "handleListClick",
+          "callee": "renderSummary",
+          "lineNumber": 97
+        },
+        {
+          "caller": "handleListClick",
+          "callee": "renderList",
+          "lineNumber": 98
+        },
+        {
+          "caller": "handleListClick",
+          "callee": "getMenuById",
+          "lineNumber": 103
+        },
+        {
+          "caller": "handleListClick",
+          "callee": "window.confirm",
+          "lineNumber": 106
+        },
+        {
+          "caller": "handleListClick",
+          "callee": "deleteMenu",
+          "lineNumber": 109
+        },
+        {
+          "caller": "handleListClick",
+          "callee": "renderSummary",
+          "lineNumber": 110
+        },
+        {
+          "caller": "handleListClick",
+          "callee": "renderList",
+          "lineNumber": 111
+        },
+        {
+          "caller": "initializePage",
+          "callee": "initializeFilters",
+          "lineNumber": 116
+        },
+        {
+          "caller": "initializePage",
+          "callee": "renderSummary",
+          "lineNumber": 117
+        },
+        {
+          "caller": "initializePage",
+          "callee": "renderList",
+          "lineNumber": 118
+        },
+        {
+          "caller": "initializePage",
+          "callee": "categoryFilter.addEventListener",
+          "lineNumber": 120
+        },
+        {
+          "caller": "initializePage",
+          "callee": "keywordInput.addEventListener",
+          "lineNumber": 121
+        },
+        {
+          "caller": "initializePage",
+          "callee": "menuList.addEventListener",
+          "lineNumber": 122
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "legacy-step2-backup/js/data.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 307,
+      "nonEmptyLines": 273,
+      "functions": [
+        {
+          "name": "getCategories",
+          "startLine": 105,
+          "endLine": 107,
+          "params": []
+        },
+        {
+          "name": "getSeedMenus",
+          "startLine": 109,
+          "endLine": 111,
+          "params": []
+        },
+        {
+          "name": "getAllMenus",
+          "startLine": 113,
+          "endLine": 133,
+          "params": []
+        },
+        {
+          "name": "saveMenus",
+          "startLine": 135,
+          "endLine": 138,
+          "params": [
+            "menus"
+          ]
+        },
+        {
+          "name": "generateMenuId",
+          "startLine": 140,
+          "endLine": 159,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "createMenu",
+          "startLine": 161,
+          "endLine": 176,
+          "params": [
+            "menuInput"
+          ]
+        },
+        {
+          "name": "updateMenu",
+          "startLine": 178,
+          "endLine": 195,
+          "params": [
+            "menuId",
+            "menuInput"
+          ]
+        },
+        {
+          "name": "deleteMenu",
+          "startLine": 197,
+          "endLine": 201,
+          "params": [
+            "menuId"
+          ]
+        },
+        {
+          "name": "toggleMenuSoldOut",
+          "startLine": 203,
+          "endLine": 207,
+          "params": [
+            "menuId"
+          ]
+        },
+        {
+          "name": "getCategoryById",
+          "startLine": 209,
+          "endLine": 211,
+          "params": [
+            "categoryId"
+          ]
+        },
+        {
+          "name": "getMenuById",
+          "startLine": 213,
+          "endLine": 215,
+          "params": [
+            "menuId"
+          ]
+        },
+        {
+          "name": "getMenusByCategory",
+          "startLine": 217,
+          "endLine": 222,
+          "params": [
+            "categoryId"
+          ]
+        },
+        {
+          "name": "seedOrdersIfEmpty",
+          "startLine": 256,
+          "endLine": 260,
+          "params": []
+        },
+        {
+          "name": "getOrders",
+          "startLine": 262,
+          "endLine": 271,
+          "params": []
+        },
+        {
+          "name": "saveOrders",
+          "startLine": 273,
+          "endLine": 276,
+          "params": [
+            "orders"
+          ]
+        },
+        {
+          "name": "getOrderById",
+          "startLine": 278,
+          "endLine": 280,
+          "params": [
+            "orderId"
+          ]
+        },
+        {
+          "name": "getOrderTotalPrice",
+          "startLine": 282,
+          "endLine": 288,
+          "params": [
+            "order"
+          ]
+        },
+        {
+          "name": "getOrderSummaryText",
+          "startLine": 290,
+          "endLine": 297,
+          "params": [
+            "order"
+          ]
+        },
+        {
+          "name": "updateOrderStatus",
+          "startLine": 299,
+          "endLine": 307,
+          "params": [
+            "orderId",
+            "status"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getSeedMenus",
+          "callee": "MENUS.map",
+          "lineNumber": 110
+        },
+        {
+          "caller": "getAllMenus",
+          "callee": "localStorage.getItem",
+          "lineNumber": 114
+        },
+        {
+          "caller": "getAllMenus",
+          "callee": "getSeedMenus",
+          "lineNumber": 117
+        },
+        {
+          "caller": "getAllMenus",
+          "callee": "localStorage.setItem",
+          "lineNumber": 118
+        },
+        {
+          "caller": "getAllMenus",
+          "callee": "JSON.stringify",
+          "lineNumber": 118
+        },
+        {
+          "caller": "getAllMenus",
+          "callee": "JSON.parse",
+          "lineNumber": 123
+        },
+        {
+          "caller": "getAllMenus",
+          "callee": "Array.isArray",
+          "lineNumber": 124
+        },
+        {
+          "caller": "getAllMenus",
+          "callee": "getSeedMenus",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getAllMenus",
+          "callee": "localStorage.setItem",
+          "lineNumber": 130
+        },
+        {
+          "caller": "getAllMenus",
+          "callee": "JSON.stringify",
+          "lineNumber": 130
+        },
+        {
+          "caller": "saveMenus",
+          "callee": "localStorage.setItem",
+          "lineNumber": 136
+        },
+        {
+          "caller": "saveMenus",
+          "callee": "JSON.stringify",
+          "lineNumber": 136
+        },
+        {
+          "caller": "generateMenuId",
+          "callee": "String(name || \"menu\")\r\n    .trim()\r\n    .toLowerCase()\r\n    .replace(/[^a-z0-9가-힣\\s-]/g, \"\")\r\n    .replace(/\\s+/g, \"-\")\r\n    .replace(/-+/g, \"-\")\r\n    .replace",
+          "lineNumber": 141
+        },
+        {
+          "caller": "generateMenuId",
+          "callee": "String(name || \"menu\")\r\n    .trim()\r\n    .toLowerCase()\r\n    .replace(/[^a-z0-9가-힣\\s-]/g, \"\")\r\n    .replace(/\\s+/g, \"-\")\r\n    .replace",
+          "lineNumber": 141
+        },
+        {
+          "caller": "generateMenuId",
+          "callee": "String(name || \"menu\")\r\n    .trim()\r\n    .toLowerCase()\r\n    .replace(/[^a-z0-9가-힣\\s-]/g, \"\")\r\n    .replace",
+          "lineNumber": 141
+        },
+        {
+          "caller": "generateMenuId",
+          "callee": "String(name || \"menu\")\r\n    .trim()\r\n    .toLowerCase()\r\n    .replace",
+          "lineNumber": 141
+        },
+        {
+          "caller": "generateMenuId",
+          "callee": "String(name || \"menu\")\r\n    .trim()\r\n    .toLowerCase",
+          "lineNumber": 141
+        },
+        {
+          "caller": "generateMenuId",
+          "callee": "String(name || \"menu\")\r\n    .trim",
+          "lineNumber": 141
+        },
+        {
+          "caller": "generateMenuId",
+          "callee": "String",
+          "lineNumber": 141
+        },
+        {
+          "caller": "generateMenuId",
+          "callee": "getAllMenus",
+          "lineNumber": 149
+        },
+        {
+          "caller": "generateMenuId",
+          "callee": "menus.some",
+          "lineNumber": 153
+        },
+        {
+          "caller": "createMenu",
+          "callee": "getAllMenus",
+          "lineNumber": 162
+        },
+        {
+          "caller": "createMenu",
+          "callee": "generateMenuId",
+          "lineNumber": 164
+        },
+        {
+          "caller": "createMenu",
+          "callee": "Number",
+          "lineNumber": 167
+        },
+        {
+          "caller": "createMenu",
+          "callee": "Boolean",
+          "lineNumber": 170
+        },
+        {
+          "caller": "createMenu",
+          "callee": "menus.push",
+          "lineNumber": 173
+        },
+        {
+          "caller": "createMenu",
+          "callee": "saveMenus",
+          "lineNumber": 174
+        },
+        {
+          "caller": "updateMenu",
+          "callee": "getAllMenus",
+          "lineNumber": 179
+        },
+        {
+          "caller": "updateMenu",
+          "callee": "menus.findIndex",
+          "lineNumber": 180
+        },
+        {
+          "caller": "updateMenu",
+          "callee": "Number",
+          "lineNumber": 189
+        },
+        {
+          "caller": "updateMenu",
+          "callee": "Boolean",
+          "lineNumber": 190
+        },
+        {
+          "caller": "updateMenu",
+          "callee": "saveMenus",
+          "lineNumber": 193
+        },
+        {
+          "caller": "deleteMenu",
+          "callee": "getAllMenus().filter",
+          "lineNumber": 198
+        },
+        {
+          "caller": "deleteMenu",
+          "callee": "getAllMenus",
+          "lineNumber": 198
+        },
+        {
+          "caller": "deleteMenu",
+          "callee": "saveMenus",
+          "lineNumber": 199
+        },
+        {
+          "caller": "toggleMenuSoldOut",
+          "callee": "getMenuById",
+          "lineNumber": 204
+        },
+        {
+          "caller": "toggleMenuSoldOut",
+          "callee": "updateMenu",
+          "lineNumber": 206
+        },
+        {
+          "caller": "getCategoryById",
+          "callee": "CATEGORIES.find",
+          "lineNumber": 210
+        },
+        {
+          "caller": "getMenuById",
+          "callee": "getAllMenus().find",
+          "lineNumber": 214
+        },
+        {
+          "caller": "getMenuById",
+          "callee": "getAllMenus",
+          "lineNumber": 214
+        },
+        {
+          "caller": "getMenusByCategory",
+          "callee": "getAllMenus",
+          "lineNumber": 219
+        },
+        {
+          "caller": "getMenusByCategory",
+          "callee": "getAllMenus().filter",
+          "lineNumber": 221
+        },
+        {
+          "caller": "getMenusByCategory",
+          "callee": "getAllMenus",
+          "lineNumber": 221
+        },
+        {
+          "caller": "seedOrdersIfEmpty",
+          "callee": "localStorage.getItem",
+          "lineNumber": 257
+        },
+        {
+          "caller": "seedOrdersIfEmpty",
+          "callee": "localStorage.setItem",
+          "lineNumber": 258
+        },
+        {
+          "caller": "seedOrdersIfEmpty",
+          "callee": "JSON.stringify",
+          "lineNumber": 258
+        },
+        {
+          "caller": "getOrders",
+          "callee": "seedOrdersIfEmpty",
+          "lineNumber": 263
+        },
+        {
+          "caller": "getOrders",
+          "callee": "localStorage.getItem",
+          "lineNumber": 264
+        },
+        {
+          "caller": "getOrders",
+          "callee": "JSON.parse",
+          "lineNumber": 267
+        },
+        {
+          "caller": "saveOrders",
+          "callee": "localStorage.setItem",
+          "lineNumber": 274
+        },
+        {
+          "caller": "saveOrders",
+          "callee": "JSON.stringify",
+          "lineNumber": 274
+        },
+        {
+          "caller": "getOrderById",
+          "callee": "getOrders().find",
+          "lineNumber": 279
+        },
+        {
+          "caller": "getOrderById",
+          "callee": "getOrders",
+          "lineNumber": 279
+        },
+        {
+          "caller": "getOrderTotalPrice",
+          "callee": "order.items.reduce",
+          "lineNumber": 283
+        },
+        {
+          "caller": "getOrderTotalPrice",
+          "callee": "getMenuById",
+          "lineNumber": 284
+        },
+        {
+          "caller": "getOrderSummaryText",
+          "callee": "getMenuById",
+          "lineNumber": 291
+        },
+        {
+          "caller": "updateOrderStatus",
+          "callee": "getOrders",
+          "lineNumber": 300
+        },
+        {
+          "caller": "updateOrderStatus",
+          "callee": "orders.findIndex",
+          "lineNumber": 301
+        },
+        {
+          "caller": "updateOrderStatus",
+          "callee": "saveOrders",
+          "lineNumber": 305
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 19,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "sections": [
+        {
+          "heading": "project1",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    }
+  ]
+}

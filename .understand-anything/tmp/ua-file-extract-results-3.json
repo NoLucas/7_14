@@ -1,0 +1,31 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "frontend/auth/auth.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 131,
+      "nonEmptyLines": 113,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/auth/login.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 52,
+      "nonEmptyLines": 44,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/auth/signup.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 55,
+      "nonEmptyLines": 46,
+      "metrics": {}
+    }
+  ]
+}

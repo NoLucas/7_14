@@ -1,0 +1,55 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "frontend/admin/orders/detail.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 165,
+      "nonEmptyLines": 139,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/admin/orders/detail.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 24,
+      "nonEmptyLines": 22,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/admin/orders/edit.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 136,
+      "nonEmptyLines": 115,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/admin/orders/edit.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 23,
+      "nonEmptyLines": 21,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/admin/orders/list.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 240,
+      "nonEmptyLines": 203,
+      "metrics": {}
+    },
+    {
+      "path": "frontend/admin/orders/list.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 71,
+      "nonEmptyLines": 66,
+      "metrics": {}
+    }
+  ]
+}

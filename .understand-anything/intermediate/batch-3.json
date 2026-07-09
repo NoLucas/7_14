@@ -1,0 +1,54 @@
+{
+  "batchIndex": 3,
+  "nodes": [
+    {
+      "id": "frontend/auth/auth.css",
+      "type": "file",
+      "label": "auth.css",
+      "language": "css",
+      "path": "frontend/auth/auth.css",
+      "summary": "로그인과 회원가입 두 페이지가 공통으로 사용하는 인증 UI 스타일 시트. `.auth-page`, `.auth-card`, `.auth-form`, `.auth-brand`, `.auth-hint`, `.primary-button`, `.auth-switch` 등의 클래스를 정의하며, CSS 변수(--color-*, --space-*, --font-size-* 등)를 활용해 디자인 토큰 기반 스타일을 적용한다. 768px 이상에서 카드 최대 너비를 420px로 제한하는 반응형 미디어 쿼리 포함.",
+      "tags": ["css", "auth", "로그인", "회원가입", "공통스타일", "반응형", "디자인토큰"],
+      "sizeLines": 131,
+      "exports": [],
+      "imports": [],
+      "languageNotes": "CSS 변수(CSS custom properties)를 통해 variables.css에 정의된 디자인 토큰을 참조함"
+    },
+    {
+      "id": "frontend/auth/login.html",
+      "type": "file",
+      "label": "login.html",
+      "language": "html",
+      "path": "frontend/auth/login.html",
+      "summary": "Cafe Moment의 로그인 페이지. 아이디/이메일과 비밀번호 입력 필드로 구성된 `#loginForm` 폼을 제공하며, DB 연동 전 임시 테스트 계정(admin/admin1234, customer/customer1234) 안내 박스를 표시한다. 상단의 카페명 링크를 클릭하면 index.html(메인 홈페이지)로 이동하며, `login.js`를 로드해 폼 제출 로직을 처리한다.",
+      "tags": ["html", "auth", "로그인", "폼", "테스트계정"],
+      "sizeLines": 52,
+      "exports": [],
+      "imports": [
+        {"from": "frontend/css/variables.css", "raw": "../css/variables.css", "kind": "stylesheet"},
+        {"from": "frontend/auth/auth.css", "raw": "auth.css", "kind": "stylesheet"},
+        {"from": "frontend/auth/login.js", "raw": "login.js", "kind": "script"}
+      ],
+      "languageNotes": "aria-live=\"polite\" 속성으로 스크린 리더에 메시지를 전달하는 접근성 고려 마크업 포함"
+    },
+    {
+      "id": "frontend/auth/signup.html",
+      "type": "file",
+      "label": "signup.html",
+      "language": "html",
+      "path": "frontend/auth/signup.html",
+      "summary": "Cafe Moment의 회원가입 페이지. 이름, 아이디/이메일, 비밀번호, 비밀번호 확인 총 4개의 입력 필드로 구성된 `#signupForm` 폼을 제공한다. DB 미연동 상태임을 안내하며, `signup.js`를 로드해 폼 유효성 검사 및 제출 로직을 처리한다. 로그인 페이지(login.html)로의 전환 링크 포함.",
+      "tags": ["html", "auth", "회원가입", "폼", "유효성검사"],
+      "sizeLines": 55,
+      "exports": [],
+      "imports": [
+        {"from": "frontend/css/variables.css", "raw": "../css/variables.css", "kind": "stylesheet"},
+        {"from": "frontend/auth/auth.css", "raw": "auth.css", "kind": "stylesheet"},
+        {"from": "frontend/auth/signup.js", "raw": "signup.js", "kind": "script"}
+      ],
+      "languageNotes": "aria-live=\"polite\" 속성으로 스크린 리더에 메시지를 전달하는 접근성 고려 마크업 포함"
+    }
+  ],
+  "edges": [],
+  "filesSkipped": []
+}

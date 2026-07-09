@@ -1,0 +1,813 @@
+{
+  "batchIndex": 8,
+  "nodes": [
+    {
+      "id": "frontend/menus/detail.js",
+      "type": "file",
+      "label": "frontend/menus/detail.js",
+      "title": "메뉴 상세 페이지 스크립트",
+      "summary": "사용자 메뉴 상세 페이지의 전체 로직을 담당하는 스크립트. URL 파라미터에서 메뉴 ID를 읽어 해당 메뉴 정보를 렌더링하고, 수량 조절 stepper와 장바구니 담기 event-handler를 바인딩한다. 품절 메뉴는 수량 조절 및 담기 버튼 없이 품절 문구만 표시한다.",
+      "language": "javascript",
+      "tags": ["event-handler", "render", "cart", "menu-detail"],
+      "sizeLines": 124,
+      "path": "frontend/menus/detail.js"
+    },
+    {
+      "id": "frontend/menus/detail.js::init",
+      "type": "function",
+      "label": "init",
+      "title": "메뉴 상세 페이지 초기화 함수",
+      "summary": "URL 파라미터에서 메뉴 ID를 파싱하여 currentMenu 상태를 설정하고, renderMenuDetail과 updateCartBadge를 호출해 페이지 초기 상태를 구성한다.",
+      "language": "javascript",
+      "tags": ["entry-point", "init"],
+      "sizeLines": 8,
+      "startLine": 6,
+      "endLine": 13,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js"
+    },
+    {
+      "id": "frontend/menus/detail.js::renderMenuDetail",
+      "type": "function",
+      "label": "renderMenuDetail",
+      "title": "메뉴 상세 정보 렌더링 함수",
+      "summary": "currentMenu 상태를 기반으로 메뉴 이미지, 이름, 가격, 설명, 수량 stepper, 액션바를 HTML로 렌더링한다. 메뉴가 없으면 안내 문구를 출력하고, 품절 시에는 수량 조절과 장바구니 버튼을 표시하지 않는다.",
+      "language": "javascript",
+      "tags": ["render", "menu-detail"],
+      "sizeLines": 30,
+      "startLine": 16,
+      "endLine": 45,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js"
+    },
+    {
+      "id": "frontend/menus/detail.js::bindQuantityEvents",
+      "type": "function",
+      "label": "bindQuantityEvents",
+      "title": "수량 조절 버튼 event-handler 바인딩",
+      "summary": "감소/증가 버튼에 클릭 이벤트를 등록하고, 수량이 1 이하일 때 감소 버튼을 비활성화한다. 수량 변경 시 updateQuantityDisplay를 호출해 UI를 동기화한다.",
+      "language": "javascript",
+      "tags": ["event-handler", "quantity"],
+      "sizeLines": 18,
+      "startLine": 67,
+      "endLine": 84,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js"
+    },
+    {
+      "id": "frontend/menus/detail.js::bindAddToCartEvent",
+      "type": "function",
+      "label": "bindAddToCartEvent",
+      "title": "장바구니 담기 event-handler 바인딩",
+      "summary": "장바구니 담기 버튼 클릭 시 addToCart를 호출하고, 버튼 텍스트를 일시적으로 '담았습니다!'로 변경 후 1.2초 뒤 원래 상태로 복원한다.",
+      "language": "javascript",
+      "tags": ["event-handler", "cart"],
+      "sizeLines": 17,
+      "startLine": 93,
+      "endLine": 109,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js"
+    },
+    {
+      "id": "frontend/menus/detail.js::updateCartBadge",
+      "type": "function",
+      "label": "updateCartBadge",
+      "title": "장바구니 배지 업데이트 함수",
+      "summary": "장바구니 총 수량을 조회하여 배지 요소에 표시하거나 숨긴다. 99개 초과 시 '99+'로 표시한다.",
+      "language": "javascript",
+      "tags": ["utility", "cart"],
+      "sizeLines": 11,
+      "startLine": 112,
+      "endLine": 122,
+      "path": "frontend/menus/detail.js",
+      "parent": "frontend/menus/detail.js"
+    },
+    {
+      "id": "frontend/menus/list.js",
+      "type": "file",
+      "label": "frontend/menus/list.js",
+      "title": "메뉴 목록 페이지 스크립트",
+      "summary": "사용자용 메뉴 목록 페이지를 담당하는 스크립트. 카테고리 탭 렌더링과 탭 클릭 시 메뉴 그리드 필터링을 처리한다. 메뉴 카드는 상세 페이지 링크로 연결되며 품절 배지를 표시한다.",
+      "language": "javascript",
+      "tags": ["render", "menu-list", "category-filter"],
+      "sizeLines": 81,
+      "path": "frontend/menus/list.js"
+    },
+    {
+      "id": "frontend/menus/list.js::renderCategoryTabs",
+      "type": "function",
+      "label": "renderCategoryTabs",
+      "title": "카테고리 탭 렌더링 함수",
+      "summary": "전체 카테고리 탭 버튼을 생성하고, 클릭 이벤트로 selectedCategoryId 상태를 갱신한 뒤 탭과 그리드를 재렌더링한다.",
+      "language": "javascript",
+      "tags": ["render", "category-filter", "event-handler"],
+      "sizeLines": 23,
+      "startLine": 12,
+      "endLine": 34,
+      "path": "frontend/menus/list.js",
+      "parent": "frontend/menus/list.js"
+    },
+    {
+      "id": "frontend/menus/list.js::renderMenuGrid",
+      "type": "function",
+      "label": "renderMenuGrid",
+      "title": "메뉴 그리드 렌더링 함수",
+      "summary": "선택된 카테고리에 해당하는 메뉴 목록을 카드 형태로 렌더링한다. 메뉴가 없을 경우 빈 상태 문구를 표시하고, 품절 메뉴에는 'sold-out' 클래스와 배지를 추가한다.",
+      "language": "javascript",
+      "tags": ["render", "menu-list"],
+      "sizeLines": 30,
+      "startLine": 37,
+      "endLine": 66,
+      "path": "frontend/menus/list.js",
+      "parent": "frontend/menus/list.js"
+    },
+    {
+      "id": "frontend/my/index.css",
+      "type": "file",
+      "label": "frontend/my/index.css",
+      "title": "마이페이지 스타일시트",
+      "summary": "마이페이지(frontend/my/index.html)의 레이아웃과 컴포넌트 스타일을 정의한다. 페이지 헤더, 프로필 카드, 통계 그리드(stat-grid), 메뉴 목록 항목(menu-item), 장바구니 배지 등의 스타일을 포함한다. CSS 변수 기반의 디자인 토큰을 활용한다.",
+      "language": "css",
+      "tags": ["layout", "component", "마이페이지"],
+      "sizeLines": 167,
+      "path": "frontend/my/index.css"
+    },
+    {
+      "id": "frontend/my/index.html",
+      "type": "file",
+      "label": "frontend/my/index.html",
+      "title": "마이페이지 HTML",
+      "summary": "사용자 마이페이지의 HTML 구조. 게스트 프로필 카드, 장바구니 수량 및 예상 결제 금액 통계 카드, 주문 내역/장바구니/전체 메뉴 바로가기 nav, 고객 지원(공지사항/FAQ/이용약관) 섹션으로 구성된다. data.js, utils.js, index.js를 로드한다.",
+      "language": "html",
+      "tags": ["마이페이지", "navigation", "profile"],
+      "sizeLines": 84,
+      "path": "frontend/my/index.html"
+    },
+    {
+      "id": "frontend/my/index.js",
+      "type": "file",
+      "label": "frontend/my/index.js",
+      "title": "마이페이지 스크립트",
+      "summary": "마이페이지의 장바구니 요약 표시, 배지 업데이트, 고객 지원 버튼 클릭 처리 로직을 담당한다. 고객 지원 항목(공지사항/FAQ/이용약관)은 alert를 통해 준비 중 메시지를 표시한다.",
+      "language": "javascript",
+      "tags": ["마이페이지", "cart", "event-handler"],
+      "sizeLines": 48,
+      "path": "frontend/my/index.js"
+    },
+    {
+      "id": "frontend/my/index.js::renderCartSummary",
+      "type": "function",
+      "label": "renderCartSummary",
+      "title": "장바구니 요약 렌더링 함수",
+      "summary": "장바구니 총 수량과 예상 결제 금액을 계산하여 마이페이지 통계 카드(cartCount, cartPrice)에 표시한다.",
+      "language": "javascript",
+      "tags": ["render", "cart", "utility"],
+      "sizeLines": 7,
+      "startLine": 8,
+      "endLine": 14,
+      "path": "frontend/my/index.js",
+      "parent": "frontend/my/index.js"
+    },
+    {
+      "id": "frontend/my/index.js::handleInfoClick",
+      "type": "function",
+      "label": "handleInfoClick",
+      "title": "고객 지원 버튼 클릭 event-handler",
+      "summary": "data-info 속성이 있는 버튼 클릭 이벤트를 위임 방식으로 처리하고, INFO_MESSAGES 객체에서 해당 메시지를 조회해 alert로 표시한다.",
+      "language": "javascript",
+      "tags": ["event-handler", "utility"],
+      "sizeLines": 9,
+      "startLine": 30,
+      "endLine": 38,
+      "path": "frontend/my/index.js",
+      "parent": "frontend/my/index.js"
+    },
+    {
+      "id": "frontend/orders/detail.js",
+      "type": "file",
+      "label": "frontend/orders/detail.js",
+      "title": "주문 상세 페이지 스크립트",
+      "summary": "주문 상세 페이지 로직을 담당한다. URL 파라미터에서 주문 ID를 읽어 주문 정보를 조회하고, 주문 항목별 메뉴명/수량/소계와 총 결제 금액을 렌더링한다. 주문이 없으면 안내 문구를 표시한다.",
+      "language": "javascript",
+      "tags": ["render", "order-detail"],
+      "sizeLines": 76,
+      "path": "frontend/orders/detail.js"
+    },
+    {
+      "id": "frontend/orders/detail.js::renderOrderDetail",
+      "type": "function",
+      "label": "renderOrderDetail",
+      "title": "주문 상세 정보 렌더링 함수",
+      "summary": "현재 주문의 항목 목록을 순회하며 메뉴명, 수량, 소계를 계산하고, 주문 ID, 상태, 날짜, 총 결제 금액을 포함한 상세 뷰를 DOM에 렌더링한다.",
+      "language": "javascript",
+      "tags": ["render", "order-detail"],
+      "sizeLines": 47,
+      "startLine": 15,
+      "endLine": 61,
+      "path": "frontend/orders/detail.js",
+      "parent": "frontend/orders/detail.js"
+    },
+    {
+      "id": "frontend/orders/list.js",
+      "type": "file",
+      "label": "frontend/orders/list.js",
+      "title": "주문 목록 페이지 스크립트",
+      "summary": "주문 내역 목록을 최신순으로 정렬하여 카드 형태로 렌더링하는 스크립트. 주문 ID, 상태 배지, 날짜, 요약 텍스트, 총 결제 금액을 표시하며 상세 페이지로의 링크를 제공한다.",
+      "language": "javascript",
+      "tags": ["render", "order-list"],
+      "sizeLines": 49,
+      "path": "frontend/orders/list.js"
+    },
+    {
+      "id": "frontend/orders/list.js::renderOrderList",
+      "type": "function",
+      "label": "renderOrderList",
+      "title": "주문 목록 렌더링 함수",
+      "summary": "전체 주문을 생성일 기준 최신순으로 정렬한 뒤, 각 주문을 카드 요소로 변환하여 orderList 컨테이너에 삽입한다. 주문이 없으면 빈 상태 안내 문구를 표시한다.",
+      "language": "javascript",
+      "tags": ["render", "order-list"],
+      "sizeLines": 27,
+      "startLine": 8,
+      "endLine": 34,
+      "path": "frontend/orders/list.js",
+      "parent": "frontend/orders/list.js"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/create.js",
+      "type": "file",
+      "label": "legacy-step2-backup/admin/menus/create.js",
+      "title": "[레거시] 관리자 메뉴 생성 스크립트",
+      "summary": "레거시 백업 파일. 관리자 메뉴 생성 폼의 카테고리 옵션 렌더링과 폼 유효성 검사 로직을 포함한다. 폼 제출 시 createMenu를 호출하고 생성된 메뉴 상세 페이지로 이동한다.",
+      "language": "javascript",
+      "tags": ["legacy", "admin", "menu-create", "form-validation"],
+      "sizeLines": 55,
+      "path": "legacy-step2-backup/admin/menus/create.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/create.js::validateMenuForm",
+      "type": "function",
+      "label": "validateMenuForm",
+      "title": "[레거시] 메뉴 폼 유효성 검사 함수",
+      "summary": "레거시 버전. 메뉴명, 카테고리, 가격(0 이상 유한수)을 검사하여 오류 메시지를 반환한다. 유효하면 빈 문자열을 반환한다.",
+      "language": "javascript",
+      "tags": ["legacy", "form-validation", "utility"],
+      "sizeLines": 15,
+      "startLine": 12,
+      "endLine": 26,
+      "path": "legacy-step2-backup/admin/menus/create.js",
+      "parent": "legacy-step2-backup/admin/menus/create.js"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/detail.js",
+      "type": "file",
+      "label": "legacy-step2-backup/admin/menus/detail.js",
+      "title": "[레거시] 관리자 메뉴 상세 스크립트",
+      "summary": "레거시 백업 파일. 관리자 메뉴 상세 페이지에서 메뉴 ID로 데이터를 조회하고, 메뉴 존재 여부에 따라 상세 정보 또는 빈 상태를 렌더링한다.",
+      "language": "javascript",
+      "tags": ["legacy", "admin", "menu-detail"],
+      "sizeLines": 59,
+      "path": "legacy-step2-backup/admin/menus/detail.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/detail.js::renderDetail",
+      "type": "function",
+      "label": "renderDetail",
+      "title": "[레거시] 관리자 메뉴 상세 렌더링 함수",
+      "summary": "레거시 버전. 메뉴 객체를 받아 카테고리명, 가격, 판매 상태, 이미지 경로 등을 포함한 상세 카드 HTML을 content 요소에 삽입하고, 수정 링크 href를 설정한다.",
+      "language": "javascript",
+      "tags": ["legacy", "render", "admin"],
+      "sizeLines": 36,
+      "startLine": 16,
+      "endLine": 51,
+      "path": "legacy-step2-backup/admin/menus/detail.js",
+      "parent": "legacy-step2-backup/admin/menus/detail.js"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/edit.js",
+      "type": "file",
+      "label": "legacy-step2-backup/admin/menus/edit.js",
+      "title": "[레거시] 관리자 메뉴 수정 스크립트",
+      "summary": "레거시 백업 파일. 관리자 메뉴 수정 폼을 동적으로 렌더링하고, 폼 제출 시 유효성 검사 후 updateMenu를 호출한다. 폼과 버튼 event-handler를 renderForm 내부에서 바인딩하는 구조이다.",
+      "language": "javascript",
+      "tags": ["legacy", "admin", "menu-edit", "form-validation"],
+      "sizeLines": 130,
+      "path": "legacy-step2-backup/admin/menus/edit.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/edit.js::validateMenuForm",
+      "type": "function",
+      "label": "validateMenuForm",
+      "title": "[레거시] 메뉴 폼 유효성 검사 함수 (수정 페이지)",
+      "summary": "레거시 버전. 메뉴명, 카테고리, 가격을 검사하는 create.js의 동일 로직 사본. 오류 메시지를 반환하거나 빈 문자열을 반환한다.",
+      "language": "javascript",
+      "tags": ["legacy", "form-validation", "utility"],
+      "sizeLines": 15,
+      "startLine": 6,
+      "endLine": 20,
+      "path": "legacy-step2-backup/admin/menus/edit.js",
+      "parent": "legacy-step2-backup/admin/menus/edit.js"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/edit.js::renderForm",
+      "type": "function",
+      "label": "renderForm",
+      "title": "[레거시] 메뉴 수정 폼 렌더링 및 이벤트 바인딩 함수",
+      "summary": "레거시 버전. 메뉴 객체를 받아 수정 폼 HTML을 동적으로 생성하고, 폼 submit 및 취소 버튼 이벤트를 내부에서 바인딩한다. 저장 시 updateMenu 호출 후 상세 페이지로 이동한다.",
+      "language": "javascript",
+      "tags": ["legacy", "render", "form-validation", "event-handler"],
+      "sizeLines": 91,
+      "startLine": 32,
+      "endLine": 122,
+      "path": "legacy-step2-backup/admin/menus/edit.js",
+      "parent": "legacy-step2-backup/admin/menus/edit.js"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/list.js",
+      "type": "file",
+      "label": "legacy-step2-backup/admin/menus/list.js",
+      "title": "[레거시] 관리자 메뉴 목록 스크립트",
+      "summary": "레거시 백업 파일. 관리자용 메뉴 목록을 카테고리 필터와 키워드 검색으로 조회하고, 각 메뉴 카드에 수정/품절 토글/삭제 기능을 제공한다. event delegation 방식으로 목록 클릭을 처리한다.",
+      "language": "javascript",
+      "tags": ["legacy", "admin", "menu-list", "event-handler"],
+      "sizeLines": 125,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/list.js::getFilteredMenus",
+      "type": "function",
+      "label": "getFilteredMenus",
+      "title": "[레거시] 필터링된 메뉴 목록 반환 함수",
+      "summary": "레거시 버전. 카테고리 필터와 키워드(이름+설명 대상 소문자 검색)를 동시에 적용하여 조건에 맞는 메뉴 배열을 반환한다.",
+      "language": "javascript",
+      "tags": ["legacy", "utility", "filter"],
+      "sizeLines": 11,
+      "startLine": 16,
+      "endLine": 26,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "parent": "legacy-step2-backup/admin/menus/list.js"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/list.js::renderList",
+      "type": "function",
+      "label": "renderList",
+      "title": "[레거시] 관리자 메뉴 목록 렌더링 함수",
+      "summary": "레거시 버전. 필터링된 메뉴를 카드 형태로 렌더링하며, 각 카드에 상세 보기, 수정, 품절 토글, 삭제 버튼을 포함한다.",
+      "language": "javascript",
+      "tags": ["legacy", "render", "admin"],
+      "sizeLines": 52,
+      "startLine": 35,
+      "endLine": 86,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "parent": "legacy-step2-backup/admin/menus/list.js"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/list.js::handleListClick",
+      "type": "function",
+      "label": "handleListClick",
+      "title": "[레거시] 메뉴 목록 클릭 event-handler",
+      "summary": "레거시 버전. 이벤트 위임으로 data-action 속성을 읽어 'toggle'(품절 토글) 또는 'delete'(확인 후 삭제) 동작을 수행하고 목록을 재렌더링한다.",
+      "language": "javascript",
+      "tags": ["legacy", "event-handler", "admin"],
+      "sizeLines": 26,
+      "startLine": 88,
+      "endLine": 113,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "parent": "legacy-step2-backup/admin/menus/list.js"
+    },
+    {
+      "id": "legacy-step2-backup/admin/menus/list.js::initializePage",
+      "type": "function",
+      "label": "initializePage",
+      "title": "[레거시] 관리자 메뉴 목록 페이지 초기화 함수",
+      "summary": "레거시 버전. 필터 초기화, 요약, 목록 렌더링을 수행하고 카테고리/키워드 변경 및 목록 클릭 이벤트를 등록한다.",
+      "language": "javascript",
+      "tags": ["legacy", "entry-point", "init"],
+      "sizeLines": 9,
+      "startLine": 115,
+      "endLine": 123,
+      "path": "legacy-step2-backup/admin/menus/list.js",
+      "parent": "legacy-step2-backup/admin/menus/list.js"
+    },
+    {
+      "id": "legacy-step2-backup/js/data.js",
+      "type": "file",
+      "label": "legacy-step2-backup/js/data.js",
+      "title": "[레거시] 데이터 레이어 스크립트",
+      "summary": "레거시 백업 파일. 카페 주문 앱의 전체 데이터 레이어를 담당하는 핵심 utility 파일. 카테고리/메뉴/주문 시드 데이터를 정의하고, localStorage를 통한 CRUD 및 조회 함수 19개를 제공한다. 현재 활성 버전인 frontend/js/data.js의 원형에 해당한다.",
+      "language": "javascript",
+      "tags": ["legacy", "data-layer", "utility", "localStorage", "CRUD"],
+      "sizeLines": 307,
+      "path": "legacy-step2-backup/js/data.js",
+      "languageNotes": "legacy-step2-backup 폴더 내 레거시 버전"
+    },
+    {
+      "id": "legacy-step2-backup/js/data.js::getAllMenus",
+      "type": "function",
+      "label": "getAllMenus",
+      "title": "[레거시] 전체 메뉴 조회 함수",
+      "summary": "레거시 버전. localStorage에서 메뉴 배열을 파싱하여 반환한다. 데이터가 없거나 파싱 실패 시 시드 데이터로 초기화한다.",
+      "language": "javascript",
+      "tags": ["legacy", "data-layer", "utility"],
+      "sizeLines": 21,
+      "startLine": 113,
+      "endLine": 133,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js"
+    },
+    {
+      "id": "legacy-step2-backup/js/data.js::generateMenuId",
+      "type": "function",
+      "label": "generateMenuId",
+      "title": "[레거시] 메뉴 ID 생성 함수",
+      "summary": "레거시 버전. 메뉴명을 slug 형식으로 변환하고 중복 시 숫자 suffix를 붙여 고유 ID를 생성한다.",
+      "language": "javascript",
+      "tags": ["legacy", "utility", "id-generation"],
+      "sizeLines": 20,
+      "startLine": 140,
+      "endLine": 159,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js"
+    },
+    {
+      "id": "legacy-step2-backup/js/data.js::createMenu",
+      "type": "function",
+      "label": "createMenu",
+      "title": "[레거시] 메뉴 생성 함수",
+      "summary": "레거시 버전. 새 메뉴 객체를 생성하고 localStorage에 저장한다. ID가 없으면 generateMenuId로 자동 생성한다.",
+      "language": "javascript",
+      "tags": ["legacy", "data-layer", "CRUD"],
+      "sizeLines": 16,
+      "startLine": 161,
+      "endLine": 176,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js"
+    },
+    {
+      "id": "legacy-step2-backup/js/data.js::updateMenu",
+      "type": "function",
+      "label": "updateMenu",
+      "title": "[레거시] 메뉴 수정 함수",
+      "summary": "레거시 버전. 메뉴 ID로 항목을 찾아 입력값으로 병합 업데이트하고 localStorage에 저장한다.",
+      "language": "javascript",
+      "tags": ["legacy", "data-layer", "CRUD"],
+      "sizeLines": 18,
+      "startLine": 178,
+      "endLine": 195,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js"
+    },
+    {
+      "id": "legacy-step2-backup/js/data.js::deleteMenu",
+      "type": "function",
+      "label": "deleteMenu",
+      "title": "[레거시] 메뉴 삭제 함수",
+      "summary": "레거시 버전. 메뉴 ID에 해당하는 항목을 배열에서 제거하고 localStorage에 저장한다.",
+      "language": "javascript",
+      "tags": ["legacy", "data-layer", "CRUD"],
+      "sizeLines": 5,
+      "startLine": 197,
+      "endLine": 201,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js"
+    },
+    {
+      "id": "legacy-step2-backup/js/data.js::getOrders",
+      "type": "function",
+      "label": "getOrders",
+      "title": "[레거시] 전체 주문 조회 함수",
+      "summary": "레거시 버전. 시드 데이터 초기화 후 localStorage에서 주문 배열을 파싱하여 반환한다.",
+      "language": "javascript",
+      "tags": ["legacy", "data-layer", "utility"],
+      "sizeLines": 10,
+      "startLine": 262,
+      "endLine": 271,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js"
+    },
+    {
+      "id": "legacy-step2-backup/js/data.js::updateOrderStatus",
+      "type": "function",
+      "label": "updateOrderStatus",
+      "title": "[레거시] 주문 상태 업데이트 함수",
+      "summary": "레거시 버전. 주문 ID로 항목을 찾아 상태를 변경하고 localStorage에 저장한다.",
+      "language": "javascript",
+      "tags": ["legacy", "data-layer", "CRUD"],
+      "sizeLines": 9,
+      "startLine": 299,
+      "endLine": 307,
+      "path": "legacy-step2-backup/js/data.js",
+      "parent": "legacy-step2-backup/js/data.js"
+    },
+    {
+      "id": "README.md",
+      "type": "document",
+      "label": "README.md",
+      "title": "프로젝트 README",
+      "summary": "프로젝트 루트 README 문서. 프로젝트명(project1)만 기재되어 있으며 실질적인 내용은 거의 없다.",
+      "language": "markdown",
+      "tags": ["docs", "readme"],
+      "sizeLines": 3,
+      "path": "README.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "frontend/menus/detail.js::init",
+      "to": "frontend/menus/detail.js::renderMenuDetail",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/menus/detail.js::init",
+      "to": "frontend/menus/detail.js::updateCartBadge",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/menus/detail.js::renderMenuDetail",
+      "to": "frontend/menus/detail.js::bindQuantityEvents",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/menus/detail.js::renderMenuDetail",
+      "to": "frontend/menus/detail.js::bindAddToCartEvent",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/menus/detail.js::bindAddToCartEvent",
+      "to": "frontend/menus/detail.js::updateCartBadge",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/menus/detail.js::init",
+      "to": "frontend/menus/detail.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/menus/detail.js::renderMenuDetail",
+      "to": "frontend/menus/detail.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/menus/detail.js::bindQuantityEvents",
+      "to": "frontend/menus/detail.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/menus/detail.js::bindAddToCartEvent",
+      "to": "frontend/menus/detail.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/menus/detail.js::updateCartBadge",
+      "to": "frontend/menus/detail.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/menus/list.js::init",
+      "to": "frontend/menus/list.js::renderCategoryTabs",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/menus/list.js::init",
+      "to": "frontend/menus/list.js::renderMenuGrid",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/menus/list.js::renderCategoryTabs",
+      "to": "frontend/menus/list.js::renderMenuGrid",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/menus/list.js::renderCategoryTabs",
+      "to": "frontend/menus/list.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/menus/list.js::renderMenuGrid",
+      "to": "frontend/menus/list.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/my/index.js::init",
+      "to": "frontend/my/index.js::renderCartSummary",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/my/index.js::init",
+      "to": "frontend/my/index.js::updateCartBadge",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/my/index.js::renderCartSummary",
+      "to": "frontend/my/index.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/my/index.js::handleInfoClick",
+      "to": "frontend/my/index.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/orders/detail.js::init",
+      "to": "frontend/orders/detail.js::renderOrderDetail",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/orders/detail.js::renderOrderDetail",
+      "to": "frontend/orders/detail.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "frontend/orders/list.js::init",
+      "to": "frontend/orders/list.js::renderOrderList",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "frontend/orders/list.js::renderOrderList",
+      "to": "frontend/orders/list.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/list.js::initializePage",
+      "to": "legacy-step2-backup/admin/menus/list.js::renderList",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/list.js::initializePage",
+      "to": "legacy-step2-backup/admin/menus/list.js::handleListClick",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/list.js::renderList",
+      "to": "legacy-step2-backup/admin/menus/list.js::getFilteredMenus",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/list.js::handleListClick",
+      "to": "legacy-step2-backup/admin/menus/list.js::renderList",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/list.js::getFilteredMenus",
+      "to": "legacy-step2-backup/admin/menus/list.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/list.js::renderList",
+      "to": "legacy-step2-backup/admin/menus/list.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/list.js::handleListClick",
+      "to": "legacy-step2-backup/admin/menus/list.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/list.js::initializePage",
+      "to": "legacy-step2-backup/admin/menus/list.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/edit.js::renderForm",
+      "to": "legacy-step2-backup/admin/menus/edit.js::validateMenuForm",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/edit.js::validateMenuForm",
+      "to": "legacy-step2-backup/admin/menus/edit.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/edit.js::renderForm",
+      "to": "legacy-step2-backup/admin/menus/edit.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/create.js::validateMenuForm",
+      "to": "legacy-step2-backup/admin/menus/create.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/admin/menus/detail.js::renderDetail",
+      "to": "legacy-step2-backup/admin/menus/detail.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::getAllMenus",
+      "to": "legacy-step2-backup/js/data.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::generateMenuId",
+      "to": "legacy-step2-backup/js/data.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::createMenu",
+      "to": "legacy-step2-backup/js/data.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::updateMenu",
+      "to": "legacy-step2-backup/js/data.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::deleteMenu",
+      "to": "legacy-step2-backup/js/data.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::getOrders",
+      "to": "legacy-step2-backup/js/data.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::updateOrderStatus",
+      "to": "legacy-step2-backup/js/data.js",
+      "type": "contains",
+      "label": "defined in"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::createMenu",
+      "to": "legacy-step2-backup/js/data.js::generateMenuId",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::createMenu",
+      "to": "legacy-step2-backup/js/data.js::getAllMenus",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::updateMenu",
+      "to": "legacy-step2-backup/js/data.js::getAllMenus",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::deleteMenu",
+      "to": "legacy-step2-backup/js/data.js::getAllMenus",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::getOrders",
+      "to": "legacy-step2-backup/js/data.js::seedOrdersIfEmpty",
+      "type": "calls",
+      "label": "calls"
+    },
+    {
+      "from": "legacy-step2-backup/js/data.js::updateOrderStatus",
+      "to": "legacy-step2-backup/js/data.js::getOrders",
+      "type": "calls",
+      "label": "calls"
+    }
+  ]
+}

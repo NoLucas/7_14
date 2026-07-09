@@ -1,0 +1,33 @@
+{
+  "projectRoot": "C:/Users/Y/workspace/etc/project1",
+  "batchFiles": [
+    {"path": "frontend/menus/detail.js", "language": "javascript", "sizeLines": 124, "fileCategory": "code"},
+    {"path": "frontend/menus/list.js", "language": "javascript", "sizeLines": 81, "fileCategory": "code"},
+    {"path": "frontend/my/index.css", "language": "css", "sizeLines": 167, "fileCategory": "markup"},
+    {"path": "frontend/my/index.html", "language": "html", "sizeLines": 84, "fileCategory": "markup"},
+    {"path": "frontend/my/index.js", "language": "javascript", "sizeLines": 48, "fileCategory": "code"},
+    {"path": "frontend/orders/detail.js", "language": "javascript", "sizeLines": 76, "fileCategory": "code"},
+    {"path": "frontend/orders/list.js", "language": "javascript", "sizeLines": 49, "fileCategory": "code"},
+    {"path": "legacy-step2-backup/admin/menus/create.js", "language": "javascript", "sizeLines": 55, "fileCategory": "code"},
+    {"path": "legacy-step2-backup/admin/menus/detail.js", "language": "javascript", "sizeLines": 59, "fileCategory": "code"},
+    {"path": "legacy-step2-backup/admin/menus/edit.js", "language": "javascript", "sizeLines": 130, "fileCategory": "code"},
+    {"path": "legacy-step2-backup/admin/menus/list.js", "language": "javascript", "sizeLines": 125, "fileCategory": "code"},
+    {"path": "legacy-step2-backup/js/data.js", "language": "javascript", "sizeLines": 307, "fileCategory": "code"},
+    {"path": "README.md", "language": "markdown", "sizeLines": 3, "fileCategory": "docs"}
+  ],
+  "batchImportData": {
+    "frontend/menus/detail.js": [],
+    "frontend/menus/list.js": [],
+    "frontend/my/index.css": [],
+    "frontend/my/index.html": [],
+    "frontend/my/index.js": [],
+    "frontend/orders/detail.js": [],
+    "frontend/orders/list.js": [],
+    "legacy-step2-backup/admin/menus/create.js": [],
+    "legacy-step2-backup/admin/menus/detail.js": [],
+    "legacy-step2-backup/admin/menus/edit.js": [],
+    "legacy-step2-backup/admin/menus/list.js": [],
+    "legacy-step2-backup/js/data.js": [],
+    "README.md": []
+  }
+}

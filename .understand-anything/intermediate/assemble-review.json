@@ -1,0 +1,62 @@
+{
+  "status": "completed",
+  "reviewedAt": "2026-07-08",
+  "inputStats": {
+    "nodes": 134,
+    "edges": 112
+  },
+  "outputStats": {
+    "nodes": 134,
+    "edges": 112
+  },
+  "fixes": {
+    "nodesRecovered": 0,
+    "edgesRestored": 0,
+    "typesFixed": 54,
+    "edgeSemanticsFix": 26
+  },
+  "typeFixesDetail": {
+    "wholeFileCssHtmlNodesTypedAsFunction": {
+      "count": 36,
+      "description": "CSS and HTML file-level nodes had id prefix 'function:' but type='function'. Fixed to type='file' because these represent whole files, not functions. Affected: frontend/admin/menus/*.{css,html}, frontend/admin/orders/*.{css,html}, frontend/auth/*.{css,html}, frontend/menus/*.{css,html}, frontend/orders/*.{css,html}, legacy-step2-backup/admin/menus/*.{css,html}"
+    },
+    "wholeFileJsNodesTypedAsFunction": {
+      "count": 12,
+      "description": "JS file-level nodes (where id path segment equals the full file path, e.g. function:frontend/menus/detail.js:frontend/menus/detail.js) had type='function'. Fixed to type='file'. Affected: frontend/menus/detail.js, frontend/menus/list.js, frontend/my/index.{css,html,js}, frontend/orders/detail.js, frontend/orders/list.js, legacy-step2-backup/admin/menus/create.js, detail.js, edit.js, list.js, legacy-step2-backup/js/data.js, README.md"
+    },
+    "fileIdNodesWithWrongType": {
+      "count": 3,
+      "description": "Nodes with 'file:' prefix but type was 'config' or 'document'. Normalized to 'file'. Affected: file:.understand-anything/config.json (was 'config'), file:backend/README.md (was 'document'), file:BLUEPRINT.md (was 'document')"
+    }
+  },
+  "edgeSemanticsFixes": {
+    "definedInEdges": {
+      "count": 26,
+      "description": "26 edges had type='contains' but label='defined in' with source=child-function, target=parent-file. This is semantically inverted for 'contains' (which should go parent→child). Changed edge type to 'defined_in' to correctly express the relationship direction."
+    }
+  },
+  "droppedEdges": {
+    "count": 7,
+    "decision": "Acceptable — these were internal 'calls' edges targeting minor helper functions (under 10-line significance threshold) that were not extracted as nodes. No stub nodes created per instructions.",
+    "samples": [
+      "function:frontend/menus/list.js:init → function:frontend/menus/list.js:renderCategoryTabs",
+      "function:frontend/menus/list.js:init → function:frontend/menus/list.js:renderMenuGrid",
+      "function:frontend/my/index.js:init → function:frontend/my/index.js:renderCartSummary"
+    ]
+  },
+  "remainingConcerns": [
+    "Some 'function:' prefix nodes have type='file' (e.g. function:frontend/admin/menus/create.css:create.css). The ID prefix 'function:' is inconsistent with type='file'. Ideally these would use 'file:' prefix IDs, but changing IDs would require updating all edge references. The type field is now correct; the prefix mismatch is a cosmetic issue that downstream graph consumers should handle by checking the 'type' field, not the prefix.",
+    "The 'contains' edges from batches 7-8 where source=file and target=function (lines 3129-3350) correctly model containment parent→child, so those are fine.",
+    "13 nodes in batch 7-part-2 and batch 8 have 'defined_in' edges pointing to whole-file nodes that use the 'function:' id prefix (e.g. function:frontend/menus/detail.js:frontend/menus/detail.js). These parent nodes are now correctly typed as 'file', but the edge structure (child function → parent file-level node via defined_in) is semantically sound."
+  ],
+  "finalNodeTypeCounts": {
+    "file": 71,
+    "function": 63
+  },
+  "finalEdgeTypeCounts": {
+    "contains": 37,
+    "uses": 33,
+    "calls": 16,
+    "defined_in": 26
+  }
+}

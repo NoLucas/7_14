@@ -184,7 +184,7 @@ function renderBasketItem(item) {
 function bindBasketEvents() {
   const checkoutBtn = document.getElementById("checkoutBtn");
   if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", () => {
+    checkoutBtn.addEventListener("click", async () => {
       const validItems = buildCartViewModels().filter((item) => item.menu);
       if (validItems.length === 0) {
         return;
@@ -196,6 +196,12 @@ function bindBasketEvents() {
       }
 
       const newOrder = createOrder(validItems);
+
+      const latteArtSelection = getLatteArtSelection();
+      if (latteArtSelection) {
+        await saveLatteArtRequest(newOrder.id, latteArtSelection);
+      }
+
       clearCart();
       clearLatteArtSelection();
       window.location.href = `../orders/detail.html?id=${encodeURIComponent(newOrder.id)}`;

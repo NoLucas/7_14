@@ -152,7 +152,12 @@ async function init() {
     return;
   }
 
-  currentLatteArt = await getLatteArtByOrderId(currentOrder.id);
+  try {
+    currentLatteArt = await getLatteArtByOrderId(currentOrder.id);
+  } catch (err) {
+    console.error("getLatteArtByOrderId threw:", err);
+    currentLatteArt = null;
+  }
   renderDetail(currentOrder);
 }
 

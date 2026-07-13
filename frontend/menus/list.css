@@ -185,3 +185,11 @@
   text-align: center;
   color: var(--color-text-muted);
 }
+
+/* ===== Latte Art Shape Icon ===== */
+.latte-art-shape-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}

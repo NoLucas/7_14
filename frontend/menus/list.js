@@ -11,7 +11,7 @@ function init() {
 // ===== 카테고리 탭 =====
 function renderCategoryTabs() {
   const tabsEl = document.getElementById("categoryTabs");
-  const allTabs = [{ id: "all", name: "전체" }, ...CATEGORIES];
+  const allTabs = [{ id: "all", name: "전체" }, ...CATEGORIES, { id: "latte-art", name: "라떼아트" }];
 
   tabsEl.innerHTML = allTabs
     .map(
@@ -36,6 +36,12 @@ function renderCategoryTabs() {
 // ===== 메뉴 그리드 =====
 function renderMenuGrid() {
   const gridEl = document.getElementById("menuGrid");
+
+  if (selectedCategoryId === "latte-art") {
+    renderLatteArtShapeGrid(gridEl);
+    return;
+  }
+
   const menus = getMenusByCategory(selectedCategoryId);
 
   if (menus.length === 0) {
@@ -63,6 +69,21 @@ function renderMenuGrid() {
       `
     )
     .join("");
+}
+
+// ===== 라떼아트 모양 그리드 =====
+function renderLatteArtShapeGrid(gridEl) {
+  gridEl.innerHTML = LATTE_ART_SHAPES.map(
+    (shape) => `
+      <a class="menu-card glass" href="latte-art-detail.html?shape=${encodeURIComponent(shape.id)}">
+        <div class="menu-card-image latte-art-shape-icon">${shape.icon}</div>
+        <div class="menu-card-body">
+          <span class="menu-card-name">${shape.label}</span>
+          <p class="menu-card-desc">카페라떼, 카푸치노, 바닐라라떼에서 선택할 수 있는 라떼아트예요.</p>
+        </div>
+      </a>
+    `
+  ).join("");
 }
 
 // ===== 장바구니 배지 =====

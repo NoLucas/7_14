@@ -293,3 +293,42 @@ body {
     width: 100%;
   }
 }
+
+/* ===== Latte Art Request ===== */
+.latte-art-request {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+
+.latte-art-request[hidden] {
+  display: none;
+}
+
+.latte-art-request-label {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.latte-art-request-detail {
+  font-weight: 700;
+}
+
+.latte-art-request-remove {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--color-border);
+  color: var(--color-danger);
+}

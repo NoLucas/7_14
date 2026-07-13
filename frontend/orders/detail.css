@@ -159,3 +159,32 @@
   text-align: center;
   color: var(--color-text-muted);
 }
+
+/* ===== Latte Art Section ===== */
+.latte-art-section {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+}
+
+.section-title {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.latte-art-request-detail {
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+.latte-art-video {
+  width: 100%;
+  max-height: 360px;
+  border-radius: var(--radius-md);
+  background: #000;
+}
+
+.latte-art-status {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}

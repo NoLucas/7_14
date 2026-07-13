@@ -19,6 +19,15 @@ function getStatusClass(status) {
   return "status-received";
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 // ===== 장바구니 유틸리티 (localStorage 기반) =====
 const CART_STORAGE_KEY = "cafe-app:cart";
 
@@ -86,4 +95,26 @@ function getCartTotalPrice(getMenuByIdFn) {
     if (!menu) return total;
     return total + menu.price * item.quantity;
   }, 0);
+}
+
+// ===== 라떼아트 요청 유틸리티 (장바구니 단위, localStorage 기반) =====
+const LATTE_ART_STORAGE_KEY = "cafe-app:latteArtSelection";
+
+function getLatteArtSelection() {
+  const raw = localStorage.getItem(LATTE_ART_STORAGE_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function setLatteArtSelection(selection) {
+  localStorage.setItem(LATTE_ART_STORAGE_KEY, JSON.stringify(selection));
+  return selection;
+}
+
+function clearLatteArtSelection() {
+  localStorage.removeItem(LATTE_ART_STORAGE_KEY);
 }

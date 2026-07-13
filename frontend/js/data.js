@@ -1,3 +1,11 @@
+// ===== 라떼아트 프리셋 모양 =====
+const LATTE_ART_SHAPES = [
+  { id: "heart", label: "하트" },
+  { id: "rosetta", label: "로제타" },
+  { id: "tulip", label: "튤립" },
+  { id: "bear", label: "곰돌이" },
+];
+
 // ===== 카테고리 =====
 const CATEGORIES = [
   { id: "coffee", name: "커피" },
@@ -27,6 +35,7 @@ const MENUS = [
     image: "images/menus/latte.png",
     soldOut: false,
     rating: 4.9,
+    latteArtAvailable: true,
   },
   {
     id: "cappuccino",
@@ -37,6 +46,7 @@ const MENUS = [
     image: "images/menus/cappuccino.png",
     soldOut: false,
     rating: 4.7,
+    latteArtAvailable: true,
   },
   {
     id: "vanilla-latte",
@@ -47,6 +57,7 @@ const MENUS = [
     image: "images/menus/vanilla-latte.png",
     soldOut: false,
     rating: 4.6,
+    latteArtAvailable: true,
   },
   {
     id: "earl-grey",
@@ -117,7 +128,7 @@ const MENU_STORAGE_KEY = "cafe-app:menus";
 
 // MENUS 시드 데이터(이미지 경로 등)를 바꿀 때마다 이 값을 올려준다.
 // 그래야 이미 브라우저에 저장된 이전 캐시를 새 시드 데이터로 갱신한다.
-const MENU_SEED_VERSION = "2";
+const MENU_SEED_VERSION = "3";
 const MENU_SEED_VERSION_KEY = "cafe-app:menus:seed-version";
 
 function getCategories() {

@@ -1,6 +1,8 @@
 // ===== 상태 =====
 let currentMenu = null;
 let quantity = 1;
+let selectedLatteArtShape = null; // 프리셋 id, "custom", 또는 null
+let latteArtNote = "";
 
 // ===== 초기화 =====
 function init() {
@@ -34,6 +36,7 @@ function renderMenuDetail() {
       <p class="menu-detail-price">${formatPrice(currentMenu.price)}</p>
       <p class="menu-detail-desc">${currentMenu.description}</p>
       ${soldOut ? `<span class="menu-detail-soldout">품절된 메뉴입니다</span>` : renderQuantityStepper()}
+      ${!soldOut && currentMenu.latteArtAvailable ? renderLatteArtPicker() : ""}
     </div>
     ${soldOut ? "" : renderActionBar()}
   `;
@@ -41,6 +44,9 @@ function renderMenuDetail() {
   if (!soldOut) {
     bindQuantityEvents();
     bindAddToCartEvent();
+    if (currentMenu.latteArtAvailable) {
+      bindLatteArtEvents();
+    }
   }
 }
 
@@ -54,11 +60,47 @@ function renderQuantityStepper() {
   `;
 }
 
+function renderLatteArtPicker() {
+  const presetButtons = LATTE_ART_SHAPES.map(
+    (shape) => `
+      <button
+        type="button"
+        class="latte-art-shape-btn ${selectedLatteArtShape === shape.id ? "selected" : ""}"
+        data-shape="${shape.id}"
+      >
+        ${shape.label}
+      </button>
+    `
+  ).join("");
+
+  return `
+    <div class="latte-art-picker">
+      <h3 class="latte-art-title">라떼아트 요청 (선택)</h3>
+      <div class="latte-art-shapes">
+        ${presetButtons}
+        <button
+          type="button"
+          class="latte-art-shape-btn ${selectedLatteArtShape === "custom" ? "selected" : ""}"
+          data-shape="custom"
+        >
+          기타
+        </button>
+      </div>
+      ${
+        selectedLatteArtShape === "custom"
+          ? `<textarea id="latteArtNote" class="latte-art-note" maxlength="100" placeholder="원하는 모양을 설명해주세요">${escapeHtml(latteArtNote)}</textarea>`
+          : ""
+      }
+    </div>
+  `;
+}
+
 function renderActionBar() {
+  const disabled = currentMenu.latteArtAvailable && !isLatteArtValid();
   return `
     <div class="action-bar glass">
       <span class="action-bar-total" id="actionBarTotal">${formatPrice(currentMenu.price * quantity)}</span>
-      <button class="add-to-cart-btn" id="addToCartBtn">장바구니 담기</button>
+      <button class="add-to-cart-btn" id="addToCartBtn" ${disabled ? "disabled" : ""}>장바구니 담기</button>
     </div>
   `;
 }
@@ -89,11 +131,46 @@ function updateQuantityDisplay() {
   document.getElementById("actionBarTotal").textContent = formatPrice(currentMenu.price * quantity);
 }
 
+// ===== 라떼아트 선택 =====
+function bindLatteArtEvents() {
+  document.querySelectorAll(".latte-art-shape-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      selectedLatteArtShape = btn.dataset.shape;
+      if (selectedLatteArtShape !== "custom") {
+        latteArtNote = "";
+      }
+      renderMenuDetail();
+    });
+  });
+
+  const noteInput = document.getElementById("latteArtNote");
+  if (noteInput) {
+    noteInput.addEventListener("input", () => {
+      latteArtNote = noteInput.value;
+      const addToCartBtn = document.getElementById("addToCartBtn");
+      if (addToCartBtn) {
+        addToCartBtn.disabled = !isLatteArtValid();
+      }
+    });
+  }
+}
+
+function isLatteArtValid() {
+  if (selectedLatteArtShape === "custom") {
+    return latteArtNote.trim().length > 0;
+  }
+  return true;
+}
+
 // ===== 장바구니 담기 =====
 function bindAddToCartEvent() {
   const addToCartBtn = document.getElementById("addToCartBtn");
 
   addToCartBtn.addEventListener("click", () => {
+    if (currentMenu.latteArtAvailable && selectedLatteArtShape) {
+      applyLatteArtSelection();
+    }
+
     addToCart(currentMenu.id, quantity);
     updateCartBadge();
 
@@ -103,9 +180,36 @@ function bindAddToCartEvent() {
 
     setTimeout(() => {
       addToCartBtn.textContent = originalText;
-      addToCartBtn.disabled = false;
+      addToCartBtn.disabled = !isLatteArtValid();
     }, 1200);
   });
+}
+
+function applyLatteArtSelection() {
+  const nextSelection = {
+    menuId: currentMenu.id,
+    menuName: currentMenu.name,
+    shape: selectedLatteArtShape,
+    note: selectedLatteArtShape === "custom" ? latteArtNote.trim() : "",
+  };
+
+  const existing = getLatteArtSelection();
+  const isSameRequest =
+    existing &&
+    existing.menuId === nextSelection.menuId &&
+    existing.shape === nextSelection.shape &&
+    existing.note === nextSelection.note;
+
+  if (existing && !isSameRequest) {
+    const confirmed = window.confirm(
+      `이미 "${existing.menuName}"에 라떼아트 요청이 있어요. "${nextSelection.menuName}" 요청으로 교체할까요?`
+    );
+    if (!confirmed) {
+      return;
+    }
+  }
+
+  setLatteArtSelection(nextSelection);
 }
 
 // ===== 장바구니 배지 =====

@@ -22,6 +22,45 @@ function bindHeaderActions() {
   });
 }
 
+function reconcileLatteArtSelection() {
+  const selection = getLatteArtSelection();
+  if (!selection) return;
+
+  const stillInCart = getCart().some((item) => item.menuId === selection.menuId);
+  if (!stillInCart) {
+    clearLatteArtSelection();
+  }
+}
+
+function renderLatteArtRequest() {
+  const sectionEl = document.getElementById("latteArtRequest");
+  const selection = getLatteArtSelection();
+
+  if (!selection) {
+    sectionEl.hidden = true;
+    sectionEl.innerHTML = "";
+    return;
+  }
+
+  const shapeInfo = LATTE_ART_SHAPES.find((shape) => shape.id === selection.shape);
+  const detailText =
+    selection.shape === "custom" ? selection.note : shapeInfo ? shapeInfo.label : selection.shape;
+
+  sectionEl.hidden = false;
+  sectionEl.innerHTML = `
+    <div>
+      <span class="latte-art-request-label">라떼아트 요청</span>
+      <p class="latte-art-request-detail">${escapeHtml(selection.menuName)} · ${escapeHtml(detailText)}</p>
+    </div>
+    <button class="latte-art-request-remove" id="removeLatteArtBtn" type="button" aria-label="라떼아트 요청 삭제">✕</button>
+  `;
+
+  document.getElementById("removeLatteArtBtn").addEventListener("click", () => {
+    clearLatteArtSelection();
+    renderBasketPage();
+  });
+}
+
 function buildCartViewModels() {
   return getCart().map((item) => {
     const menu = getMenuById(item.menuId);
@@ -37,6 +76,9 @@ function buildCartViewModels() {
 }
 
 function renderBasketPage() {
+  reconcileLatteArtSelection();
+  renderLatteArtRequest();
+
   const contentEl = document.getElementById("basketContent");
   const cartItems = buildCartViewModels();
   const validItems = cartItems.filter((item) => item.menu);
@@ -142,7 +184,7 @@ function renderBasketItem(item) {
 function bindBasketEvents() {
   const checkoutBtn = document.getElementById("checkoutBtn");
   if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", () => {
+    checkoutBtn.addEventListener("click", async () => {
       const validItems = buildCartViewModels().filter((item) => item.menu);
       if (validItems.length === 0) {
         return;
@@ -154,7 +196,14 @@ function bindBasketEvents() {
       }
 
       const newOrder = createOrder(validItems);
+
+      const latteArtSelection = getLatteArtSelection();
+      if (latteArtSelection) {
+        await saveLatteArtRequest(newOrder.id, latteArtSelection);
+      }
+
       clearCart();
+      clearLatteArtSelection();
       window.location.href = `../orders/detail.html?id=${encodeURIComponent(newOrder.id)}`;
     });
   }

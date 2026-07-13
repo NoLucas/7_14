@@ -10,6 +10,14 @@ function init() {
   const menuId = params.get("id");
   currentMenu = menuId ? getMenuById(menuId) : null;
 
+  const shapeParam = params.get("shape");
+  if (currentMenu && currentMenu.latteArtAvailable && shapeParam) {
+    const isKnownShape = LATTE_ART_SHAPES.some((shape) => shape.id === shapeParam) || shapeParam === "custom";
+    if (isKnownShape) {
+      selectedLatteArtShape = shapeParam;
+    }
+  }
+
   renderMenuDetail();
   updateCartBadge();
 }

@@ -305,6 +305,10 @@ body {
   border-radius: var(--radius-lg);
 }
 
+.latte-art-request[hidden] {
+  display: none;
+}
+
 .latte-art-request-label {
   display: block;
   color: var(--color-text-muted);

@@ -216,10 +216,10 @@ project1/
 
 > 라떼류 메뉴에 한해, 고객이 원하는 라떼아트 모양을 프리셋 또는 직접 입력으로 요청. 요청은 **장바구니 전체 단위로 1개만** 유지(여러 라떼아트 메뉴를 담아도 마지막 선택으로 교체).
 
-- [ ] `frontend/js/data.js` — `LATTE_ART_SHAPES` 프리셋 목록(하트/로제타/튤립/곰돌이/기타) 추가, `MENUS`의 라떼류(카페라떼/카푸치노/바닐라라떼)에 `latteArtAvailable: true` 플래그 추가
-- [ ] `frontend/js/utils.js` — 장바구니 단위 라떼아트 요청 저장/조회/삭제 함수 추가: `getLatteArtSelection` / `setLatteArtSelection` / `clearLatteArtSelection` (localStorage 키 `cafe-app:latteArtSelection`)
-- [ ] `frontend/menus/detail.html`, `detail.css`, `detail.js` — `latteArtAvailable` 메뉴일 때 모양 선택 UI(프리셋 카드 + "기타" 선택 시 텍스트 입력) 노출. 장바구니 담기 시 현재 선택을 라떼아트 요청으로 저장(기존 요청이 있으면 교체 confirm)
-- [ ] `frontend/basket/list.html`, `list.css`, `list.js` — "라떼아트 요청" 카드로 현재 요청(메뉴명/모양/설명) 표시, 삭제 가능
+- [x] `frontend/js/data.js` — `LATTE_ART_SHAPES` 프리셋 목록(하트/로제타/튤립/곰돌이/기타) 추가, `MENUS`의 라떼류(카페라떼/카푸치노/바닐라라떼)에 `latteArtAvailable: true` 플래그 추가
+- [x] `frontend/js/utils.js` — 장바구니 단위 라떼아트 요청 저장/조회/삭제 함수 추가: `getLatteArtSelection` / `setLatteArtSelection` / `clearLatteArtSelection` (localStorage 키 `cafe-app:latteArtSelection`)
+- [x] `frontend/menus/detail.html`, `detail.css`, `detail.js` — `latteArtAvailable` 메뉴일 때 모양 선택 UI(프리셋 카드 + "기타" 선택 시 텍스트 입력) 노출. 장바구니 담기 시 현재 선택을 라떼아트 요청으로 저장(기존 요청이 있으면 교체 confirm)
+- [x] `frontend/basket/list.html`, `list.css`, `list.js` — "라떼아트 요청" 카드로 현재 요청(메뉴명/모양/설명) 표시, 삭제 가능
 
 ### 12단계: Supabase 연동 기반 구축
 

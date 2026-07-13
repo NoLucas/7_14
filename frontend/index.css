@@ -686,3 +686,67 @@ body {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* ===== Barista Profile ===== */
+.barista-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+  padding: var(--space-xl);
+}
+
+.barista-photo {
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-full);
+}
+
+.barista-info {
+  text-align: center;
+}
+
+.barista-name {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.barista-role {
+  margin-top: var(--space-xs);
+  color: var(--color-primary-light);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+.barista-career {
+  margin-top: var(--space-md);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  list-style: disc;
+  padding-left: var(--space-lg);
+  text-align: left;
+  display: inline-block;
+}
+
+.barista-bio {
+  margin-top: var(--space-md);
+  color: var(--color-text);
+  font-style: italic;
+}
+
+@media (min-width: 768px) {
+  .barista-card {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .barista-info {
+    text-align: left;
+  }
+}

@@ -268,10 +268,10 @@ project1/
 
 > 라떼아트도 하나의 "메뉴"로 취급해, 메뉴 목록 페이지 카테고리 탭(전체/커피/티/에이드/디저트)에 "라떼아트" 탭을 추가한다. 이 탭을 고르면 커피 카드와 같은 스타일로 프리셋 모양 4종(하트/로제타/튤립/곰돌이)이 보이고, 모양을 고르면 그 모양을 만들 수 있는 커피 3종(카페라떼/카푸치노/바닐라라떼)이 나온다. 커피를 고르면 기존 메뉴 상세 페이지로 이동하되 그 모양이 미리 선택된 채로 열린다(장바구니 담기 전 다른 모양으로 바꿀 수 있음). 11단계에서 이미 구현된 모양 선택/저장 로직은 건드리지 않고, 그 앞에 "탐색" 경로만 새로 만든다.
 
-- [ ] `frontend/js/data.js` — `LATTE_ART_SHAPES` 각 항목에 `icon`(이모지) 필드 추가
-- [ ] `frontend/menus/list.html`, `list.css`, `list.js` — 카테고리 탭에 "라떼아트" 가상 탭 추가, 선택 시 모양 카드 그리드 렌더링(기존 메뉴 카드와 동일한 비주얼)
-- [ ] `frontend/menus/latte-art-detail.html`, `latte-art-detail.css`, `latte-art-detail.js` — 모양별 상세 페이지 신규 추가: 모양 아이콘/이름 + 지원 커피 3종 카드(`detail.html?id=X&shape=Y`로 연결)
-- [ ] `frontend/menus/detail.js` — URL의 `shape` 쿼리 파라미터를 읽어 라떼아트 모양을 미리 선택한 상태로 렌더링
+- [x] `frontend/js/data.js` — `LATTE_ART_SHAPES` 각 항목에 `icon`(이모지) 필드 추가
+- [x] `frontend/menus/list.html`, `list.css`, `list.js` — 카테고리 탭에 "라떼아트" 가상 탭 추가, 선택 시 모양 카드 그리드 렌더링(기존 메뉴 카드와 동일한 비주얼)
+- [x] `frontend/menus/latte-art-detail.html`, `latte-art-detail.css`, `latte-art-detail.js` — 모양별 상세 페이지 신규 추가: 모양 아이콘/이름 + 지원 커피 3종 카드(`detail.html?id=X&shape=Y`로 연결)
+- [x] `frontend/menus/detail.js` — URL의 `shape` 쿼리 파라미터를 읽어 라떼아트 모양을 미리 선택한 상태로 렌더링
 
 ### 17단계: 홈페이지 - 바리스타 소개
 

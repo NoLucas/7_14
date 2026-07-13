@@ -1,9 +1,9 @@
 // ===== 라떼아트 프리셋 모양 =====
 const LATTE_ART_SHAPES = [
-  { id: "heart", label: "하트" },
-  { id: "rosetta", label: "로제타" },
-  { id: "tulip", label: "튤립" },
-  { id: "bear", label: "곰돌이" },
+  { id: "heart", label: "하트", icon: "❤️" },
+  { id: "rosetta", label: "로제타", icon: "🌿" },
+  { id: "tulip", label: "튤립", icon: "🌷" },
+  { id: "bear", label: "곰돌이", icon: "🐻" },
 ];
 
 // ===== 카테고리 =====

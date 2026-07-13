@@ -14,6 +14,7 @@
 - 11단계의 모양 선택 로직(`selectedLatteArtShape`, `latteArtNote`, `applyLatteArtSelection`, `isLatteArtValid` 등)은 이 단계에서 값을 변경하지 않는다 — `init()`에서 초기값만 세팅하고, 그 이후 로직/렌더링은 손대지 않는다.
 - 라떼아트 모양 카드/상세 페이지의 커피 카드는 기존 `frontend/menus/list.css`의 `.menu-card`/`.menu-card-image`/`.menu-card-body`/`.menu-card-name`/`.menu-card-desc`/`.menu-card-price`/`.menu-grid`/`.empty-state` 클래스를 그대로 재사용한다 — 새로 정의하지 않는다.
 - 새 함수/페이지는 정확히 이 이름을 쓴다: 카테고리 탭 가상 항목 id `latte-art`, 새 페이지 `frontend/menus/latte-art-detail.html`(쿼리 파라미터 `shape`), `frontend/menus/detail.js`가 읽는 쿼리 파라미터 `shape`.
+- **로컬 서버 URL 규칙 (중요, 검증 중 실제로 발견된 문제)**: `package.json`의 `start` 스크립트가 `serve frontend -l 3113`이라 로컬 서버는 `frontend/`를 루트로 서빙한다 — URL에 `/frontend/` 접두사를 붙이면 안 된다(예: `http://localhost:3113/menus/list.html`, `/frontend/` 없이). **또한 `serve` 패키지가 `.html` 확장자가 붙은 URL을 확장자 없는 URL로 301 리다이렉트하는데, 이 리다이렉트 과정에서 쿼리 스트링(`?id=...`, `?shape=...`)이 통째로 사라지는 버그성 동작이 있다** — 실제로 Task 1 검증 중 이것 때문에 `?id=latte`가 날아가서 "메뉴를 찾을 수 없습니다"가 뜨는 걸 직접 겪었다. 그러니 Playwright로 `page.goto()`할 때 쿼리 파라미터가 있는 URL은 **반드시 `.html` 확장자를 빼고** 접속할 것(예: `http://localhost:3113/menus/detail?id=latte&shape=heart` — `detail.html`이 아니라 `detail`). 쿼리 파라미터가 없는 URL(`list.html` 등)은 `.html`을 붙여도 리다이렉트만 되고 문제없지만, 일관성을 위해 이 단계의 모든 검증에서는 확장자 없는 URL을 쓸 것. **이건 로컬 개발 서버(`serve`)만의 특성이고 실제 배포(GitHub Pages)나 앱 코드 자체의 문제가 아니다** — 앱 코드를 이 리다이렉트에 맞춰 고치려 하지 말 것.
 
 ---
 
@@ -40,13 +41,13 @@ const LATTE_ART_SHAPES = [
 
 - [ ] **Step 2: 검증**
 
-`npm start` 실행 후 `http://localhost:3113/frontend/menus/list.html`에서 개발자 도구 콘솔:
+`npm start` 실행 후 `http://localhost:3113/menus/list`에서 개발자 도구 콘솔:
 
 ```js
 LATTE_ART_SHAPES.map((s) => s.icon)  // ["❤️", "🌿", "🌷", "🐻"]
 ```
 
-기존 11단계 UI(라떼류 메뉴 상세 페이지의 모양 선택 버튼)가 여전히 정상 작동하는지도 확인 — `http://localhost:3113/frontend/menus/detail.html?id=latte`에서 "하트" 버튼을 눌러 선택되는지 확인 (아이콘 필드 추가가 기존 버튼 렌더링을 깨지 않는지 확인).
+기존 11단계 UI(라떼류 메뉴 상세 페이지의 모양 선택 버튼)가 여전히 정상 작동하는지도 확인 — `http://localhost:3113/menus/detail?id=latte`에서 "하트" 버튼을 눌러 선택되는지 확인 (아이콘 필드 추가가 기존 버튼 렌더링을 깨지 않는지 확인). **실제로 Playwright로 열어서 확인할 것 — Task 1은 이미 이렇게 검증되어 통과했다 (icons: ["❤️","🌿","🌷","🐻"], heart button selected after click: true, console errors: none).**
 
 - [ ] **Step 3: 커밋**
 
@@ -157,7 +158,7 @@ const { chromium } = require("playwright");
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  await page.goto("http://localhost:3113/frontend/menus/list.html", { waitUntil: "networkidle" });
+  await page.goto("http://localhost:3113/menus/list", { waitUntil: "networkidle" });
   await page.click('button.category-tab:has-text("라떼아트")');
   await page.waitForSelector('a[href*="latte-art-detail.html?shape=heart"]');
   const cardCount = await page.locator(".menu-grid .menu-card").count();
@@ -336,7 +337,7 @@ init();
 
 - [ ] **Step 4: 검증 — 실제 브라우저(Playwright)**
 
-`http://localhost:3113/frontend/menus/latte-art-detail.html?shape=heart`로 직접 접속해서:
+`http://localhost:3113/menus/latte-art-detail?shape=heart`로 직접 접속해서:
 1. "❤️ 하트" 히어로 영역이 보이는지
 2. 아래에 카페라떼/카푸치노/바닐라라떼 3개 카드가 보이는지 (다른 메뉴는 안 보여야 함 — `latteArtAvailable`이 없는 메뉴는 제외되는지)
 3. 카페라떼 카드를 클릭하면 `detail.html?id=latte&shape=heart`로 이동하는지
@@ -387,7 +388,7 @@ function init() {
 
 - [ ] **Step 2: 검증 — 실제 브라우저(Playwright)**
 
-`http://localhost:3113/frontend/menus/detail.html?id=latte&shape=heart`로 접속해서 "하트" 버튼이 이미 선택된(활성화 스타일) 상태로 렌더링되는지 확인. `?id=latte&shape=rosetta`, `?id=latte`(파라미터 없음, 기존 동작 그대로 아무것도 선택 안 됨), `?id=americano&shape=heart`(라떼아트 미지원 메뉴 — 섹션 자체가 안 보여야 함, 11단계 기존 동작과 동일)도 확인.
+`http://localhost:3113/menus/detail?id=latte&shape=heart`로 접속해서 "하트" 버튼이 이미 선택된(활성화 스타일) 상태로 렌더링되는지 확인. `?id=latte&shape=rosetta`, `?id=latte`(파라미터 없음, 기존 동작 그대로 아무것도 선택 안 됨), `?id=americano&shape=heart`(라떼아트 미지원 메뉴 — 섹션 자체가 안 보여야 함, 11단계 기존 동작과 동일)도 확인.
 
 - [ ] **Step 3: 커밋**
 

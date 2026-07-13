@@ -1,0 +1,27 @@
+/* ===== Latte Art Shape Hero ===== */
+.latte-art-shape-hero {
+  margin-top: var(--space-lg);
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.latte-art-shape-icon-large {
+  font-size: 4rem;
+  margin-bottom: var(--space-sm);
+}
+
+.latte-art-shape-name {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+}
+
+.latte-art-shape-hint {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+}
+
+.not-found {
+  padding: var(--space-2xl) 0;
+  text-align: center;
+  color: var(--color-text-muted);
+}

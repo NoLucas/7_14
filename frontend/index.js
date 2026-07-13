@@ -110,6 +110,33 @@ function renderGallery() {
   ).join("");
 }
 
+// ===== 라떼아트 갤러리 =====
+async function renderLatteArtGallery() {
+  const gridEl = document.getElementById("latteArtGalleryGrid");
+
+  let videos = [];
+  try {
+    videos = await getRecentLatteArtVideos(4);
+  } catch (err) {
+    console.error("getRecentLatteArtVideos threw:", err);
+  }
+
+  if (videos.length === 0) {
+    gridEl.innerHTML = `<p class="empty-state">곧 라떼아트 갤러리가 채워질 예정이에요.</p>`;
+    return;
+  }
+
+  gridEl.innerHTML = videos
+    .map(
+      (video) => `
+        <div class="latte-art-gallery-card">
+          <video src="${escapeHtml(video.video_url)}" autoplay muted loop playsinline></video>
+        </div>
+      `
+    )
+    .join("");
+}
+
 // ===== 장바구니 담기 (인기 메뉴 카드 버튼) =====
 function bindAddToCartButtons(scopeEl) {
   scopeEl.querySelectorAll(".add-cart-btn").forEach((button) => {
@@ -199,6 +226,7 @@ function init() {
   renderFeaturedMenus();
   renderRecommendation();
   renderGallery();
+  renderLatteArtGallery();
   updateCartBadge();
   bindHeaderScrollEffect();
   bindRevealAnimation();

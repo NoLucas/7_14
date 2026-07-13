@@ -231,6 +231,12 @@ project1/
 - [x] `frontend/js/latte-art.js` — `saveLatteArtRequest(orderId, request)` / `getLatteArtByOrderId(orderId)` / `uploadLatteArtVideo(orderId, file)` 공통 함수
 - [x] `frontend/basket/list.js` — 주문하기(`createOrder`) 성공 후 라떼아트 요청이 있으면 `saveLatteArtRequest` 호출, 로컬 선택 초기화
 
+**⚠️ 알려진 이슈 (최종 리뷰에서 발견, 의도적으로 미해결)**
+
+- **`order_id` 충돌 가능성** — `latte_art_orders.order_id`는 브라우저별 로컬 `generateOrderId()`(`ORD-YYYYMMDD-NNN`, 당일 순번)를 그대로 공유 테이블의 PK로 사용한다. 서로 다른 기기의 고객이 같은 날 같은 순번을 생성하면 나중 주문의 `saveLatteArtRequest` insert가 PK 충돌로 실패해 조용히 `null`을 반환하고(체크아웃 자체는 정상 진행), 해당 고객의 라떼아트 요청이 유실된다. 포트폴리오/데모 규모상 실제 동시 충돌 가능성이 낮다고 보고 현재는 그대로 두기로 결정함 — 실사용 트래픽이 생기면 서로게이트 PK 등으로 재검토 필요.
+- **`uploadLatteArtVideo`의 에러 계약 미검증** — `frontend/js/latte-art.js`의 다른 두 함수(`saveLatteArtRequest`/`getLatteArtByOrderId`)와 달리, `client.storage...upload()` 호출은 이론상 `{data, error}`를 반환하지 않고 reject할 수 있어 "절대 throw하지 않는다"는 파일 전체의 계약을 깰 가능성이 있다. 12단계 시점에는 이 함수를 호출하는 곳이 없어 실질적 영향은 없음 — **13단계에서 실제 업로드 UI를 연결할 때 try/catch로 감싸거나 동작을 재검증할 것.**
+- **커스텀 모양 + 빈 설명 처리** — 고객이 "기타"를 선택하고 설명을 비워둔 채 저장되면(11단계 UI는 버튼 비활성화로 막지만, 향후 경로 변경 시 재발 가능) `shape: "custom"`, `note: null`로 저장된다. 13/14단계 화면에서 표시할 내용이 없을 수 있음 — 표시 로직에서 폴백 문구를 고려할 것.
+
 ### 13단계: 관리자 - 라떼아트 영상 업로드
 
 > 바리스타가 라떼아트를 만든 뒤 녹화한 영상을 주문에 연결해 업로드 (실시간 스트리밍이 아닌 녹화 업로드 방식).

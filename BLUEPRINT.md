@@ -212,3 +212,35 @@ project1/
 - [x] `frontend/index.css` — 신규 섹션 스타일, hover/스크롤 reveal/버튼 리플 애니메이션, 반응형(Desktop/Tablet/Mobile)
 - [x] `frontend/index.js` — Popular Menu 카드(별점/카테고리/Add to Cart), Today's Recommendation·Instagram Gallery 렌더링, 헤더 스크롤 효과, 스크롤 reveal, 리플 이벤트 바인딩
 
+### 11단계: 고객 - 라떼아트 모양 선택
+
+> 라떼류 메뉴에 한해, 고객이 원하는 라떼아트 모양을 프리셋 또는 직접 입력으로 요청. 요청은 **장바구니 전체 단위로 1개만** 유지(여러 라떼아트 메뉴를 담아도 마지막 선택으로 교체).
+
+- [ ] `frontend/js/data.js` — `LATTE_ART_SHAPES` 프리셋 목록(하트/로제타/튤립/곰돌이/기타) 추가, `MENUS`의 라떼류(카페라떼/카푸치노/바닐라라떼)에 `latteArtAvailable: true` 플래그 추가
+- [ ] `frontend/js/utils.js` — 장바구니 단위 라떼아트 요청 저장/조회/삭제 함수 추가: `getLatteArtSelection` / `setLatteArtSelection` / `clearLatteArtSelection` (localStorage 키 `cafe-app:latteArtSelection`)
+- [ ] `frontend/menus/detail.html`, `detail.css`, `detail.js` — `latteArtAvailable` 메뉴일 때 모양 선택 UI(프리셋 카드 + "기타" 선택 시 텍스트 입력) 노출. 장바구니 담기 시 현재 선택을 라떼아트 요청으로 저장(기존 요청이 있으면 교체 confirm)
+- [ ] `frontend/basket/list.html`, `list.css`, `list.js` — "라떼아트 요청" 카드로 현재 요청(메뉴명/모양/설명) 표시, 삭제 가능
+
+### 12단계: Supabase 연동 기반 구축
+
+> 라떼아트 요청·영상은 관리자/고객이 서로 다른 브라우저에서 봐야 하므로 localStorage로는 공유가 안 됨. 이 기능에 한해서만 Supabase(DB + Storage)를 도입하고, 기존 주문/메뉴/인증은 그대로 localStorage 목업 유지.
+
+- [ ] Supabase 프로젝트 생성. 테이블 `latte_art_orders` 생성: `order_id`(PK, text, 기존 로컬 주문 ID 그대로 사용) / `item_name`(text) / `shape`(text) / `note`(text, nullable) / `video_url`(text, nullable) / `video_uploaded_at`(timestamptz, nullable) / `created_at`(timestamptz)
+- [ ] Storage 버킷 `latte-art-videos` 생성 및 접근 정책 설정
+- [ ] `frontend/js/supabase-client.js` — Supabase JS client 초기화 (project URL, anon key)
+- [ ] `frontend/js/latte-art.js` — `saveLatteArtRequest(orderId, request)` / `getLatteArtByOrderId(orderId)` / `uploadLatteArtVideo(orderId, file)` 공통 함수
+- [ ] `frontend/basket/list.js` — 주문하기(`createOrder`) 성공 후 라떼아트 요청이 있으면 `saveLatteArtRequest` 호출, 로컬 선택 초기화
+
+### 13단계: 관리자 - 라떼아트 영상 업로드
+
+> 바리스타가 라떼아트를 만든 뒤 녹화한 영상을 주문에 연결해 업로드 (실시간 스트리밍이 아닌 녹화 업로드 방식).
+
+- [ ] `frontend/admin/orders/detail.html`, `detail.css`, `detail.js` — 주문에 연결된 라떼아트 요청(모양/설명) 표시
+- [ ] 영상 업로드 UI(파일 선택 + 업로드 버튼, 진행 상태 표시). `video/*` 타입 및 용량 상한(예: 50MB) 클라이언트 검증
+- [ ] 업로드 성공 시 `uploadLatteArtVideo` 호출 → `video_url` / `video_uploaded_at` 갱신 및 화면 반영
+
+### 14단계: 고객 - 라떼아트 영상 확인
+
+- [ ] `frontend/orders/detail.html`, `detail.css`, `detail.js` — 주문에 라떼아트 요청이 있으면 요청 내용 표시. `video_url`이 있으면 `<video>` 재생, 없으면 "제작 중" 안내
+- [ ] Supabase 조회 실패 시 해당 섹션만 안내 메시지로 대체(주문 상세 페이지 자체는 정상 표시되도록 에러 격리)
+

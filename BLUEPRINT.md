@@ -225,11 +225,11 @@ project1/
 
 > 라떼아트 요청·영상은 관리자/고객이 서로 다른 브라우저에서 봐야 하므로 localStorage로는 공유가 안 됨. 이 기능에 한해서만 Supabase(DB + Storage)를 도입하고, 기존 주문/메뉴/인증은 그대로 localStorage 목업 유지.
 
-- [ ] Supabase 프로젝트 생성. 테이블 `latte_art_orders` 생성: `order_id`(PK, text, 기존 로컬 주문 ID 그대로 사용) / `item_name`(text) / `shape`(text) / `note`(text, nullable) / `video_url`(text, nullable) / `video_uploaded_at`(timestamptz, nullable) / `created_at`(timestamptz)
-- [ ] Storage 버킷 `latte-art-videos` 생성 및 접근 정책 설정
-- [ ] `frontend/js/supabase-client.js` — Supabase JS client 초기화 (project URL, anon key)
-- [ ] `frontend/js/latte-art.js` — `saveLatteArtRequest(orderId, request)` / `getLatteArtByOrderId(orderId)` / `uploadLatteArtVideo(orderId, file)` 공통 함수
-- [ ] `frontend/basket/list.js` — 주문하기(`createOrder`) 성공 후 라떼아트 요청이 있으면 `saveLatteArtRequest` 호출, 로컬 선택 초기화
+- [x] Supabase 프로젝트 생성. 테이블 `latte_art_orders` 생성: `order_id`(PK, text, 기존 로컬 주문 ID 그대로 사용) / `item_name`(text) / `shape`(text) / `note`(text, nullable) / `video_url`(text, nullable) / `video_uploaded_at`(timestamptz, nullable) / `created_at`(timestamptz)
+- [x] Storage 버킷 `latte-art-videos` 생성 및 접근 정책 설정
+- [x] `frontend/js/supabase-client.js` — Supabase JS client 초기화 (project URL, anon key)
+- [x] `frontend/js/latte-art.js` — `saveLatteArtRequest(orderId, request)` / `getLatteArtByOrderId(orderId)` / `uploadLatteArtVideo(orderId, file)` 공통 함수
+- [x] `frontend/basket/list.js` — 주문하기(`createOrder`) 성공 후 라떼아트 요청이 있으면 `saveLatteArtRequest` 호출, 로컬 선택 초기화
 
 ### 13단계: 관리자 - 라떼아트 영상 업로드
 

@@ -102,6 +102,19 @@ create policy "anon can update latte art videos"
 
   Done: surfaced an additional `public_bucket_allows_listing` WARN (see amendment above) — fixed by dropping the unnecessary SELECT policy, not part of the original plan's scope but a genuine improvement, not a scope tradeoff. Re-ran advisors after the fix: only the two pre-accepted `latte_art_orders` warnings remain.
 
+**Amendment made during final whole-branch review:** the final reviewer flagged that the bucket had no `file_size_limit`/`allowed_mime_types`, so any holder of the public key could upload arbitrary-size/arbitrary-type files (a flooding/abuse vector, distinct from the accepted "anyone can upload a legitimate video" tradeoff). Fixed directly by the controller:
+
+```sql
+update storage.buckets
+set file_size_limit = 52428800, -- 50MB, matches 13단계's planned client-side check
+    allowed_mime_types = array['video/mp4', 'video/webm', 'video/quicktime', 'video/x-msvideo']
+where id = 'latte-art-videos';
+```
+
+Verified: `file_size_limit: 52428800`, `allowed_mime_types` set as above.
+
+**Known accepted risk (not fixed):** `latte_art_orders.order_id` is the localStorage-generated, per-browser-sequential order id (`ORD-YYYYMMDD-NNN`) used directly as this shared table's primary key. Two different customers on two different devices could, in principle, generate the same id on the same day and collide — the losing insert fails silently (`saveLatteArtRequest` catches the error and returns `null`; checkout still proceeds) and that customer's latte-art request would be lost. Explicitly accepted as low-probability for this portfolio/demo project's realistic traffic; revisit if this ever needs to handle real concurrent customers.
+
 ---
 
 ## Task 3: `frontend/js/supabase-client.js` — 클라이언트 초기화

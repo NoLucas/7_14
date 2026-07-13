@@ -255,3 +255,12 @@ project1/
 - [x] `frontend/orders/detail.html`, `detail.css`, `detail.js` — 주문에 라떼아트 요청이 있으면 요청 내용 표시. `video_url`이 있으면 `<video>` 재생, 없으면 "제작 중" 안내
 - [x] Supabase 조회 실패 시 해당 섹션만 안내 메시지로 대체(주문 상세 페이지 자체는 정상 표시되도록 에러 격리)
 
+### 15단계: 홈페이지 - 라떼아트 갤러리 & 헤더 메뉴
+
+> 로그인/주문 여부와 무관하게 누구나 홈페이지에서 실제 업로드된 라떼아트 영상을 볼 수 있게 한다. 헤더에 "라떼아트" 메뉴를 추가해 새 섹션으로 스크롤 이동(기존 Menu/Event 앵커 링크와 동일 방식). Supabase에서 영상이 업로드된 요청 중 최근 4개를 가져와 인스타그램 갤러리와 같은 스타일(자동재생/무음/반복)로 표시. 4개 미만이면 있는 만큼만, 0개면 안내 문구. **알려진 트레이드오프**: `latte_art_orders`에 고객 이름 등 개인정보는 없지만, 고객 동의 없이 업로드된 주문 영상이 모두 공개 갤러리 대상이 됨(포트폴리오/데모 규모상 허용하기로 결정, 관리자 승인/공개 토글 없음).
+
+- [ ] `frontend/js/latte-art.js` — `getRecentLatteArtVideos(limit)` 함수 추가: `video_url`이 있는 요청을 `video_uploaded_at` 내림차순으로 조회
+- [ ] `frontend/index.html` — 헤더 nav에 "라떼아트" 메뉴 추가(`#latteArtGallery` 앵커), Supabase 스크립트 태그 추가, 갤러리 섹션 마크업 추가
+- [ ] `frontend/index.css` — 갤러리 그리드/카드 스타일 (기존 Instagram Gallery 섹션과 동일한 반응형 패턴: 모바일 2열 → 데스크톱 4열)
+- [ ] `frontend/index.js` — 갤러리 조회/렌더링, Supabase 실패 시 섹션만 안내로 대체(에러 격리, 홈페이지 전체는 항상 정상 표시)
+

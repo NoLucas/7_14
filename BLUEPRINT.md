@@ -241,9 +241,9 @@ project1/
 
 > 바리스타가 라떼아트를 만든 뒤 녹화한 영상을 주문에 연결해 업로드 (실시간 스트리밍이 아닌 녹화 업로드 방식).
 
-- [ ] `frontend/admin/orders/detail.html`, `detail.css`, `detail.js` — 주문에 연결된 라떼아트 요청(모양/설명) 표시
-- [ ] 영상 업로드 UI(파일 선택 + 업로드 버튼, 진행 상태 표시). `video/*` 타입 및 용량 상한(예: 50MB) 클라이언트 검증
-- [ ] 업로드 성공 시 `uploadLatteArtVideo` 호출 → `video_url` / `video_uploaded_at` 갱신 및 화면 반영
+- [x] `frontend/admin/orders/detail.html`, `detail.css`, `detail.js` — 주문에 연결된 라떼아트 요청(모양/설명) 표시
+- [x] 영상 업로드 UI(파일 선택 + 업로드 버튼, 진행 상태 표시). `video/*` 타입 및 용량 상한(예: 50MB) 클라이언트 검증
+- [x] 업로드 성공 시 `uploadLatteArtVideo` 호출 → `video_url` / `video_uploaded_at` 갱신 및 화면 반영
 
 ### 14단계: 고객 - 라떼아트 영상 확인
 

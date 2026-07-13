@@ -19,6 +19,15 @@ function getStatusClass(status) {
   return "status-received";
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 // ===== 장바구니 유틸리티 (localStorage 기반) =====
 const CART_STORAGE_KEY = "cafe-app:cart";
 

@@ -88,7 +88,7 @@ function renderLatteArtPicker() {
       </div>
       ${
         selectedLatteArtShape === "custom"
-          ? `<textarea id="latteArtNote" class="latte-art-note" maxlength="100" placeholder="원하는 모양을 설명해주세요">${latteArtNote}</textarea>`
+          ? `<textarea id="latteArtNote" class="latte-art-note" maxlength="100" placeholder="원하는 모양을 설명해주세요">${escapeHtml(latteArtNote)}</textarea>`
           : ""
       }
     </div>

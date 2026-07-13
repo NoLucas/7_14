@@ -660,3 +660,29 @@ body {
     align-items: start;
   }
 }
+
+/* ===== Latte Art Gallery ===== */
+.latte-art-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.latte-art-gallery-card {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: #000;
+}
+
+.latte-art-gallery-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 640px) {
+  .latte-art-gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,14 +1,59 @@
 // ===== 상태 =====
 let currentOrder = null;
+let currentLatteArt = null;
+let latteArtFetchFailed = false;
 
 // ===== 초기화 =====
-function init() {
+async function init() {
   const params = new URLSearchParams(window.location.search);
   const orderId = params.get("id");
   currentOrder = orderId ? getOrderById(orderId) : null;
 
+  if (currentOrder) {
+    try {
+      currentLatteArt = await getLatteArtByOrderId(currentOrder.id);
+    } catch (err) {
+      console.error("getLatteArtByOrderId threw:", err);
+      latteArtFetchFailed = true;
+    }
+  }
+
   renderOrderDetail();
   updateCartBadge();
+}
+
+// ===== 라떼아트 섹션 렌더링 =====
+function renderLatteArtSection() {
+  if (latteArtFetchFailed) {
+    return `
+      <div class="latte-art-section glass">
+        <h2 class="section-title">라떼아트 요청</h2>
+        <p class="latte-art-status">라떼아트 정보를 불러올 수 없습니다.</p>
+      </div>
+    `;
+  }
+
+  if (!currentLatteArt) return "";
+
+  const shapeInfo = LATTE_ART_SHAPES.find((shape) => shape.id === currentLatteArt.shape);
+  const detailText =
+    currentLatteArt.shape === "custom"
+      ? currentLatteArt.note || "설명 없음"
+      : shapeInfo
+      ? shapeInfo.label
+      : currentLatteArt.shape;
+
+  const videoSection = currentLatteArt.video_url
+    ? `<video class="latte-art-video" src="${escapeHtml(currentLatteArt.video_url)}" controls></video>`
+    : `<p class="latte-art-status">라떼아트 영상을 제작 중이에요. 완성되면 이곳에서 볼 수 있어요.</p>`;
+
+  return `
+    <div class="latte-art-section glass">
+      <h2 class="section-title">라떼아트 요청</h2>
+      <p class="latte-art-request-detail">${escapeHtml(detailText)}</p>
+      ${videoSection}
+    </div>
+  `;
 }
 
 // ===== 주문 상세 렌더링 =====
@@ -57,6 +102,8 @@ function renderOrderDetail() {
       <span class="order-total-label">총 결제 금액</span>
       <span class="order-total-value">${formatPrice(totalPrice)}</span>
     </div>
+
+    ${renderLatteArtSection()}
   `;
 }
 

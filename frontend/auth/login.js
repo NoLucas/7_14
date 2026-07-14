@@ -19,7 +19,9 @@ loginForm.addEventListener("submit", async (event) => {
   }
 
   const profile = await getCurrentProfile();
-  const redirectTo = profile && profile.role === "admin" ? "../admin/" : "../index.html";
+  const params = new URLSearchParams(window.location.search);
+  const redirectParam = params.get("redirect");
+  const redirectTo = redirectParam || (profile && profile.role === "admin" ? "../admin/" : "../index.html");
 
   message.textContent = "로그인되었습니다. 이동합니다...";
   window.location.href = redirectTo;

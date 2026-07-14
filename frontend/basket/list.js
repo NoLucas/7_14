@@ -216,7 +216,15 @@ function buildGlassSlots() {
   return slots;
 }
 
-function openCheckoutModal() {
+async function openCheckoutModal() {
+  const profile = await getCurrentProfile();
+  if (!profile) {
+    // 주의: 로컬 serve 서버가 "*.html?query" 요청을 clean-url 리다이렉트하며 쿼리스트링을 날리는
+    // 기존 이슈가 있어(앱 버그 아님), 이 링크만 확장자 없이 이동한다(GitHub Pages에서도 정상 동작 확인).
+    window.location.href = `../auth/login?redirect=${encodeURIComponent(window.location.href)}`;
+    return;
+  }
+
   checkoutGlassSlots = buildGlassSlots();
   checkoutPaymentMethod = null;
   renderCheckoutForm();

@@ -4,7 +4,6 @@ const params = new URLSearchParams(window.location.search);
 const orderId = params.get("id");
 
 let currentOrder = null;
-let currentLatteArt = null;
 
 function renderEmpty() {
   content.innerHTML = `
@@ -16,39 +15,47 @@ function renderEmpty() {
   editLink.style.display = "none";
 }
 
-function renderLatteArtSection() {
-  if (!currentLatteArt) return "";
+// 주문 항목 중 카페라떼(라떼아트 대상) 잔마다 개별 영상 업로드 UI를 보여준다.
+// 메뉴/홈페이지 관리에서 쓰는 라떼아트 영상과는 별개의, 이 주문만을 위한 개인 맞춤 영상이다.
+function renderOrderItemLatteArtSection(order) {
+  const latteItems = order.items.filter((item) => item.menuId === "latte");
+  if (latteItems.length === 0) return "";
 
-  const shapeInfo = LATTE_ART_SHAPES.find((shape) => shape.id === currentLatteArt.shape);
-  const detailText =
-    currentLatteArt.shape === "custom"
-      ? currentLatteArt.note || "설명 없음"
-      : shapeInfo
-      ? shapeInfo.label
-      : currentLatteArt.shape;
+  const cards = latteItems
+    .map((item, index) => {
+      const videoSection = item.latteArtVideoUrl
+        ? `
+          <video class="latte-art-video" src="${escapeHtml(item.latteArtVideoUrl)}" controls></video>
+          <p class="latte-art-uploaded-at">업로드됨: ${formatDate(item.latteArtVideoUploadedAt)}</p>
+        `
+        : `<p class="latte-art-status">아직 영상이 업로드되지 않았습니다.</p>`;
 
-  const videoSection = currentLatteArt.video_url
-    ? `
-      <video class="latte-art-video" src="${escapeHtml(currentLatteArt.video_url)}" controls></video>
-      <p class="latte-art-uploaded-at">업로드됨: ${formatDate(currentLatteArt.video_uploaded_at)}</p>
-    `
-    : `<p class="latte-art-status">아직 영상이 업로드되지 않았습니다.</p>`;
+      return `
+        <div class="latte-art-item-card">
+          <p class="latte-art-slot-title">카페라떼 #${index + 1}</p>
+          ${videoSection}
+          <div class="latte-art-upload">
+            <input type="file" class="latte-art-video-input" data-item-id="${item.id}" accept="video/*" />
+            <button type="button" class="latte-art-upload-btn" data-item-id="${item.id}">
+              ${item.latteArtVideoUrl ? "영상 교체" : "영상 업로드"}
+            </button>
+          </div>
+          <p class="latte-art-upload-status" data-item-id="${item.id}" hidden></p>
+        </div>
+      `;
+    })
+    .join("");
 
   return `
     <section class="latte-art-card">
-      <h2 class="section-title">라떼아트 요청</h2>
-      <p class="latte-art-request-detail">${escapeHtml(currentLatteArt.item_name)} · ${escapeHtml(detailText)}</p>
-      ${videoSection}
-      <div class="latte-art-upload">
-        <input type="file" id="latteArtVideoInput" accept="video/*" />
-        <button type="button" id="latteArtUploadBtn">${currentLatteArt.video_url ? "영상 교체" : "영상 업로드"}</button>
-      </div>
-      <p class="latte-art-upload-status" id="latteArtUploadStatus" hidden></p>
+      <h2 class="section-title">라떼아트 영상 (카페라떼 ${latteItems.length}잔)</h2>
+      ${cards}
     </section>
   `;
 }
 
 function renderDetail(order) {
+  currentOrder = order;
   editLink.href = `./edit.html?id=${encodeURIComponent(order.id)}`;
 
   const itemRows = order.items
@@ -88,79 +95,79 @@ function renderDetail(order) {
       </div>
     </section>
 
-    ${renderLatteArtSection()}
+    ${renderOrderItemLatteArtSection(order)}
   `;
 
-  bindLatteArtUploadEvents();
+  bindOrderItemLatteArtEvents();
 }
 
-function showLatteArtUploadStatus(message) {
-  const statusEl = document.getElementById("latteArtUploadStatus");
+function showLatteArtItemStatus(itemId, message) {
+  const statusEl = document.querySelector(`.latte-art-upload-status[data-item-id="${itemId}"]`);
   if (!statusEl) return;
   statusEl.textContent = message;
-  statusEl.hidden = false;
+  statusEl.hidden = !message;
 }
 
-function bindLatteArtUploadEvents() {
-  const uploadBtn = document.getElementById("latteArtUploadBtn");
-  if (!uploadBtn) return;
+function bindOrderItemLatteArtEvents() {
+  document.querySelectorAll(".latte-art-upload-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const itemId = btn.dataset.itemId;
+      const fileInput = document.querySelector(`.latte-art-video-input[data-item-id="${itemId}"]`);
+      const file = fileInput.files[0];
+      const item = currentOrder.items.find((i) => String(i.id) === itemId);
 
-  uploadBtn.addEventListener("click", async () => {
-    const fileInput = document.getElementById("latteArtVideoInput");
-    const file = fileInput.files[0];
+      if (!file) {
+        showLatteArtItemStatus(itemId, "업로드할 영상 파일을 선택해주세요.");
+        return;
+      }
+      if (!file.type.startsWith("video/")) {
+        showLatteArtItemStatus(itemId, "video 파일만 업로드할 수 있습니다.");
+        return;
+      }
+      if (file.size > 50 * 1024 * 1024) {
+        showLatteArtItemStatus(itemId, "파일 용량은 50MB 이하만 업로드할 수 있습니다.");
+        return;
+      }
 
-    if (!file) {
-      showLatteArtUploadStatus("업로드할 영상 파일을 선택해주세요.");
-      return;
-    }
-    if (!file.type.startsWith("video/")) {
-      showLatteArtUploadStatus("video 파일만 업로드할 수 있습니다.");
-      return;
-    }
-    if (file.size > 50 * 1024 * 1024) {
-      showLatteArtUploadStatus("파일 용량은 50MB 이하만 업로드할 수 있습니다.");
-      return;
-    }
+      if (item && item.latteArtVideoUrl) {
+        const confirmed = window.confirm("이미 업로드된 영상이 있습니다. 새 영상으로 교체할까요?");
+        if (!confirmed) return;
+      }
 
-    uploadBtn.disabled = true;
-    showLatteArtUploadStatus("업로드 중...");
+      btn.disabled = true;
+      showLatteArtItemStatus(itemId, "업로드 중...");
 
-    let updated = null;
-    try {
-      updated = await uploadLatteArtVideo(currentOrder.id, file);
-    } catch (err) {
-      console.error("uploadLatteArtVideo threw:", err);
-    }
+      let updated = null;
+      try {
+        updated = await uploadOrderItemLatteArtVideo(itemId, file);
+      } catch (err) {
+        console.error("uploadOrderItemLatteArtVideo threw:", err);
+      }
 
-    uploadBtn.disabled = false;
+      btn.disabled = false;
 
-    if (!updated) {
-      showLatteArtUploadStatus("업로드에 실패했습니다. 다시 시도해주세요.");
-      return;
-    }
+      if (!updated) {
+        showLatteArtItemStatus(itemId, "업로드에 실패했습니다. 다시 시도해주세요.");
+        return;
+      }
 
-    currentLatteArt = updated;
-    renderDetail(currentOrder);
+      const refreshed = await getOrderById(currentOrder.id);
+      renderDetail(refreshed);
+    });
   });
 }
 
 async function init() {
-  await Promise.all([getAllMenus(), getLatteArtShapes()]);
+  await getAllMenus();
 
-  currentOrder = orderId ? await getOrderById(orderId) : null;
+  const order = orderId ? await getOrderById(orderId) : null;
 
-  if (!currentOrder) {
+  if (!order) {
     renderEmpty();
     return;
   }
 
-  try {
-    currentLatteArt = await getLatteArtByOrderId(currentOrder.id);
-  } catch (err) {
-    console.error("getLatteArtByOrderId threw:", err);
-    currentLatteArt = null;
-  }
-  renderDetail(currentOrder);
+  renderDetail(order);
 }
 
 init();

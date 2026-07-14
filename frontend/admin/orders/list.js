@@ -52,11 +52,21 @@ function renderList() {
   orderList.innerHTML = orders
     .map((order) => {
       const nextStatus = getNextStatus(order.status);
+      const latteItems = order.items.filter((item) => item.menuId === "latte");
+      const latteArtBadge = latteItems.length
+        ? latteItems.every((item) => item.latteArtVideoUrl)
+          ? '<span class="badge latte-art-badge done">🎥 영상 완료</span>'
+          : '<span class="badge latte-art-badge pending">🎥 영상 대기</span>'
+        : "";
+
       return `
         <article class="order-card">
           <div class="order-card-top">
             <span class="order-card-id">${order.id}</span>
-            <span class="order-status ${getStatusClass(order.status)}">${order.status}</span>
+            <div class="order-card-badges">
+              ${latteArtBadge}
+              <span class="order-status ${getStatusClass(order.status)}">${order.status}</span>
+            </div>
           </div>
           <span class="order-card-date">${formatDate(order.createdAt)}</span>
           <span class="order-card-summary">${getOrderSummaryText(order)}</span>

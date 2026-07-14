@@ -190,6 +190,11 @@
   max-height: 360px;
   border-radius: var(--radius-md);
   background: #000;
+  /* 상위 .glass 요소의 backdrop-filter와 video의 하드웨어 오버레이 레이어가 겹치면
+     크롬이 재생 버튼 클릭의 히트테스트를 부모 요소로 잘못 넘기는 문제가 있어,
+     video를 별도 스태킹 컨텍스트로 분리한다. */
+  position: relative;
+  z-index: 1;
 }
 
 .latte-art-status {

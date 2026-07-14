@@ -77,7 +77,7 @@ function renderLatteArtShapeGrid(gridEl) {
   gridEl.innerHTML = LATTE_ART_SHAPES.map(
     (shape) => `
       <a class="menu-card glass" href="latte-art-detail.html?shape=${encodeURIComponent(shape.id)}">
-        <div class="menu-card-image latte-art-shape-icon">${shape.icon}</div>
+        <div class="menu-card-image latte-art-shape-icon">${renderLatteArtShapeMedia(shape)}</div>
         <div class="menu-card-body">
           <span class="menu-card-name">${shape.label}</span>
           <p class="menu-card-desc">카페라떼, 카푸치노, 바닐라라떼에서 선택할 수 있는 라떼아트예요.</p>

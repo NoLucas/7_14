@@ -269,7 +269,7 @@ function renderGlassPicker(slot, index) {
         class="latte-art-shape-btn ${slot.shape === shape.id ? "selected" : ""}"
         data-slot-index="${index}"
         data-shape="${shape.id}"
-      >${shape.label}</button>
+      >${shape.icon} ${shape.label}</button>
     `
   ).join("");
 

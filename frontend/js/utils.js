@@ -28,6 +28,17 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+// 라떼아트 모양의 실제 사진/영상이 등록되어 있으면 그것을, 없으면 이모티콘을 대신 표시한다.
+function renderLatteArtShapeMedia(shape) {
+  if (shape.video_url) {
+    return `<video src="${escapeHtml(shape.video_url)}" autoplay muted loop playsinline></video>`;
+  }
+  if (shape.image_url) {
+    return `<img src="${escapeHtml(shape.image_url)}" alt="${escapeHtml(shape.label)}" />`;
+  }
+  return shape.icon;
+}
+
 // ===== 장바구니 유틸리티 (localStorage 기반) =====
 const CART_STORAGE_KEY = "cafe-app:cart";
 

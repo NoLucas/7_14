@@ -374,3 +374,19 @@ project1/
 - 주문 상세 페이지(고객/관리자)에는 아직 잔별 라떼아트 모양/설명을 화면에 표시하는 로직을 추가하지 않음(DB 저장까지만 이번 범위) — 필요하면 후속 작업으로 추가 가능
 - 11단계 "장바구니 단위 라떼아트 선택" 배너가 basket 페이지에 그대로 남아있는데, 이제 체크아웃 모달이 별도로 선택을 받으므로 두 선택이 서로 다를 수 있어 다소 혼란스러울 수 있음. 16단계(모양 탐색) 플로우가 이 배너와 얽혀 있어 임의로 제거하지 않았음 — 정리가 필요하면 알려주세요
 
+### 23단계: 라떼아트 디자인 4종 — 사진/영상 자리에 이모티콘 임시 표시 — `feature/latte-art-designs` 브랜치
+
+> 작업 전 확인: "라떼아트 디자인" 데이터가 관리자 메뉴 관리와 고객 주문 선택 화면에서 공유되는 마스터 데이터인지 확인받음 → 이미 양쪽(고객 모양 탐색·담기·체크아웃)에서 공유 중인 기존 `latte_art_shapes`(하트/로제타/튤립/곰돌이) 테이블에 `image_url`/`video_url` 컬럼만 추가하는 것으로 결정(신규 테이블 생성 대신 확장, 기존 4행 그대로 재사용 — 새로 4개를 더 만들지 않음).
+
+- [x] `latte_art_shapes`에 `image_url`/`video_url`(text, nullable) 컬럼 추가. `latte-art-shape-media` Storage 버킷 신설(public, 이미지+영상 mime, 50MB), 관리자 전용 insert/update/delete + `authenticated` SELECT 정책(지난 세션들에서 반복 발견된 "UPDATE는 SELECT로 보여야 함" RLS 함정을 처음부터 반영). `latte_art_shapes` 자체도 admin 전용 UPDATE 정책 추가(기존엔 select만 있었음)
+- [x] `frontend/js/data.js` — `updateLatteArtShapeMedia(shapeId, file)`(이미지/영상 자동 판별 후 해당 컬럼만 채우고 반대쪽은 null로, 새 파일은 매번 새 경로에 저장) / `deleteLatteArtShapeMedia(shapeId)`(Storage+DB 동시 정리)
+- [x] `frontend/js/utils.js` — `renderLatteArtShapeMedia(shape)` 공용 헬퍼 추가: `video_url` → `<video>`, 없고 `image_url` → `<img>`, 둘 다 없으면 `shape.icon`(이모티콘) 반환. 4곳 모두에서 재사용
+- [x] `frontend/admin/menus/latte-art.html`·`.js`·`.css` 신규 — 라떼아트 디자인 관리 화면(4개 카드: 미리보기 + 업로드/교체 + 삭제). `admin/menus/list.html`에 링크 추가
+- [x] 고객 화면 4곳 반영: `menus/list.js`(모양 탐색 탭 그리드 카드), `menus/latte-art-detail.js`(모양 상세 히어로) — 기존 이모티콘 표시 자리를 `renderLatteArtShapeMedia`로 교체(레이아웃 불변, CSS에 `img`/`video` 크기 규칙만 추가). `menus/detail.js`(담기 피커)·`basket/list.js`(체크아웃 모달 피커) — 텍스트만 있던 버튼에 이모티콘을 라벨 앞에 추가(사진/영상 자리가 원래 없던 곳이라, 작은 버튼에 큰 미디어를 넣기보다 이모티콘만 표시)
+
+**검증**: Playwright(Chromium)로 확인 — 관리자 화면에 4개 카드가 각각의 이모티콘과 함께 표시됨, 고객 모양 탐색 그리드·모양 상세 히어로·메뉴 담기 피커·체크아웃 모달 피커 4곳 모두 동일한 4개 옵션과 이모티콘 노출, 콘솔 에러 없음. "하트"에 테스트 이미지를 업로드하자 관리자 화면과 고객 모양 탐색/상세 화면 모두 자동으로 이모티콘 대신 이미지로 전환됨(레이아웃 크기 동일하게 유지) 확인 → 삭제 후 다시 이모티콘으로 정상 복귀, Storage 오브젝트 0개로 정리 확인
+
+**보고 사항**
+- 요청하신 "스완" 등 새 이름 4개를 추가로 만들지 않고, 이미 존재하던 하트/로제타/튤립/곰돌이 4개를 그대로 "라떼아트 디자인" 마스터 데이터로 확장했습니다(사용자 확인 답변에 따른 결정)
+- `menus/detail.js`·`basket/list.js`의 피커 버튼은 원래 사진/영상이 들어갈 자리가 없던 텍스트 버튼이라, 완전한 사진/영상 표시 대신 이모티콘만 라벨 옆에 추가했습니다. 이후 실제 사진이 채워져도 이 두 버튼은 계속 이모티콘만 보여줍니다(작은 버튼에 사진을 넣으면 오히려 어색해질 수 있어 의도적으로 그렇게 둠) — 필요하면 별도로 알려주세요
+

@@ -409,7 +409,7 @@ function renderCheckoutComplete(order) {
   `;
 
   document.getElementById("checkoutCompleteConfirmBtn").addEventListener("click", () => {
-    window.location.href = `../orders/detail.html?id=${encodeURIComponent(order.id)}`;
+    window.location.href = `../orders/detail?id=${encodeURIComponent(order.id)}`;
   });
 }
 

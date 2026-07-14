@@ -1,7 +1,5 @@
 // ===== 상태 =====
 let currentOrder = null;
-let currentLatteArt = null;
-let latteArtFetchFailed = false;
 
 // ===== 초기화 =====
 async function init() {
@@ -11,50 +9,35 @@ async function init() {
   const orderId = params.get("id");
   currentOrder = orderId ? await getOrderById(orderId) : null;
 
-  if (currentOrder) {
-    try {
-      currentLatteArt = await getLatteArtByOrderId(currentOrder.id);
-    } catch (err) {
-      console.error("getLatteArtByOrderId threw:", err);
-      latteArtFetchFailed = true;
-    }
-  }
-
   renderOrderDetail();
   updateCartBadge();
   renderAuthStatus("../");
 }
 
-// ===== 라떼아트 섹션 렌더링 =====
-function renderLatteArtSection() {
-  if (latteArtFetchFailed) {
-    return `
-      <div class="latte-art-section glass">
-        <h2 class="section-title">라떼아트 요청</h2>
-        <p class="latte-art-status">라떼아트 정보를 불러올 수 없습니다.</p>
-      </div>
-    `;
-  }
+// ===== 라떼아트 영상 섹션 렌더링 (카페라떼 잔별, 읽기 전용) =====
+function renderLatteArtSection(order) {
+  const latteItems = order.items.filter((item) => item.menuId === "latte");
+  if (latteItems.length === 0) return "";
 
-  if (!currentLatteArt) return "";
+  const cards = latteItems
+    .map((item, index) => {
+      const videoSection = item.latteArtVideoUrl
+        ? `<video class="latte-art-video" src="${escapeHtml(item.latteArtVideoUrl)}" controls></video>`
+        : `<p class="latte-art-status">라떼아트 영상을 제작 중이에요. 완성되면 이곳에서 볼 수 있어요.</p>`;
 
-  const shapeInfo = LATTE_ART_SHAPES.find((shape) => shape.id === currentLatteArt.shape);
-  const detailText =
-    currentLatteArt.shape === "custom"
-      ? currentLatteArt.note || "설명 없음"
-      : shapeInfo
-      ? shapeInfo.label
-      : currentLatteArt.shape;
-
-  const videoSection = currentLatteArt.video_url
-    ? `<video class="latte-art-video" src="${escapeHtml(currentLatteArt.video_url)}" controls></video>`
-    : `<p class="latte-art-status">라떼아트 영상을 제작 중이에요. 완성되면 이곳에서 볼 수 있어요.</p>`;
+      return `
+        <div class="latte-art-item">
+          <p class="latte-art-request-detail">카페라떼 #${index + 1}</p>
+          ${videoSection}
+        </div>
+      `;
+    })
+    .join("");
 
   return `
     <div class="latte-art-section glass">
-      <h2 class="section-title">라떼아트 요청</h2>
-      <p class="latte-art-request-detail">${escapeHtml(detailText)}</p>
-      ${videoSection}
+      <h2 class="section-title">라떼아트 영상</h2>
+      ${cards}
     </div>
   `;
 }
@@ -106,7 +89,7 @@ function renderOrderDetail() {
       <span class="order-total-value">${formatPrice(totalPrice)}</span>
     </div>
 
-    ${renderLatteArtSection()}
+    ${renderLatteArtSection(currentOrder)}
   `;
 }
 

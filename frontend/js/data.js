@@ -430,39 +430,26 @@ async function getOrders() {
   return data.map(normalizeOrderRow);
 }
 
-// 오늘 날짜 + 일련번호 조합으로 주문 ID를 만든다 (예: ORD-20260708-001)
-async function generateOrderId() {
-  const now = new Date();
-  const datePart = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(
-    now.getDate()
-  ).padStart(2, "0")}`;
-
-  const { data, error } = await getSupabaseClient()
-    .from(ORDERS_TABLE)
-    .select("id")
-    .like("id", `ORD-${datePart}-%`);
-
-  const existingIds = error ? [] : data.map((row) => row.id);
-
-  let sequence = 1;
-  let nextId = `ORD-${datePart}-${String(sequence).padStart(3, "0")}`;
-
-  while (existingIds.includes(nextId)) {
-    sequence += 1;
-    nextId = `ORD-${datePart}-${String(sequence).padStart(3, "0")}`;
-  }
-
-  return nextId;
-}
-
 // 장바구니 항목({menuId, quantity, latteArtShape?, latteArtNote?}[])과 결제방법을 받아 새 주문을 생성하고 저장한다.
+// 주문 ID는 RPC(generate_order_id)로 생성한다 — 본인 주문만 조회 가능하도록 RLS를 강화했기 때문에,
+// 클라이언트가 직접 기존 주문 목록을 조회해 중복을 피하는 방식은 더 이상 신뢰할 수 없다.
 async function createOrder(items, paymentMethod) {
   const client = getSupabaseClient();
-  const id = await generateOrderId();
+
+  const { data: id, error: idError } = await client.rpc("generate_order_id");
+  if (idError || !id) {
+    console.error("createOrder (generate_order_id) failed:", idError);
+    return null;
+  }
+
+  const {
+    data: { session },
+  } = await client.auth.getSession();
+  const userId = session ? session.user.id : null;
 
   const { error: orderError } = await client
     .from(ORDERS_TABLE)
-    .insert({ id, status: ORDER_STATUSES[0], payment_method: paymentMethod });
+    .insert({ id, status: ORDER_STATUSES[0], payment_method: paymentMethod, user_id: userId });
 
   if (orderError) {
     console.error("createOrder (orders insert) failed:", orderError);

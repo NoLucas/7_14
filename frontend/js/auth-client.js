@@ -56,3 +56,14 @@ async function requireAdminOrRedirect(loginPagePath) {
   }
   return profile;
 }
+
+// 로그인 필요 페이지 가드: 비로그인이면 로그인 페이지로 리다이렉트(로그인 후 돌아올 수 있도록 redirect 파라미터 포함)하고 null 반환.
+async function requireLoginOrRedirect(loginPagePath) {
+  const profile = await getCurrentProfile();
+
+  if (!profile) {
+    window.location.href = `${loginPagePath}?redirect=${encodeURIComponent(window.location.href)}`;
+    return null;
+  }
+  return profile;
+}

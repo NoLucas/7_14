@@ -19,7 +19,7 @@ async function renderOrderList() {
   listEl.innerHTML = orders
     .map(
       (order) => `
-        <a class="order-card glass" href="detail.html?id=${encodeURIComponent(order.id)}">
+        <a class="order-card glass" href="detail?id=${encodeURIComponent(order.id)}">
           <div class="order-card-top">
             <span class="order-card-id">${order.id}</span>
             <span class="order-status ${getStatusClass(order.status)}">${order.status}</span>

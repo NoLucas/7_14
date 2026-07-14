@@ -116,9 +116,9 @@ async function renderLatteArtGallery() {
 
   let videos = [];
   try {
-    videos = await getRecentLatteArtVideos(4);
+    videos = (await getHomeGalleryVideos()).filter((row) => row.video_url);
   } catch (err) {
-    console.error("getRecentLatteArtVideos threw:", err);
+    console.error("getHomeGalleryVideos threw:", err);
   }
 
   if (videos.length === 0) {

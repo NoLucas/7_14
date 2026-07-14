@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관리자 - 홈페이지 관리</title>
+    <link rel="stylesheet" href="../../css/variables.css" />
+    <link rel="stylesheet" href="./list.css" />
+    <link rel="stylesheet" href="../admin-nav.css" />
+  </head>
+  <body>
+    <div class="page-shell container">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Admin · Home Management</p>
+          <h1>홈페이지 관리</h1>
+        </div>
+        <a class="secondary-link" href="../index.html">대시보드로</a>
+      </header>
+
+      <p class="page-desc">홈페이지 "라떼아트" 갤러리에 노출되는 영상 4개를 관리합니다. 각 슬롯에 영상을 업로드/교체/삭제할 수 있습니다.</p>
+
+      <main id="slotList" class="slot-grid"></main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../../js/supabase-client.js"></script>
+    <script src="../../js/auth-client.js"></script>
+    <script>requireAdminOrRedirect("../../auth/login.html");</script>
+    <script src="../../js/admin-nav.js"></script>
+    <script src="../../js/data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="./list.js"></script>
+  </body>
+</html>

@@ -49,7 +49,6 @@ function normalizeMenuRow(row) {
     soldOut: row.sold_out,
     rating: row.rating,
     latteArtAvailable: row.latte_art_available,
-    latteArtVideoUrl: row.latte_art_video_url,
   };
 }
 
@@ -98,7 +97,6 @@ async function createMenu(menuInput) {
     sold_out: Boolean(menuInput.soldOut),
     rating: menuInput.rating ?? null,
     latte_art_available: Boolean(menuInput.latteArtAvailable),
-    latte_art_video_url: null,
   };
 
   const { data, error } = await getSupabaseClient().from(MENUS_TABLE).insert(row).select().single();
@@ -123,8 +121,6 @@ async function updateMenu(menuId, menuInput) {
     image: menuInput.image ?? existing.image,
     sold_out: Boolean(menuInput.soldOut),
     latte_art_available: menuInput.latteArtAvailable ?? existing.latteArtAvailable,
-    latte_art_video_url:
-      menuInput.latteArtVideoUrl !== undefined ? menuInput.latteArtVideoUrl : existing.latteArtVideoUrl,
   };
 
   const { data, error } = await getSupabaseClient()
@@ -157,14 +153,28 @@ async function toggleMenuSoldOut(menuId) {
   return updateMenu(menuId, { soldOut: !menu.soldOut });
 }
 
-// ===== 라떼아트 메뉴 미리보기 영상 (관리자 전용, Storage) =====
+// ===== 라떼아트 메뉴 미리보기 영상 (메뉴당 여러 개, 관리자 전용 업로드/삭제) =====
 const MENU_LATTE_ART_VIDEO_BUCKET = "menu-latte-art-videos";
+const MENU_LATTE_ART_VIDEOS_TABLE = "menu_latte_art_videos";
 
-async function uploadMenuLatteArtVideo(menuId, file) {
+async function getMenuLatteArtVideos(menuId) {
+  const { data, error } = await getSupabaseClient()
+    .from(MENU_LATTE_ART_VIDEOS_TABLE)
+    .select("*")
+    .eq("menu_id", menuId)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("getMenuLatteArtVideos failed:", error);
+    return [];
+  }
+  return data;
+}
+
+async function addMenuLatteArtVideo(menuId, file) {
   const client = getSupabaseClient();
   const extension = file.name.includes(".") ? file.name.split(".").pop() : "mp4";
-  // Storage 키는 한글 등 비-ASCII 문자를 허용하지 않으므로(메뉴 id에 한글이 올 수 있음)
-  // 메뉴 id를 파일명에 쓰지 않고 무작위 식별자를 사용한다.
+  // Storage 키는 한글 등 비-ASCII 문자를 허용하지 않으므로(메뉴 id에 한글이 올 수 있음) 무작위 파일명을 쓴다.
   const filePath = `${crypto.randomUUID()}.${extension}`;
 
   const { error: uploadError } = await client.storage
@@ -172,42 +182,133 @@ async function uploadMenuLatteArtVideo(menuId, file) {
     .upload(filePath, file);
 
   if (uploadError) {
-    console.error("uploadMenuLatteArtVideo upload failed:", uploadError);
+    console.error("addMenuLatteArtVideo upload failed:", uploadError);
     return null;
   }
 
   const { data: urlData } = client.storage.from(MENU_LATTE_ART_VIDEO_BUCKET).getPublicUrl(filePath);
 
-  const updated = await updateMenu(menuId, { latteArtVideoUrl: urlData.publicUrl });
-  if (!updated) {
-    console.error("uploadMenuLatteArtVideo db update failed");
+  const { data, error } = await client
+    .from(MENU_LATTE_ART_VIDEOS_TABLE)
+    .insert({ menu_id: menuId, video_url: urlData.publicUrl })
+    .select()
+    .single();
+
+  if (error) {
+    console.error("addMenuLatteArtVideo db insert failed:", error);
     return null;
   }
-  return updated;
+  return data;
 }
 
-async function deleteMenuLatteArtVideo(menuId) {
-  const menu = getMenuById(menuId);
-  if (!menu || !menu.latteArtVideoUrl) return null;
-
+async function deleteMenuLatteArtVideoById(videoId) {
   const client = getSupabaseClient();
-  const filePath = menu.latteArtVideoUrl.split(`${MENU_LATTE_ART_VIDEO_BUCKET}/`).pop();
 
-  const { error: removeError } = await client.storage
-    .from(MENU_LATTE_ART_VIDEO_BUCKET)
-    .remove([filePath]);
+  const { data: video, error: fetchError } = await client
+    .from(MENU_LATTE_ART_VIDEOS_TABLE)
+    .select("video_url")
+    .eq("id", videoId)
+    .maybeSingle();
+
+  if (fetchError || !video) {
+    console.error("deleteMenuLatteArtVideoById lookup failed:", fetchError);
+    return false;
+  }
+
+  const filePath = video.video_url.split(`${MENU_LATTE_ART_VIDEO_BUCKET}/`).pop();
+  const { error: removeError } = await client.storage.from(MENU_LATTE_ART_VIDEO_BUCKET).remove([filePath]);
 
   if (removeError) {
-    console.error("deleteMenuLatteArtVideo storage remove failed:", removeError);
+    console.error("deleteMenuLatteArtVideoById storage remove failed:", removeError);
+    return false;
+  }
+
+  const { error: deleteError } = await client.from(MENU_LATTE_ART_VIDEOS_TABLE).delete().eq("id", videoId);
+  if (deleteError) {
+    console.error("deleteMenuLatteArtVideoById db delete failed (storage file already removed):", deleteError);
+    return false;
+  }
+  return true;
+}
+
+// ===== 홈페이지 라떼아트 갤러리 (고정 4슬롯, 관리자 전용 업로드/삭제) =====
+const HOME_GALLERY_VIDEO_BUCKET = "home-gallery-videos";
+const HOME_GALLERY_VIDEOS_TABLE = "home_gallery_videos";
+
+async function getHomeGalleryVideos() {
+  const { data, error } = await getSupabaseClient()
+    .from(HOME_GALLERY_VIDEOS_TABLE)
+    .select("*")
+    .order("slot", { ascending: true });
+
+  if (error) {
+    console.error("getHomeGalleryVideos failed:", error);
+    return [];
+  }
+  return data;
+}
+
+async function updateHomeGalleryVideo(slot, file) {
+  const client = getSupabaseClient();
+
+  const slots = await getHomeGalleryVideos();
+  const existing = slots.find((row) => row.slot === slot);
+  if (existing && existing.video_url) {
+    const oldPath = existing.video_url.split(`${HOME_GALLERY_VIDEO_BUCKET}/`).pop();
+    await client.storage.from(HOME_GALLERY_VIDEO_BUCKET).remove([oldPath]);
+  }
+
+  const extension = file.name.includes(".") ? file.name.split(".").pop() : "mp4";
+  const filePath = `${crypto.randomUUID()}.${extension}`;
+
+  const { error: uploadError } = await client.storage.from(HOME_GALLERY_VIDEO_BUCKET).upload(filePath, file);
+  if (uploadError) {
+    console.error("updateHomeGalleryVideo upload failed:", uploadError);
     return null;
   }
 
-  const updated = await updateMenu(menuId, { latteArtVideoUrl: null });
-  if (!updated) {
-    console.error("deleteMenuLatteArtVideo db update failed (storage file already removed)");
+  const { data: urlData } = client.storage.from(HOME_GALLERY_VIDEO_BUCKET).getPublicUrl(filePath);
+
+  const { data, error } = await client
+    .from(HOME_GALLERY_VIDEOS_TABLE)
+    .update({ video_url: urlData.publicUrl, updated_at: new Date().toISOString() })
+    .eq("slot", slot)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("updateHomeGalleryVideo db update failed:", error);
     return null;
   }
-  return updated;
+  return data;
+}
+
+async function deleteHomeGalleryVideo(slot) {
+  const client = getSupabaseClient();
+
+  const slots = await getHomeGalleryVideos();
+  const existing = slots.find((row) => row.slot === slot);
+  if (!existing || !existing.video_url) return null;
+
+  const filePath = existing.video_url.split(`${HOME_GALLERY_VIDEO_BUCKET}/`).pop();
+  const { error: removeError } = await client.storage.from(HOME_GALLERY_VIDEO_BUCKET).remove([filePath]);
+  if (removeError) {
+    console.error("deleteHomeGalleryVideo storage remove failed:", removeError);
+    return null;
+  }
+
+  const { data, error } = await client
+    .from(HOME_GALLERY_VIDEOS_TABLE)
+    .update({ video_url: null, updated_at: new Date().toISOString() })
+    .eq("slot", slot)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("deleteHomeGalleryVideo db update failed (storage file already removed):", error);
+    return null;
+  }
+  return data;
 }
 
 function getMenuById(menuId) {

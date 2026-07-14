@@ -340,3 +340,19 @@ project1/
 - **관리자 세션으로도 영상 삭제가 조용히 실패**: `menu-latte-art-videos` 버킷에 `authenticated` 역할용 SELECT 정책이 없어, 19단계에서 발견한 것과 동일한 "UPDATE/DELETE는 SELECT로 행이 보여야 한다"는 Postgres RLS 특성 때문에 관리자 로그인 상태에서도 삭제 요청이 0건 처리됨. `admin can view menu latte art videos` SELECT 정책을 추가해 해결
 - 검증: Playwright(Chromium)로 관리자 메뉴 추가→가격/설명 수정→라떼아트 가능 체크→영상 업로드→고객 메뉴 상세에서 영상 `readyState=4`(재생 가능) 확인→영상 삭제(Storage 오브젝트·DB URL 둘 다 제거 확인)→메뉴 삭제→고객 계정으로 `admin/menus/list` 접근 시 로그인 페이지로 차단 확인. 테스트용 웹캠 없이 Chromium의 `MediaRecorder`로 실제 재생 가능한 짧은 webm을 직접 생성해 업로드 테스트에 사용함. 테스트 중 생성된 메뉴·Storage 파일은 모두 삭제해 원상 복구(메뉴 10개, 관련 Storage 파일 0개 확인)
 
+### 21단계: 관리자 사이드 네비게이션 + 홈페이지 관리 탭 — `feature/menu-management` 브랜치 이어서 작업
+
+> 작업 전 두 가지를 사용자에게 확인받고 진행: (1) 홈페이지 라떼아트 갤러리는 20단계의 메뉴별 영상과 별개 데이터로, 기존 15단계(`latte_art_orders` 기반 자동 수집)를 제거하고 관리자가 직접 업로드/교체하는 고정 4슬롯으로 교체. (2) 메뉴 관리 탭의 메뉴별 영상은 "교체"가 아니라 "메뉴당 여러 개를 함께 보여주는" 1:N 구조로 변경(20단계의 단일 컬럼 구조를 뒤엎음).
+
+- [x] `menus.latte_art_video_url` 컬럼 제거 → `menu_latte_art_videos`(id, menu_id FK, video_url, created_at) 1:N 테이블로 교체. RLS: 조회는 공개, insert/delete는 `is_admin()`만
+- [x] `home_gallery_videos`(slot 1~4 고정 PK, video_url) 테이블 신설 + 4행 시드. RLS: 조회는 공개, update(업로드/교체/삭제 모두 update로 처리)는 `is_admin()`만
+- [x] `home-gallery-videos` Storage 버킷 신설(public, 50MB, mp4/webm/quicktime/x-msvideo — 기존과 동일 기준), 관리자 전용 insert/update/delete + `authenticated` SELECT 정책(20단계에서 찾은 RLS 가시성 버그를 처음부터 반영)
+- [x] `frontend/js/data.js` — `getMenuLatteArtVideos`/`addMenuLatteArtVideo`/`deleteMenuLatteArtVideoById`(메뉴당 다중 영상), `getHomeGalleryVideos`/`updateHomeGalleryVideo`(교체 시 이전 Storage 파일도 정리)/`deleteHomeGalleryVideo`. `latte-art.js`의 `getRecentLatteArtVideos`(더 이상 호출하는 곳 없음) 삭제
+- [x] `frontend/js/admin-nav.js` + `frontend/admin/admin-nav.css` 신규 — 왼쪽 가장자리에 항상 보이는 탭 버튼 + 슬라이드 패널. `:hover`/`:focus-within`(키보드)로 자동 열림, 클릭으로 토글(터치 대응), 바깥 클릭 시 닫힘. 관리자 페이지 9곳(대시보드 1 + 메뉴/주문 관리 각 3~4 + 홈페이지 관리 1) 전체에 삽입 — 비관리자는 각 페이지의 기존 `requireAdminOrRedirect` 가드에서 이미 차단되므로 네비게이션 자체에 별도 권한 로직 불필요
+- [x] `frontend/admin/menus/detail.js`, `detail.css` — 영상 "교체" UI를 "목록(각각 삭제 버튼) + 추가 업로드"로 전면 변경
+- [x] `frontend/admin/home/list.html`·`.js`·`.css` 신규 — 고정 4슬롯 카드(미리보기/업로드·교체/삭제), 관리자 가드 적용
+- [x] `frontend/index.js` — `renderLatteArtGallery`가 `latte_art_orders` 대신 `home_gallery_videos`를 사용하도록 교체(기존 `#latteArtGalleryGrid` 마크업 그대로 재사용, 영상 없으면 기존 "곧 채워질 예정" 문구 그대로 표시)
+- [x] `frontend/menus/detail.js` — 메뉴별 최신 영상 1개(`created_at` 내림차순 1건)를 기존 이미지 슬롯에 표시하도록 20단계 로직을 새 1:N 테이블 기준으로 수정
+
+**검증**: Playwright(Chromium)로 전부 확인 — 데스크톱 호버 열림/벗어나면 닫힘, 클릭(터치 대응) 토글 및 바깥 클릭 시 닫힘, 키보드 Tab 포커스로 열림(`:focus-within`), 사이드바 링크로 메뉴/주문/홈페이지 관리 3개 탭 이동, 메뉴 하나에 영상 2개 추가 후 목록에 2개 모두 노출·삭제로 0개까지 정리, 고객 메뉴 상세에서 최신 영상 재생 가능(`readyState=4`) 확인, 홈페이지 관리 슬롯 업로드 후 홈페이지에 실제 반영, 슬롯 삭제 후 홈페이지가 기존 "곧 채워질 예정" 대체 문구로 정상 복귀, 비관리자 계정으로 메뉴/주문/홈페이지 관리 3곳 모두 로그인 페이지로 차단, 콘솔 에러 없음. 최종적으로 DB(`menu_latte_art_videos`, `home_gallery_videos.video_url`)와 Storage(두 버킷) 모두 0건으로 일치(테스트 데이터 완전 정리) 확인
+

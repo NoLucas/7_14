@@ -61,18 +61,3 @@ async function uploadLatteArtVideo(orderId, file) {
   }
   return data;
 }
-
-async function getRecentLatteArtVideos(limit = 4) {
-  const { data, error } = await getSupabaseClient()
-    .from(LATTE_ART_TABLE)
-    .select("*")
-    .not("video_url", "is", null)
-    .order("video_uploaded_at", { ascending: false })
-    .limit(limit);
-
-  if (error) {
-    console.error("getRecentLatteArtVideos failed:", error);
-    return [];
-  }
-  return data;
-}

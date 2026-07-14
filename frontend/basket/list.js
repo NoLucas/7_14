@@ -3,6 +3,13 @@ async function init() {
   bindHeaderActions();
   document.getElementById("basketContent").addEventListener("click", handleBasketClick);
   renderBasketPage();
+
+  document.getElementById("checkoutModalCloseBtn").addEventListener("click", closeCheckoutModal);
+  document.getElementById("checkoutModalOverlay").addEventListener("click", (event) => {
+    if (event.target.id === "checkoutModalOverlay") {
+      closeCheckoutModal();
+    }
+  });
 }
 
 function bindHeaderActions() {
@@ -185,29 +192,213 @@ function renderBasketItem(item) {
 function bindBasketEvents() {
   const checkoutBtn = document.getElementById("checkoutBtn");
   if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", async () => {
-      const validItems = buildCartViewModels().filter((item) => item.menu);
-      if (validItems.length === 0) {
-        return;
-      }
-
-      const confirmed = window.confirm("장바구니에 담긴 메뉴로 주문할까요?");
-      if (!confirmed) {
-        return;
-      }
-
-      const newOrder = await createOrder(validItems);
-
-      const latteArtSelection = getLatteArtSelection();
-      if (latteArtSelection) {
-        await saveLatteArtRequest(newOrder.id, latteArtSelection);
-      }
-
-      clearCart();
-      clearLatteArtSelection();
-      window.location.href = `../orders/detail.html?id=${encodeURIComponent(newOrder.id)}`;
-    });
+    checkoutBtn.addEventListener("click", openCheckoutModal);
   }
+}
+
+// ===== 주문하기 모달 (결제방법 + 잔별 라떼아트 선택) =====
+let checkoutGlassSlots = [];
+let checkoutPaymentMethod = null;
+
+function buildGlassSlots() {
+  const slots = [];
+  buildCartViewModels()
+    .filter((item) => item.menu)
+    .forEach((item) => {
+      if (item.menu.latteArtAvailable) {
+        for (let i = 0; i < item.quantity; i++) {
+          slots.push({ menuId: item.menu.id, menuName: item.menu.name, shape: null, note: "" });
+        }
+      }
+    });
+  return slots;
+}
+
+function openCheckoutModal() {
+  checkoutGlassSlots = buildGlassSlots();
+  checkoutPaymentMethod = null;
+  renderCheckoutForm();
+  document.getElementById("checkoutModalOverlay").hidden = false;
+}
+
+function closeCheckoutModal() {
+  document.getElementById("checkoutModalOverlay").hidden = true;
+}
+
+function renderCheckoutForm() {
+  const body = document.getElementById("checkoutModalBody");
+
+  const latteArtSection = checkoutGlassSlots.length
+    ? `
+      <section class="latte-art-slots-section">
+        <h3 class="section-title">라떼아트 선택 (${checkoutGlassSlots.length}잔)</h3>
+        ${checkoutGlassSlots.map((slot, index) => renderGlassPicker(slot, index)).join("")}
+      </section>
+    `
+    : "";
+
+  body.innerHTML = `
+    <section class="payment-method-section">
+      <h3 class="section-title">결제 방법</h3>
+      <div class="payment-method-options">
+        <label class="payment-method-option">
+          <input type="radio" name="paymentMethod" value="card" ${checkoutPaymentMethod === "card" ? "checked" : ""} />
+          <span>카드 결제 (매장)</span>
+        </label>
+        <label class="payment-method-option">
+          <input type="radio" name="paymentMethod" value="cash" ${checkoutPaymentMethod === "cash" ? "checked" : ""} />
+          <span>현금 결제 (매장)</span>
+        </label>
+      </div>
+    </section>
+
+    ${latteArtSection}
+
+    <p class="checkout-modal-message" id="checkoutModalMessage" hidden></p>
+    <button type="button" class="primary-button" id="checkoutSubmitBtn">주문 완료</button>
+  `;
+
+  bindCheckoutFormEvents();
+}
+
+function renderGlassPicker(slot, index) {
+  const presetButtons = LATTE_ART_SHAPES.map(
+    (shape) => `
+      <button
+        type="button"
+        class="latte-art-shape-btn ${slot.shape === shape.id ? "selected" : ""}"
+        data-slot-index="${index}"
+        data-shape="${shape.id}"
+      >${shape.label}</button>
+    `
+  ).join("");
+
+  return `
+    <div class="latte-art-slot">
+      <p class="latte-art-slot-title">${escapeHtml(slot.menuName)} #${index + 1}</p>
+      <div class="latte-art-shapes">
+        ${presetButtons}
+        <button
+          type="button"
+          class="latte-art-shape-btn ${slot.shape === "custom" ? "selected" : ""}"
+          data-slot-index="${index}"
+          data-shape="custom"
+        >기타</button>
+      </div>
+      ${
+        slot.shape === "custom"
+          ? `<textarea class="latte-art-note" data-slot-index="${index}" maxlength="100" placeholder="원하는 모양을 설명해주세요">${escapeHtml(slot.note)}</textarea>`
+          : ""
+      }
+    </div>
+  `;
+}
+
+function showCheckoutMessage(message) {
+  const messageEl = document.getElementById("checkoutModalMessage");
+  if (!messageEl) return;
+  messageEl.textContent = message;
+  messageEl.hidden = !message;
+}
+
+function isCheckoutValid(paymentMethod) {
+  if (!paymentMethod) return false;
+  return checkoutGlassSlots.every((slot) => slot.shape && (slot.shape !== "custom" || slot.note.trim().length > 0));
+}
+
+function bindCheckoutFormEvents() {
+  document.querySelectorAll('input[name="paymentMethod"]').forEach((input) => {
+    input.addEventListener("change", () => {
+      checkoutPaymentMethod = input.value;
+    });
+  });
+
+  document.querySelectorAll(".latte-art-shape-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const index = Number(btn.dataset.slotIndex);
+      const shape = btn.dataset.shape;
+      checkoutGlassSlots[index].shape = shape;
+      if (shape !== "custom") {
+        checkoutGlassSlots[index].note = "";
+      }
+      renderCheckoutForm();
+    });
+  });
+
+  document.querySelectorAll(".latte-art-note").forEach((textarea) => {
+    textarea.addEventListener("input", () => {
+      const index = Number(textarea.dataset.slotIndex);
+      checkoutGlassSlots[index].note = textarea.value;
+    });
+  });
+
+  document.getElementById("checkoutSubmitBtn").addEventListener("click", handleCheckoutSubmit);
+}
+
+function buildOrderItems() {
+  const items = [];
+  let slotCursor = 0;
+
+  buildCartViewModels()
+    .filter((item) => item.menu)
+    .forEach((item) => {
+      if (item.menu.latteArtAvailable) {
+        for (let i = 0; i < item.quantity; i++) {
+          const slot = checkoutGlassSlots[slotCursor++];
+          items.push({
+            menuId: item.menu.id,
+            quantity: 1,
+            latteArtShape: slot.shape,
+            latteArtNote: slot.shape === "custom" ? slot.note.trim() : "",
+          });
+        }
+      } else {
+        items.push({ menuId: item.menu.id, quantity: item.quantity });
+      }
+    });
+
+  return items;
+}
+
+async function handleCheckoutSubmit() {
+  if (!isCheckoutValid(checkoutPaymentMethod)) {
+    showCheckoutMessage("결제 방법과 라떼아트 모양을 모두 선택해주세요.");
+    return;
+  }
+
+  const submitBtn = document.getElementById("checkoutSubmitBtn");
+  submitBtn.disabled = true;
+  showCheckoutMessage("");
+
+  const items = buildOrderItems();
+  const newOrder = await createOrder(items, checkoutPaymentMethod);
+
+  if (!newOrder) {
+    submitBtn.disabled = false;
+    showCheckoutMessage("주문 처리에 실패했습니다. 다시 시도해주세요.");
+    return;
+  }
+
+  clearCart();
+  clearLatteArtSelection();
+  renderBasketPage();
+  renderCheckoutComplete(newOrder);
+}
+
+function renderCheckoutComplete(order) {
+  const body = document.getElementById("checkoutModalBody");
+  body.innerHTML = `
+    <div class="checkout-complete">
+      <p class="checkout-complete-icon">✅</p>
+      <h3>주문이 완료되었습니다</h3>
+      <p class="checkout-complete-code">주문코드 <strong>${order.id}</strong></p>
+      <button type="button" class="primary-button" id="checkoutCompleteConfirmBtn">주문 내역 보기</button>
+    </div>
+  `;
+
+  document.getElementById("checkoutCompleteConfirmBtn").addEventListener("click", () => {
+    window.location.href = `../orders/detail.html?id=${encodeURIComponent(order.id)}`;
+  });
 }
 
 function handleBasketClick(event) {

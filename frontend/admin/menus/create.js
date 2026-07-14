@@ -37,6 +37,7 @@ form.addEventListener("submit", async (event) => {
     image: String(formData.get("image") || "").trim(),
     description: String(formData.get("description") || "").trim(),
     soldOut: formData.get("soldOut") === "on",
+    latteArtAvailable: formData.get("latteArtAvailable") === "on",
   };
 
   const error = validateMenuForm(payload);

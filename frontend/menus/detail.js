@@ -36,9 +36,13 @@ function renderMenuDetail() {
   const category = getCategoryById(currentMenu.categoryId);
   const soldOut = currentMenu.soldOut;
 
+  const mediaMarkup = currentMenu.latteArtVideoUrl
+    ? `<video src="${escapeHtml(currentMenu.latteArtVideoUrl)}" autoplay muted loop playsinline controls></video>`
+    : `<img src="../${currentMenu.image}" alt="${currentMenu.name}" loading="lazy" />`;
+
   detailEl.innerHTML = `
     <div class="menu-detail-image">
-      <img src="../${currentMenu.image}" alt="${currentMenu.name}" loading="lazy" />
+      ${mediaMarkup}
     </div>
     <div class="menu-detail-body">
       ${category ? `<span class="menu-detail-category">${category.name}</span>` : ""}

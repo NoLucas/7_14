@@ -324,3 +324,19 @@ project1/
 - 조치: 리다이렉트 대상을 `"../admin/"`(끝 슬래시 포함)으로 수정해 `serve`의 추가 리다이렉트가 발생하지 않도록 함. 헤드리스 브라우저로 재검증해 정상 표시(전체 주문 3, 품절 메뉴 0) 확인
 - Playwright(Chromium)로 실제 브라우저 전체 플로우 검증 완료: 홈/메뉴 목록·상세/장바구니 담기/주문하기(체크아웃)/주문 내역/관리자 비로그인 접근 차단/고객 계정의 관리자 접근 차단/관리자 로그인·대시보드·메뉴 목록 이동, 콘솔 에러 없음 확인. 테스트 중 생성된 임시 주문·품절 토글은 삭제해 데이터 원상 복구함
 
+### 20단계: 관리자 - 메뉴 관리(라떼아트 미리보기 영상) — `feature/menu-management` 브랜치
+
+> 관리자 대시보드의 "메뉴 관리"(`admin/menus/*`, 8단계에서 이미 구현됨)에 라떼아트 메뉴 전용 미리보기 영상 업로드/삭제 기능을 추가한다. 영상은 Supabase Storage에, URL만 `menus.latte_art_video_url`에 저장한다. 고객용 메뉴 상세 페이지는 레이아웃 변경 없이, 영상이 있으면 기존 이미지 자리에 영상을 대신 보여준다.
+
+- [x] `menus` 테이블에 `latte_art_video_url`(text, nullable) 컬럼 추가
+- [x] `menu-latte-art-videos` Storage 버킷 신설(public, 50MB, video/mp4·webm·quicktime·x-msvideo — 기존 `latte-art-videos` 버킷과 동일한 제약을 재사용 제안). insert/update/delete를 `is_admin()`에게만 허용하는 RLS 정책 추가(select는 관리자 화면의 업로드/삭제 동작 자체에도 필요해서 별도로 추가 — 아래 버그 참고)
+- [x] `frontend/js/data.js` — `uploadMenuLatteArtVideo`/`deleteMenuLatteArtVideo` 추가(기존 주문별 라떼아트 영상 업로드 패턴 재사용), `normalizeMenuRow`/`createMenu`/`updateMenu`에 `latteArtVideoUrl` 배관
+- [x] `frontend/admin/menus/create.js`, `edit.js` — "라떼아트 가능 메뉴로 표시" 체크박스 추가(기존에 없던 편집 항목)
+- [x] `frontend/admin/menus/detail.js`, `detail.css` — 라떼아트 가능 메뉴에 한해 미리보기 영상 섹션 추가(업로드/교체/삭제, 50MB·video/* 클라이언트 검증은 기존 주문 영상 업로드 화면과 동일 기준)
+- [x] `frontend/menus/detail.js`, `detail.css` — 고객 메뉴 상세의 `.menu-detail-image` 슬롯에 영상이 있으면 `<img>` 대신 `<video>`를 렌더링(레이아웃/구조 변경 없음, 영상 없는 메뉴는 기존과 100% 동일)
+
+**🐛 실제 브라우저 검증 중 발견/수정한 버그**
+- **Storage 키에 한글 사용 불가**: 새 메뉴는 이름을 슬러그화한 한글 id를 가질 수 있는데(`generateMenuId`가 한글을 보존), 영상 파일명을 `${menuId}-${timestamp}`로 만들면 Supabase Storage가 `InvalidKey`로 거부함. 파일명에서 menuId를 빼고 `crypto.randomUUID()`로 대체해 해결(주문별 영상 업로드는 orderId가 항상 영문/숫자라 이 문제가 없었음)
+- **관리자 세션으로도 영상 삭제가 조용히 실패**: `menu-latte-art-videos` 버킷에 `authenticated` 역할용 SELECT 정책이 없어, 19단계에서 발견한 것과 동일한 "UPDATE/DELETE는 SELECT로 행이 보여야 한다"는 Postgres RLS 특성 때문에 관리자 로그인 상태에서도 삭제 요청이 0건 처리됨. `admin can view menu latte art videos` SELECT 정책을 추가해 해결
+- 검증: Playwright(Chromium)로 관리자 메뉴 추가→가격/설명 수정→라떼아트 가능 체크→영상 업로드→고객 메뉴 상세에서 영상 `readyState=4`(재생 가능) 확인→영상 삭제(Storage 오브젝트·DB URL 둘 다 제거 확인)→메뉴 삭제→고객 계정으로 `admin/menus/list` 접근 시 로그인 페이지로 차단 확인. 테스트용 웹캠 없이 Chromium의 `MediaRecorder`로 실제 재생 가능한 짧은 webm을 직접 생성해 업로드 테스트에 사용함. 테스트 중 생성된 메뉴·Storage 파일은 모두 삭제해 원상 복구(메뉴 10개, 관련 Storage 파일 0개 확인)
+

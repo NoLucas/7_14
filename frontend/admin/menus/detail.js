@@ -13,7 +13,111 @@ function renderEmpty() {
   editLink.style.display = "none";
 }
 
+let currentMenu = null;
+
+function renderMenuLatteArtSection(menu) {
+  if (!menu.latteArtAvailable) return "";
+
+  const videoSection = menu.latteArtVideoUrl
+    ? `
+      <video class="latte-art-video" src="${escapeHtml(menu.latteArtVideoUrl)}" controls></video>
+      <div class="latte-art-video-actions">
+        <button type="button" class="action-button warn" id="latteArtDeleteBtn">영상 삭제</button>
+      </div>
+    `
+    : `<p class="latte-art-status">아직 미리보기 영상이 없습니다.</p>`;
+
+  return `
+    <section class="latte-art-card">
+      <h2 class="section-title">라떼아트 미리보기 영상</h2>
+      ${videoSection}
+      <div class="latte-art-upload">
+        <input type="file" id="latteArtVideoInput" accept="video/*" />
+        <button type="button" id="latteArtUploadBtn">${menu.latteArtVideoUrl ? "영상 교체" : "영상 업로드"}</button>
+      </div>
+      <p class="latte-art-upload-status" id="latteArtUploadStatus" hidden></p>
+    </section>
+  `;
+}
+
+function showLatteArtUploadStatus(message) {
+  const statusEl = document.getElementById("latteArtUploadStatus");
+  if (!statusEl) return;
+  statusEl.textContent = message;
+  statusEl.hidden = false;
+}
+
+function bindMenuLatteArtEvents() {
+  const uploadBtn = document.getElementById("latteArtUploadBtn");
+  if (uploadBtn) {
+    uploadBtn.addEventListener("click", async () => {
+      const fileInput = document.getElementById("latteArtVideoInput");
+      const file = fileInput.files[0];
+
+      if (!file) {
+        showLatteArtUploadStatus("업로드할 영상 파일을 선택해주세요.");
+        return;
+      }
+      if (!file.type.startsWith("video/")) {
+        showLatteArtUploadStatus("video 파일만 업로드할 수 있습니다.");
+        return;
+      }
+      if (file.size > 50 * 1024 * 1024) {
+        showLatteArtUploadStatus("파일 용량은 50MB 이하만 업로드할 수 있습니다.");
+        return;
+      }
+
+      uploadBtn.disabled = true;
+      showLatteArtUploadStatus("업로드 중...");
+
+      let updated = null;
+      try {
+        updated = await uploadMenuLatteArtVideo(currentMenu.id, file);
+      } catch (err) {
+        console.error("uploadMenuLatteArtVideo threw:", err);
+      }
+
+      uploadBtn.disabled = false;
+
+      if (!updated) {
+        showLatteArtUploadStatus("업로드에 실패했습니다. 다시 시도해주세요.");
+        return;
+      }
+
+      currentMenu = updated;
+      renderDetail(currentMenu);
+    });
+  }
+
+  const deleteBtn = document.getElementById("latteArtDeleteBtn");
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", async () => {
+      const confirmed = window.confirm("미리보기 영상을 삭제할까요?");
+      if (!confirmed) return;
+
+      deleteBtn.disabled = true;
+
+      let updated = null;
+      try {
+        updated = await deleteMenuLatteArtVideo(currentMenu.id);
+      } catch (err) {
+        console.error("deleteMenuLatteArtVideo threw:", err);
+      }
+
+      if (!updated) {
+        deleteBtn.disabled = false;
+        showLatteArtUploadStatus("삭제에 실패했습니다. 다시 시도해주세요.");
+        return;
+      }
+
+      currentMenu = updated;
+      renderDetail(currentMenu);
+    });
+  }
+}
+
 function renderDetail(menu) {
+  currentMenu = menu;
   const category = getCategoryById(menu.categoryId);
   editLink.href = `./edit.html?id=${encodeURIComponent(menu.id)}`;
 
@@ -45,9 +149,17 @@ function renderDetail(menu) {
           <span>판매 상태</span>
           <strong>${menu.soldOut ? "품절" : "판매 중"}</strong>
         </article>
+        <article class="info-box">
+          <span>라떼아트</span>
+          <strong>${menu.latteArtAvailable ? "가능" : "불가"}</strong>
+        </article>
       </div>
     </section>
+
+    ${renderMenuLatteArtSection(menu)}
   `;
+
+  bindMenuLatteArtEvents();
 }
 
 async function init() {

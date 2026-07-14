@@ -332,14 +332,21 @@ function normalizeOrderRow(row) {
     id: row.id,
     createdAt: row.created_at,
     status: row.status,
-    items: (row.order_items || []).map((item) => ({ menuId: item.menu_id, quantity: item.quantity })),
+    paymentMethod: row.payment_method,
+    items: (row.order_items || []).map((item) => ({
+      menuId: item.menu_id,
+      quantity: item.quantity,
+      latteArtShape: item.latte_art_shape,
+      latteArtNote: item.latte_art_note,
+    })),
   };
 }
 
+const ORDER_SELECT_COLUMNS =
+  "id, created_at, status, payment_method, order_items(menu_id, quantity, latte_art_shape, latte_art_note)";
+
 async function getOrders() {
-  const { data, error } = await getSupabaseClient()
-    .from(ORDERS_TABLE)
-    .select("id, created_at, status, order_items(menu_id, quantity)");
+  const { data, error } = await getSupabaseClient().from(ORDERS_TABLE).select(ORDER_SELECT_COLUMNS);
 
   if (error) {
     console.error("getOrders failed:", error);
@@ -373,21 +380,27 @@ async function generateOrderId() {
   return nextId;
 }
 
-// 장바구니 항목({menuId, quantity}[])을 받아 새 주문을 생성하고 저장한다.
-async function createOrder(items) {
+// 장바구니 항목({menuId, quantity, latteArtShape?, latteArtNote?}[])과 결제방법을 받아 새 주문을 생성하고 저장한다.
+async function createOrder(items, paymentMethod) {
   const client = getSupabaseClient();
   const id = await generateOrderId();
 
   const { error: orderError } = await client
     .from(ORDERS_TABLE)
-    .insert({ id, status: ORDER_STATUSES[0] });
+    .insert({ id, status: ORDER_STATUSES[0], payment_method: paymentMethod });
 
   if (orderError) {
     console.error("createOrder (orders insert) failed:", orderError);
     return null;
   }
 
-  const itemRows = items.map((item) => ({ order_id: id, menu_id: item.menuId, quantity: item.quantity }));
+  const itemRows = items.map((item) => ({
+    order_id: id,
+    menu_id: item.menuId,
+    quantity: item.quantity,
+    latte_art_shape: item.latteArtShape ?? null,
+    latte_art_note: item.latteArtNote ?? null,
+  }));
   const { error: itemsError } = await client.from(ORDER_ITEMS_TABLE).insert(itemRows);
 
   if (itemsError) {
@@ -401,7 +414,7 @@ async function createOrder(items) {
 async function getOrderById(orderId) {
   const { data, error } = await getSupabaseClient()
     .from(ORDERS_TABLE)
-    .select("id, created_at, status, order_items(menu_id, quantity)")
+    .select(ORDER_SELECT_COLUMNS)
     .eq("id", orderId)
     .maybeSingle();
 

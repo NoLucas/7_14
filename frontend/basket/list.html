@@ -31,9 +31,18 @@
     <section id="basketContent"></section>
   </main>
 
+  <div class="modal-overlay" id="checkoutModalOverlay" hidden>
+    <div class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
+      <div class="modal-header">
+        <h2 id="checkoutModalTitle">주문하기</h2>
+        <button type="button" class="modal-close" id="checkoutModalCloseBtn" aria-label="닫기">✕</button>
+      </div>
+      <div id="checkoutModalBody"></div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="../js/supabase-client.js"></script>
-  <script src="../js/latte-art.js"></script>
   <script src="../js/data.js"></script>
   <script src="../js/utils.js"></script>
   <script src="list.js"></script>

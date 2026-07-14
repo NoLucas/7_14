@@ -24,7 +24,9 @@
 
       <div class="site-header-actions">
         <a href="menus/list.html" class="icon-btn" aria-label="메뉴 검색">🔍</a>
-        <a href="auth/login.html" class="icon-btn" aria-label="로그인">👤</a>
+        <div class="auth-status" id="authStatus">
+          <a href="auth/login.html" class="icon-btn" aria-label="로그인">👤</a>
+        </div>
         <a href="basket/list.html" class="icon-btn cart-btn" aria-label="장바구니">
           🛍️
           <span class="cart-badge" id="cartBadge" hidden>0</span>
@@ -187,6 +189,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="js/supabase-client.js"></script>
+  <script src="js/auth-client.js"></script>
   <script src="js/data.js"></script>
   <script src="js/utils.js"></script>
   <script src="index.js"></script>

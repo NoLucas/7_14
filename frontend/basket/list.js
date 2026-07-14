@@ -197,6 +197,8 @@ function bindBasketEvents() {
 }
 
 // ===== 주문하기 모달 (결제방법 + 잔별 라떼아트 선택) =====
+// 라떼아트 선택은 카페라떼 메뉴에만 적용한다(카푸치노/바닐라라떼 등 다른 latteArtAvailable 메뉴는 제외).
+const LATTE_ART_CHECKOUT_MENU_ID = "latte";
 let checkoutGlassSlots = [];
 let checkoutPaymentMethod = null;
 
@@ -205,7 +207,7 @@ function buildGlassSlots() {
   buildCartViewModels()
     .filter((item) => item.menu)
     .forEach((item) => {
-      if (item.menu.latteArtAvailable) {
+      if (item.menu.id === LATTE_ART_CHECKOUT_MENU_ID) {
         for (let i = 0; i < item.quantity; i++) {
           slots.push({ menuId: item.menu.id, menuName: item.menu.name, shape: null, note: "" });
         }
@@ -342,7 +344,7 @@ function buildOrderItems() {
   buildCartViewModels()
     .filter((item) => item.menu)
     .forEach((item) => {
-      if (item.menu.latteArtAvailable) {
+      if (item.menu.id === LATTE_ART_CHECKOUT_MENU_ID) {
         for (let i = 0; i < item.quantity; i++) {
           const slot = checkoutGlassSlots[slotCursor++];
           items.push({

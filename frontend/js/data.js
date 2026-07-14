@@ -447,9 +447,12 @@ async function createOrder(items, paymentMethod) {
   } = await client.auth.getSession();
   const userId = session ? session.user.id : null;
 
+  const status = ORDER_STATUSES[0];
+  const createdAt = new Date().toISOString();
+
   const { error: orderError } = await client
     .from(ORDERS_TABLE)
-    .insert({ id, status: ORDER_STATUSES[0], payment_method: paymentMethod, user_id: userId });
+    .insert({ id, status, payment_method: paymentMethod, user_id: userId });
 
   if (orderError) {
     console.error("createOrder (orders insert) failed:", orderError);
@@ -470,7 +473,25 @@ async function createOrder(items, paymentMethod) {
     return null;
   }
 
-  return getOrderById(id);
+  // 방금 저장한 값으로 결과를 직접 구성한다(재조회하지 않음): 본인 주문만 조회 가능하도록
+  // RLS를 강화한 뒤로는, 결제방법 선택 등으로 체크아웃 모달이 열려 있는 동안 세션이 만료/갱신되면
+  // user_id가 auth.uid()와 일시적으로 어긋나 재조회(getOrderById)가 0건을 반환할 수 있다.
+  // insert 자체는 성공했는데도 "주문 처리에 실패했습니다"로 잘못 보고되는 원인이었다.
+  return {
+    id,
+    createdAt,
+    status,
+    paymentMethod,
+    items: items.map((item) => ({
+      id: null,
+      menuId: item.menuId,
+      quantity: item.quantity,
+      latteArtShape: item.latteArtShape ?? null,
+      latteArtNote: item.latteArtNote ?? null,
+      latteArtVideoUrl: null,
+      latteArtVideoUploadedAt: null,
+    })),
+  };
 }
 
 async function getOrderById(orderId) {

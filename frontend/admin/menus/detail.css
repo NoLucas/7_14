@@ -157,6 +157,17 @@ body {
   margin-bottom: var(--space-lg);
 }
 
+.latte-art-video-list {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: var(--space-lg);
+}
+
+.latte-art-video-item .latte-art-video {
+  margin-bottom: var(--space-sm);
+}
+
 .action-button {
   min-width: 76px;
   padding: 0.7rem 0.95rem;

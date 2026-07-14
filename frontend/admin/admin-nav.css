@@ -1,0 +1,74 @@
+/* ===== 관리자 사이드 네비게이션 (호버/탭/포커스로 열림) ===== */
+.admin-side-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 500;
+}
+
+.admin-side-nav-tab {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  padding: var(--space-md) var(--space-sm);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  box-shadow: var(--shadow-md);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.admin-side-nav-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 240px;
+  padding: var(--space-2xl) var(--space-lg) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background: var(--glass-bg);
+  border-right: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-100%);
+  transition: transform var(--transition-slow);
+}
+
+.admin-side-nav:hover .admin-side-nav-panel,
+.admin-side-nav:focus-within .admin-side-nav-panel,
+.admin-side-nav.is-open .admin-side-nav-panel {
+  transform: translateX(0);
+}
+
+.admin-side-nav-title {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.admin-side-nav-panel a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.admin-side-nav-panel a:hover,
+.admin-side-nav-panel a:focus-visible {
+  background: var(--color-surface-alt);
+}
+
+.admin-side-nav-panel a.is-current {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}

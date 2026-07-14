@@ -1,5 +1,6 @@
 // ===== 상태 =====
 let currentMenu = null;
+let currentMenuVideoUrl = null;
 let quantity = 1;
 let selectedLatteArtShape = null; // 프리셋 id, "custom", 또는 null
 let latteArtNote = "";
@@ -20,6 +21,11 @@ async function init() {
     }
   }
 
+  if (currentMenu && currentMenu.latteArtAvailable) {
+    const videos = await getMenuLatteArtVideos(currentMenu.id);
+    currentMenuVideoUrl = videos[0] ? videos[0].video_url : null;
+  }
+
   renderMenuDetail();
   updateCartBadge();
 }
@@ -36,8 +42,8 @@ function renderMenuDetail() {
   const category = getCategoryById(currentMenu.categoryId);
   const soldOut = currentMenu.soldOut;
 
-  const mediaMarkup = currentMenu.latteArtVideoUrl
-    ? `<video src="${escapeHtml(currentMenu.latteArtVideoUrl)}" autoplay muted loop playsinline controls></video>`
+  const mediaMarkup = currentMenuVideoUrl
+    ? `<video src="${escapeHtml(currentMenuVideoUrl)}" autoplay muted loop playsinline controls></video>`
     : `<img src="../${currentMenu.image}" alt="${currentMenu.name}" loading="lazy" />`;
 
   detailEl.innerHTML = `

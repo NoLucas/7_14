@@ -14,26 +14,31 @@ function renderEmpty() {
 }
 
 let currentMenu = null;
+let currentVideos = [];
 
-function renderMenuLatteArtSection(menu) {
-  if (!menu.latteArtAvailable) return "";
+function renderMenuLatteArtSection() {
+  if (!currentMenu.latteArtAvailable) return "";
 
-  const videoSection = menu.latteArtVideoUrl
-    ? `
-      <video class="latte-art-video" src="${escapeHtml(menu.latteArtVideoUrl)}" controls></video>
-      <div class="latte-art-video-actions">
-        <button type="button" class="action-button warn" id="latteArtDeleteBtn">영상 삭제</button>
-      </div>
-    `
-    : `<p class="latte-art-status">아직 미리보기 영상이 없습니다.</p>`;
+  const videoItems = currentVideos.length
+    ? currentVideos
+        .map(
+          (video) => `
+            <div class="latte-art-video-item">
+              <video class="latte-art-video" src="${escapeHtml(video.video_url)}" controls></video>
+              <button type="button" class="action-button warn" data-action="delete-video" data-id="${video.id}">영상 삭제</button>
+            </div>
+          `
+        )
+        .join("")
+    : `<p class="latte-art-status">아직 등록된 영상이 없습니다.</p>`;
 
   return `
     <section class="latte-art-card">
-      <h2 class="section-title">라떼아트 미리보기 영상</h2>
-      ${videoSection}
+      <h2 class="section-title">라떼아트 영상 (${currentVideos.length}개)</h2>
+      <div class="latte-art-video-list">${videoItems}</div>
       <div class="latte-art-upload">
         <input type="file" id="latteArtVideoInput" accept="video/*" />
-        <button type="button" id="latteArtUploadBtn">${menu.latteArtVideoUrl ? "영상 교체" : "영상 업로드"}</button>
+        <button type="button" id="latteArtUploadBtn">영상 추가</button>
       </div>
       <p class="latte-art-upload-status" id="latteArtUploadStatus" hidden></p>
     </section>
@@ -70,50 +75,49 @@ function bindMenuLatteArtEvents() {
       uploadBtn.disabled = true;
       showLatteArtUploadStatus("업로드 중...");
 
-      let updated = null;
+      let added = null;
       try {
-        updated = await uploadMenuLatteArtVideo(currentMenu.id, file);
+        added = await addMenuLatteArtVideo(currentMenu.id, file);
       } catch (err) {
-        console.error("uploadMenuLatteArtVideo threw:", err);
+        console.error("addMenuLatteArtVideo threw:", err);
       }
 
       uploadBtn.disabled = false;
 
-      if (!updated) {
+      if (!added) {
         showLatteArtUploadStatus("업로드에 실패했습니다. 다시 시도해주세요.");
         return;
       }
 
-      currentMenu = updated;
+      currentVideos = await getMenuLatteArtVideos(currentMenu.id);
       renderDetail(currentMenu);
     });
   }
 
-  const deleteBtn = document.getElementById("latteArtDeleteBtn");
-  if (deleteBtn) {
+  document.querySelectorAll('[data-action="delete-video"]').forEach((deleteBtn) => {
     deleteBtn.addEventListener("click", async () => {
-      const confirmed = window.confirm("미리보기 영상을 삭제할까요?");
+      const confirmed = window.confirm("이 영상을 삭제할까요?");
       if (!confirmed) return;
 
       deleteBtn.disabled = true;
 
-      let updated = null;
+      let ok = false;
       try {
-        updated = await deleteMenuLatteArtVideo(currentMenu.id);
+        ok = await deleteMenuLatteArtVideoById(deleteBtn.dataset.id);
       } catch (err) {
-        console.error("deleteMenuLatteArtVideo threw:", err);
+        console.error("deleteMenuLatteArtVideoById threw:", err);
       }
 
-      if (!updated) {
+      if (!ok) {
         deleteBtn.disabled = false;
         showLatteArtUploadStatus("삭제에 실패했습니다. 다시 시도해주세요.");
         return;
       }
 
-      currentMenu = updated;
+      currentVideos = await getMenuLatteArtVideos(currentMenu.id);
       renderDetail(currentMenu);
     });
-  }
+  });
 }
 
 function renderDetail(menu) {
@@ -156,7 +160,7 @@ function renderDetail(menu) {
       </div>
     </section>
 
-    ${renderMenuLatteArtSection(menu)}
+    ${renderMenuLatteArtSection()}
   `;
 
   bindMenuLatteArtEvents();
@@ -168,9 +172,13 @@ async function init() {
 
   if (!menu) {
     renderEmpty();
-  } else {
-    renderDetail(menu);
+    return;
   }
+
+  if (menu.latteArtAvailable) {
+    currentVideos = await getMenuLatteArtVideos(menu.id);
+  }
+  renderDetail(menu);
 }
 
 init();

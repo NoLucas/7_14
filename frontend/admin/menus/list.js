@@ -6,8 +6,8 @@ const activeCount = document.getElementById("activeCount");
 const soldOutCount = document.getElementById("soldOutCount");
 const resultText = document.getElementById("resultText");
 
-function initializeFilters() {
-  const options = [{ id: "all", name: "전체" }, ...getCategories()];
+function initializeFilters(categories) {
+  const options = [{ id: "all", name: "전체" }, ...categories];
   categoryFilter.innerHTML = options
     .map((category) => `<option value="${category.id}">${category.name}</option>`)
     .join("");
@@ -17,7 +17,7 @@ function getFilteredMenus() {
   const categoryId = categoryFilter.value;
   const keyword = keywordInput.value.trim().toLowerCase();
 
-  return getAllMenus().filter((menu) => {
+  return getMenusByCategory().filter((menu) => {
     const matchesCategory = categoryId === "all" || menu.categoryId === categoryId;
     const source = `${menu.name} ${menu.description}`.toLowerCase();
     const matchesKeyword = !keyword || source.includes(keyword);
@@ -26,7 +26,7 @@ function getFilteredMenus() {
 }
 
 function renderSummary() {
-  const menus = getAllMenus();
+  const menus = getMenusByCategory();
   totalCount.textContent = menus.length;
   activeCount.textContent = menus.filter((menu) => !menu.soldOut).length;
   soldOutCount.textContent = menus.filter((menu) => menu.soldOut).length;
@@ -85,7 +85,7 @@ function renderList() {
     .join("");
 }
 
-function handleListClick(event) {
+async function handleListClick(event) {
   const button = event.target.closest("[data-action]");
   if (!button) return;
 
@@ -93,7 +93,7 @@ function handleListClick(event) {
   if (!id) return;
 
   if (action === "toggle") {
-    toggleMenuSoldOut(id);
+    await toggleMenuSoldOut(id);
     renderSummary();
     renderList();
     return;
@@ -106,14 +106,15 @@ function handleListClick(event) {
     const confirmed = window.confirm(`"${menu.name}" 메뉴를 삭제할까요?`);
     if (!confirmed) return;
 
-    deleteMenu(id);
+    await deleteMenu(id);
     renderSummary();
     renderList();
   }
 }
 
-function initializePage() {
-  initializeFilters();
+async function initializePage() {
+  const [, categories] = await Promise.all([getAllMenus(), getCategories()]);
+  initializeFilters(categories);
   renderSummary();
   renderList();
 

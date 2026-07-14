@@ -50,10 +50,15 @@ function renderDetail(menu) {
   `;
 }
 
-const menu = menuId ? getMenuById(menuId) : null;
+async function init() {
+  await Promise.all([getAllMenus(), getCategories()]);
+  const menu = menuId ? getMenuById(menuId) : null;
 
-if (!menu) {
-  renderEmpty();
-} else {
-  renderDetail(menu);
+  if (!menu) {
+    renderEmpty();
+  } else {
+    renderDetail(menu);
+  }
 }
+
+init();

@@ -102,6 +102,17 @@ project1/
 | **고객** | `/frontend/`, `/frontend/menus/`, `/frontend/my/`, `/frontend/basket/`, `/frontend/orders/`, `/frontend/auth/` | 메인, 메뉴 조회, 마이페이지, 장바구니, 주문 내역, 로그인/회원가입 |
 | **관리자/사장** | `/frontend/admin/`, `/frontend/admin/menus/`, `/frontend/admin/orders/` | 대시보드, 메뉴 CRUD, 주문 관리 |
 
+## 🛠️ 기술 스택
+
+| 구분 | 기술 | 비고 |
+|------|------|------|
+| 프런트엔드 | HTML / CSS / Vanilla JavaScript | 프레임워크 없이 정적 페이지로 구현 |
+| 로컬 데이터 저장 | `localStorage` | 장바구니(`cart`), 라떼아트 요청 임시 선택(`latteArtSelection`)만 유지(19단계에서 로그인 관련 목업도 제거됨) |
+| 백엔드/DB | [Supabase](https://supabase.com) (Postgres + Storage + Auth) | 카테고리/메뉴/라떼아트 프리셋 모양/주문(+주문 항목)/라떼아트 요청·영상을 관계형 테이블로 관리(18단계), 로그인 계정은 Supabase Auth(`auth.users`) + `public.profiles`(role 구분)로 관리(19단계). 클라이언트에서 `@supabase/supabase-js` (CDN, `frontend/js/supabase-client.js` · `frontend/js/auth-client.js`)로 직접 접근, 관리자 쓰기 작업은 RLS로 `is_admin()`에게만 허용 |
+| 폰트 | Pretendard | `frontend/css/variables.css`에서 전역 적용 |
+| 개발 서버 | [`serve`](https://www.npmjs.com/package/serve) (npm 패키지) | `npm start` → `frontend/`를 정적 서빙 (포트 3113) |
+| 버전 관리 | Git / GitHub | |
+
 ## 🎨 디자인
 
 - **테마**: 라이트 + 따뜻한 브라운/크림 톤
@@ -279,4 +290,37 @@ project1/
 
 - [x] `frontend/index.html` — 헤더 nav에 "바리스타" 메뉴 추가(`#baristaProfile` 앵커), 바리스타 소개 섹션 마크업 추가(사진 아이콘 + 이름/직함/경력/소개글, 플레이스홀더 내용)
 - [x] `frontend/index.css` — 바리스타 소개 섹션 스타일 (사진+텍스트 카드 레이아웃, 반응형)
+
+### 18단계: 데이터 저장소를 JSON/더미데이터 → Supabase(관계형 DB)로 전면 이전
+
+> UI/UX는 변경하지 않고, `frontend/js/data.js`에 하드코딩되어 있던 `CATEGORIES`/`MENUS`/`LATTE_ART_SHAPES`/`ORDER_SEED`(localStorage 목업 포함)를 Supabase Postgres 테이블로 옮긴다. 데이터 형식·내용은 그대로 유지하되, 관계형으로 재설계(`menus.category_id` → `categories.id`, `order_items.order_id` → `orders.id`, `order_items.menu_id` → `menus.id` FK).
+
+- [x] Supabase 테이블 생성: `categories`(4행) / `menus`(10행, `category_id` FK) / `latte_art_shapes`(4행) / `orders`(3행, 기존 `ORDER_SEED`) / `order_items`(5행, 주문별 `{menuId, quantity}` 정규화). 각 테이블 RLS 활성화 + `anon` 역할에 select/insert/update/delete 정책 부여(기존 `latte_art_orders` 테이블과 동일한 패턴, 실 인증 없는 앱 구조 유지)
+- [x] 이전 전 JSON/더미데이터 레코드 수와 Supabase 테이블 행 수 일치 확인(4/10/4/3/5) 후 `frontend/js/data.js`의 하드코딩 배열과 localStorage 시드 로직(`MENU_STORAGE_KEY`, `ORDER_SEED`, `seedMenusIfOutdated` 등) 완전 삭제
+- [x] `frontend/js/data.js` — `getCategories`/`getAllMenus`/`getLatteArtShapes`/`getOrders`/`getOrderById`/`createOrder`/`updateOrderStatus`/`createMenu`/`updateMenu`/`deleteMenu`/`toggleMenuSoldOut`를 Supabase 쿼리 기반 비동기 함수로 재작성. 메뉴/카테고리/라떼아트 모양은 페이지 로드 시 1회 fetch 후 모듈 캐시에 저장해, `getMenuById`/`getCategoryById`/`getMenusByCategory` 등 동기 조회 함수는 그대로 유지(호출부 대량 수정 최소화)
+- [x] `frontend/js/supabase-client.js` CDN 스크립트 태그를 이전까지 라떼아트 기능에서만 쓰던 페이지 외에 데이터 조회가 필요한 모든 페이지(메뉴/장바구니/주문/마이페이지/관리자 전체, 총 16개 HTML)에 추가
+- [x] 메뉴/카테고리/주문/장바구니/관리자 CRUD 관련 12개 JS 파일의 `init()`/이벤트 핸들러를 `async`로 전환하고 데이터 조회 함수 호출부에 `await` 추가 (장바구니 로컬 상태와 라떼아트 임시 선택은 기존 `localStorage` 방식 그대로 유지 — 실사용자 식별자가 없어 DB로 옮길 근거가 없다고 판단)
+- [x] 검증: Supabase REST API에 `anon` 키로 실제 select/insert/update/delete 왕복 테스트(주문 생성 흐름 시뮬레이션) 및 모든 수정 JS 파일 `node --check` 구문 검증 통과. 로컬 브라우저 수동 QA는 미실시(헤드리스 브라우저 도구 없음) — 최초 배포/사용 전 실제 브라우저로 메뉴 목록/상세, 장바구니 담기~주문, 관리자 메뉴·주문 CRUD, 라떼아트 플로우를 한 번씩 직접 확인할 것
+
+### 19단계: 로그인 계정 데이터를 Supabase Auth로 이관 + 관리자 RLS 강화
+
+> `frontend/auth/login.js`에 하드코딩되어 있던 평문 비밀번호 데모 계정(`admin`/`admin1234`, `customer`/`customer1234`) 2건을 Supabase Auth로 이관한다. 회원가입(`signup.js`)은 원래도 실제 저장 로직이 없던 화면이라 이관 대상 데이터가 없어 그대로 둠(실제 가입 기능 구현은 이번 범위 밖으로 판단, 필요 시 별도 요청 필요). 로그인 시 실제 Supabase 세션이 생기는 것과 관리자 페이지 접근 제어 신설은 사전 보고 후 사용자 승인을 받고 진행함.
+
+- [x] `public.profiles`(id→`auth.users` FK, `username` unique, `role` check(customer/admin)) 테이블 + RLS(본인 또는 admin만 select, insert/update는 트리거 전용) 생성
+- [x] `handle_new_user()` 트리거로 `auth.users` insert 시 `profiles` 자동 생성, `is_admin()` SECURITY DEFINER 함수로 RLS 재귀 없이 관리자 여부 확인
+- [x] 데모 계정 2건을 합성 이메일(`<id>@cafe-moment.local`)로 `auth.users`에 `pgcrypto`(`crypt`/`gen_salt('bf')`) 해싱하여 시딩 — 평문 비밀번호는 어디에도 남기지 않음
+- [x] `menus`/`categories`/`orders`/`order_items`/`latte_art_orders`의 쓰기(insert/update/delete) RLS를 `is_admin()`에게만 허용하도록 강화(고객 체크아웃에 필요한 `orders`/`order_items` insert는 비로그인 상태로 유지). 강화 과정에서 "UPDATE는 SELECT 정책으로 행이 보여야 대상을 찾을 수 있다"는 Postgres RLS 특성 때문에 `authenticated` 역할에 SELECT 정책이 없어 관리자 UPDATE가 0건 처리되는 문제를 발견해 SELECT 정책에 `authenticated` 역할을 추가로 반영
+- [x] `frontend/js/auth-client.js` 신규 — `signInWithUsername`/`signOutCurrentUser`/`getCurrentProfile`/`requireAdminOrRedirect` (아이디 입력 → 합성 이메일 변환 내부 처리, 화면 입력 필드는 기존과 동일)
+- [x] `frontend/auth/login.js` — `DEMO_ACCOUNTS` 배열 제거, Supabase Auth 로그인으로 교체(레디이렉트 경로는 role에 따라 기존과 동일하게 admin/고객 홈으로 분기)
+- [x] `frontend/admin/*` 8개 HTML 전체에 `requireAdminOrRedirect` 가드 스크립트 추가 — 로그인 안 했거나 role이 admin이 아니면 로그인 페이지로 리다이렉트(기존에는 이런 접근 제어가 전혀 없었음)
+- [x] 검증: admin/customer 계정으로 실제 Supabase Auth 로그인(REST `/auth/v1/token`) 성공 확인, `is_admin()` 기반 RLS로 admin 쓰기 성공·customer/anon 쓰기 차단을 REST API로 각각 재현 확인, 전체 테이블 행 수 원상 확인(4/10/4/3/5, profiles 2), `DEMO_ACCOUNTS` 참조 전체 삭제 확인
+
+**⚠️ 보고 사항**
+- 관리자 페이지 가드는 클라이언트 스크립트로 리다이렉트하는 방식이라, 페이지 콘텐츠가 아주 잠깐 그려진 뒤 리다이렉트될 수 있음(로딩 오버레이 추가는 화면 요소 변경이라 이번 범위에서 제외). 실제 데이터 접근 차단은 DB의 RLS가 담당하므로 보안상 문제는 아니지만 UX상 알아둘 것
+- 로그아웃 버튼은 추가하지 않음(UI 변경 금지 지침) — 다른 계정으로 로그인하면 세션이 자동 교체됨
+
+**🐛 실제 브라우저 검증 중 발견/수정한 버그 (19단계 자체 코드, `npm start` 환경 한정)**
+- `frontend/auth/login.js`가 관리자 로그인 후 `"../admin/index.html"`로 리다이렉트했는데, `serve` 패키지의 clean-url 기능이 이를 `/admin`(끝 슬래시 없음)으로 한 번 더 리다이렉트한다. 이 상태에서 `admin/index.html`의 `<script src="./index.js">`가 `/admin/index.js`가 아니라 `/index.js`(고객 홈페이지 스크립트)로 잘못 해석되어, 관리자 대시보드가 항상 "전체 주문 0 / 총 매출 0원"으로 보이는 실제 버그가 있었음(로그인 자체과 데이터는 정상, 대시보드 렌더링만 깨짐)
+- 조치: 리다이렉트 대상을 `"../admin/"`(끝 슬래시 포함)으로 수정해 `serve`의 추가 리다이렉트가 발생하지 않도록 함. 헤드리스 브라우저로 재검증해 정상 표시(전체 주문 3, 품절 메뉴 0) 확인
+- Playwright(Chromium)로 실제 브라우저 전체 플로우 검증 완료: 홈/메뉴 목록·상세/장바구니 담기/주문하기(체크아웃)/주문 내역/관리자 비로그인 접근 차단/고객 계정의 관리자 접근 차단/관리자 로그인·대시보드·메뉴 목록 이동, 콘솔 에러 없음 확인. 테스트 중 생성된 임시 주문·품절 토글은 삭제해 데이터 원상 복구함
 

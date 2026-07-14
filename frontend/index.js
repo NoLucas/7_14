@@ -53,7 +53,7 @@ function renderFeaturedMenus() {
 function getPopularMenus() {
   const recommendedIds = new Set(getRecommendedMenus().map((menu) => menu.id));
 
-  return getAllMenus()
+  return getMenusByCategory()
     .filter((menu) => !recommendedIds.has(menu.id))
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 6);
@@ -61,7 +61,7 @@ function getPopularMenus() {
 
 // ===== 오늘의 추천 메뉴 =====
 function getRecommendedMenus() {
-  return getAllMenus()
+  return getMenusByCategory()
     .filter((menu) => !menu.soldOut)
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 3);
@@ -222,7 +222,8 @@ function bindButtonRipple() {
 }
 
 // ===== 초기화 =====
-function init() {
+async function init() {
+  await Promise.all([getAllMenus(), getCategories()]);
   renderFeaturedMenus();
   renderRecommendation();
   renderGallery();

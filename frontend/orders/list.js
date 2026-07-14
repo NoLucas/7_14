@@ -1,13 +1,14 @@
 // ===== 초기화 =====
-function init() {
-  renderOrderList();
+async function init() {
+  await getAllMenus();
+  await renderOrderList();
   updateCartBadge();
 }
 
 // ===== 주문 목록 렌더링 =====
-function renderOrderList() {
+async function renderOrderList() {
   const listEl = document.getElementById("orderList");
-  const orders = getOrders().slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const orders = (await getOrders()).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   if (orders.length === 0) {
     listEl.innerHTML = `<p class="empty-state">주문 내역이 없습니다.</p>`;

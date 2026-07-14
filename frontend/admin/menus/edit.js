@@ -29,10 +29,10 @@ function renderEmpty() {
   detailLink.style.display = "none";
 }
 
-function renderForm(menu) {
+function renderForm(menu, categories) {
   detailLink.href = `./detail.html?id=${encodeURIComponent(menu.id)}`;
 
-  const categoryOptions = getCategories()
+  const categoryOptions = categories
     .map(
       (category) =>
         `<option value="${category.id}" ${category.id === menu.categoryId ? "selected" : ""}>${category.name}</option>`
@@ -93,7 +93,7 @@ function renderForm(menu) {
   const message = document.getElementById("message");
   const cancelButton = document.getElementById("cancelButton");
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const formData = new FormData(form);
@@ -112,7 +112,7 @@ function renderForm(menu) {
       return;
     }
 
-    const updatedMenu = updateMenu(menu.id, payload);
+    const updatedMenu = await updateMenu(menu.id, payload);
     window.location.href = `./detail.html?id=${encodeURIComponent(updatedMenu.id)}`;
   });
 
@@ -121,10 +121,15 @@ function renderForm(menu) {
   });
 }
 
-const menu = editMenuId ? getMenuById(editMenuId) : null;
+async function init() {
+  const [, categories] = await Promise.all([getAllMenus(), getCategories()]);
+  const menu = editMenuId ? getMenuById(editMenuId) : null;
 
-if (!menu) {
-  renderEmpty();
-} else {
-  renderForm(menu);
+  if (!menu) {
+    renderEmpty();
+  } else {
+    renderForm(menu, categories);
+  }
 }
+
+init();

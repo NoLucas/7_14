@@ -145,7 +145,9 @@ function bindLatteArtUploadEvents() {
 }
 
 async function init() {
-  currentOrder = orderId ? getOrderById(orderId) : null;
+  await Promise.all([getAllMenus(), getLatteArtShapes()]);
+
+  currentOrder = orderId ? await getOrderById(orderId) : null;
 
   if (!currentOrder) {
     renderEmpty();

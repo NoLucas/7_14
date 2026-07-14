@@ -48,22 +48,27 @@ function renderEdit(order) {
     </section>
   `;
 
-  document.getElementById("statusActions").addEventListener("click", (event) => {
+  document.getElementById("statusActions").addEventListener("click", async (event) => {
     const button = event.target.closest("[data-action='set-status']");
     if (!button) return;
 
     const { status } = button.dataset;
     if (status === order.status) return;
 
-    updateOrderStatus(order.id, status);
-    renderEdit(getOrderById(order.id));
+    await updateOrderStatus(order.id, status);
+    renderEdit(await getOrderById(order.id));
   });
 }
 
-const order = orderId ? getOrderById(orderId) : null;
+async function init() {
+  await getAllMenus();
+  const order = orderId ? await getOrderById(orderId) : null;
 
-if (!order) {
-  renderEmpty();
-} else {
-  renderEdit(order);
+  if (!order) {
+    renderEmpty();
+  } else {
+    renderEdit(order);
+  }
 }
+
+init();

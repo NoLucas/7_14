@@ -5,7 +5,9 @@ let selectedLatteArtShape = null; // 프리셋 id, "custom", 또는 null
 let latteArtNote = "";
 
 // ===== 초기화 =====
-function init() {
+async function init() {
+  await Promise.all([getAllMenus(), getLatteArtShapes(), getCategories()]);
+
   const params = new URLSearchParams(window.location.search);
   const menuId = params.get("id");
   currentMenu = menuId ? getMenuById(menuId) : null;

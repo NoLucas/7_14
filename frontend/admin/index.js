@@ -1,7 +1,4 @@
-function renderSummary() {
-  const orders = getOrders();
-  const menus = getAllMenus();
-
+function renderSummary(orders, menus) {
   const pendingCount = orders.filter((order) => order.status !== "완료").length;
   const totalRevenue = orders.reduce((total, order) => total + getOrderTotalPrice(order), 0);
   const soldOutCount = menus.filter((menu) => menu.soldOut).length;
@@ -12,9 +9,9 @@ function renderSummary() {
   document.getElementById("soldOutMenus").textContent = soldOutCount;
 }
 
-function renderRecentOrders() {
+function renderRecentOrders(orders) {
   const listEl = document.getElementById("recentOrders");
-  const orders = getOrders()
+  orders = orders
     .slice()
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 5);
@@ -43,9 +40,10 @@ function renderRecentOrders() {
     .join("");
 }
 
-function initializePage() {
-  renderSummary();
-  renderRecentOrders();
+async function initializePage() {
+  const [orders, menus] = await Promise.all([getOrders(), getAllMenus()]);
+  renderSummary(orders, menus);
+  renderRecentOrders(orders);
 }
 
 initializePage();

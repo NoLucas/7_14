@@ -2,7 +2,8 @@
 let selectedCategoryId = "all";
 
 // ===== 초기화 =====
-function init() {
+async function init() {
+  await Promise.all([getCategories(), getAllMenus(), getLatteArtShapes()]);
   renderCategoryTabs();
   renderMenuGrid();
   updateCartBadge();

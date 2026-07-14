@@ -1,184 +1,68 @@
-// ===== 라떼아트 프리셋 모양 =====
-const LATTE_ART_SHAPES = [
-  { id: "heart", label: "하트", icon: "❤️" },
-  { id: "rosetta", label: "로제타", icon: "🌿" },
-  { id: "tulip", label: "튤립", icon: "🌷" },
-  { id: "bear", label: "곰돌이", icon: "🐻" },
-];
-
 // ===== 카테고리 =====
-const CATEGORIES = [
-  { id: "coffee", name: "커피" },
-  { id: "tea", name: "티" },
-  { id: "ade", name: "에이드" },
-  { id: "dessert", name: "디저트" },
-];
+const CATEGORIES_TABLE = "categories";
+let CATEGORIES = [];
+
+async function getCategories() {
+  const { data, error } = await getSupabaseClient().from(CATEGORIES_TABLE).select("*");
+  if (error) {
+    console.error("getCategories failed:", error);
+    return CATEGORIES;
+  }
+  CATEGORIES = data;
+  return CATEGORIES;
+}
+
+function getCategoryById(categoryId) {
+  return CATEGORIES.find((category) => category.id === categoryId) || null;
+}
+
+// ===== 라떼아트 프리셋 모양 =====
+const LATTE_ART_SHAPES_TABLE = "latte_art_shapes";
+let LATTE_ART_SHAPES = [];
+
+async function getLatteArtShapes() {
+  const { data, error } = await getSupabaseClient().from(LATTE_ART_SHAPES_TABLE).select("*");
+  if (error) {
+    console.error("getLatteArtShapes failed:", error);
+    return LATTE_ART_SHAPES;
+  }
+  LATTE_ART_SHAPES = data;
+  return LATTE_ART_SHAPES;
+}
 
 // ===== 메뉴 =====
-const MENUS = [
-  {
-    id: "americano",
-    categoryId: "coffee",
-    name: "아메리카노",
-    price: 4500,
-    description: "깔끔하고 깊은 풍미의 에스프레소 베이스 커피",
-    image: "images/menus/americano.png",
-    soldOut: false,
-    rating: 4.8,
-  },
-  {
-    id: "latte",
-    categoryId: "coffee",
-    name: "카페라떼",
-    price: 5000,
-    description: "부드러운 우유와 에스프레소의 조화",
-    image: "images/menus/latte.png",
-    soldOut: false,
-    rating: 4.9,
-    latteArtAvailable: true,
-  },
-  {
-    id: "cappuccino",
-    categoryId: "coffee",
-    name: "카푸치노",
-    price: 5000,
-    description: "풍성한 우유 거품이 매력적인 커피",
-    image: "images/menus/cappuccino.png",
-    soldOut: false,
-    rating: 4.7,
-    latteArtAvailable: true,
-  },
-  {
-    id: "vanilla-latte",
-    categoryId: "coffee",
-    name: "바닐라라떼",
-    price: 5500,
-    description: "달콤한 바닐라 시럽을 더한 라떼",
-    image: "images/menus/vanilla-latte.png",
-    soldOut: false,
-    rating: 4.6,
-    latteArtAvailable: true,
-  },
-  {
-    id: "earl-grey",
-    categoryId: "tea",
-    name: "얼그레이",
-    price: 4800,
-    description: "은은한 베르가못 향의 홍차",
-    image: "images/menus/earl-grey.png",
-    soldOut: false,
-    rating: 4.5,
-  },
-  {
-    id: "peppermint",
-    categoryId: "tea",
-    name: "페퍼민트",
-    price: 4800,
-    description: "상쾌한 향의 허브티",
-    image: "images/menus/peppermint.png",
-    soldOut: false,
-    rating: 4.4,
-  },
-  {
-    id: "lemon-ade",
-    categoryId: "ade",
-    name: "레몬에이드",
-    price: 5500,
-    description: "상큼한 레몬으로 만든 탄산 에이드",
-    image: "images/menus/lemon-ade.png",
-    soldOut: false,
-    rating: 4.7,
-  },
-  {
-    id: "grapefruit-ade",
-    categoryId: "ade",
-    name: "자몽에이드",
-    price: 5800,
-    description: "새콤달콤한 자몽 과육이 가득한 에이드",
-    image: "images/menus/grapefruit-ade.png",
-    soldOut: false,
-    rating: 4.6,
-  },
-  {
-    id: "cheesecake",
-    categoryId: "dessert",
-    name: "치즈케이크",
-    price: 6500,
-    description: "진한 크림치즈의 부드러운 케이크",
-    image: "images/menus/cheesecake.png",
-    soldOut: false,
-    rating: 4.9,
-  },
-  {
-    id: "croissant",
-    categoryId: "dessert",
-    name: "크루아상",
-    price: 4200,
-    description: "겹겹이 바삭한 버터 크루아상",
-    image: "images/menus/croissant.png",
-    soldOut: false,
-    rating: 4.5,
-  },
-];
+const MENUS_TABLE = "menus";
 
 // 관리자 화면 등에서 새로 만든 메뉴처럼 rating이 없는 경우를 대비한 기본값
 const DEFAULT_MENU_RATING = 4.5;
 
-const MENU_STORAGE_KEY = "cafe-app:menus";
+let _menusCache = [];
 
-// MENUS 시드 데이터(이미지 경로 등)를 바꿀 때마다 이 값을 올려준다.
-// 그래야 이미 브라우저에 저장된 이전 캐시를 새 시드 데이터로 갱신한다.
-const MENU_SEED_VERSION = "3";
-const MENU_SEED_VERSION_KEY = "cafe-app:menus:seed-version";
-
-function getCategories() {
-  return [...CATEGORIES];
+function normalizeMenuRow(row) {
+  return {
+    id: row.id,
+    categoryId: row.category_id,
+    name: row.name,
+    price: row.price,
+    description: row.description,
+    image: row.image,
+    soldOut: row.sold_out,
+    rating: row.rating,
+    latteArtAvailable: row.latte_art_available,
+  };
 }
 
-function getSeedMenus() {
-  return MENUS.map((menu) => ({ ...menu }));
-}
-
-function seedMenusIfOutdated() {
-  const storedVersion = localStorage.getItem(MENU_SEED_VERSION_KEY);
-  if (storedVersion === MENU_SEED_VERSION) {
-    return;
+async function getAllMenus() {
+  const { data, error } = await getSupabaseClient().from(MENUS_TABLE).select("*");
+  if (error) {
+    console.error("getAllMenus failed:", error);
+    return _menusCache;
   }
-
-  localStorage.setItem(MENU_STORAGE_KEY, JSON.stringify(getSeedMenus()));
-  localStorage.setItem(MENU_SEED_VERSION_KEY, MENU_SEED_VERSION);
+  _menusCache = data.map(normalizeMenuRow);
+  return _menusCache;
 }
 
-function getAllMenus() {
-  seedMenusIfOutdated();
-
-  const raw = localStorage.getItem(MENU_STORAGE_KEY);
-
-  if (!raw) {
-    const seedMenus = getSeedMenus();
-    localStorage.setItem(MENU_STORAGE_KEY, JSON.stringify(seedMenus));
-    return seedMenus;
-  }
-
-  try {
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) {
-      throw new Error("Invalid menu data");
-    }
-    return parsed;
-  } catch {
-    const seedMenus = getSeedMenus();
-    localStorage.setItem(MENU_STORAGE_KEY, JSON.stringify(seedMenus));
-    return seedMenus;
-  }
-}
-
-function saveMenus(menus) {
-  localStorage.setItem(MENU_STORAGE_KEY, JSON.stringify(menus));
-  return menus;
-}
-
-function generateMenuId(name) {
+async function generateMenuId(name) {
   const base = String(name || "menu")
     .trim()
     .toLowerCase()
@@ -187,11 +71,13 @@ function generateMenuId(name) {
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "") || "menu";
 
-  const menus = getAllMenus();
+  const { data, error } = await getSupabaseClient().from(MENUS_TABLE).select("id");
+  const existingIds = error ? [] : data.map((row) => row.id);
+
   let nextId = base;
   let index = 2;
 
-  while (menus.some((menu) => menu.id === nextId)) {
+  while (existingIds.includes(nextId)) {
     nextId = `${base}-${index}`;
     index += 1;
   }
@@ -199,135 +85,129 @@ function generateMenuId(name) {
   return nextId;
 }
 
-function createMenu(menuInput) {
-  const menus = getAllMenus();
-  const nextMenu = {
-    id: menuInput.id || generateMenuId(menuInput.name),
-    categoryId: menuInput.categoryId,
+async function createMenu(menuInput) {
+  const id = menuInput.id || (await generateMenuId(menuInput.name));
+  const row = {
+    id,
+    category_id: menuInput.categoryId,
     name: menuInput.name,
     price: Number(menuInput.price),
     description: menuInput.description || "",
     image: menuInput.image || "",
-    soldOut: Boolean(menuInput.soldOut),
+    sold_out: Boolean(menuInput.soldOut),
+    rating: menuInput.rating ?? null,
+    latte_art_available: Boolean(menuInput.latteArtAvailable),
   };
 
-  menus.push(nextMenu);
-  saveMenus(menus);
-  return nextMenu;
-}
-
-function updateMenu(menuId, menuInput) {
-  const menus = getAllMenus();
-  const index = menus.findIndex((menu) => menu.id === menuId);
-
-  if (index === -1) {
+  const { data, error } = await getSupabaseClient().from(MENUS_TABLE).insert(row).select().single();
+  if (error) {
+    console.error("createMenu failed:", error);
     return null;
   }
 
-  menus[index] = {
-    ...menus[index],
-    ...menuInput,
-    price: Number(menuInput.price ?? menus[index].price),
-    soldOut: Boolean(menuInput.soldOut),
+  await getAllMenus();
+  return normalizeMenuRow(data);
+}
+
+async function updateMenu(menuId, menuInput) {
+  const existing = getMenuById(menuId);
+  if (!existing) return null;
+
+  const row = {
+    category_id: menuInput.categoryId ?? existing.categoryId,
+    name: menuInput.name ?? existing.name,
+    price: Number(menuInput.price ?? existing.price),
+    description: menuInput.description ?? existing.description,
+    image: menuInput.image ?? existing.image,
+    sold_out: Boolean(menuInput.soldOut),
+    latte_art_available: menuInput.latteArtAvailable ?? existing.latteArtAvailable,
   };
 
-  saveMenus(menus);
-  return menus[index];
+  const { data, error } = await getSupabaseClient()
+    .from(MENUS_TABLE)
+    .update(row)
+    .eq("id", menuId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("updateMenu failed:", error);
+    return null;
+  }
+
+  await getAllMenus();
+  return normalizeMenuRow(data);
 }
 
-function deleteMenu(menuId) {
-  const menus = getAllMenus().filter((menu) => menu.id !== menuId);
-  saveMenus(menus);
-  return menus;
+async function deleteMenu(menuId) {
+  const { error } = await getSupabaseClient().from(MENUS_TABLE).delete().eq("id", menuId);
+  if (error) {
+    console.error("deleteMenu failed:", error);
+  }
+  return getAllMenus();
 }
 
-function toggleMenuSoldOut(menuId) {
+async function toggleMenuSoldOut(menuId) {
   const menu = getMenuById(menuId);
   if (!menu) return null;
   return updateMenu(menuId, { soldOut: !menu.soldOut });
 }
 
-function getCategoryById(categoryId) {
-  return CATEGORIES.find((category) => category.id === categoryId) || null;
-}
-
 function getMenuById(menuId) {
-  return getAllMenus().find((menu) => menu.id === menuId) || null;
+  return _menusCache.find((menu) => menu.id === menuId) || null;
 }
 
 function getMenusByCategory(categoryId) {
   if (!categoryId || categoryId === "all") {
-    return getAllMenus();
+    return _menusCache;
   }
-  return getAllMenus().filter((menu) => menu.categoryId === categoryId);
+  return _menusCache.filter((menu) => menu.categoryId === categoryId);
 }
 
 // ===== 주문 =====
 const ORDER_STATUSES = ["주문접수", "준비중", "완료"];
+const ORDERS_TABLE = "orders";
+const ORDER_ITEMS_TABLE = "order_items";
 
-const ORDERS_STORAGE_KEY = "cafe-app:orders";
-
-const ORDER_SEED = [
-  {
-    id: "ORD-20260701-001",
-    createdAt: "2026-07-01T10:23:00",
-    status: "완료",
-    items: [
-      { menuId: "americano", quantity: 2 },
-      { menuId: "cheesecake", quantity: 1 },
-    ],
-  },
-  {
-    id: "ORD-20260703-002",
-    createdAt: "2026-07-03T14:05:00",
-    status: "준비중",
-    items: [{ menuId: "vanilla-latte", quantity: 1 }],
-  },
-  {
-    id: "ORD-20260705-003",
-    createdAt: "2026-07-05T09:40:00",
-    status: "주문접수",
-    items: [
-      { menuId: "lemon-ade", quantity: 2 },
-      { menuId: "croissant", quantity: 2 },
-    ],
-  },
-];
-
-function seedOrdersIfEmpty() {
-  if (localStorage.getItem(ORDERS_STORAGE_KEY) === null) {
-    localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(ORDER_SEED));
-  }
+function normalizeOrderRow(row) {
+  return {
+    id: row.id,
+    createdAt: row.created_at,
+    status: row.status,
+    items: (row.order_items || []).map((item) => ({ menuId: item.menu_id, quantity: item.quantity })),
+  };
 }
 
-function getOrders() {
-  seedOrdersIfEmpty();
-  const raw = localStorage.getItem(ORDERS_STORAGE_KEY);
-  if (!raw) return [];
-  try {
-    return JSON.parse(raw);
-  } catch {
+async function getOrders() {
+  const { data, error } = await getSupabaseClient()
+    .from(ORDERS_TABLE)
+    .select("id, created_at, status, order_items(menu_id, quantity)");
+
+  if (error) {
+    console.error("getOrders failed:", error);
     return [];
   }
-}
-
-function saveOrders(orders) {
-  localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
-  return orders;
+  return data.map(normalizeOrderRow);
 }
 
 // 오늘 날짜 + 일련번호 조합으로 주문 ID를 만든다 (예: ORD-20260708-001)
-function generateOrderId() {
+async function generateOrderId() {
   const now = new Date();
   const datePart = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(
     now.getDate()
   ).padStart(2, "0")}`;
 
-  const orders = getOrders();
+  const { data, error } = await getSupabaseClient()
+    .from(ORDERS_TABLE)
+    .select("id")
+    .like("id", `ORD-${datePart}-%`);
+
+  const existingIds = error ? [] : data.map((row) => row.id);
+
   let sequence = 1;
   let nextId = `ORD-${datePart}-${String(sequence).padStart(3, "0")}`;
 
-  while (orders.some((order) => order.id === nextId)) {
+  while (existingIds.includes(nextId)) {
     sequence += 1;
     nextId = `ORD-${datePart}-${String(sequence).padStart(3, "0")}`;
   }
@@ -336,22 +216,42 @@ function generateOrderId() {
 }
 
 // 장바구니 항목({menuId, quantity}[])을 받아 새 주문을 생성하고 저장한다.
-function createOrder(items) {
-  const orders = getOrders();
-  const newOrder = {
-    id: generateOrderId(),
-    createdAt: new Date().toISOString(),
-    status: ORDER_STATUSES[0],
-    items: items.map((item) => ({ menuId: item.menuId, quantity: item.quantity })),
-  };
+async function createOrder(items) {
+  const client = getSupabaseClient();
+  const id = await generateOrderId();
 
-  orders.push(newOrder);
-  saveOrders(orders);
-  return newOrder;
+  const { error: orderError } = await client
+    .from(ORDERS_TABLE)
+    .insert({ id, status: ORDER_STATUSES[0] });
+
+  if (orderError) {
+    console.error("createOrder (orders insert) failed:", orderError);
+    return null;
+  }
+
+  const itemRows = items.map((item) => ({ order_id: id, menu_id: item.menuId, quantity: item.quantity }));
+  const { error: itemsError } = await client.from(ORDER_ITEMS_TABLE).insert(itemRows);
+
+  if (itemsError) {
+    console.error("createOrder (order_items insert) failed:", itemsError);
+    return null;
+  }
+
+  return getOrderById(id);
 }
 
-function getOrderById(orderId) {
-  return getOrders().find((order) => order.id === orderId) || null;
+async function getOrderById(orderId) {
+  const { data, error } = await getSupabaseClient()
+    .from(ORDERS_TABLE)
+    .select("id, created_at, status, order_items(menu_id, quantity)")
+    .eq("id", orderId)
+    .maybeSingle();
+
+  if (error) {
+    console.error("getOrderById failed:", error);
+    return null;
+  }
+  return data ? normalizeOrderRow(data) : null;
 }
 
 function getOrderTotalPrice(order) {
@@ -371,12 +271,11 @@ function getOrderSummaryText(order) {
   return firstName;
 }
 
-function updateOrderStatus(orderId, status) {
-  const orders = getOrders();
-  const index = orders.findIndex((order) => order.id === orderId);
-  if (index === -1) return null;
-
-  orders[index] = { ...orders[index], status };
-  saveOrders(orders);
-  return orders[index];
+async function updateOrderStatus(orderId, status) {
+  const { error } = await getSupabaseClient().from(ORDERS_TABLE).update({ status }).eq("id", orderId);
+  if (error) {
+    console.error("updateOrderStatus failed:", error);
+    return null;
+  }
+  return getOrderById(orderId);
 }

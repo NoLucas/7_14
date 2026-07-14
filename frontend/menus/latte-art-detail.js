@@ -2,7 +2,9 @@
 let currentShape = null;
 
 // ===== 초기화 =====
-function init() {
+async function init() {
+  await Promise.all([getLatteArtShapes(), getAllMenus()]);
+
   const params = new URLSearchParams(window.location.search);
   const shapeId = params.get("shape");
   currentShape = LATTE_ART_SHAPES.find((shape) => shape.id === shapeId) || null;
@@ -20,7 +22,7 @@ function render() {
     return;
   }
 
-  const eligibleMenus = getAllMenus().filter((menu) => menu.latteArtAvailable);
+  const eligibleMenus = getMenusByCategory().filter((menu) => menu.latteArtAvailable);
 
   const menuCards = eligibleMenus
     .map(

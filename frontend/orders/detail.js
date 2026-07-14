@@ -5,9 +5,11 @@ let latteArtFetchFailed = false;
 
 // ===== 초기화 =====
 async function init() {
+  await Promise.all([getAllMenus(), getLatteArtShapes()]);
+
   const params = new URLSearchParams(window.location.search);
   const orderId = params.get("id");
-  currentOrder = orderId ? getOrderById(orderId) : null;
+  currentOrder = orderId ? await getOrderById(orderId) : null;
 
   if (currentOrder) {
     try {

@@ -3,8 +3,9 @@ const categorySelect = document.getElementById("categorySelect");
 const message = document.getElementById("message");
 const cancelButton = document.getElementById("cancelButton");
 
-function renderCategoryOptions() {
-  categorySelect.innerHTML = getCategories()
+async function renderCategoryOptions() {
+  const categories = await getCategories();
+  categorySelect.innerHTML = categories
     .map((category) => `<option value="${category.id}">${category.name}</option>`)
     .join("");
 }
@@ -25,7 +26,7 @@ function validateMenuForm(data) {
   return "";
 }
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const formData = new FormData(form);
@@ -44,7 +45,7 @@ form.addEventListener("submit", (event) => {
     return;
   }
 
-  const createdMenu = createMenu(payload);
+  const createdMenu = await createMenu(payload);
   window.location.href = `./detail.html?id=${encodeURIComponent(createdMenu.id)}`;
 });
 

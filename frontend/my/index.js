@@ -37,7 +37,8 @@ function handleInfoClick(event) {
   }
 }
 
-function init() {
+async function init() {
+  await getAllMenus();
   renderCartSummary();
   updateCartBadge();
   document.querySelectorAll("[data-info]").forEach((button) => {

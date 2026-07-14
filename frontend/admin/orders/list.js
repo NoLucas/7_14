@@ -7,11 +7,13 @@ const preparingCount = document.getElementById("preparingCount");
 const doneCount = document.getElementById("doneCount");
 const resultText = document.getElementById("resultText");
 
+let ordersCache = [];
+
 function getFilteredOrders() {
   const status = statusFilter.value;
   const keyword = keywordInput.value.trim().toLowerCase();
 
-  return getOrders()
+  return ordersCache
     .filter((order) => {
       const matchesStatus = status === "all" || order.status === status;
       const matchesKeyword = !keyword || order.id.toLowerCase().includes(keyword);
@@ -21,7 +23,7 @@ function getFilteredOrders() {
 }
 
 function renderSummary() {
-  const orders = getOrders();
+  const orders = ordersCache;
   totalCount.textContent = orders.length;
   receivedCount.textContent = orders.filter((order) => order.status === "주문접수").length;
   preparingCount.textContent = orders.filter((order) => order.status === "준비중").length;
@@ -76,7 +78,7 @@ function renderList() {
     .join("");
 }
 
-function handleListClick(event) {
+async function handleListClick(event) {
   const button = event.target.closest("[data-action]");
   if (!button) return;
 
@@ -84,19 +86,22 @@ function handleListClick(event) {
   if (!id) return;
 
   if (action === "advance") {
-    const order = getOrderById(id);
+    const order = ordersCache.find((o) => o.id === id);
     if (!order) return;
 
     const nextStatus = getNextStatus(order.status);
     if (!nextStatus) return;
 
-    updateOrderStatus(id, nextStatus);
+    await updateOrderStatus(id, nextStatus);
+    ordersCache = await getOrders();
     renderSummary();
     renderList();
   }
 }
 
-function initializePage() {
+async function initializePage() {
+  await getAllMenus();
+  ordersCache = await getOrders();
   renderSummary();
   renderList();
 

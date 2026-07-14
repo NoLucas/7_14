@@ -1,4 +1,5 @@
-function init() {
+async function init() {
+  await Promise.all([getAllMenus(), getCategories(), getLatteArtShapes()]);
   bindHeaderActions();
   document.getElementById("basketContent").addEventListener("click", handleBasketClick);
   renderBasketPage();
@@ -195,7 +196,7 @@ function bindBasketEvents() {
         return;
       }
 
-      const newOrder = createOrder(validItems);
+      const newOrder = await createOrder(validItems);
 
       const latteArtSelection = getLatteArtSelection();
       if (latteArtSelection) {

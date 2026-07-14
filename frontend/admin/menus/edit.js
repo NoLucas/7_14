@@ -79,6 +79,11 @@ function renderForm(menu, categories) {
           <span>품절 상태로 표시</span>
         </label>
 
+        <label class="checkbox-field">
+          <input name="latteArtAvailable" type="checkbox" ${menu.latteArtAvailable ? "checked" : ""} />
+          <span>라떼아트 가능 메뉴로 표시</span>
+        </label>
+
         <p id="message" class="message" aria-live="polite"></p>
 
         <div class="form-actions">
@@ -104,6 +109,7 @@ function renderForm(menu, categories) {
       image: String(formData.get("image") || "").trim(),
       description: String(formData.get("description") || "").trim(),
       soldOut: formData.get("soldOut") === "on",
+      latteArtAvailable: formData.get("latteArtAvailable") === "on",
     };
 
     const error = validateMenuForm(payload);

@@ -49,6 +49,7 @@ function normalizeMenuRow(row) {
     soldOut: row.sold_out,
     rating: row.rating,
     latteArtAvailable: row.latte_art_available,
+    latteArtVideoUrl: row.latte_art_video_url,
   };
 }
 
@@ -97,6 +98,7 @@ async function createMenu(menuInput) {
     sold_out: Boolean(menuInput.soldOut),
     rating: menuInput.rating ?? null,
     latte_art_available: Boolean(menuInput.latteArtAvailable),
+    latte_art_video_url: null,
   };
 
   const { data, error } = await getSupabaseClient().from(MENUS_TABLE).insert(row).select().single();
@@ -121,6 +123,8 @@ async function updateMenu(menuId, menuInput) {
     image: menuInput.image ?? existing.image,
     sold_out: Boolean(menuInput.soldOut),
     latte_art_available: menuInput.latteArtAvailable ?? existing.latteArtAvailable,
+    latte_art_video_url:
+      menuInput.latteArtVideoUrl !== undefined ? menuInput.latteArtVideoUrl : existing.latteArtVideoUrl,
   };
 
   const { data, error } = await getSupabaseClient()
@@ -151,6 +155,59 @@ async function toggleMenuSoldOut(menuId) {
   const menu = getMenuById(menuId);
   if (!menu) return null;
   return updateMenu(menuId, { soldOut: !menu.soldOut });
+}
+
+// ===== 라떼아트 메뉴 미리보기 영상 (관리자 전용, Storage) =====
+const MENU_LATTE_ART_VIDEO_BUCKET = "menu-latte-art-videos";
+
+async function uploadMenuLatteArtVideo(menuId, file) {
+  const client = getSupabaseClient();
+  const extension = file.name.includes(".") ? file.name.split(".").pop() : "mp4";
+  // Storage 키는 한글 등 비-ASCII 문자를 허용하지 않으므로(메뉴 id에 한글이 올 수 있음)
+  // 메뉴 id를 파일명에 쓰지 않고 무작위 식별자를 사용한다.
+  const filePath = `${crypto.randomUUID()}.${extension}`;
+
+  const { error: uploadError } = await client.storage
+    .from(MENU_LATTE_ART_VIDEO_BUCKET)
+    .upload(filePath, file);
+
+  if (uploadError) {
+    console.error("uploadMenuLatteArtVideo upload failed:", uploadError);
+    return null;
+  }
+
+  const { data: urlData } = client.storage.from(MENU_LATTE_ART_VIDEO_BUCKET).getPublicUrl(filePath);
+
+  const updated = await updateMenu(menuId, { latteArtVideoUrl: urlData.publicUrl });
+  if (!updated) {
+    console.error("uploadMenuLatteArtVideo db update failed");
+    return null;
+  }
+  return updated;
+}
+
+async function deleteMenuLatteArtVideo(menuId) {
+  const menu = getMenuById(menuId);
+  if (!menu || !menu.latteArtVideoUrl) return null;
+
+  const client = getSupabaseClient();
+  const filePath = menu.latteArtVideoUrl.split(`${MENU_LATTE_ART_VIDEO_BUCKET}/`).pop();
+
+  const { error: removeError } = await client.storage
+    .from(MENU_LATTE_ART_VIDEO_BUCKET)
+    .remove([filePath]);
+
+  if (removeError) {
+    console.error("deleteMenuLatteArtVideo storage remove failed:", removeError);
+    return null;
+  }
+
+  const updated = await updateMenu(menuId, { latteArtVideoUrl: null });
+  if (!updated) {
+    console.error("deleteMenuLatteArtVideo db update failed (storage file already removed)");
+    return null;
+  }
+  return updated;
 }
 
 function getMenuById(menuId) {

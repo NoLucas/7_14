@@ -88,7 +88,7 @@ function renderLatteArtPicker() {
         class="latte-art-shape-btn ${selectedLatteArtShape === shape.id ? "selected" : ""}"
         data-shape="${shape.id}"
       >
-        ${shape.label}
+        ${shape.icon} ${shape.label}
       </button>
     `
   ).join("");

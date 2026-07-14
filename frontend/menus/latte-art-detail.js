@@ -47,7 +47,7 @@ function render() {
 
   el.innerHTML = `
     <div class="latte-art-shape-hero glass">
-      <div class="latte-art-shape-icon-large">${currentShape.icon}</div>
+      <div class="latte-art-shape-icon-large">${renderLatteArtShapeMedia(currentShape)}</div>
       <h2 class="latte-art-shape-name">${currentShape.label}</h2>
       <p class="latte-art-shape-hint">이 모양은 아래 커피에서 선택할 수 있어요.</p>
     </div>

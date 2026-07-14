@@ -37,6 +37,12 @@ body {
   margin-bottom: var(--space-xs);
 }
 
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
 .topbar h1,
 .list-header h2 {
   font-size: var(--font-size-xl);

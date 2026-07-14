@@ -30,6 +30,78 @@ async function getLatteArtShapes() {
   return LATTE_ART_SHAPES;
 }
 
+// 라떼아트 모양 마스터 데이터에 실제 사진/영상을 채워 넣는다 (관리자 전용).
+// 사진/영상 중 나중에 올린 것으로 대체되며(하나만 유지), 없으면 emoji로 대체 표시된다.
+const LATTE_ART_SHAPE_MEDIA_BUCKET = "latte-art-shape-media";
+
+async function updateLatteArtShapeMedia(shapeId, file) {
+  const client = getSupabaseClient();
+  const isImage = file.type.startsWith("image/");
+  const isVideo = file.type.startsWith("video/");
+  if (!isImage && !isVideo) {
+    console.error("updateLatteArtShapeMedia: 지원하지 않는 파일 형식입니다.");
+    return null;
+  }
+
+  const extension = file.name.includes(".") ? file.name.split(".").pop() : isImage ? "png" : "mp4";
+  const filePath = `${crypto.randomUUID()}.${extension}`;
+
+  const { error: uploadError } = await client.storage.from(LATTE_ART_SHAPE_MEDIA_BUCKET).upload(filePath, file);
+  if (uploadError) {
+    console.error("updateLatteArtShapeMedia upload failed:", uploadError);
+    return null;
+  }
+
+  const { data: urlData } = client.storage.from(LATTE_ART_SHAPE_MEDIA_BUCKET).getPublicUrl(filePath);
+
+  const { data, error } = await client
+    .from(LATTE_ART_SHAPES_TABLE)
+    .update({
+      image_url: isImage ? urlData.publicUrl : null,
+      video_url: isVideo ? urlData.publicUrl : null,
+    })
+    .eq("id", shapeId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("updateLatteArtShapeMedia db update failed:", error);
+    return null;
+  }
+
+  await getLatteArtShapes();
+  return data;
+}
+
+async function deleteLatteArtShapeMedia(shapeId) {
+  const client = getSupabaseClient();
+  const shape = LATTE_ART_SHAPES.find((row) => row.id === shapeId);
+  const mediaUrl = shape && (shape.video_url || shape.image_url);
+  if (!mediaUrl) return null;
+
+  const filePath = mediaUrl.split(`${LATTE_ART_SHAPE_MEDIA_BUCKET}/`).pop();
+  const { error: removeError } = await client.storage.from(LATTE_ART_SHAPE_MEDIA_BUCKET).remove([filePath]);
+  if (removeError) {
+    console.error("deleteLatteArtShapeMedia storage remove failed:", removeError);
+    return null;
+  }
+
+  const { data, error } = await client
+    .from(LATTE_ART_SHAPES_TABLE)
+    .update({ image_url: null, video_url: null })
+    .eq("id", shapeId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("deleteLatteArtShapeMedia db update failed (storage file already removed):", error);
+    return null;
+  }
+
+  await getLatteArtShapes();
+  return data;
+}
+
 // ===== 메뉴 =====
 const MENUS_TABLE = "menus";
 

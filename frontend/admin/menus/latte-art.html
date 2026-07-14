@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관리자 - 라떼아트 디자인 관리</title>
+    <link rel="stylesheet" href="../../css/variables.css" />
+    <link rel="stylesheet" href="./latte-art.css" />
+    <link rel="stylesheet" href="../admin-nav.css" />
+  </head>
+  <body>
+    <div class="page-shell container">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Admin · Latte Art Designs</p>
+          <h1>라떼아트 디자인 관리</h1>
+        </div>
+        <a class="secondary-link" href="./list.html">메뉴 목록으로</a>
+      </header>
+
+      <p class="page-desc">
+        고객이 라떼아트 메뉴 주문 시 선택하는 모양 4종입니다. 사진/영상이 없으면 이모티콘으로 대체 표시되고,
+        업로드하면 자동으로 실제 미디어가 표시됩니다.
+      </p>
+
+      <main id="shapeList" class="shape-grid"></main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="../../js/supabase-client.js"></script>
+    <script src="../../js/auth-client.js"></script>
+    <script>requireAdminOrRedirect("../../auth/login.html");</script>
+    <script src="../../js/admin-nav.js"></script>
+    <script src="../../js/data.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="./latte-art.js"></script>
+  </body>
+</html>

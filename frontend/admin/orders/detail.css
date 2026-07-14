@@ -181,6 +181,22 @@ body {
   margin-bottom: var(--space-md);
 }
 
+.latte-art-item-card {
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  margin-bottom: var(--space-md);
+}
+
+.latte-art-item-card:last-child {
+  margin-bottom: 0;
+}
+
+.latte-art-slot-title {
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
 .latte-art-video {
   width: 100%;
   max-height: 360px;

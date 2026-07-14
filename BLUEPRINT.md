@@ -441,3 +441,17 @@ project1/
 
 **검증**: Playwright로 로그인/비로그인 각각 6개 페이지 전부 확인 — 비로그인 시 로그인 아이콘, 로그인 시 "customer ▾" 정상 표시, 새로고침 후 유지, 스크린샷으로 기존 헤더 요소(뒤로가기·제목·장바구니 아이콘 등)가 가려지거나 깨지지 않았음을 확인, 콘솔 에러 없음
 
+### 27단계: 관리자 주문 상세 - 카페라떼 잔별 라떼아트 영상 업로드 — `feature/order-latte-art-video` 브랜치
+
+> 작업 전 확인: (1) 관리자 업로드 영상이 고객이 고른 모양과 일치하는지 검증하지 않음(자유 업로드). (2) 22단계 체크아웃에서 이미 카페라떼를 잔(order_item) 단위로 선택하게 되어 있어, 영상도 잔 단위로 개별 업로드. (3) 고객이 이 영상을 보는 화면은 이번 범위에서 제외(관리자 업로드까지만).
+
+- [x] `order_items`에 `latte_art_video_url`/`latte_art_video_uploaded_at` 컬럼 추가. `order-latte-art-videos` Storage 버킷 신설(public, mp4/webm/quicktime/x-msvideo, 50MB), 관리자 전용 insert/update/delete + `authenticated` SELECT 정책(반복 발견된 RLS 가시성 함정을 처음부터 반영). 메뉴 관리(`menu_latte_art_videos`)·홈페이지 관리(`home_gallery_videos`)의 라떼아트 테이블과는 이름·용도가 분리된 별개 데이터
+- [x] `frontend/js/data.js` — `order_items` select에 `id`, 새 두 컬럼 추가, `uploadOrderItemLatteArtVideo(orderItemId, file)` 신규
+- [x] `frontend/admin/orders/detail.js` — 12~14단계에서 만든 주문 단위(`latte_art_orders` 테이블) 영상 업로드 섹션을 제거하고, 주문 항목 중 `menuId === "latte"`인 잔마다 개별 카드(미리보기+업로드/교체)로 재작성. 이미 영상이 있는 잔에 다시 업로드하면 confirm으로 교체 여부를 먼저 확인. `js/latte-art.js` 의존성 제거(더 이상 불필요)
+- [x] `frontend/admin/orders/list.js`·`list.css` — 주문 카드에 카페라떼 포함 주문만 "🎥 영상 완료"/"🎥 영상 대기" 배지 표시(포함된 카페라떼 잔 전부 업로드돼야 완료로 표시)
+- 권한: 두 페이지 모두 기존 `requireAdminOrRedirect` 가드 그대로 적용(추가 작업 불필요)
+
+**검증**: Playwright로 카페라떼 2잔+아메리카노 주문과 카페라떼 없는 주문(치즈케이크)을 각각 생성 후 확인 — 카페라떼 없는 주문은 목록 배지·상세 섹션 모두 미노출, 카페라떼 주문은 잔 개수만큼(2개) 개별 카드 노출, 각 잔에 서로 다른 영상 업로드 후 DB에 정확히 분리 저장(각기 다른 Storage URL) 확인, 목록 배지가 업로드 완료 후 "영상 완료"로 전환, 이미 업로드된 잔에 재업로드 시 confirm 메시지 노출 및 취소 시 기존 영상 유지 확인, 비관리자 계정 접근 차단 확인, 콘솔 에러 없음. 테스트 주문·Storage 파일 모두 정리해 원상 복구(주문 3건/주문항목 5건, Storage 파일 0개)
+
+**에러 보고**: 없음. 테스트 중 자동화 스크립트가 업로드 직후 곧바로 확인했을 때 방금 올린 첫 번째 영상이 화면에 안 보이는 것처럼 보인 순간이 있었으나, 페이지를 새로고침해서 다시 확인한 결과 실제로는 정상 저장·표시되고 있어 앱 버그가 아니라 자동화 스크립트의 타이밍 문제였음을 확인함
+

@@ -406,16 +406,19 @@ function normalizeOrderRow(row) {
     status: row.status,
     paymentMethod: row.payment_method,
     items: (row.order_items || []).map((item) => ({
+      id: item.id,
       menuId: item.menu_id,
       quantity: item.quantity,
       latteArtShape: item.latte_art_shape,
       latteArtNote: item.latte_art_note,
+      latteArtVideoUrl: item.latte_art_video_url,
+      latteArtVideoUploadedAt: item.latte_art_video_uploaded_at,
     })),
   };
 }
 
 const ORDER_SELECT_COLUMNS =
-  "id, created_at, status, payment_method, order_items(menu_id, quantity, latte_art_shape, latte_art_note)";
+  "id, created_at, status, payment_method, order_items(id, menu_id, quantity, latte_art_shape, latte_art_note, latte_art_video_url, latte_art_video_uploaded_at)";
 
 async function getOrders() {
   const { data, error } = await getSupabaseClient().from(ORDERS_TABLE).select(ORDER_SELECT_COLUMNS);
@@ -521,4 +524,38 @@ async function updateOrderStatus(orderId, status) {
     return null;
   }
   return getOrderById(orderId);
+}
+
+// ===== 주문 항목별 라떼아트 영상 (관리자 전용, 카페라떼 잔 단위 개인 맞춤 영상) =====
+// 메뉴/홈페이지 관리에서 쓰는 라떼아트 관련 테이블과는 별개의, 주문 건별 데이터다.
+const ORDER_LATTE_ART_VIDEO_BUCKET = "order-latte-art-videos";
+
+async function uploadOrderItemLatteArtVideo(orderItemId, file) {
+  const client = getSupabaseClient();
+  const extension = file.name.includes(".") ? file.name.split(".").pop() : "mp4";
+  const filePath = `${crypto.randomUUID()}.${extension}`;
+
+  const { error: uploadError } = await client.storage.from(ORDER_LATTE_ART_VIDEO_BUCKET).upload(filePath, file);
+  if (uploadError) {
+    console.error("uploadOrderItemLatteArtVideo upload failed:", uploadError);
+    return null;
+  }
+
+  const { data: urlData } = client.storage.from(ORDER_LATTE_ART_VIDEO_BUCKET).getPublicUrl(filePath);
+
+  const { data, error } = await client
+    .from(ORDER_ITEMS_TABLE)
+    .update({
+      latte_art_video_url: urlData.publicUrl,
+      latte_art_video_uploaded_at: new Date().toISOString(),
+    })
+    .eq("id", orderItemId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("uploadOrderItemLatteArtVideo db update failed:", error);
+    return null;
+  }
+  return data;
 }

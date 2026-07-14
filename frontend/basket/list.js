@@ -10,6 +10,8 @@ async function init() {
       closeCheckoutModal();
     }
   });
+
+  renderAuthStatus("../");
 }
 
 function bindHeaderActions() {

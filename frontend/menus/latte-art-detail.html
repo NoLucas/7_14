@@ -13,16 +13,22 @@
   <header class="page-header glass">
     <a href="list.html" class="icon-btn" aria-label="목록으로">‹</a>
     <h1>라떼아트 모양</h1>
-    <a href="../basket/list.html" class="icon-btn cart-btn" aria-label="장바구니">
-      🛒
-      <span class="cart-badge" id="cartBadge" hidden>0</span>
-    </a>
+    <div class="header-actions">
+      <div class="auth-status" id="authStatus">
+        <a href="../auth/login.html" class="icon-btn" aria-label="로그인">👤</a>
+      </div>
+      <a href="../basket/list.html" class="icon-btn cart-btn" aria-label="장바구니">
+        🛒
+        <span class="cart-badge" id="cartBadge" hidden>0</span>
+      </a>
+    </div>
   </header>
 
   <main class="container" id="latteArtDetail"></main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="../js/supabase-client.js"></script>
+  <script src="../js/auth-client.js"></script>
   <script src="../js/data.js"></script>
   <script src="../js/utils.js"></script>
   <script src="latte-art-detail.js"></script>

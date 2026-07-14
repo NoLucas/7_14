@@ -221,41 +221,6 @@ function bindButtonRipple() {
   });
 }
 
-// ===== 로그인 상태 표시 =====
-async function renderAuthStatus() {
-  const statusEl = document.getElementById("authStatus");
-  const profile = await getCurrentProfile();
-
-  if (!profile) {
-    statusEl.innerHTML = `<a href="auth/login.html" class="icon-btn" aria-label="로그인">👤</a>`;
-    return;
-  }
-
-  statusEl.innerHTML = `
-    <button type="button" class="auth-username-btn" id="authUsernameBtn">${escapeHtml(profile.username)} ▾</button>
-    <div class="auth-dropdown" id="authDropdown" hidden>
-      <button type="button" id="logoutBtn">로그아웃</button>
-    </div>
-  `;
-
-  const usernameBtn = document.getElementById("authUsernameBtn");
-  const dropdown = document.getElementById("authDropdown");
-
-  usernameBtn.addEventListener("click", (event) => {
-    event.stopPropagation();
-    dropdown.hidden = !dropdown.hidden;
-  });
-
-  document.addEventListener("click", () => {
-    dropdown.hidden = true;
-  });
-
-  document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await signOutCurrentUser();
-    window.location.href = "index.html";
-  });
-}
-
 // ===== 초기화 =====
 async function init() {
   await Promise.all([getAllMenus(), getCategories()]);
@@ -267,7 +232,7 @@ async function init() {
   bindHeaderScrollEffect();
   bindRevealAnimation();
   bindButtonRipple();
-  renderAuthStatus();
+  renderAuthStatus("");
 }
 
 init();

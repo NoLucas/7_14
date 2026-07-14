@@ -11,6 +11,7 @@ async function init() {
 
   render();
   updateCartBadge();
+  renderAuthStatus("../");
 }
 
 // ===== 렌더링 =====

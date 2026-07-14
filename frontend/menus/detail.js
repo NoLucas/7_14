@@ -28,6 +28,7 @@ async function init() {
 
   renderMenuDetail();
   updateCartBadge();
+  renderAuthStatus("../");
 }
 
 // ===== 메뉴 상세 렌더링 =====

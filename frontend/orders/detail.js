@@ -22,6 +22,7 @@ async function init() {
 
   renderOrderDetail();
   updateCartBadge();
+  renderAuthStatus("../");
 }
 
 // ===== 라떼아트 섹션 렌더링 =====

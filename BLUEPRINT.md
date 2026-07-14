@@ -428,3 +428,16 @@ project1/
 
 **보고 사항**: 로그인 후 장바구니 페이지로는 복귀하지만 체크아웃 모달이 자동으로 다시 열리지는 않습니다(사용자가 "주문하기"를 한 번 더 눌러야 함) — 요청하신 "장바구니 화면 복귀"는 충족하나, 모달 자동 재오픈까지는 범위를 넘는다고 판단해 구현하지 않았습니다. 필요하면 알려주세요.
 
+### 26단계: 로그인 상태 표시를 고객용 페이지 전체로 확장 — `feature/header-login-status-all-pages` 브랜치
+
+> 25단계에서 홈페이지에만 추가했던 로그인 상태 표시를 나머지 고객 페이지(메뉴 목록/상세, 라떼아트 모양 상세, 주문 내역, 마이페이지, 장바구니)로 확장
+
+- [x] `frontend/css/variables.css` — `.auth-status`/`.auth-username-btn`/`.auth-dropdown`/`.header-actions`를 index.css에서 이곳(모든 페이지가 공유하는 파일)으로 이동, 페이지마다 중복 정의하지 않도록 함
+- [x] `frontend/js/utils.js` — `renderAuthStatus(basePath)` 공용 함수 추가(index.js에 있던 로직을 일반화: 로그인 페이지 경로를 페이지 깊이에 따른 `basePath` 인자로 받고, 로그아웃은 `location.reload()`로 단순화)
+- [x] 6개 페이지(`menus/list`, `menus/detail`, `menus/latte-art-detail`, `orders/list`, `orders/detail`, `my/index`, `basket/list`)에 `js/auth-client.js` 스크립트 추가, 기존 우측 아이콘(장바구니 등)을 `.header-actions` 래퍼로 감싸고 그 안에 `#authStatus`를 추가 → 기존 3분할 헤더 레이아웃(뒤로가기 · 제목 · 우측 아이콘)을 그대로 유지하면서 로그인 상태만 우측에 추가로 노출
+- [x] `frontend/basket/list.css` — `.page-header`가 `grid-template-columns: 44px 1fr 44px`(고정 44px)였는데, 우측 칸에 로그인 상태+비우기 버튼 두 개가 들어가야 해서 `44px 1fr auto`로 변경(다른 두 칸 크기는 그대로)
+
+**🐛 검증 중 발견한 사전 존재 버그(이번 세션 변경과 무관, 19단계 admin 대시보드 버그와 동일 패턴)**: `frontend/my/index.html`이 `<script src="index.js">`(상대경로, 앞에 `../`나 `./` 없음)를 쓰는데, `index.html` → `/my`로 리다이렉트하는 로컬 `serve`의 clean-url 동작 때문에 `/my/`가 아닌 `/my`로 리다이렉트되며 상대경로가 루트 기준으로 깨져 홈페이지용 `index.js`가 대신 로드됨(마이페이지 기능이 조용히 실행되지 않음). GitHub Pages는 이런 리다이렉트를 하지 않아(직접 200 응답) 배포本엔 영향 없었지만, 로컬 테스트 중 실제로 재현됨. `frontend/index.html`에서 이 페이지로 가는 유일한 링크(`my/index.html` → `my/`)를 끝 슬래시 형태로 바꿔 해결(19단계와 동일한 해결 패턴)
+
+**검증**: Playwright로 로그인/비로그인 각각 6개 페이지 전부 확인 — 비로그인 시 로그인 아이콘, 로그인 시 "customer ▾" 정상 표시, 새로고침 후 유지, 스크린샷으로 기존 헤더 요소(뒤로가기·제목·장바구니 아이콘 등)가 가려지거나 깨지지 않았음을 확인, 콘솔 에러 없음
+

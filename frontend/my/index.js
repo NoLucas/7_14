@@ -44,6 +44,7 @@ async function init() {
   document.querySelectorAll("[data-info]").forEach((button) => {
     button.addEventListener("click", handleInfoClick);
   });
+  renderAuthStatus("../");
 }
 
 init();

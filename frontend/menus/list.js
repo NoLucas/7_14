@@ -7,6 +7,7 @@ async function init() {
   renderCategoryTabs();
   renderMenuGrid();
   updateCartBadge();
+  renderAuthStatus("../");
 }
 
 // ===== 카테고리 탭 =====

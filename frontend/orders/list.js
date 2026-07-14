@@ -3,6 +3,7 @@ async function init() {
   await getAllMenus();
   await renderOrderList();
   updateCartBadge();
+  renderAuthStatus("../");
 }
 
 // ===== 주문 목록 렌더링 =====
